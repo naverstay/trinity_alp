@@ -1,0 +1,136 @@
+//- src/views/components/footer.pug
+
+footer.footer
+    .container
+        .footer__row.flex
+            .footer__col.flex
+                .footer__col
+                    .links-title Продукты
+                    ul.links-list.list
+                        li
+                            a(href='https://trinitygroup.ru/products/server/') Серверное оборудование
+                        li
+                            a(href='https://trinitygroup.ru/products/storage/') Системы хранения данных
+                        li
+                            a(href='https://trinitygroup.ru/products/netsys/') Сетевое оборудование
+                        li
+                            a(href='https://trinitygroup.ru/products/soft/') Программное обеспечение
+                    .links-title Проекты
+                    ul.links-list.list
+                .footer__col
+                    .links-title Решения
+                    ul.links-list.list
+                        li
+                            a(href='https://trinitygroup.ru/solutions/virtualization/') Виртуализация
+                        li
+                            a(href='https://trinitygroup.ru/solutions/disaster_recovery/')
+                                | Катастрофо
+                                wbr
+                                | устойчивые решения
+                        li
+                            a(href='https://trinitygroup.ru/solutions/inf-secure/') Информационная безопасность
+                        li
+                            a(href='https://trinitygroup.ru/solutions/hpc/')
+                                | Высоко
+                                wbr
+                                | производительные вычисления и VDI
+                        li
+                            a(href='https://trinitygroup.ru/solutions/deep-learning2/') Deep Learning и AI
+                        li
+                            a(href='https://trinitygroup.ru/solutions/kontrol-udalennogo-dostupa-/') Контроль удаленного доступа
+                        li
+                            a(href='https://trinitygroup.ru/solutions/osnashchenie-konferents-zalov-i-peregovornykh/') Оснащение конференц-залов и переговорных
+                        li
+                            a(href='https://trinitygroup.ru/solutions/resheniya-dlya-5g-i-intellektualnogo-pokrytiya/') Решения для 5G и Интеллектуального покрытия
+                        li
+                            a(href='https://trinitygroup.ru/solutions/triniti-razrabotka-softa/') Тринити: разработка софта
+                        li
+                            a(href='https://trinitygroup.ru/solutions/archbackup/') Резервное копирование
+                        li
+                            a(href='https://trinitygroup.ru/solutions/cod/') Инженерная инфраструктура ЦОД
+                        li
+                            a(href='https://trinitygroup.ru/solutions/videonabludenie/') Видеонаблюдение
+                        li
+                            a(href='https://trinitygroup.ru/solutions/videoidentifikatsiya/') Видеоидентификация
+                        li
+                            a(href='https://trinitygroup.ru/solutions/predictive-maintenance/') Прогнозная аналитика
+            .footer__col.flex
+                .footer__col
+                    .links-title О компании
+                    ul.links-list.list
+                        li
+                            a(href='https://trinitygroup.ru/import-substitution/') Импортозамещение
+                        li
+                            a(href='https://trinitygroup.ru/about/address/') Адреса и реквизиты
+                        li
+                            a(href='https://trinitygroup.ru/about/trinity_service/') Сервисные центры
+                        li
+                            a(href='https://trinitygroup.ru/about/partners/') Партнеры / Вендоры
+                        li
+                            a(href='https://trinitygroup.ru/about/sertificate/') Сертификаты
+                        li
+                            a(href='https://trinitygroup.ru/about/delivery_and_purchase/') Доставка и Оплата
+                        li
+                            a(href='https://trinitygroup.ru/about/history/') История компании
+                        li
+                            a(href='https://trinitygroup.ru/news/') Новости
+                        li
+                            a(href='https://trinitygroup.ru/events/') Мероприятия
+                        li
+                            a(href='https://trinitygroup.ru/about/lizing-it/') Лизинг ИТ и специальные финансовые условия
+                        li
+                            a(href='https://trinitygroup.ru/about/tender/') Участие в торгах
+                        li
+                            a(href='https://trinitygroup.ru/about/vacansy/') Вакансии
+                .footer__col
+                    .footer__data
+                        .footer__label
+                            | Звонки по России
+                        a.footer__tel(href='tel:88002005960') 8 800 200-59-60
+                    .footer__data
+                        .footer__label
+                            | Москва
+                        a.footer__tel(href='tel:+74952329230') +7 (495) 232-92-30
+                    .footer__data
+                        .footer__label
+                            | Санкт-Петербург
+                        a.footer__tel(href='tel:+78123275960') +7 (812) 327-59-60
+                    .footer__data
+                        .footer__label
+                            | Екатеринбург
+                        a.footer__tel(href='tel:+73433784150') +7 (343) 378-41-50
+                    a.footer__email.footer__email-block(href='mailto:info@trinitygroup.ru')
+                        | info@trinitygroup.ru
+                    ul.social-links.list
+                        li
+                            a.social-link.social-fb(href='http://facebook.com/trinitygroup.ru' target='_blank')
+                        li
+                            a.social-link.social-vk(href='https://vk.com/trinitygroup' target='_blank')
+                        li
+                            a.social-link.social-yo(href='https://www.youtube.com/channel/UCRL3GFD6czzkGw1DdL_QAcg' target='_blank')
+                        li
+                            a.social-link.social-in(href='https://www.instagram.com/trinitygroup.ru/?hl=ru' target='_blank')
+                        li
+                            a.social-link.social-li(href='https://www.linkedin.com/company/jsc-trinity' target='_blank')
+
+        ul.footer-nav.flex
+            li
+                a(href='https://server.trinitygroup.ru/') Конфигуратор серверов
+            li
+                a(href='https://storage.trinitygroup.ru/') Конфигуратор СХД
+            li
+                a(href='http://3nity.ru/') Форум 3nity.ru
+            li
+                a(href='http://blog.trinitygroup.ru/') Блог
+        .footer-bottom.flex
+            .footer-block.flex
+                .footer-logo
+                    img(src='/assets/images/system/logo-white.svg' alt='Тринити')
+                .copy
+                    // &copy; Trinity 2020
+                    | Основана в 1993 г.
+            a.privacy-link(href='#') Политика конфиденциальности
+            .designer
+                | Дизайн сайта —&nbsp;
+                a(href='http://goga.spb.ru/' target='_blank') Егор Сорокин
+

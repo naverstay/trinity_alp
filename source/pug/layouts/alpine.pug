@@ -1,0 +1,50 @@
+script.
+    function mainMenu() {
+        return {
+            showMainMenu: false,
+            openMainMenu() {
+                this.showMainMenu = true
+            },
+            closeMainMenu() {
+                this.showMainMenu = false
+            },
+            mainMenuIsOpen() {
+                return this.showMainMenu === true
+            },
+        }
+    }
+
+
+    function mainMenuDropdown() {
+        return {
+            activeMenu: 0,
+            toggleDropdownMenu(index, ref) {
+                let that = this;
+
+                ref && slideToggle(ref, 300, function (ret) {
+                    console.log('ret', ret);
+
+                    if (ret === 'up') {
+                        that.activeMenu = 0;
+                    } else {
+                        that.activeMenu = index;
+                    }
+                });
+            },
+            toggleDropdownClass(menu, ref) {
+                let list = menu.querySelectorAll('.sublist');
+
+                for (let i = 0; i < list.length; i++) {
+                    let child = list[i];
+
+                    if (child !== ref) {
+                        slideUp(child, 300);
+                    }
+                }
+            },
+            isActiveDropdown(index) {
+                return this.activeMenu === index;
+            },
+        }
+    }
+

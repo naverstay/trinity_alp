@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='initial-scale=1.0, width=device-width')
+    title
+      block title
+  body
+    header
+      a(href='https://webpack.js.org').logo
+        img(src=require('./../../../media/images/webpack_logo.svg'))
+      include nav
+    block main

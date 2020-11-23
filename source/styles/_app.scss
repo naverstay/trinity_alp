@@ -1,0 +1,58 @@
+$develop: false;
+$production: true;
+$all: true;
+$ie9: false;
+$ie8: false;
+$ie7: false;
+$doc: false;
+$local_var: global;
+$holydat_var: none;
+
+//@import "compass";
+//@import "compass/functions";
+
+//@import "../../../node_modules/bourbon-libsass/dist/bourbon";
+
+@import 'includes/global_var';
+
+@import 'reset';
+
+/*
+  Base
+*/
+@import '../media/fonts/fonts';
+@import '../media/trinity_icons/style';
+//@import './base/fonts';
+
+/*
+  Utils
+*/
+@import './utils/dimensions';
+@import './utils/mixins';
+@import './utils/colors';
+@import './utils/keyframes';
+
+/*
+  Components
+*/
+@import './components/main';
+@import './components/header';
+@import './components/footer';
+@import './components/breadcrumbs';
+@import './components/workflow';
+@import './components/features';
+@import './components/button';
+@import './components/link';
+
+/*
+  Layout
+*/
+@import './layout/page';
+@import './layout/general';
+
+/*
+  Pages
+*/
+@import './pages/index';
+@import './pages/blog';
+@import './pages/contact';

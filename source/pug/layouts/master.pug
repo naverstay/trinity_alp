@@ -1,0 +1,13 @@
+//- Master layout
+include page
+
+block vars
+    - var breadcrumbs = ['Конфигураторы'];
+
+doctype html
+html(lang='ru')
+    include ../mixins/head
+
+    +page()
+        block content
+

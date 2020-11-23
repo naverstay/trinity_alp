@@ -1,0 +1,31 @@
+/* src/assets/styles/base/_fonts.scss  */
+
+/*
+  Quicksand
+*/
+
+@font-face {
+    font-family: 'Quicksand';
+    font-weight: 700;
+    src: url('@~media/fonts/Quicksand-Bold.woff');
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    font-weight: 500;
+    src: url('@~media/fonts/Quicksand-Medium.woff');
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    font-weight: 400;
+    src: url('@~media/fonts/Quicksand-Regular.woff');
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    font-weight: 300;
+    src: url('@~media/fonts/Quicksand-Light.woff');
+}
+
+$quicksand: 'Quicksand', sans-serif;

@@ -1,0 +1,130 @@
+@import "variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?t9c0es');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?t9c0es#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?t9c0es') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?t9c0es') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?t9c0es##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="ti-"], [class*=" ti-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ti-check-square {
+  &:before {
+    content: $ti-check-square; 
+  }
+}
+.ti-house {
+  &:before {
+    content: $ti-house; 
+  }
+}
+.ti-arrow-down {
+  &:before {
+    content: $ti-arrow-down; 
+  }
+}
+.ti-arrow-right {
+  &:before {
+    content: $ti-arrow-right; 
+  }
+}
+.ti-briefcase {
+  &:before {
+    content: $ti-briefcase; 
+  }
+}
+.ti-friends {
+  &:before {
+    content: $ti-friends; 
+  }
+}
+.ti-docs {
+  &:before {
+    content: $ti-docs; 
+  }
+}
+.ti-spreadsheet {
+  &:before {
+    content: $ti-spreadsheet; 
+  }
+}
+.ti-keyboard {
+  &:before {
+    content: $ti-keyboard; 
+  }
+}
+.ti-list-text {
+  &:before {
+    content: $ti-list-text; 
+  }
+}
+.ti-mail {
+  &:before {
+    content: $ti-mail; 
+  }
+}
+.ti-map {
+  &:before {
+    content: $ti-map; 
+  }
+}
+.ti-message {
+  &:before {
+    content: $ti-message; 
+  }
+}
+.ti-office {
+  &:before {
+    content: $ti-office; 
+  }
+}
+.ti-open-book {
+  &:before {
+    content: $ti-open-book; 
+  }
+}
+.ti-percent {
+  &:before {
+    content: $ti-percent; 
+  }
+}
+.ti-star {
+  &:before {
+    content: $ti-star; 
+  }
+}
+.ti-watch {
+  &:before {
+    content: $ti-watch; 
+  }
+}
+.ti-phone {
+  &:before {
+    content: $ti-phone; 
+  }
+}
+.ti-user {
+  &:before {
+    content: $ti-user; 
+  }
+}
+

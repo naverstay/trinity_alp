@@ -1,0 +1,87 @@
+@font-face {
+  font-family: 'trinity_icons';
+  src:  url('fonts/trinity_icons.eot?t9c0es');
+  src:  url('fonts/trinity_icons.eot?t9c0es#iefix') format('embedded-opentype'),
+    url('fonts/trinity_icons.ttf?t9c0es') format('truetype'),
+    url('fonts/trinity_icons.woff?t9c0es') format('woff'),
+    url('fonts/trinity_icons.svg?t9c0es#trinity_icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="ti-"], [class*=" ti-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'trinity_icons' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ti-check-square:before {
+  content: "\e913";
+}
+.ti-house:before {
+  content: "\e911";
+}
+.ti-arrow-down:before {
+  content: "\e900";
+}
+.ti-arrow-right:before {
+  content: "\e912";
+}
+.ti-briefcase:before {
+  content: "\e901";
+}
+.ti-friends:before {
+  content: "\e902";
+}
+.ti-docs:before {
+  content: "\e903";
+}
+.ti-spreadsheet:before {
+  content: "\e904";
+}
+.ti-keyboard:before {
+  content: "\e905";
+}
+.ti-list-text:before {
+  content: "\e906";
+}
+.ti-mail:before {
+  content: "\e907";
+}
+.ti-map:before {
+  content: "\e908";
+}
+.ti-message:before {
+  content: "\e909";
+}
+.ti-office:before {
+  content: "\e90a";
+}
+.ti-open-book:before {
+  content: "\e90b";
+}
+.ti-percent:before {
+  content: "\e90c";
+}
+.ti-star:before {
+  content: "\e90d";
+}
+.ti-watch:before {
+  content: "\e90e";
+}
+.ti-phone:before {
+  content: "\e90f";
+}
+.ti-user:before {
+  content: "\e910";
+}

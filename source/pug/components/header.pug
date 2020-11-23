@@ -1,0 +1,142 @@
+//- src/views/components/header.pug
+
+header.header
+    .container.container--wide
+        .header__line.flex
+            .menu-toggle(@click=' openMainMenu() ')
+                span.menu-ic
+            .logo
+                a(href='/')
+                    img(src='/assets/images/system/logo.svg' alt='Тринити')
+            nav.top-menu
+                ul#horizontal-multilevel-menu.top-menu__list.list(x-ref="top_menu_list")
+                    li
+                        a(href='/products/') Продукты
+                        span.mob-toggle(@click=' toggleDropdownMenu(1, $refs.menu_sublist_1); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_1); }); ' :class="{ 'active': isActiveDropdown(1) }")
+                        ul.sublist.list(x-ref="menu_sublist_1")
+                            li
+                                a(href='/products/server/') Серверное оборудование
+                            li
+                                a(href='/products/storage/') Системы хранения данных
+                            li
+                                a(href='/products/netsys/') Сетевое оборудование
+                            li
+                                a(href='/products/soft/') Программное обеспечение
+                    li
+                        a(href='/solutions/') Решения
+                        span.mob-toggle(@click=' toggleDropdownMenu(2, $refs.menu_sublist_2); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_2); }); ' :class="{ 'active': isActiveDropdown(2) }")
+                        ul.sublist.list(x-ref="menu_sublist_2")
+                            li
+                                a(href='/solutions/virtualization/') Виртуализация
+                            li
+                                a(href='/solutions/disaster_recovery/') Катастрофоустойчивые решения
+                            li
+                                a(href='/solutions/hpc/') Высокопроизводительные вычисления и VDI
+                            li
+                                a(href='/solutions/deep-learning2/') Deep Learning и AI
+                            li
+                                a(href='/solutions/kontrol-udalennogo-dostupa/') Контроль удаленного доступа
+                            li
+                                a(href='/solutions/inf-secure/') Информационная безопасность
+                            li
+                                a(href='/solutions/archbackup/') Резервное копирование
+                            li
+                                a(href='/solutions/cod/') Инженерная инфраструктура ЦОД
+                            li
+                                a(href='/solutions/videonabludenie/') Видеонаблюдение
+                            li
+                                a(href='/solutions/graphics/') Телевидение, IPTV / OTT
+                            li
+                                a(href='/solutions/predictive-maintenance/') Прогностическая аналитика
+                            li
+                                a(href='/solutions/automatization/') СЭД Тринити
+                    li
+                        a(href='/services/') Услуги
+                        span.mob-toggle(@click=' toggleDropdownMenu(3, $refs.menu_sublist_3); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_3); }); ' :class="{ 'active': isActiveDropdown(3) }")
+                        ul.sublist.list(x-ref="menu_sublist_3")
+                            li
+                                a(href='/services/service/audit-it-infrastruktury/') Аудит ИТ-инфраструктуры
+                            li
+                                a(href='/services/service/audit-informatsionnoy-bezopasnosti/')
+                                    | Аудит информационной
+                                    | безопасности
+                            li
+                                a(href='/services/service/my-gotovy-vam-pomoch-/') Мы готовы вам помочь
+                            li
+                                a(href='/services/service/razrabotka-kontseptsii-i-trebovaniy/')
+                                    | Разработка концепции и
+                                    | требований
+                            li
+                                a(href='/services/service/tekhnicheskoe-obsluzhivanie-serverov/')
+                                    | Гарантийное
+                                    | обслуживание серверов
+                            li
+                                a(href='/services/service/rasshirennaya-garantiya/') Сервисные контракты вендоров
+                            li
+                                a(href='/services/service/proektirovanie-montazh-puskonaladka/')
+                                    | Проектирование, монтаж,
+                                    | пусконаладка
+                            li
+                                a(href='/services/service/uslugi-demo-stenda/') Услуги демо-стенда
+                            li
+                                a(href='/services/service/pechati-na-3d-printere/') Печать на 3D-принтере
+                    li
+                        a(href='/about/projects/') Проекты
+                        //-span.mob-toggle
+                    li
+                        a(href='/import-substitution/') Импортозамещение
+                        //-span.mob-toggle
+                    li
+                        a(href='/about/') О компании
+                        span.mob-toggle(@click=' toggleDropdownMenu(6, $refs.menu_sublist_6); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_6); }); ' :class="{ 'active': isActiveDropdown(6) }")
+                        ul.sublist.list(x-ref="menu_sublist_6")
+                            li
+                                a(href='/about/address/') Адреса и реквизиты
+                            li
+                                a(href='/about/trinity_service/') Сервисные центры
+                            li
+                                a(href='/about/partners/') Партнеры / Вендоры
+                            li
+                                a(href='/about/sertificate/') Сертификаты
+                            li
+                                a(href='/about/delivery_and_purchase/') Доставка и Оплата
+                            li
+                                a(href='/about/history/') История компании
+                            li
+                                a(href='/about/tender/') Участие в торгах
+                            li
+                                a(href='/about/vacansy/') Вакансии
+                            li
+                                a(href='/news/') Новости
+                            li
+                                a(href='/events/') Мероприятия
+                    li.config-link
+                        a(href='/konfiguratory/') Конфигураторы
+                        span.mob-toggle(@click=' toggleDropdownMenu(7, $refs.menu_sublist_7); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_7); }); ' :class="{ 'active': isActiveDropdown(7) }")
+                        ul.sublist.list(x-ref="menu_sublist_7")
+                            li
+                                a(href='https://server.trinitygroup.ru/') Конфигуратор серверов
+                            li
+                                a(href='http://storage.trinitygroup.ru/') Конфигуратор СХД
+                            li
+                                a(href='https://workstation.trinitygroup.ru/') Конфигуратор графических станций
+                .menu-clear-left
+                a.tel-link.mob-hidden(href='tel:88002005960')
+                    | 8 800 200-59-60
+                .controls-block
+                    .lang
+                        a(href='/en/') En
+                    .search(x-data='{ open: false }' @click.away='open = false' :class="{ 'search-expanded': open }")
+                        .search__toggle(@click='open = true')
+                            img(src='/assets/images/system/ic-search-black.svg' alt='alt')
+                        .search__form
+                            form(action='#')
+                                .flex
+                                    input.input.search__input(type='text' placeholder='Поиск' autocomplete='off' required='')
+                                    button.btn.search__btn
+                .btn-close(@click=' closeMainMenu() ')
+            a.tel-link.desktop-hidden(href='tel:88002005960')
+                | 8 800 200-59-60
+        // /.header__line
+
+

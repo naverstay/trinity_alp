@@ -1,0 +1,269 @@
+/* src/assets/styles/components/_footer.scss  */
+
+.footer {
+    padding: 55px 0 60px;
+    background-color: #1c70b7;
+    font-size: 14px;
+    color: #fff;
+
+    a {
+        color: inherit;
+        line-height: 1.44;
+    }
+}
+
+.footer__col {
+    box-sizing: border-box;
+    width: 50%;
+}
+
+.footer__col .footer__col {
+    padding-right: 15%;
+}
+
+.footer__data {
+    margin-bottom: 20px;
+}
+
+.footer__label {
+    margin-bottom: .2em;
+}
+
+.footer__tel {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.footer-logo {
+    width: 100px;
+    height: 22px;
+    margin-right: 21px;
+}
+
+.footer .social-links {
+    margin-top: 30px;
+}
+
+
+/* ----- иконки-ссылки соц сети ----- */
+.social-links {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.social-links li:not(:last-child) {
+    margin-right: 12px;
+}
+
+.social-link {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    font-size: 10px;
+}
+
+.social-link:hover {
+    -webkit-transform: translate3d(0, -0.2em, 0);
+    transform: translate3d(0, -0.2em, 0);
+}
+
+.social-fb {
+    @include bgimg("/system/ic-fb.svg");
+    width: 1.3em;
+    height: 2.4em;
+}
+
+.social-vk {
+    @include bgimg("/system/ic-vk.svg");
+    width: 3em;
+    height: 1.7em;
+}
+
+.social-li {
+    @include bgimg("/system/ic-linkedin.svg");
+    width: 2.4em;
+    height: 2.4em;
+}
+
+.social-yo {
+    @include bgimg("/system/ic-youtube.svg");
+    width: 2.4em;
+    height: 1.7em;
+}
+
+.social-in {
+    @include bgimg("/system/ic-instagram.svg");
+    width: 2.4em;
+    height: 2.4em;
+}
+
+.footer-nav {
+    max-width: 1180px;
+    margin: 22px 0;
+    padding: 30px 0;
+    list-style: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.footer-nav a {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.footer-bottom {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    @include respond-to-min($hamburger) {
+        padding-top: 15px;
+    }
+}
+
+.footer-bottom .privacy-link {
+    display: inline-block;
+    width: 25%;
+}
+
+.footer-bottom .designer {
+    width: 25%;
+    margin-left: auto;
+}
+
+.footer-block {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 25%;
+}
+
+.links-title {
+    margin-bottom: .8em;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.links-list a, .footer__label, .copy, .designer, .privacy-link {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.links-list a:hover, .designer a:hover, .privacy-link:hover {
+    color: #fff;
+}
+
+.links-list li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.links-list + .links-title {
+    margin-top: 1.3em;
+}
+
+.footer__email-block {
+    display: inline-block;
+    font-size: 18px;
+    margin: 20px 0 0;
+}
+
+.footer-en .lang {
+    margin-left: 45px;
+}
+
+@media screen and (max-width: 1199px) {
+    .footer__col .footer__col {
+        padding-right: 5%;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .footer {
+        padding: 50px 0 30px;
+    }
+    .footer__col.flex {
+        display: block;
+    }
+    .footer__col .footer__col {
+        width: 100%;
+        margin-bottom: 30px;
+        padding-right: 15px;
+    }
+    .footer-nav {
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        margin: 5px 0 30px;
+        padding: 30px 0 15px;
+    }
+    .footer-nav li {
+        margin-right: 35px;
+        margin-bottom: 15px;
+    }
+    .footer-logo, .footer-bottom .designer {
+        display: none;
+    }
+    .footer-bottom {
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    }
+    .footer-bottom .footer-block, .footer-bottom .privacy-link {
+        width: auto;
+    }
+}
+
+.footer-en {
+    padding: 50px 0 45px;
+    background-color: #fff;
+    color: #000;
+}
+
+.footer-en .footer__row {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.footer-en .copy {
+    color: #000;
+    margin-right: auto;
+}
+
+/*
+  Responsive
+*/
+
+@media screen and (max-width: 575px) {
+    .footer-nav li {
+        margin-right: 25px;
+    }
+    .footer-en .lang {
+        margin-left: 15px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .footer__col {
+        width: 100%;
+    }
+}
+
+
+
+

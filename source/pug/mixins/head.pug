@@ -1,0 +1,48 @@
+head
+    //- Meta
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+
+    meta(name='msapplication-TileColor', content='#0e0e0e')
+    meta(name='theme-color', content='#0e0e0e')
+
+    //- SEO
+
+    //- Basic Seo
+    block basicSeo
+        meta(name='description' content='Index page')
+        meta(name='keywords', content='index, page')
+        meta(name='author' content='')
+
+    //- Twitter
+    meta(name='twitter:card', content='summary')
+    meta(name='twitter:site', content='')
+    meta(name='twitter:image', content='')
+    meta(name='twitter:description', content='')
+
+    //- Facebook
+    meta(property='og:url', content='')
+    meta(property='og:title', content='')
+    meta(property='og:description', content='')
+    meta(property='og:image', content='')
+    meta(property='og:type', content='website')
+
+    //- Favicons
+    link(rel='apple-touch-icon', sizes='180x180', href=require('media/images/favicons/apple-touch-icon.png'))
+    link(rel='icon', type='image/png', sizes='32x32', href=require('media/images/favicons/favicon-32x32.png'))
+    link(rel='icon', type='image/png', sizes='16x16', href=require('media/images/favicons/favicon-16x16.png'))
+    link(rel='shortcut icon', href=require('media/images/favicons/favicon.ico'))
+
+    //- Title
+    block title
+        title= pageTitle || 'Trinity'
+
+    //- Manifest browserconfig files
+    block manifestBrowserconfigFiles
+        //link(rel='manifest', href='./manifest.json', crossorigin)
+        //meta(name='msapplication-config' content='./browserconfig.xml')
+        meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
+        meta(http-equiv='cleartype' content='on')
+        meta(name='msapplication-tap-highlight' content='no')
+

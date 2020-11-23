@@ -1,0 +1,44 @@
+/* src/assets/styles/components/_breadcrumbs.scss  */
+
+.breadcrumbs {
+    padding: 34px 0 30px;
+}
+
+.breadcrumbs li {
+    float: left;
+    position: relative;
+    padding-left: 36px;
+    letter-spacing: .05em;
+}
+
+.breadcrumbs li {
+    color: #7c7c7c;
+    font-size: 12px;
+
+    &:not(:first-child) {
+        @extend %trinity_icons_before;
+
+        &::before {
+            content: $ti-arrow-right;
+            position: absolute;
+            left: 12px;
+            font-size: 12px;
+            top: 1px;
+            color: #cccccc;
+        }
+    }
+
+    &:first-child {
+        padding-left: 0;
+
+        &::before {
+            display: none;
+        }
+    }
+}
+
+
+.breadcrumb_icon {
+    position: relative;
+    display: inline-block;
+}

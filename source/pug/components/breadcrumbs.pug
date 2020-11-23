@@ -1,0 +1,17 @@
+mixin breadcrumbs(array)
+    | <!-- breadcrumbs.length #{array.length} -->
+
+    if (array && array.length)
+        // breadcrumb
+        ul.breadcrumbs.clearfix
+            li
+                a.breadcrumb_link(href='#')
+                    span.ti-house.breadcrumb_icon
+            - for (var i = 0; i < array.length; i++)
+                if (i === array.length - 1)
+                    li.active(): span= array[i]
+                else
+                    li(class= (i === array.length - 1 ? 'active' : ''))
+                        a.breadcrumb_link= array[i]
+        // /breadcrumb
+

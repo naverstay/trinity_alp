@@ -1,0 +1,68 @@
+/* src/assets/styles/layout/_general.scss  */
+
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font: 16px/1.35 'Circe-Regular', sans-serif;
+    color: $default_t_color;
+    margin: 0;
+    padding: 0;
+    @include retina('/system/main_bg');
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+p {
+    margin: 0;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.cb {
+    clear: both;
+}
+
+.dm {
+    display: inline-block;
+    vertical-align: middle;
+}

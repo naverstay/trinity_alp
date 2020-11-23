@@ -1,0 +1,57 @@
+/* src/assets/styles/layout/_page.scss  */
+
+.page {
+    &__section {
+        position: relative;
+        padding: 34px 0 44px;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: -50vw;
+            right: -50vw;
+            background: #fff;
+        }
+
+        &.__blue {
+            &:before {
+                background: $blue;
+            }
+        }
+
+        &.__gray {
+            &:before {
+                background: $gray;
+            }
+        }
+    }
+
+
+    &__title {
+        padding: 20px 0 27px;
+
+        h1 {
+            color: $black;
+            font: 36px $fontGilroyExtraBold;
+            font-weight: 900;
+        }
+
+        @include respond-to-min($tab) {
+            padding-top: 13px;
+
+            h1 {
+                font-size: 48px;
+            }
+        }
+
+    }
+}
+
+/*
+  Responsive
+*/
+@media screen and(max-width: $grid-width) {
+
+}
