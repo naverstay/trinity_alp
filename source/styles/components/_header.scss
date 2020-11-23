@@ -222,7 +222,7 @@
     left: 0;
     top: 0;
     z-index: 0;
-    background: url("@~media/images/system/ic-search-white.svg") no-repeat 50% 50%/18px 18px;
+    background: url("@~media/system/ic-search-white.svg") no-repeat 50% 50%/18px 18px;
 }
 
 .search-expanded .search__form {
@@ -453,7 +453,7 @@
     display: none;
     width: 8px;
     height: 14px;
-    background: url("@~media/images/system/ic-arrow.svg") no-repeat 50% 50%/100%;
+    background: url("@~media/system/ic-arrow.svg") no-repeat 50% 50%/100%;
     -webkit-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);

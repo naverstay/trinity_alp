@@ -75,31 +75,31 @@
 }
 
 .social-fb {
-    @include bgimg("/system/ic-fb.svg");
+    @include bgimg("system/ic-fb.svg");
     width: 1.3em;
     height: 2.4em;
 }
 
 .social-vk {
-    @include bgimg("/system/ic-vk.svg");
+    @include bgimg("system/ic-vk.svg");
     width: 3em;
     height: 1.7em;
 }
 
 .social-li {
-    @include bgimg("/system/ic-linkedin.svg");
+    @include bgimg("system/ic-linkedin.svg");
     width: 2.4em;
     height: 2.4em;
 }
 
 .social-yo {
-    @include bgimg("/system/ic-youtube.svg");
+    @include bgimg("system/ic-youtube.svg");
     width: 2.4em;
     height: 1.7em;
 }
 
 .social-in {
-    @include bgimg("/system/ic-instagram.svg");
+    @include bgimg("system/ic-instagram.svg");
     width: 2.4em;
     height: 2.4em;
 }

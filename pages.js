@@ -1,6 +1,6 @@
 const pages = [
-  'index',
-  'test'
+    'index',
+    'test'
 ];
 
 module.exports = pages;

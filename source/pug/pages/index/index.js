@@ -1,8 +1,9 @@
-import './index.sass';
+import '../../../scripts/slideToggle';
 
-$( document ).ready(function() {
-  const text = 'Push me';
-  const satisfaction = `${text}, and then just touch me`;
+document.addEventListener('DOMContentLoaded', (event) => {
 
-  (() =>console.log(satisfaction))();
+    const text = 'Push me';
+    const satisfaction = `${text}, and then just touch me`;
+
+    (() => console.log(satisfaction))();
 });

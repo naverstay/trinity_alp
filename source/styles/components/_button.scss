@@ -71,7 +71,7 @@
     display: inline-block;
     width: 18px;
     height: 18px;
-    background: url("@~media/images/system/ic-close.svg") no-repeat 50% 50%/100%;
+    background: url("@~media/system/ic-close.svg") no-repeat 50% 50%/100%;
     opacity: 0.8;
     cursor: pointer;
 }
@@ -81,7 +81,7 @@
 }
 
 .btn-close.mfp-close {
-    background: url("@~media/images/system/ic-close.svg") no-repeat 50% 50%/100% !important;
+    background: url("@~media/system/ic-close.svg") no-repeat 50% 50%/100% !important;
 }
 
 .links-list a, .footer__label, .copy, .designer, .privacy-link {

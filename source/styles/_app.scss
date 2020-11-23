@@ -11,7 +11,7 @@ $holydat_var: none;
 //@import "compass";
 //@import "compass/functions";
 
-//@import "../../../node_modules/bourbon-libsass/dist/bourbon";
+//@import "@~node_modules/bourbon-libsass/dist/bourbon";
 
 @import 'includes/global_var';
 
@@ -20,7 +20,7 @@ $holydat_var: none;
 /*
   Base
 */
-@import '../media/fonts/fonts';
+@import '../fonts/fonts';
 @import '../media/trinity_icons/style';
 //@import './base/fonts';
 

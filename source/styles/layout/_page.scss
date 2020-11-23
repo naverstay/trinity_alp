@@ -8,6 +8,7 @@
         &::before {
             content: '';
             position: absolute;
+            z-index: -1;
             top: 0;
             bottom: 0;
             left: -50vw;
@@ -27,7 +28,6 @@
             }
         }
     }
-
 
     &__title {
         padding: 20px 0 27px;

@@ -1,6 +1,4 @@
 mixin breadcrumbs(array)
-    | <!-- breadcrumbs.length #{array.length} -->
-
     if (array && array.length)
         // breadcrumb
         ul.breadcrumbs.clearfix
@@ -14,4 +12,3 @@ mixin breadcrumbs(array)
                     li(class= (i === array.length - 1 ? 'active' : ''))
                         a.breadcrumb_link= array[i]
         // /breadcrumb
-

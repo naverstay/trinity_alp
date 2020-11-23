@@ -7,11 +7,11 @@ const dev = require('./config/webpack.dev');
 const prod = require('./config/webpack.prod');
 
 module.exports = (env, argv) => {
-  if (argv.mode === 'development') {
-    return merge(common, dev);
-  }
+    if (argv.mode === 'development') {
+        return merge(common, dev);
+    }
 
-  if (argv.mode === 'production') {
-    return merge(common, prod);
-  }
+    if (argv.mode === 'production') {
+        return merge(common, prod);
+    }
 };

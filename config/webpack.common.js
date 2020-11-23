@@ -46,13 +46,14 @@ const common = {
   resolve: {
     alias: {
       media: PATHS.media,
+      fonts: PATHS.fonts,
       styles: PATHS.styles
     }
   },
 
   /**
    * What happens there?
-   * Option `plugins` get an array of plugins for webpak. But in our case, we can have many pages.
+   * Option `plugins` get an array of plugins for webpack. But in our case, we can have many pages.
    * And for each page, we need to initialize a new instance of HtmlWebpackPlugin.
    * We make it dynamically from `PAGES` array.
    * In the end, we concatenate array with all our pages with other webpack plugins.

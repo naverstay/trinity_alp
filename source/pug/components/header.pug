@@ -7,7 +7,8 @@ header.header
                 span.menu-ic
             .logo
                 a(href='/')
-                    img(src='/assets/images/system/logo.svg' alt='Тринити')
+                    img(src=require('media/system/logo.svg') alt='Тринити')
+
             nav.top-menu
                 ul#horizontal-multilevel-menu.top-menu__list.list(x-ref="top_menu_list")
                     li
@@ -121,22 +122,22 @@ header.header
                             li
                                 a(href='https://workstation.trinitygroup.ru/') Конфигуратор графических станций
                 .menu-clear-left
-                a.tel-link.mob-hidden(href='tel:88002005960')
-                    | 8 800 200-59-60
+                a.tel-link.mob-hidden(href='tel:88002005960') 8 800 200-59-60
                 .controls-block
                     .lang
                         a(href='/en/') En
                     .search(x-data='{ open: false }' @click.away='open = false' :class="{ 'search-expanded': open }")
                         .search__toggle(@click='open = true')
-                            img(src='/assets/images/system/ic-search-black.svg' alt='alt')
+                            img(src=require('media/system/ic-search-black.svg') alt='alt')
                         .search__form
                             form(action='#')
                                 .flex
                                     input.input.search__input(type='text' placeholder='Поиск' autocomplete='off' required='')
                                     button.btn.search__btn
+
                 .btn-close(@click=' closeMainMenu() ')
-            a.tel-link.desktop-hidden(href='tel:88002005960')
-                | 8 800 200-59-60
+
+            a.tel-link.desktop-hidden(href='tel:88002005960') 8 800 200-59-60
         // /.header__line
 
 

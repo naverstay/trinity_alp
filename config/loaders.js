@@ -1,3 +1,4 @@
+const PATHS = require('./paths');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const PUG_LOADER = {
@@ -48,13 +49,27 @@ const SASS_LOADER = {
 const IMAGE_LOADER = {
     loader: 'file-loader',
     options: {
-        name: 'images/[name].[hash].[ext]'
+        //name(file,q,w) {
+        //    console.log('file-loader', file,q,w);
+        //    // generate path dynamically here
+        //    const newPath = '[hash].[ext]';
+        //
+        //    return '[path][name].[ext]';
+        //}
+        name: '[path][name].[ext]'
     }
 };
 
 const FONTS_LOADER = {
     loader: 'file-loader',
     options: {
+        //name(file, q, w) {
+        //    console.log('font-loader', file, q, w);
+        //    // generate path dynamically here
+        //    const newPath = '[hash].[ext]';
+        //
+        //    return '[path][name].[ext]';
+        //}
         name: 'fonts/[name].[ext]'
     }
 };
@@ -92,12 +107,14 @@ const loaders = [
     },
     {
         test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/,
+        exclude: [/fonts/],
         use: [
             IMAGE_LOADER
         ]
     },
     {
-        test: /\.(eot|woff|woff2|ttf)$/,
+        test: /\.(eot|woff|woff2|ttf|svg)$/,
+        exclude: [/media/],
         use: [
             FONTS_LOADER
         ]

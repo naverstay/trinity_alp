@@ -29,10 +29,10 @@ head
     meta(property='og:type', content='website')
 
     //- Favicons
-    link(rel='apple-touch-icon', sizes='180x180', href=require('media/images/favicons/apple-touch-icon.png'))
-    link(rel='icon', type='image/png', sizes='32x32', href=require('media/images/favicons/favicon-32x32.png'))
-    link(rel='icon', type='image/png', sizes='16x16', href=require('media/images/favicons/favicon-16x16.png'))
-    link(rel='shortcut icon', href=require('media/images/favicons/favicon.ico'))
+    link(rel='apple-touch-icon', sizes='180x180', href=require('media/favicons/apple-touch-icon.png'))
+    link(rel='icon', type='image/png', sizes='32x32', href=require('media/favicons/favicon-32x32.png'))
+    link(rel='icon', type='image/png', sizes='16x16', href=require('media/favicons/favicon-16x16.png'))
+    link(rel='shortcut icon', href=require('media/favicons/favicon.ico'))
 
     //- Title
     block title
@@ -40,9 +40,8 @@ head
 
     //- Manifest browserconfig files
     block manifestBrowserconfigFiles
-        //link(rel='manifest', href='./manifest.json', crossorigin)
-        //meta(name='msapplication-config' content='./browserconfig.xml')
+        //-link(rel='manifest', href='./manifest.json', crossorigin)
+        //-meta(name='msapplication-config' content='./browserconfig.xml')
         meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
         meta(http-equiv='cleartype' content='on')
         meta(name='msapplication-tap-highlight' content='no')
-
