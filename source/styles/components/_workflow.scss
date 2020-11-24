@@ -5,11 +5,13 @@
         @extend %global_flex_block_row_nowrap_space_between_center;
         position: relative;
         z-index: 1;
+        overflow-x: auto;
+        overflow-y: hidden;
 
         li {
             flex: 1 0 auto;
+            padding: 0 15px;
         }
-
     }
 
     &__item {

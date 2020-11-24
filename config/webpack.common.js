@@ -10,65 +10,71 @@ const PAGES = require('./../pages');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const common = {
-  /**
-   * What happens there?
-   * We need to create multiple pages and each page require to own `entry`.
-   * We get theirs dynamically from `PAGES` variable.
-   */
-  entry: (() => {
-    const entries = {};
-    PAGES.forEach(page => entries[page] = PATHS.source + `/pug/pages/${page}/${page}.js`);
-    return entries;
-  })(),
+    /**
+     * What happens there?
+     * We need to create multiple pages and each page require to own `entry`.
+     * We get theirs dynamically from `PAGES` variable.
+     */
+    entry: (() => {
+        const entries = {app: PATHS.source + '/app.js'};
 
-  output: {
-    path: PATHS.build,
-    filename: 'js/[name].js'
-  },
+        PAGES.forEach(page => entries[page] = PATHS.source + `/pug/pages/${page}/${page}.js`);
 
-  module: {
-    rules: LOADERS
-  },
+        return entries;
+    })(),
 
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      cacheGroups: {
-        commons: {
-          name: 'common',
-          chunks: 'initial',
-          minChunks: 1
+    output: {
+        path: PATHS.build,
+        filename: 'js/[name].js'
+    },
+
+    module: {
+        rules: LOADERS
+    },
+
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+                commons: {
+                    name: 'common',
+                    chunks: 'initial',
+                    minChunks: 1
+                }
+            }
         }
-      }
-    }
-  },
+    },
 
-  resolve: {
-    alias: {
-      media: PATHS.media,
-      fonts: PATHS.fonts,
-      styles: PATHS.styles
-    }
-  },
+    resolve: {
+        alias: {
+            media: PATHS.media,
+            fonts: PATHS.fonts,
+            styles: PATHS.styles
+        }
+    },
 
-  /**
-   * What happens there?
-   * Option `plugins` get an array of plugins for webpack. But in our case, we can have many pages.
-   * And for each page, we need to initialize a new instance of HtmlWebpackPlugin.
-   * We make it dynamically from `PAGES` array.
-   * In the end, we concatenate array with all our pages with other webpack plugins.
-   */
-  plugins: PAGES.map((page) => new HtmlWebpackPlugin({
-    template: PATHS.source + `/pug/pages/${page}/${page}.pug`,
-    filename: `${page}.html`,
-    chunks: ['common', page],
-    inject: 'body'
-  })).concat([
-    //new webpack.ProvidePlugin({
-    //  $: 'jquery',
-    //  jQuery: 'jquery'
-    //})
-  ])
+    /**
+     * What happens there?
+     * Option `plugins` get an array of plugins for webpack. But in our case, we can have many pages.
+     * And for each page, we need to initialize a new instance of HtmlWebpackPlugin.
+     * We make it dynamically from `PAGES` array.
+     * In the end, we concatenate array with all our pages with other webpack plugins.
+     */
+    plugins: PAGES.map((page) => new HtmlWebpackPlugin({
+        template: PATHS.source + `/pug/pages/${page}/${page}.pug`,
+        filename: `${page}.html`,
+        chunks: [
+            'common',
+            'app',
+            page
+        ],
+        inject: 'body'
+    })).concat([
+        //new webpack.ProvidePlugin({
+        //  $: 'jquery',
+        //  jQuery: 'jquery'
+        //})
+    ])
 };
 
 module.exports = common;

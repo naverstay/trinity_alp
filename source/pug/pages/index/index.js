@@ -1,4 +1,3 @@
-import '../../../scripts/slideToggle';
 
 document.addEventListener('DOMContentLoaded', (event) => {
 

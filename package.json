@@ -1,7 +1,7 @@
 {
   "name": "trinity",
   "version": "1.0.0",
-  "description": "A boilerplate for light coding",
+  "description": "server configurator",
   "main": "index.js",
   "license": "MIT",
   "homepage": "https://github.com/antonchupak/pug#readme",
@@ -11,7 +11,6 @@
     "url": "git+https://github.com/antonchupak/pug.git"
   },
   "keywords": [
-    "boilerplate",
     "webpack",
     "pug",
     "es-6",
