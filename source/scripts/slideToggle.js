@@ -10,6 +10,7 @@ window.slideUp = (target, duration = 500) => {
     target.style.paddingBottom = 0;
     target.style.marginTop = 0;
     target.style.marginBottom = 0;
+
     window.setTimeout(() => {
         target.style.display = 'none';
         target.style.removeProperty('height');
@@ -28,10 +29,12 @@ window.slideDown = (target, duration = 500) => {
     target.style.removeProperty('display');
     let display = window.getComputedStyle(target).display;
 
-    if (display === 'none')
+    if (display === 'none') {
         display = 'block';
+    }
 
     target.style.display = display;
+
     let height = target.offsetHeight;
     target.style.overflow = 'hidden';
     target.style.height = 0;

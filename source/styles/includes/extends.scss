@@ -57,7 +57,7 @@
     }
 
     %global_flex_block_row_wrap_flex-start_stretch {
-        @include flex_block(row nowrap, flex-start, stretch);
+        @include flex_block(row wrap, flex-start, stretch);
     }
 
     %global_flex_block_row_wrap_flex-end_stretch {
@@ -74,6 +74,10 @@
 
     %global_flex_block_row_nowrap_space_between_center {
         @include flex_block(row nowrap, space-between, center);
+    }
+
+    %global_flex_block_row_wrap_space_between_center {
+        @include flex_block(row wrap, space-between, center);
     }
 
     %global_flex_block_row_nowrap_flex_end_center {

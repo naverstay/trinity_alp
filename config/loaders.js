@@ -1,10 +1,18 @@
 const PATHS = require('./paths');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const fs = require('fs');
 
 const PUG_LOADER = {
-    loader: 'pug-loader',
+    //loader: 'pug-loader',
+    loader: 'pug-global-loader',
     options: {
-        pretty: true
+        pretty: true,
+        globalVariable: {
+            namespace: 'GLOBAL',
+            variables: {
+                params: JSON.parse(fs.readFileSync(PATHS.media + '/data/params.json', {encoding: 'utf-8'}))
+            }
+        }
     }
 };
 

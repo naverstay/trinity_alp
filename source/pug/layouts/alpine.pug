@@ -14,7 +14,6 @@ script.
         }
     }
 
-
     function mainMenuDropdown() {
         return {
             activeMenu: 0,
@@ -44,6 +43,35 @@ script.
             },
             isActiveDropdown(index) {
                 return this.activeMenu === index;
+            },
+        }
+    }
+
+    function slideActions() {
+        return {
+            slideOpen: false,
+            slideToggle(evt, parent) {
+                console.log('ref', evt, parent);
+                let that = this;
+
+                if (parent) {
+                    let slide = parent.querySelectorAll('.slideBlock');
+
+                    for (let i = 0; i < slide.length; i++) {
+                        const sld = slide[i];
+
+                        slideToggle(sld, 200, function (ret) {
+                            if (ret === 'up') {
+                                that.slideOpen = false;
+                            } else {
+                                that.slideOpen = true;
+                            }
+                        });
+                    }
+                }
+            },
+            isOpen() {
+                return this.slideOpen;
             },
         }
     }
