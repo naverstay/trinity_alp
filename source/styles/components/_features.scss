@@ -276,8 +276,17 @@
         background: #f6f6f6;
     }
 
-    * {
-        box-sizing: border-box;
+    @include respond-to-max($dt) {
+        padding-top: 10px;
+        padding-bottom: 5px;
+
+        .callback_title {
+            line-height: 38px;
+        }
+
+        .callback_text {
+            margin-bottom: 20px;
+        }
     }
 }
 

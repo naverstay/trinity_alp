@@ -1,7 +1,11 @@
 /* src/assets/styles/components/_breadcrumbs.scss  */
 
 .breadcrumbs {
-    padding: 34px 0 30px;
+    padding: 34px 0 16px;
+
+    @include respond-to-min($dt) {
+        padding-bottom: 30px;
+    }
 }
 
 .breadcrumbs li {
@@ -36,7 +40,6 @@
         }
     }
 }
-
 
 .breadcrumb_icon {
     position: relative;

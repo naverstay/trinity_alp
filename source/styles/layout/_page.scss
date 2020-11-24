@@ -3,7 +3,7 @@
 .page {
     &__section {
         position: relative;
-        padding: 34px 0 44px;
+        padding: 32px 0 44px;
 
         &::before {
             content: '';
@@ -27,10 +27,14 @@
                 background: $gray;
             }
         }
+
+        @include respond-to-min($dt) {
+            padding: 34px 0 44px;
+        }
     }
 
     &__title {
-        padding: 20px 0 27px;
+        padding: 13px 0 27px;
 
         h1 {
             color: $black;
@@ -39,7 +43,6 @@
         }
 
         @include respond-to-min($tab) {
-            padding-top: 13px;
 
             h1 {
                 font-size: 48px;

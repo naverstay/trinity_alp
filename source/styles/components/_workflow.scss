@@ -22,8 +22,8 @@
 
     &__icon {
         font-size: 34px;
-        height: 50px;
-        line-height: 50px;
+        height: 75px;
+        line-height: 75px;
 
         span {
             opacity: .4;
@@ -31,9 +31,8 @@
         }
 
         @include respond-to-min($dt) {
-            height: 75px;
             padding-top: 8px;
+            line-height: 50px;
         }
     }
-
 }
