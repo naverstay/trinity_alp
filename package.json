@@ -4,12 +4,6 @@
   "description": "server configurator",
   "main": "index.js",
   "license": "MIT",
-  "homepage": "https://github.com/antonchupak/pug#readme",
-  "author": "Anton Chupak <tony.chupak@gmail.com> (https://github.com/antonchupak)",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/antonchupak/pug.git"
-  },
   "keywords": [
     "webpack",
     "pug",
