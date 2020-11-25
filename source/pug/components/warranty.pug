@@ -1,0 +1,26 @@
+// ### pug/components/warranty.pug
+
+h3.product__description-title Гарантия
+
+.product__description()
+    h3.product__description-subcaption Гарантия и сервисное обслуживание
+    .product__description-text.__short
+        p
+            a(href='#') Стандартная гарантия
+            |  на продукцию Тринити (SC3) включает 3 года гарантийного обслуживания и восстановление работоспособности изделия в течение 21 рабочего дня. Подробная информация о расширенном гарантийном обслуживании
+            |
+            a(href='') здесь
+
+        ul.product__warranty
+            li
+                +checkbox('Стандартная гарантия 3 года ', true)
+            li
+                +checkbox('Расширенная гарантия 3 года с выездом ')
+            li
+                +checkbox('Расширенная гарантия 5 лет с выездом ')
+            li
+                +checkbox('Дополнительная опция «Невозврат носителей информации» ')
+
+
+
+// pug/components/warranty.pug ###

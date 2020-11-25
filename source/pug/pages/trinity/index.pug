@@ -16,8 +16,10 @@ block scripts
         function switcherMenu() {
             return {
                 #{serverParamsJS},
-                switchParam(prm, ind) {
+                switchParam(evt, prm, ind) {
+                    evt.preventDefault();
                     this.configurator[prm] = ind;
+                    return false;
                 },
                 activeParam(prm) {
                     return this.configurator[prm]
@@ -26,7 +28,7 @@ block scripts
         }
 
 block content
-    // ### pug/pages/index.pug
+    // ### pug/pages/trinity/index.pug
 
     include ../../components/switchers
 
@@ -55,20 +57,6 @@ block content
 
                     - i++;
 
-        h3.product__description-title Описание конфигуратора Тринити
+        include ../../components/description
 
-        .product__description(x-data='{...slideActions()}' :class="{ '_expanded': isOpen() , '_collapsed': !isOpen() }")
-            .product__description-text
-                p
-                    a(href='#') Сервер Тринити
-                    | &nbsp;- среда разработки информационных систем на базе платформы «1С Предприятие».  Разработка прикладного решения обычно называется программирование или конфигурированием 1С.  С помощью данной среды возможно произвести не только доработку какого-либо решения, но и разработать собственную, полноценную конфигурацию.
-
-            .product__description-text.slideBlock(style='display:none;')
-                p
-                    a(href='#') Сервер Тринити
-                    | &nbsp;- среда разработки информационных систем на базе платформы «1С Предприятие».  Разработка прикладного решения обычно называется программирование или конфигурированием 1С.  С помощью данной среды возможно произвести не только доработку какого-либо решения, но и разработать собственную, полноценную конфигурацию.
-
-            .text-right
-                a.product__description-toggle(href='#' @click='{ slideToggle($event, $el) }')
-                    span.show__expanded Развернуть
-                    span.show__collapsed Свернуть
+    // ### pug/pages/trinity/index.pug

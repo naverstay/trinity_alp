@@ -48,7 +48,12 @@
                 font-size: 48px;
             }
         }
+    }
 
+    &__description {
+        color: $blue;
+        font-size: 18px;
+        margin-bottom: 20px;
     }
 }
 

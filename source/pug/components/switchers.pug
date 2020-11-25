@@ -6,7 +6,7 @@ mixin buildSwitch(name)
         - var array = serverParams[name];
         - for (var i = 0; i < array.length; i++)
             li()
-                a.switcher__link(href='#' @click='{ switchParam("' + name + '",' + i + ') }' :class= '{ active: ' + i + ' === activeParam("' + name + '") }')= array[i]
+                a.switcher__link(href='#' @click="{ switchParam($event, '" + name + "', " + i + ") }" :class= "{ active: ' + i + ' === activeParam('" + name + "') }")= array[i]
 
 section.page__section.__gray
     .switcher__holder

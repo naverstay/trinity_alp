@@ -2,3 +2,8 @@ mixin requireIMG(img, alt)
     - var imgPath = img;
     - var imgSet = imgPath.replace(/(\.\w+)$/, '@2x$1 2x, ') + imgPath.replace(/(\.\w+)$/, '@3x$1 3x');
     img(src= imgPath srcset= imgSet alt = (alt || ''))
+
+mixin checkbox(txt, chk)
+    label.checkbox_v1
+        input(type='checkbox' checked = (chk ? 'checked' : null))
+        span.checkbox__text= txt

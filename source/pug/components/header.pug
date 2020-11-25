@@ -13,7 +13,7 @@ header.header
                 ul#horizontal-multilevel-menu.top-menu__list.list(x-ref="top_menu_list")
                     li
                         a(href='/products/') Продукты
-                        span.mob-toggle(@click=' toggleDropdownMenu(1, $refs.menu_sublist_1); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_1); }); ' :class="{ 'active': isActiveDropdown(1) }")
+                        span.mob-toggle(@click=" toggleDropdownMenu(1, $refs.menu_sublist_1); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_1); }); " :class="{ 'active': isActiveDropdown(1) }")
                         ul.sublist.list(x-ref="menu_sublist_1")
                             li
                                 a(href='/products/server/') Серверное оборудование
@@ -25,7 +25,7 @@ header.header
                                 a(href='/products/soft/') Программное обеспечение
                     li
                         a(href='/solutions/') Решения
-                        span.mob-toggle(@click=' toggleDropdownMenu(2, $refs.menu_sublist_2); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_2); }); ' :class="{ 'active': isActiveDropdown(2) }")
+                        span.mob-toggle(@click=" toggleDropdownMenu(2, $refs.menu_sublist_2); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_2); }); " :class="{ 'active': isActiveDropdown(2) }")
                         ul.sublist.list(x-ref="menu_sublist_2")
                             li
                                 a(href='/solutions/virtualization/') Виртуализация
@@ -53,7 +53,7 @@ header.header
                                 a(href='/solutions/automatization/') СЭД Тринити
                     li
                         a(href='/services/') Услуги
-                        span.mob-toggle(@click=' toggleDropdownMenu(3, $refs.menu_sublist_3); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_3); }); ' :class="{ 'active': isActiveDropdown(3) }")
+                        span.mob-toggle(@click=" toggleDropdownMenu(3, $refs.menu_sublist_3); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_3); }); " :class="{ 'active': isActiveDropdown(3) }")
                         ul.sublist.list(x-ref="menu_sublist_3")
                             li
                                 a(href='/services/service/audit-it-infrastruktury/') Аудит ИТ-инфраструктуры
@@ -89,7 +89,7 @@ header.header
                         //-span.mob-toggle
                     li
                         a(href='/about/') О компании
-                        span.mob-toggle(@click=' toggleDropdownMenu(6, $refs.menu_sublist_6); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_6); }); ' :class="{ 'active': isActiveDropdown(6) }")
+                        span.mob-toggle(@click=" toggleDropdownMenu(6, $refs.menu_sublist_6); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_6); }); " :class="{ 'active': isActiveDropdown(6) }")
                         ul.sublist.list(x-ref="menu_sublist_6")
                             li
                                 a(href='/about/address/') Адреса и реквизиты
@@ -113,7 +113,7 @@ header.header
                                 a(href='/events/') Мероприятия
                     li.config-link
                         a(href='/konfiguratory/') Конфигураторы
-                        span.mob-toggle(@click=' toggleDropdownMenu(7, $refs.menu_sublist_7); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_7); }); ' :class="{ 'active': isActiveDropdown(7) }")
+                        span.mob-toggle(@click=" toggleDropdownMenu(7, $refs.menu_sublist_7); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_7); }); " :class="{ 'active': isActiveDropdown(7) }")
                         ul.sublist.list(x-ref="menu_sublist_7")
                             li
                                 a(href='https://server.trinitygroup.ru/') Конфигуратор серверов
@@ -126,8 +126,8 @@ header.header
                 .controls-block
                     .lang
                         a(href='/en/') En
-                    .search(x-data='{ open: false }' @click.away='open = false' :class="{ 'search-expanded': open }")
-                        .search__toggle(@click='open = true')
+                    .search(x-data=" { openSearchBar: false } " @click.away=" openSearchBar = false " :class="{ 'search-expanded': openSearchBar }")
+                        .search__toggle(@click=' openSearchBar = true ')
                             img(src=require('media/system/ic-search-black.svg') alt='alt')
                         .search__form
                             form(action='#')

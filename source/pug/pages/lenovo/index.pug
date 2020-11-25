@@ -1,0 +1,46 @@
+extends ../../layouts/master.pug
+
+block vars
+    - var pageTitle = 'Конфигуратор серверов Lenovo';
+    - var breadcrumbs = ['Конфигуратор серверов', 'Lenovo'];
+    - var serverParams = {cpu : ['1хCPU', '2хCPU', '4хCPU', '8хCPU'], factor : ['1U', '2U', '3U', '4U', '5U', 'TOWER'], ps : ['1хPS', '2хPS', '4хPS']};
+    - var extraData = ', ...switcherMenu()';
+    - var serverParamsJS = 'configurator: {';
+    each val, key in serverParams
+        - serverParamsJS += '\n' + key + ':0,';
+
+    - serverParamsJS = serverParamsJS.replace(/,$/, '\n') + '}';
+
+block scripts
+    script.
+        function switcherMenu() {
+            return {
+                #{serverParamsJS},
+                switchParam(evt, prm, ind) {
+                    evt.preventDefault();
+                    this.configurator[prm] = ind;
+                    return false;
+                },
+                activeParam(prm) {
+                    return this.configurator[prm]
+                },
+            }
+        }
+
+block content
+    // ### pug/pages/lenovo/index.pug
+
+    include ../../components/slider
+
+    section.page__section.__gray
+        .page__description Мы произведем расчет цен, предоставим скидки и вышлем вам подробное коммерческое предложение со спецификацией требуемого Lenovo сервера. Пожалуйста выберите необходимые характеристики ниже:
+
+        .uCalc_237203.uc-frame-show
+            iframe.uCalc-frame_237203(src='https://api.ucalc.pro/api/237203?bg_color=transparent&TID=SlxfW0dV#https%3A%2F%2Fsrvr.trinitygroup.ru%2Flenovo%2F' scrolling='no' style='border: 0px; width: 100%; height: 2310px;' frameborder='0')
+
+    section.page__section
+        include ../../components/warranty
+
+        include ../../components/description
+
+    // pug/pages/lenovo/index.pug ###
