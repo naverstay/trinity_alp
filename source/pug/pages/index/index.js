@@ -1,3 +1,4 @@
+import './index.sass';
 
 document.addEventListener('DOMContentLoaded', (event) => {
 

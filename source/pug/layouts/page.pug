@@ -9,8 +9,14 @@ mixin page(body_cls)
             .container: .page_content: .wrapper
                 +breadcrumbs(breadcrumbs)
 
+                .page__title: h1 Конфигуратор серверов
+
+                include ../components/workflow
+
                 //- block content
                 block content
+
+                include ../components/callback
 
         //- Footer
         include ../components/footer

@@ -4,70 +4,39 @@ block vars
     - var pageTitle = 'Главная';
     - var breadcrumbs = ['Конфигураторы'];
 
-
 block content
-    //- Desktop page
-    section.page
-        .page__title: h1 Конфигуратор серверов
+    section.page__section
+        .product__panel
+            ul.product__list
+                - var i = 0;
+                while i < (productList.length)
+                    li: a.product__item(href='/' + productList[i])
+                        img(src=require('media/logos/prod_' + productList[i] + '.png'))
+                        //+requireIMG()
 
-        .page__section.__blue
-            include ../../components/workflow
+                    - i++;
 
-        .page__section
-            .product__panel
-                ul.product__list
-                    - var i = 0;
-                    while i < (productList.length)
-                        li: a.product__item(href='/' + productList[i])
-                            img(src=require('media/logos/prod_' + productList[i] + '.png'))
-                            //+requireIMG()
+        .product__description(x-data='{...slideActions()}' :class="{ '_expanded': isOpen() , '_collapsed': !isOpen() }")
+            h3.product__description-caption Описание конфигуратора
+            .product__description-text
+                p  Конфигуратор  — среда разработки информационных систем на базе платформы «1С Предприятие».  Разработка прикладного решения обычно называется программирование или конфигурированием 1С.  С помощью данной среды возможно произвести не только доработку какого-либо решения, но и разработать собственную, полноценную конфигурацию.
 
-                        - i++;
+            .product__description-text.slideBlock(style='display:none;')
+                p  Конфигуратор  — среда разработки информационных систем на базе платформы «1С Предприятие».  Разработка прикладного решения обычно называется программирование или конфигурированием 1С.  С помощью данной среды возможно произвести не только доработку какого-либо решения, но и разработать собственную, полноценную конфигурацию.
 
-            .product__description(x-data='{...slideActions()}' :class="{ '_expanded': isOpen() , '_collapsed': !isOpen() }")
-                h3.product__description-caption Описание конфигуратора
-                .product__description-text
-                    p  Конфигуратор  — среда разработки информационных систем на базе платформы «1С Предприятие».  Разработка прикладного решения обычно называется программирование или конфигурированием 1С.  С помощью данной среды возможно произвести не только доработку какого-либо решения, но и разработать собственную, полноценную конфигурацию.
+            .text-right
+                a.product__description-toggle(href='#' @click='{ slideToggle($event, $el) }')
+                    span.show__expanded Развернуть
+                    span.show__collapsed Свернуть
 
-                .product__description-text.slideBlock(style='display:none;')
-                    p  Конфигуратор  — среда разработки информационных систем на базе платформы «1С Предприятие».  Разработка прикладного решения обычно называется программирование или конфигурированием 1С.  С помощью данной среды возможно произвести не только доработку какого-либо решения, но и разработать собственную, полноценную конфигурацию.
-
-                .text-right
-                    a.product__description-toggle(href='#' @click='{ slideToggle($event, $el) }')
-                        span.show__expanded Развернуть
-                        span.show__collapsed Свернуть
-
-        .page__section.__gray
-            .callback_section
-                .callback_title Мы готовы ответить на ваши вопросы
-                .callback_text Оставьте свои данные, и мы свяжемся с вами в ближайшее время
-                .callback_form_holder: .callback_form_wrapper
-                    // todo .crm-webform-wrapper box-shadow:none;
-                    script#bx24_form_inline(data-skip-moving='true').
-                        (function (w, d, u, b) {
-                            w['Bitrix24FormObject'] = b;
-                            w[b] = w[b] || function () {
-                                arguments[0].ref = u;
-                                (w[b].forms = w[b].forms || []).push(arguments[0])
-                            };
-                            if (w[b]['forms']) return;
-                            var s = d.createElement('script');
-                            s.async = 1;
-                            s.src = u + '?' + (1 * new Date());
-                            var h = d.getElementsByTagName('script')[0];
-                            h.parentNode.insertBefore(s, h);
-                        })(window, document, 'https://crm.3nt.ru/bitrix/js/crm/form_loader.js', 'b24form');
-                        b24form({"id": "11", "lang": "ru", "sec": "av3vz5", "type": "inline"});
+    //-
+        <div x-data="{ show: false }">
+        <button x-on:click="show= ! show" x-text="show ? 'Скрыть': 'Показать' ">
+        </button>
 
 
-        //-
-            <div x-data="{ show: false }">
-            <button x-on:click="show= ! show" x-text="show ? 'Скрыть': 'Показать' ">
-            </button>
+        <p x-show.transition.origin.top.left="show">TRANSITION Top Right</p>
 
-
-            <p x-show.transition.origin.top.left="show">TRANSITION Top Right</p>
-
-            <p x-show.transition.in.duration.1000ms.out.duration.500ms="show">TRANSITION IN Duration</p>
-            </div>
+        <p x-show.transition.in.duration.1000ms.out.duration.500ms="show">TRANSITION IN Duration</p>
+        </div>
 
