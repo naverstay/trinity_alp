@@ -1,0 +1,60 @@
+/* src/assets/styles/components/_switcher.scss  */
+
+.switcher {
+
+    &__name {
+        font-size: 24px;
+        font-family: $fontCirceExtraBold;
+        margin-bottom: 12px;
+    }
+
+    &__holder {
+        @extend %global_flex_block_row_wrap_space_between_center;
+        margin: 4px -5px -25px;
+
+        @include respond-to-min($dt) {
+            margin-bottom: -20px;
+        }
+    }
+
+    &__list {
+        @extend %global_flex_block_row_nowrap_center_center;
+        width: 100%;
+        margin: 0 5px 20px;
+
+        @include respond-to-min($dt) {
+            flex: 1 0 auto;
+            width: auto;
+
+            &:first-child {
+                justify-content: flex-start;
+            }
+
+            &:last-child {
+                justify-content: flex-end;
+
+                .switcher__link {
+                    min-width: 77px;
+                }
+            }
+        }
+    }
+
+    &__link {
+        min-width: 56px;
+        height: 44px;
+        border: 2px solid #e2e2e2;
+        margin-left: -2px;
+        text-align: center;
+        font: 18px/44px $fontCirceRegular;
+        color: $blue;
+        display: inline-block;
+        padding: 0 9px;
+
+        &.active {
+            background: $blue;
+            border-color: $blue;
+            color: #fff;
+        }
+    }
+}

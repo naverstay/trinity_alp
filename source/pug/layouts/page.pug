@@ -1,7 +1,7 @@
 include ../components/breadcrumbs
 
 mixin page(body_cls)
-    body(class= body_cls x-data='{...mainMenuDropdown(), ...mainMenu()}' :class="{ 'menu-expanded': mainMenuIsOpen() }")
+    body(class= body_cls x-data='{ ...mainMenuDropdown(), ...mainMenu()' + (extraData || '') + ' }' :class="{ 'menu-expanded': mainMenuIsOpen() }")
         .main
             //- Header
             include ../components/header
@@ -9,7 +9,7 @@ mixin page(body_cls)
             .container: .page_content: .wrapper
                 +breadcrumbs(breadcrumbs)
 
-                .page__title: h1 Конфигуратор серверов
+                .page__title: h1= pageTitle
 
                 include ../components/workflow
 

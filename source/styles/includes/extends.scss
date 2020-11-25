@@ -76,10 +76,6 @@
         @include flex_block(row nowrap, space-between, center);
     }
 
-    %global_flex_block_row_wrap_space_between_center {
-        @include flex_block(row wrap, space-between, center);
-    }
-
     %global_flex_block_row_nowrap_flex_end_center {
         @include flex_block(row nowrap, flex-end, center);
     }

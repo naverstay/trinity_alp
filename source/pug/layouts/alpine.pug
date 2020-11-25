@@ -51,7 +51,8 @@ script.
         return {
             slideOpen: false,
             slideToggle(evt, parent) {
-                console.log('ref', evt, parent);
+                evt.preventDefault();
+
                 let that = this;
 
                 if (parent) {
@@ -69,6 +70,8 @@ script.
                         });
                     }
                 }
+
+                return false;
             },
             isOpen() {
                 return this.slideOpen;

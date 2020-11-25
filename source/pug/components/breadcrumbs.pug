@@ -10,5 +10,5 @@ mixin breadcrumbs(array)
                     li.active(): span= array[i]
                 else
                     li(class= (i === array.length - 1 ? 'active' : ''))
-                        a.breadcrumb_link= array[i]
+                        a.breadcrumb_link(href='#')= array[i]
         // pug/components/breadcrumb.pug ###

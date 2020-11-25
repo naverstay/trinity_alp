@@ -5,6 +5,8 @@ block vars
     - var breadcrumbs = ['Конфигураторы'];
 
 block content
+    // ### pug/pages/index.pug
+
     section.page__section
         .product__panel
             ul.product__list
@@ -28,6 +30,8 @@ block content
                 a.product__description-toggle(href='#' @click='{ slideToggle($event, $el) }')
                     span.show__expanded Развернуть
                     span.show__collapsed Свернуть
+
+    // pug/pages/index.pug ###
 
     //-
         <div x-data="{ show: false }">

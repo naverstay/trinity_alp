@@ -1,10 +1,13 @@
 //- Master layout
 - var productList = GLOBAL.params.productList;
+- var trinityServerList = GLOBAL.params.trinityServerList;
 
 include page
 include ../mixins/image
 
 block vars
+    - var extraData = '';
+    - var pageTitle = 'Тринити';
 
 doctype html
 html(lang='ru')

@@ -18,7 +18,7 @@ const common = {
     entry: (() => {
         const entries = {app: PATHS.source + '/app.js'};
 
-        PAGES.forEach(page => entries[page] = PATHS.source + `/pug/pages/${page}/${page}.js`);
+        PAGES.forEach(page => entries[page] = PATHS.source + `/pug/pages/${page}/index.js`);
 
         return entries;
     })(),
@@ -61,7 +61,7 @@ const common = {
      * In the end, we concatenate array with all our pages with other webpack plugins.
      */
     plugins: PAGES.map((page) => new HtmlWebpackPlugin({
-        template: PATHS.source + `/pug/pages/${page}/${page}.pug`,
+        template: PATHS.source + `/pug/pages/${page}/index.pug`,
         filename: `${page}.html`,
         chunks: [
             'common',

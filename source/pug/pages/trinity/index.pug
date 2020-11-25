@@ -1,0 +1,74 @@
+extends ../../layouts/master.pug
+
+block vars
+    - var pageTitle = 'Конфигуратор серверов Тринити';
+    - var breadcrumbs = ['Конфигуратор серверов', 'Тринити'];
+    - var serverParams = {cpu : ['1хCPU', '2хCPU', '4хCPU', '8хCPU'], factor : ['1U', '2U', '3U', '4U', '5U', 'TOWER'], ps : ['1хPS', '2хPS', '4хPS']};
+    - var extraData = ', ...switcherMenu()';
+    - var serverParamsJS = 'configurator: {';
+    each val, key in serverParams
+        - serverParamsJS += '\n' + key + ':0,';
+
+    - serverParamsJS = serverParamsJS.replace(/,$/, '\n') + '}';
+
+block scripts
+    script.
+        function switcherMenu() {
+            return {
+                #{serverParamsJS},
+                switchParam(prm, ind) {
+                    this.configurator[prm] = ind;
+                },
+                activeParam(prm) {
+                    return this.configurator[prm]
+                },
+            }
+        }
+
+block content
+    // ### pug/pages/index.pug
+
+    include ../../components/switchers
+
+    section.page__section
+        .product__panel
+            ul.product__list.__wide
+                - var i = 0;
+                while i < 4
+                    li: .product__block
+                        .product__img
+                            img(src=require('media/content/server_1.png'))
+
+                        .product__name Сервер E110-M5
+
+                        ul.product__options
+                            li Корзина на 4 SAS/SATA 3,5” диска с возможностью горячей замены.
+                            li Для установки дисков SAS требуется RAID-контроллер.
+                            li Полноразмерный слот PCI-E.
+                            li Одинарный блок питания 350Вт.
+                            li Поддержка одного процессора Intel® Xeon® E3-1200 v6 и Core i3.
+                            li 4 сокета DDR4 Unbuffered ECC.
+                            li 2 порта Gigabit Ethernet.
+                            li Встроенный IPMI
+
+                        a.product__btn(href='#') Сконфигурировать
+
+                    - i++;
+
+        h3.product__description-title Описание конфигуратора Тринити
+
+        .product__description(x-data='{...slideActions()}' :class="{ '_expanded': isOpen() , '_collapsed': !isOpen() }")
+            .product__description-text
+                p
+                    a(href='#') Сервер Тринити
+                    | &nbsp;- среда разработки информационных систем на базе платформы «1С Предприятие».  Разработка прикладного решения обычно называется программирование или конфигурированием 1С.  С помощью данной среды возможно произвести не только доработку какого-либо решения, но и разработать собственную, полноценную конфигурацию.
+
+            .product__description-text.slideBlock(style='display:none;')
+                p
+                    a(href='#') Сервер Тринити
+                    | &nbsp;- среда разработки информационных систем на базе платформы «1С Предприятие».  Разработка прикладного решения обычно называется программирование или конфигурированием 1С.  С помощью данной среды возможно произвести не только доработку какого-либо решения, но и разработать собственную, полноценную конфигурацию.
+
+            .text-right
+                a.product__description-toggle(href='#' @click='{ slideToggle($event, $el) }')
+                    span.show__expanded Развернуть
+                    span.show__collapsed Свернуть

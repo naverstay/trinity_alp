@@ -1,0 +1,17 @@
+// ### pug/components/switcher.pug
+
+mixin buildSwitch(name)
+    - var cls = '__' + name;
+    .switcher__list(class=  cls)
+        - var array = serverParams[name];
+        - for (var i = 0; i < array.length; i++)
+            li()
+                a.switcher__link(href='#' @click='{ switchParam("' + name + '",' + i + ') }' :class= '{ active: ' + i + ' === activeParam("' + name + '") }')= array[i]
+
+section.page__section.__gray
+    .switcher__holder
+        +buildSwitch('cpu')
+        +buildSwitch('factor')
+        +buildSwitch('ps')
+
+// pug/components/switcher.pug ###

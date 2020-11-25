@@ -1,6 +1,51 @@
-/* src/assets/styles/components/_workflow.scss  */
+/* src/assets/styles/components/_product.scss  */
 
 .product {
+
+    &__name {
+        font-size: 24px;
+        font-family: $fontCirceExtraBold;
+        margin-bottom: 12px;
+    }
+
+    &__img {
+        @extend %global_flex_block_column_nowrap_center_center;
+        height: 200px;
+        margin-bottom: 35px;
+
+        img {
+            display: block;
+            max-width: 96%;
+        }
+    }
+
+    &__btn {
+        @include transition_all(background .3s);
+        display: block;
+        text-decoration: none;
+        height: 40px;
+        border-radius: 4px;
+        text-align: center;
+        background: $blue;
+        color: #fff;
+        font-size: 18px;
+        line-height: 40px;
+
+        &:hover {
+            background: darken($blue, 5%);
+        }
+    }
+
+    &__options {
+        margin-bottom: 35px;
+
+        li {
+            font-size: 14px;
+            color: #616161;
+            margin-bottom: 18px;
+        }
+    }
+
     &__list {
         @extend %global_flex_block_row_wrap_flex-start_stretch;
         position: relative;
@@ -9,20 +54,49 @@
         overflow-y: hidden;
         margin: 0 -13px 70px;
 
-        li {
+        > li {
             flex: 0 0;
             padding: 13px 13px 10px;
+        }
+
+        &.__wide {
+            margin-bottom: -25px;
+
+            > li {
+                min-width: 100%;
+            }
+
+            @include respond-to-min($tab) {
+                margin-bottom: 0;
+
+                > li {
+                    min-width: 50%;
+                }
+            }
+
+            @include respond-to-min($dt) {
+                margin-bottom: 35px;
+
+                > li {
+                    min-width: 25%;
+                }
+            }
         }
 
         @include respond-to-min($wide) {
             margin: 0 -15px 50px;
             justify-content: space-between;
 
-            li {
+            > li {
                 flex: 1 0;
                 padding: 15px 15px 0;
             }
         }
+    }
+
+    &__block {
+        max-width: 276px;
+        margin: 0 auto 20px;
     }
 
     &__item {
@@ -80,9 +154,18 @@
             }
         }
 
+        &-title {
+            color: $black;
+            font-family: $fontCirceExtraBold;
+            font-size: 30px;
+            line-height: 1;
+            padding-top: 40px;
+            margin-bottom: 30px;
+        }
+
         &-caption {
             color: $blue;
-            font-weight: bold;
+            font-family: $fontCirceExtraBold;
             font-size: 30px;
             margin-bottom: 30px;
         }
@@ -101,6 +184,15 @@
         }
 
         &-text {
+
+            a {
+                color: $blue;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
 
             p {
                 color: $black;
