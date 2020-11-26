@@ -1,7 +1,34 @@
 // ### pug/components/slider.pug
 
 section.page__section
-    .slider__holder slider
+    .slider__holder
+        .slider__wrapper
+            .prodMainSlider.swiper-container.__main
+                .swiper-wrapper
+                    +loop_while(6)
+                        .swiper-slide
+                            img(src=require('media/content/slide_1_b.png'))
+
+
+            .prodThumbSlider.swiper-container.__thumb
+                .swiper-wrapper
+                    +loop_while(2)
+                        .swiper-slide
+                            img(src=require('media/content/slide_1.png'))
+                        .swiper-slide
+                            img(src=require('media/content/slide_2.png'))
+                        .swiper-slide
+                            img(src=require('media/content/slide_3.png'))
+
+        .slider__logo
+            .product__item
+                img(src='source/media/logos/prod_lenovo.png')
+
+        .slider__description
+            .slider__description-caption
+                span Lenovo
+                |  Описание серверов
+            p Lenovo  – двухпроцессорный стоечный сервер высотой 2U,  оптимально подходящий для средних и крупных предприятий, а также сервис-провайдеров облачных услуг. Это самый широко используемый тип серверов в мире. Он разработан для обеспечения высокой производительности благодаря поддержке центральных процессоров с тепловыделением 205 Вт, дисков NVMe с малым временем задержки и мощных графических процессоров (GPU).
 
 
 // pug/components/slider.pug ###

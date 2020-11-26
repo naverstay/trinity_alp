@@ -1,0 +1,101 @@
+/* src/assets/styles/components/_slider.scss  */
+
+.slider {
+
+    &__holder {
+        @extend %clearfix;
+        position: relative;
+
+        @include respond-to-min($dt) {
+            padding-right: 210px;
+        }
+    }
+
+    &__logo {
+        position: absolute;
+        right: 0;
+        top: 20px;
+        width: 132px;
+        z-index: 1;
+
+        @include respond-to-min($dt) {
+            right: 7px;
+            top: 10px;
+            width: 152px;
+        }
+    }
+
+    &__wrapper {
+        margin-bottom: 40px;
+
+        .swiper-container {
+            + .swiper-container {
+                margin-top: 10px;
+
+                @include respond-to-min($dt) {
+                    margin-top: 20px;
+                }
+            }
+
+            &.__main {
+                .swiper-slide {
+                    height: 305px;
+                }
+            }
+
+            &.__thumb {
+                .swiper-slide {
+                    height: 110px;
+                }
+            }
+        }
+
+        .swiper-slide {
+            @extend %global_flex_block_column_nowrap_center_center;
+
+            img {
+                display: inline-block;
+                vertical-align: top;
+                max-width: 100%;
+            }
+        }
+
+        @include respond-to-min($dt) {
+            float: left;
+            width: 420px;
+            margin-right: 55px;
+            margin-bottom: 10px;
+        }
+    }
+
+    &__description {
+        padding-bottom: 15px;
+
+        &-caption {
+            color: #afafaf;
+            font-size: 14px;
+            margin-bottom: 15px;
+
+            span {
+                color: $black;
+                font-size: 24px;
+                font-family: $fontCirceBold;
+            }
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.65;
+
+            + p {
+                margin-top: 20px;
+            }
+        }
+
+        @include respond-to-min($dt) {
+            padding-top: 15px;
+            min-height: 100px;
+            padding-bottom: 0;
+        }
+    }
+}

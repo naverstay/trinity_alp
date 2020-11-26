@@ -7,3 +7,9 @@ mixin checkbox(txt, chk)
     label.checkbox_v1
         input(type='checkbox' checked = (chk ? 'checked' : null))
         span.checkbox__text= txt
+
+mixin loop_while(counter)
+    -i=0;
+    while i < counter
+        block
+        -i++;
