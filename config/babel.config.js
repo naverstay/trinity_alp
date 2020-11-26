@@ -5,7 +5,7 @@ module.exports = function (api) {
             '@babel/preset-env',
             {
                 corejs: {
-                    version: "3",
+                    version: 3,
                     proposals: true
                 },
                 useBuiltIns: 'usage',
@@ -23,6 +23,7 @@ module.exports = function (api) {
         ]
     ];
     const plugins = [
+        "@babel/plugin-proposal-object-rest-spread",
         ["@babel/plugin-proposal-decorators", {decoratorsBeforeExport: true}],
         ["@babel/plugin-proposal-class-properties", {"loose": true}]
     ];

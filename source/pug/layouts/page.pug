@@ -1,28 +1,32 @@
 include ../components/breadcrumbs
 
 mixin page(body_cls)
-    body(class= body_cls x-data='{ ...mainMenuDropdown(), ...mainMenu()' + (extraData || '') + ' }' :class="{ 'menu-expanded': mainMenuIsOpen() }")
+    - var ie11 = false;
+    - var xData = '{ ...mainMenuDropdown(), ...mainMenu()' + (extraData || '') + ' }';
+    - xData = ' siteData() ';
+    body(class= body_cls x-data=xData :class="{ 'menu-expanded': mainMenuIsOpen() }")
         .main
             //- Header
+
             include ../components/header
 
-            .container: .page_content: .wrapper
-                +breadcrumbs(breadcrumbs)
+            if (!ie11)
+                .container: .page_content(x-data=' switcherMenu() '): .wrapper
+                    +breadcrumbs(breadcrumbs)
 
-                .page__title: h1= pageTitle
+                    .page__title: h1= pageTitle
 
-                include ../components/workflow
+                    include ../components/workflow
 
-                //- block content
-                block content
+                    //- block content
+                    block content
 
-                include ../components/callback
+                    include ../components/callback
 
         //- Footer
-        include ../components/footer
+        if (!ie11)
+            include ../components/footer
 
-        | <script src="https://polyfill.io/v3/polyfill.min.js?features=MutationObserver%2CArray.from%2CArray.prototype.forEach%2CMap%2CSet%2CArray.prototype.includes%2CString.prototype.includes%2CPromise%2CNodeList.prototype.forEach%2CObject.values%2CReflect%2CReflect.set"></script>
-        | <script src="https://cdn.jsdelivr.net/npm/proxy-polyfill@0.3.0/proxy.min.js"></script>
         | <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"></script>
         | <script nomodule src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine-ie11.js" defer></script>
 
@@ -38,4 +42,4 @@ mixin page(body_cls)
             gtag('js', new Date());
             gtag('config', 'UA-56237358-2');
 
-        include alpine
+        include alpine_all

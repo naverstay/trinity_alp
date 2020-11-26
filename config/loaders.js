@@ -3,7 +3,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const fs = require('fs');
 
 const PUG_LOADER = {
-    //loader: 'pug-loader',
     loader: 'pug-global-loader',
     options: {
         pretty: true,

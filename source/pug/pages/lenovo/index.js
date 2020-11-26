@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     prodMainSwiper = new Swiper('.prodMainSlider', {
-        loop: true,
-        setWrapperSize: true,
+        loop: false,
+        setWrapperSize: false,
         speed: sliderSpeed,
         on: {
             slideChange: function (swp) {

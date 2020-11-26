@@ -18,7 +18,7 @@ block content
 
                     - i++;
 
-        .product__description(x-data='{...slideActions()}' :class="{ '_expanded': isOpen() , '_collapsed': !isOpen() }")
+        .product__description(x-data=' slideActions() ' :class="{ '_expanded': isOpen() , '_collapsed': !isOpen() }")
             h3.product__description-caption Описание конфигуратора
             .product__description-text
                 p  Конфигуратор  — среда разработки информационных систем на базе платформы «1С Предприятие».  Разработка прикладного решения обычно называется программирование или конфигурированием 1С.  С помощью данной среды возможно произвести не только доработку какого-либо решения, но и разработать собственную, полноценную конфигурацию.

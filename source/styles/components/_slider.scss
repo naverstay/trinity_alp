@@ -46,16 +46,22 @@
             &.__thumb {
                 .swiper-slide {
                     height: 110px;
+                    cursor: pointer;
                 }
             }
         }
 
         .swiper-slide {
             @extend %global_flex_block_column_nowrap_center_center;
+            overflow: hidden;
+
+            &.swiper-slide-active {
+                //border: 1px solid red;
+            }
 
             img {
                 display: inline-block;
-                vertical-align: top;
+                vertical-align: middle;
                 max-width: 100%;
             }
         }
