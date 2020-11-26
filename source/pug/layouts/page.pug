@@ -2,23 +2,21 @@ include ../components/breadcrumbs
 
 mixin page(body_cls)
     - var ie11 = false;
-    - var xData = '{ ...mainMenuDropdown(), ...mainMenu()' + (extraData || '') + ' }';
-    - xData = ' siteData() ';
+    - var xData = ' siteData() ';
     body(class= body_cls x-data=xData :class="{ 'menu-expanded': mainMenuIsOpen() }")
         .main
             //- Header
-
             include ../components/header
 
             if (!ie11)
-                .container: .page_content(x-data=' switcherMenu() '): .wrapper
+                .container: .page_content: .wrapper
                     +breadcrumbs(breadcrumbs)
 
                     .page__title: h1= pageTitle
 
                     include ../components/workflow
 
-                    //- block content
+                    //- Content
                     block content
 
                     include ../components/callback
@@ -27,8 +25,8 @@ mixin page(body_cls)
         if (!ie11)
             include ../components/footer
 
-        | <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"></script>
-        | <script nomodule src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine-ie11.js" defer></script>
+        | <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+        | <script nomodule src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine-ie11.min.js" defer></script>
 
         //- block scripts
         block scripts

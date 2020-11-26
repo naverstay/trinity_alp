@@ -9,7 +9,7 @@ mixin buildSwitch(name)
                 a.switcher__link(href='#' @click="{ switchParam($event, '" + name + "', " + i + ") }" :class= "{ active: " + i + " === activeParam('" + name + "') }")= array[i]
 
 section.page__section.__gray
-    .switcher__holder
+    .switcher__holder(x-data=' switcherMenu() ')
         +buildSwitch('cpu')
         +buildSwitch('factor')
         +buildSwitch('ps')

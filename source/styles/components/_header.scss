@@ -465,12 +465,26 @@
     -webkit-transition: all 0.1s linear;
     -o-transition: all 0.1s linear;
     transition: all 0.1s linear;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -12px;
+        bottom: -12px;
+        left: -16px;
+        right: -10px;
+    }
 }
 
 .mob-toggle.active {
     -webkit-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
     transform: rotate(-90deg);
+
+    &::before {
+        right: -16px;
+        left: -10px;
+    }
 }
 
 .header__line .top-menu {

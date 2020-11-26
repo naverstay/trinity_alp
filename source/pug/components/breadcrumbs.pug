@@ -1,6 +1,7 @@
 mixin breadcrumbs(array)
     if (array && array.length)
         // ### pug/components/breadcrumb.pug
+
         ul.breadcrumbs.clearfix
             li
                 a.breadcrumb_link(href='#')
@@ -11,4 +12,5 @@ mixin breadcrumbs(array)
                 else
                     li(class= (i === array.length - 1 ? 'active' : ''))
                         a.breadcrumb_link(href='#')= array[i]
+
         // pug/components/breadcrumb.pug ###

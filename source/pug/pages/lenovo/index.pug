@@ -4,7 +4,7 @@ block vars
     - var pageTitle = 'Конфигуратор серверов Lenovo';
     - var breadcrumbs = ['Конфигуратор серверов', 'Lenovo'];
     - var serverParams = {cpu : ['1хCPU', '2хCPU', '4хCPU', '8хCPU'], factor : ['1U', '2U', '3U', '4U', '5U', 'TOWER'], ps : ['1хPS', '2хPS', '4хPS']};
-    - var extraData = ', ...switcherMenu()';
+
     - var serverParamsJS = 'configurator: {';
     each val, key in serverParams
         - serverParamsJS += '\n' + key + ':0,';
@@ -12,20 +12,6 @@ block vars
     - serverParamsJS = serverParamsJS.replace(/,$/, '\n') + '}';
 
 block scripts
-    script.
-        function switcherMenu() {
-            return {
-                #{serverParamsJS},
-                switchParam(evt, prm, ind) {
-                    evt.preventDefault();
-                    this.configurator[prm] = ind;
-                    return false;
-                },
-                activeParam(prm) {
-                    return this.configurator[prm]
-                },
-            }
-        }
 
 block content
     // ### pug/pages/lenovo/index.pug

@@ -14,8 +14,6 @@ block content
                 while i < (productList.length)
                     li: a.product__item(href='/' + productList[i])
                         img(src=require('media/logos/prod_' + productList[i] + '.png'))
-                        //+requireIMG()
-
                     - i++;
 
         .product__description(x-data=' slideActions() ' :class="{ '_expanded': isOpen() , '_collapsed': !isOpen() }")
@@ -32,15 +30,4 @@ block content
                     span.show__collapsed Свернуть
 
     // pug/pages/index/index.pug ###
-
-    //-
-        <div x-data="{ show: false }">
-        <button x-on:click="show= ! show" x-text="show ? 'Скрыть': 'Показать' ">
-        </button>
-
-
-        <p x-show.transition.origin.top.left="show">TRANSITION Top Right</p>
-
-        <p x-show.transition.in.duration.1000ms.out.duration.500ms="show">TRANSITION IN Duration</p>
-        </div>
 

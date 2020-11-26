@@ -43,6 +43,7 @@ $holydat_var: none;
 @import './components/product';
 @import './components/switcher';
 @import './components/slider';
+@import './components/configurator';
 @import './components/features';
 @import './components/forms';
 @import './components/button';
@@ -54,9 +55,3 @@ $holydat_var: none;
 @import './layout/page';
 @import './layout/general';
 
-/*
-  Pages
-*/
-@import './pages/index';
-@import './pages/blog';
-@import './pages/contact';

@@ -30,6 +30,10 @@
 
         @include respond-to-min($dt) {
             padding: 34px 0 44px;
+
+            &.__pad-0 {
+                padding-top: 0;
+            }
         }
     }
 

@@ -69,7 +69,6 @@
         @include respond-to-min($dt) {
             float: left;
             width: 420px;
-            margin-right: 55px;
             margin-bottom: 10px;
         }
     }
@@ -99,9 +98,10 @@
         }
 
         @include respond-to-min($dt) {
-            padding-top: 15px;
             min-height: 100px;
+            padding-top: 15px;
             padding-bottom: 0;
+            margin-left: 470px;
         }
     }
 }

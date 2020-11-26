@@ -1,0 +1,104 @@
+// ### pug/components/conf_main.pug
+
+mixin selectBox(txt)
+    - var s = 0;
+    select
+        while (s < 6)
+            option= (typeof txt === 'string') ? (txt + ' #' + s) : (s + 1)
+            - s++;
+
+.configurator__main
+    .configurator__row
+        .configurator__icon
+            img(src=require('media/system/config_cpu.png'))
+        .configurator__label Процессор
+        .configurator__controls
+            .configurator__cell
+                +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
+            .configurator__cell.__multiply
+                +selectBox(1)
+
+    .configurator__row
+        .configurator__icon
+            img(src=require('media/system/config_ram.png'))
+        .configurator__label Оперативная память
+        .configurator__controls
+            .configurator__cell
+                +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
+            .configurator__cell.__multiply
+                +selectBox(1)
+
+    .configurator__row
+        .configurator__icon
+            img(src=require('media/system/config_raid.png'))
+        .configurator__label Raid контроллер
+        .configurator__controls
+            .configurator__cell
+                +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
+
+    .configurator__row
+        .configurator__icon
+            img(src=require('media/system/config_ssd.png'))
+        .configurator__label Жесткие диски
+
+        - var ssd = ['SATA', 'SAS', 'SSD']
+        each d in ssd
+            .configurator__label= d
+            +loop_while(3)
+                .configurator__controls
+                    .configurator__cell
+                        +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
+                    .configurator__cell.__multiply
+                        +selectBox(1)
+
+    .configurator__row
+        .configurator__icon
+            img(src=require('media/system/config_other.png'))
+        .configurator__label Прочие контроллеры
+        +loop_while(2)
+            .configurator__controls
+                .configurator__cell
+                    +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
+
+    .configurator__row
+        .configurator__icon
+            img(src=require('media/system/config_misc.png'))
+        .configurator__label Прочие компоненты
+        .configurator__controls
+            .configurator__cell
+                +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
+
+    .configurator__row
+        .configurator__icon
+            img(src=require('media/system/config_soft.png'))
+        .configurator__label Программное обеспечение
+        .configurator__controls
+            .configurator__cell
+                +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
+
+    .configurator__row
+        .configurator__icon
+            img(src=require('media/system/config_ups.png'))
+        .configurator__label ИБП
+        .configurator__controls
+            .configurator__cell
+                +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
+
+    .configurator__row
+        .configurator__icon
+            img(src=require('media/system/config_switch.png'))
+        .configurator__label Коммутаторы
+        .configurator__controls
+            .configurator__cell
+                +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
+
+    .configurator__row
+        .configurator__icon
+            img(src=require('media/system/config_service.png'))
+        .configurator__label Сервисное обслуживание
+        .configurator__controls
+            .configurator__cell
+                +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
+
+
+// pug/components/conf_main.pug ###
