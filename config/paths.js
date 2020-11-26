@@ -3,6 +3,7 @@ const path = require('path');
 const ROOT = process.cwd();
 
 const PATHS = {
+    config: path.join(ROOT, 'config'),
     build: path.join(ROOT, 'build'),
     source: path.join(ROOT, 'source'),
     fonts: path.join(ROOT, 'source/fonts'),

@@ -2,7 +2,7 @@
 
 header.header
     .container.container--wide
-        .header__line.flex
+        .header__line.flex(@click.away=' closeMainMenu() ')
             .menu-toggle(@click=' openMainMenu() ')
                 span.menu-ic
             .logo

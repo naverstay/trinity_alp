@@ -19,9 +19,11 @@ const PUG_LOADER = {
 const BABEL_LOADER = {
     loader: 'babel-loader',
     options: {
-        presets: [
-            '@babel/preset-env'
-        ]
+        babelrc: false,
+        configFile: (PATHS.config + '/babel.config.js'),
+        compact: false,
+        cacheDirectory: true,
+        sourceMaps: false
     }
 };
 
@@ -91,6 +93,11 @@ const loaders = [
     },
     {
         test: /\.js$/,
+        exclude: [
+            /\bcore-js\b/,
+            /\bwebpack\/buildin\b/,
+            /node_modules/
+        ],
         use: [
             BABEL_LOADER
         ]

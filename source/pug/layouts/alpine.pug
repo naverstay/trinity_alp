@@ -20,7 +20,7 @@ script.
             toggleDropdownMenu(index, ref) {
                 let that = this;
 
-                ref && slideToggle(ref, 300, function (ret) {
+                ref && window.slideToggle(ref, 300, function (ret) {
                     console.log('ret', ret);
 
                     if (ret === 'up') {
@@ -37,7 +37,7 @@ script.
                     let child = list[i];
 
                     if (child !== ref) {
-                        slideUp(child, 300);
+                        window.slideUp(child, 300);
                     }
                 }
             },
@@ -61,7 +61,7 @@ script.
                     for (let i = 0; i < slide.length; i++) {
                         const sld = slide[i];
 
-                        slideToggle(sld, 200, function (ret) {
+                        window.slideToggle(sld, 200, function (ret) {
                             if (ret === 'up') {
                                 that.slideOpen = false;
                             } else {
