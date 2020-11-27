@@ -143,8 +143,10 @@
             max-width: 100%;
         }
 
-        &:hover {
-            border-color: $blue;
+        @at-root a#{&} {
+            &:hover {
+                border-color: $blue;
+            }
         }
 
         &.active {

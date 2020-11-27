@@ -71,7 +71,7 @@
 
         @include respond-to-min($dt) {
             padding-right: 40px;
-            flex: 1 0 auto;
+            flex: 1;
         }
     }
 
@@ -197,188 +197,69 @@
         }
     }
 
-    &__list {
-        @extend %global_flex_block_row_wrap_flex-start_stretch;
-        position: relative;
-        z-index: 1;
-        overflow-x: auto;
-        overflow-y: hidden;
-        margin: 0 -13px 70px;
 
-        > li {
-            flex: 0 0;
-            padding: 13px 13px 10px;
-        }
+    &__total {
+        @extend %global_flex_block_column_nowrap_flex-start_stretch;
 
-        &.__wide {
-            margin-bottom: -25px;
-
-            > li {
-                min-width: 100%;
-            }
-
-            @include respond-to-min($tab) {
-                margin-bottom: 0;
-
-                > li {
-                    min-width: 50%;
-                }
-            }
+        &-info {
+            background: #f6f6f6;
+            color: $blue;
+            font-size: 16px;
+            line-height: 1.5;
+            padding: 24px 20px;
+            margin-bottom: 30px;
 
             @include respond-to-min($dt) {
-                margin-bottom: 35px;
-
-                > li {
-                    min-width: 25%;
-                }
+                margin-bottom: 0;
+                padding: 20px 120px 20px 32px;
             }
         }
 
-        @include respond-to-min($wide) {
-            margin: 0 -15px 50px;
-            justify-content: space-between;
+        &-price {
+            @extend %global_flex_block_row_wrap_space_between_stretch;
+            padding: 0 20px;
+            min-width: 177px;
 
-            > li {
-                flex: 1 0;
-                padding: 15px 15px 0;
-            }
-        }
-    }
-
-    &__block {
-        max-width: 276px;
-        margin: 0 auto 20px;
-    }
-
-    &__item {
-        @extend %global_flex_block_column_nowrap_center_center;
-        @include transition_all(border-color .3s, box-shadow .3s);
-        text-align: center;
-        border: 1px solid #e9e9e9;
-        height: 73px;
-        min-width: 132px;
-
-        img {
-            display: inline-block;
-            vertical-align: top;
-            max-width: 100%;
-        }
-
-        &:hover {
-            border-color: $blue;
-        }
-
-        &.active {
-            box-shadow: inset 0 0 10px $blue;
-            border-color: $blue;
-        }
-
-        @include respond-to-min($wide) {
-            height: 87px;
-            min-width: 0;
-        }
-    }
-
-    &__description {
-        background: #f6f6f6;
-        padding: 40px 30px 15px;
-        margin-bottom: 55px;
-        position: relative;
-
-        @include respond-to-max($dt) {
-            padding: 40px 0 35px;
-            margin-bottom: 30px;
-
-            &::before {
-                content: '';
-                position: absolute;
-                z-index: -1;
-                top: 0;
-                bottom: 0;
-                left: -50vw;
-                right: -50vw;
-                background: inherit;
-            }
-
-            .product__description-toggle {
-                margin-top: 30px;
+            @include respond-to-min($dt) {
+                flex-flow: column nowrap;
+                padding: 0 0 0 32px;
+                justify-content: center;
+                flex: 1;
             }
         }
 
-        &-title {
-            color: $black;
-            font-family: $fontCirceExtraBold;
-            font-size: 30px;
-            line-height: 1;
-            padding-top: 40px;
-            margin-bottom: 30px;
-        }
+        &-label {
+            color: #989898;
+            font-size: 14px;
+            width: 100%;
 
-        &-caption {
-            color: $blue;
-            font-family: $fontCirceExtraBold;
-            font-size: 30px;
-            margin-bottom: 30px;
-        }
-
-        &-subcaption {
-            font-family: $fontCirceBold;
-            font-size: 18px;
-        }
-
-        &-toggle {
-            display: inline-block;
-            vertical-align: top;
-            cursor: pointer;
-            font-size: 12px;
-            color: $blue;
-            text-decoration: underline;
-
-            &:hover {
-                text-decoration: none;
+            @include respond-to-min($dt) {
+                padding-left: 5px;
+                padding-bottom: 10px;
             }
         }
 
-        &-text {
+        &-val {
+            color: #000;
+            font: 30px $fontCirceBold;
+            margin-top: 10px;
+            text-align: center;
+            background: #f6f6f6;
+            width: calc(50% - 6px);
 
-            a {
-                color: $blue;
-                text-decoration: none;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-
-            p {
-                color: $black;
-                font-size: 18px;
-                margin-bottom: 28px;
-            }
-
-            &.__short {
-                p {
-                    font-size: 14px;
-                    line-height: 22px;
-                    margin-bottom: 15px;
-                }
-            }
-        }
-
-        &._collapsed {
-            .show__collapsed {
-                display: none;
-            }
-        }
-
-        &._expanded {
-            .show__expanded {
-                display: none;
+            @include respond-to-min($dt) {
+                background: none;
+                text-align: left;
+                padding: 0;
+                margin-top: 0;
+                white-space: nowrap;
+                width: 100%;
             }
         }
 
         @include respond-to-min($dt) {
-
+            flex-flow: row nowrap;
+            margin-bottom: 70px;
         }
     }
 

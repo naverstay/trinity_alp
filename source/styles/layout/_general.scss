@@ -10,6 +10,29 @@ body {
     height: 100%;
 }
 
+html {
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $blue;
+        border-radius: 4px;
+    }
+
+    * {
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $blue;
+            border-radius: 4px;
+        }
+    }
+}
+
 body {
     font: 16px/1.35 'Circe-Regular', sans-serif;
     color: $default_t_color;

@@ -18,8 +18,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         slideToClickedSlide: true,
         on: {
             slideChange: function (swp) {
-                console.log('prodThumbSwiper', swp);
-
                 if (!skip && prodMainSwiper) {
                     skip = true;
                     prodMainSwiper.slideTo(swp.activeIndex);
@@ -47,5 +45,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
         }
     });
-
 });
