@@ -81,8 +81,8 @@
     &__main {
 
         .configurator__row {
-            margin-top: 4px;
-            padding-bottom: 38px;
+            margin-top: 42px;
+            padding-bottom: 42px;
 
             + .configurator__row {
 
@@ -103,6 +103,7 @@
 
             @include respond-to-max($dt) {
                 margin-top: 46px;
+                padding-bottom: 38px;
 
                 &:first-child {
                     margin-top: 22px;
@@ -116,6 +117,7 @@
 
         @include respond-to-min($dt) {
             padding-right: 40px;
+            padding-top: 32px;
             width: calc(100% - 300px);
         }
     }
