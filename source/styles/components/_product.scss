@@ -26,20 +26,15 @@
     }
 
     &__btn {
+        @extend %blue_btn_hover;
         @include transition_all(background .3s);
         display: block;
         text-decoration: none;
         height: 40px;
         border-radius: 4px;
         text-align: center;
-        background: $blue;
-        color: #fff;
         font-size: 18px;
         line-height: 40px;
-
-        &:hover {
-            background: darken($blue, 5%);
-        }
     }
 
     &__options {
@@ -71,6 +66,10 @@
                     background: $blue;
                     width: 8px;
                     height: 8px;
+                }
+
+                @include respond-to-max($dt) {
+                    margin-left: 40px;
                 }
             }
         }
@@ -188,7 +187,7 @@
 
         &-title {
             color: $black;
-            font-family: $fontCirceExtraBold;
+            font-family: $fontGilroyExtraBold;
             font-size: 30px;
             line-height: 1;
             padding-top: 40px;
@@ -197,7 +196,7 @@
 
         &-caption {
             color: $blue;
-            font-family: $fontCirceExtraBold;
+            font-family: $fontGilroyExtraBold;
             font-size: 30px;
             margin-bottom: 30px;
         }

@@ -6,113 +6,113 @@ header.header
             .menu-toggle(@click=' openMainMenu() ')
                 span.menu-ic
             .logo
-                a(href='/')
+                a(href='https://trinitygroup.ru/')
                     img(src=require('media/system/logo.svg') alt='Тринити')
 
             nav.top-menu
                 ul#horizontal-multilevel-menu.top-menu__list.list(x-ref="top_menu_list")
                     li
-                        a(href='/products/') Продукты
+                        a(href='https://trinitygroup.ru/products/') Продукты
                         span.mob-toggle(@click=" toggleDropdownMenu(1, $refs.menu_sublist_1); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_1); }); " :class="{ 'active': isActiveDropdown(1) }")
                         ul.sublist.list(x-ref="menu_sublist_1")
                             li
-                                a(href='/products/server/') Серверное оборудование
+                                a(href='https://trinitygroup.ru/products/server/') Серверное оборудование
                             li
-                                a(href='/products/storage/') Системы хранения данных
+                                a(href='https://trinitygroup.ru/products/storage/') Системы хранения данных
                             li
-                                a(href='/products/netsys/') Сетевое оборудование
+                                a(href='https://trinitygroup.ru/products/netsys/') Сетевое оборудование
                             li
-                                a(href='/products/soft/') Программное обеспечение
+                                a(href='https://trinitygroup.ru/products/soft/') Программное обеспечение
                     li
-                        a(href='/solutions/') Решения
+                        a(href='https://trinitygroup.ru/solutions/') Решения
                         span.mob-toggle(@click=" toggleDropdownMenu(2, $refs.menu_sublist_2); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_2); }); " :class="{ 'active': isActiveDropdown(2) }")
                         ul.sublist.list(x-ref="menu_sublist_2")
                             li
-                                a(href='/solutions/virtualization/') Виртуализация
+                                a(href='https://trinitygroup.ru/solutions/virtualization/') Виртуализация
                             li
-                                a(href='/solutions/disaster_recovery/') Катастрофоустойчивые решения
+                                a(href='https://trinitygroup.ru/solutions/disaster_recovery/') Катастрофоустойчивые решения
                             li
-                                a(href='/solutions/hpc/') Высокопроизводительные вычисления и VDI
+                                a(href='https://trinitygroup.ru/solutions/hpc/') Высокопроизводительные вычисления и VDI
                             li
-                                a(href='/solutions/deep-learning2/') Deep Learning и AI
+                                a(href='https://trinitygroup.ru/solutions/deep-learning2/') Deep Learning и AI
                             li
-                                a(href='/solutions/kontrol-udalennogo-dostupa/') Контроль удаленного доступа
+                                a(href='https://trinitygroup.ru/solutions/kontrol-udalennogo-dostupa/') Контроль удаленного доступа
                             li
-                                a(href='/solutions/inf-secure/') Информационная безопасность
+                                a(href='https://trinitygroup.ru/solutions/inf-secure/') Информационная безопасность
                             li
-                                a(href='/solutions/archbackup/') Резервное копирование
+                                a(href='https://trinitygroup.ru/solutions/archbackup/') Резервное копирование
                             li
-                                a(href='/solutions/cod/') Инженерная инфраструктура ЦОД
+                                a(href='https://trinitygroup.ru/solutions/cod/') Инженерная инфраструктура ЦОД
                             li
-                                a(href='/solutions/videonabludenie/') Видеонаблюдение
+                                a(href='https://trinitygroup.ru/solutions/videonabludenie/') Видеонаблюдение
                             li
-                                a(href='/solutions/graphics/') Телевидение, IPTV / OTT
+                                a(href='https://trinitygroup.ru/solutions/graphics/') Телевидение, IPTV / OTT
                             li
-                                a(href='/solutions/predictive-maintenance/') Прогностическая аналитика
+                                a(href='https://trinitygroup.ru/solutions/predictive-maintenance/') Прогностическая аналитика
                             li
-                                a(href='/solutions/automatization/') СЭД Тринити
+                                a(href='https://trinitygroup.ru/solutions/automatization/') СЭД Тринити
                     li
-                        a(href='/services/') Услуги
+                        a(href='https://trinitygroup.ru/services/') Услуги
                         span.mob-toggle(@click=" toggleDropdownMenu(3, $refs.menu_sublist_3); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_3); }); " :class="{ 'active': isActiveDropdown(3) }")
                         ul.sublist.list(x-ref="menu_sublist_3")
                             li
-                                a(href='/services/service/audit-it-infrastruktury/') Аудит ИТ-инфраструктуры
+                                a(href='https://trinitygroup.ru/services/service/audit-it-infrastruktury/') Аудит ИТ-инфраструктуры
                             li
-                                a(href='/services/service/audit-informatsionnoy-bezopasnosti/')
+                                a(href='https://trinitygroup.ru/services/service/audit-informatsionnoy-bezopasnosti/')
                                     | Аудит информационной
                                     | безопасности
                             li
-                                a(href='/services/service/my-gotovy-vam-pomoch-/') Мы готовы вам помочь
+                                a(href='https://trinitygroup.ru/services/service/my-gotovy-vam-pomoch-/') Мы готовы вам помочь
                             li
-                                a(href='/services/service/razrabotka-kontseptsii-i-trebovaniy/')
+                                a(href='https://trinitygroup.ru/services/service/razrabotka-kontseptsii-i-trebovaniy/')
                                     | Разработка концепции и
                                     | требований
                             li
-                                a(href='/services/service/tekhnicheskoe-obsluzhivanie-serverov/')
+                                a(href='https://trinitygroup.ru/services/service/tekhnicheskoe-obsluzhivanie-serverov/')
                                     | Гарантийное
                                     | обслуживание серверов
                             li
-                                a(href='/services/service/rasshirennaya-garantiya/') Сервисные контракты вендоров
+                                a(href='https://trinitygroup.ru/services/service/rasshirennaya-garantiya/') Сервисные контракты вендоров
                             li
-                                a(href='/services/service/proektirovanie-montazh-puskonaladka/')
+                                a(href='https://trinitygroup.ru/services/service/proektirovanie-montazh-puskonaladka/')
                                     | Проектирование, монтаж,
                                     | пусконаладка
                             li
-                                a(href='/services/service/uslugi-demo-stenda/') Услуги демо-стенда
+                                a(href='https://trinitygroup.ru/services/service/uslugi-demo-stenda/') Услуги демо-стенда
                             li
-                                a(href='/services/service/pechati-na-3d-printere/') Печать на 3D-принтере
+                                a(href='https://trinitygroup.ru/services/service/pechati-na-3d-printere/') Печать на 3D-принтере
                     li
-                        a(href='/about/projects/') Проекты
+                        a(href='https://trinitygroup.ru/about/projects/') Проекты
                         //-span.mob-toggle
                     li
-                        a(href='/import-substitution/') Импортозамещение
+                        a(href='https://trinitygroup.ru/import-substitution/') Импортозамещение
                         //-span.mob-toggle
                     li
-                        a(href='/about/') О компании
+                        a(href='https://trinitygroup.ru/about/') О компании
                         span.mob-toggle(@click=" toggleDropdownMenu(6, $refs.menu_sublist_6); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_6); }); " :class="{ 'active': isActiveDropdown(6) }")
                         ul.sublist.list(x-ref="menu_sublist_6")
                             li
-                                a(href='/about/address/') Адреса и реквизиты
+                                a(href='https://trinitygroup.ru/about/address/') Адреса и реквизиты
                             li
-                                a(href='/about/trinity_service/') Сервисные центры
+                                a(href='https://trinitygroup.ru/about/trinity_service/') Сервисные центры
                             li
-                                a(href='/about/partners/') Партнеры / Вендоры
+                                a(href='https://trinitygroup.ru/about/partners/') Партнеры / Вендоры
                             li
-                                a(href='/about/sertificate/') Сертификаты
+                                a(href='https://trinitygroup.ru/about/sertificate/') Сертификаты
                             li
-                                a(href='/about/delivery_and_purchase/') Доставка и Оплата
+                                a(href='https://trinitygroup.ru/about/delivery_and_purchase/') Доставка и Оплата
                             li
-                                a(href='/about/history/') История компании
+                                a(href='https://trinitygroup.ru/about/history/') История компании
                             li
-                                a(href='/about/tender/') Участие в торгах
+                                a(href='https://trinitygroup.ru/about/tender/') Участие в торгах
                             li
-                                a(href='/about/vacansy/') Вакансии
+                                a(href='https://trinitygroup.ru/about/vacansy/') Вакансии
                             li
-                                a(href='/news/') Новости
+                                a(href='https://trinitygroup.ru/news/') Новости
                             li
-                                a(href='/events/') Мероприятия
+                                a(href='https://trinitygroup.ru/events/') Мероприятия
                     li.config-link
-                        a(href='/konfiguratory/') Конфигураторы
+                        a(href='https://trinitygroup.ru/konfiguratory/') Конфигураторы
                         span.mob-toggle(@click=" toggleDropdownMenu(7, $refs.menu_sublist_7); $nextTick(function() { toggleDropdownClass($refs.top_menu_list, $refs.menu_sublist_7); }); " :class="{ 'active': isActiveDropdown(7) }")
                         ul.sublist.list(x-ref="menu_sublist_7")
                             li
@@ -125,7 +125,7 @@ header.header
                 a.tel-link.mob-hidden(href='tel:88002005960') 8 800 200-59-60
                 .controls-block
                     .lang
-                        a(href='/en/') En
+                        a(href='https://trinitygroup.ru/en/') En
                     .search(x-data=" { openSearchBar: false } " @click.away=" openSearchBar = false " :class="{ 'search-expanded': openSearchBar }")
                         .search__toggle(@click=' openSearchBar = true ')
                             img(src=require('media/system/ic-search-black.svg') alt='alt')

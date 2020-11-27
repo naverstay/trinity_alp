@@ -60,6 +60,10 @@
         @include flex_block(row wrap, flex-start, stretch);
     }
 
+    %global_flex_block_row_nowrap_flex-start_stretch {
+        @include flex_block(row nowrap, flex-start, stretch);
+    }
+
     %global_flex_block_row_wrap_flex-end_stretch {
         @include flex_block(row nowrap, flex-end, stretch);
     }

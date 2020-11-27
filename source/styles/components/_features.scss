@@ -293,7 +293,7 @@
 .callback_title {
     color: #000;
     font: 700 38px/44px 'Gilroy-ExtraBold';
-    margin-bottom: 16px;
+    margin-bottom: 15px;
     letter-spacing: -.025em;
 }
 
@@ -311,12 +311,14 @@
         &:before {
             content: '';
             position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 426px;
-            height: 250px;
-            @include retina('/system/callback_form_paper', png , 426px, 250px);
+            bottom: 15px;
+            right: 75px;
+            width: 380px;
+            height: 220px;
+            @include retina('/system/callback_form_paper', png , 380px, 220px);
             background-repeat: no-repeat;
+            -webkit-background-size: cover;
+            background-size: cover;
         }
     }
 }

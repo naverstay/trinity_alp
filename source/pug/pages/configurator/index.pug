@@ -17,15 +17,18 @@ block scripts
 block content
     // ### pug/pages/configurator/index.pug
 
-    include ../../components/slider
+    section.page__section
+        include ../../components/slider
 
-    section.page__section.__pad-0
-        .configurator__holder
+        form.configurator__holder(action='#')
             include ../../components/conf_main
 
             include ../../components/conf_aside
 
             include ../../components/conf_form
+
+            .configurator__cell
+                button.btn Получить предложение
 
         include ../../components/warranty
 

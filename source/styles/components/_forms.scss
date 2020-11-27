@@ -12,6 +12,11 @@
     width: 100%;
 }
 
+.input_v1 {
+    @extend %input_v1;
+
+}
+
 .checkbox_v1 {
     .checkbox__text {
         @extend %trinity_icons_before;
@@ -74,6 +79,15 @@
             right: 18px;
             color: #bababa;
         }
+
+        span {
+            display: block;
+            max-width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
     }
 
     select {

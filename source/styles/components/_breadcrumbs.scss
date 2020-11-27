@@ -1,7 +1,7 @@
 /* src/assets/styles/components/_breadcrumbs.scss  */
 
 .breadcrumbs {
-    padding: 34px 0 16px;
+    padding: 32px 0 16px;
 
     @include respond-to-min($dt) {
         padding-bottom: 30px;
@@ -12,12 +12,11 @@
     float: left;
     position: relative;
     padding-left: 36px;
-    letter-spacing: .05em;
 }
 
 .breadcrumbs li {
     color: #7c7c7c;
-    font-size: 12px;
+    font-size: 14px;
 
     &:not(:first-child) {
         @extend %trinity_icons_before;
