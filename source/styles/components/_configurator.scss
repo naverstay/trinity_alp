@@ -20,8 +20,10 @@
     }
 
     &__aside {
+        @extend %global_flex_block_row_nowrap_flex-start_stretch;
         background: $blue;
         padding: 26px 38px 34px;
+        width: 100%;
 
         h4 {
             color: #fff;
@@ -47,12 +49,32 @@
             }
         }
 
-        @include respond-to-max($tab) {
+        @include respond-to-max($dt) {
             margin-bottom: 60px;
+
+            &-col {
+                width: 50%;
+                padding-right: 20px;
+            }
         }
 
-        @include respond-to-min($tab) {
+        @include respond-to-max($tab) {
+            display: block;
+
+            &-col {
+                width: 100%;
+                padding-right: 0;
+            }
+        }
+
+        @include respond-to-min($dt) {
             width: 300px;
+            display: block;
+
+            &-col {
+                width: 100%;
+                padding-right: 0;
+            }
         }
     }
 
@@ -94,7 +116,7 @@
 
         @include respond-to-min($dt) {
             padding-right: 40px;
-            flex: 1;
+            width: calc(100% - 300px);
         }
     }
 
@@ -184,6 +206,7 @@
 
     &__cell {
         position: relative;
+        max-width: 100%;
 
         &:first-child {
             flex: 1 0 auto;
@@ -330,5 +353,4 @@
             margin-bottom: 70px;
         }
     }
-
 }
