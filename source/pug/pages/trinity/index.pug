@@ -1,10 +1,10 @@
 extends ../../layouts/master.pug
 
 block vars
+    - filterConfig = true;
     - var pageTitle = 'Конфигуратор серверов Тринити';
     - var breadcrumbs = ['Конфигуратор серверов', 'Тринити'];
     - var serverParams = {cpu : ['1хCPU', '2хCPU', '4хCPU', '8хCPU'], fac : ['1U', '2U', '3U', '4U', '5U', 'TOWER'], ups : ['1хPS', '2хPS', '4хPS']};
-
     - var serverParamsJS = 'configurator: {';
     each val, key in serverParams
         - serverParamsJS += '\n' + key + ':0,';
@@ -19,31 +19,34 @@ block content
     section.page__section
         .product__panel
             ul.product__list.__wide
-                if (alpineTemplates)
-                    template(x-for='part in brand.config.parts' :key='part.id')
-                        li
-                            .product__block
-                                .product__img
-                                    img(src='source/media/content/config_1.jpg')
-                                .product__name(x-text='"Сервер " + part.short_name')
+                //-if (alpineTemplates)
+                //-    template(x-for='part in brand.config.parts' :key='part.id')
+                //-        li
+                //-            .product__block
+                //-                .product__img
+                //-                    img(src='source/media/content/config_1.jpg')
+                //-                .product__name(x-text='"Сервер " + part.short_name')
 
-                                include ../../components/options
-                                a.product__btn(href='configurator.html') Сконфигурировать
+                //-                include ../../components/options
+                //-                a.product__btn(href='configurator.html') Сконфигурировать
 
-                else
-                    - var i = 0;
-                    while i < 4
-                        li: .product__block
-                            .product__img
-                                img(src=require('media/content/config_1.jpg'))
+                //-else
 
-                            .product__name Сервер E110-M5
+                each cpu, ci in serverParams.cpu
+                    if (ci < 4)
+                        each fac, fi in serverParams.fac
+                            if (fi < 4)
+                                each ups, ui in serverParams.ups
+                                    if (ui < 4 && (ci + fi + ui) % 3)
+                                        li(x-show= ' checkVisibility("' + (cpu + '", "' + fac + '", "' + ups) + '") '): .product__block
+                                            .product__img
+                                                img(src=require('media/content/config_1.jpg'))
 
-                            include ../../components/options
+                                            .product__name Сервер E110-M5
 
-                            a.product__btn(href='configurator.html') Сконфигурировать
+                                            include ../../components/options
 
-                        - i++;
+                                            a.product__btn(href='configurator.html') Сконфигурировать
 
         include ../../components/description
 

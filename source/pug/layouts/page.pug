@@ -5,7 +5,7 @@ mixin page(body_cls)
     - var alpineTemplates = false;
     - var xData = ' siteData() ';
 
-    - alpineTemplates = true;
+    //- alpineTemplates = true;
 
     body(class= body_cls x-data=xData :class="{ 'menu-expanded': mainMenuIsOpen() }")
         .main
@@ -13,7 +13,7 @@ mixin page(body_cls)
             include ../components/header
 
             if (!ie11)
-                .container: .page_content(x-data=" configuratorAlpine() " x-init=" init() " ): .wrapper
+                .container: .page_content(x-data=' configuratorAlpine() ' x-init=' init() ' ): .wrapper
                     +breadcrumbs(breadcrumbs)
 
                     .page__title: h1= pageTitle

@@ -24,6 +24,10 @@ const prod = {
                     to: PATHS.build + '/source/data/config2.json'
                 },
                 {
+                    from: PATHS.media + '/data/filter.json',
+                    to: PATHS.build + '/source/data/filter.json'
+                },
+                {
                     from: PATHS.source + '/../manifest.json',
                     to: PATHS.build + '/manifest.json'
                 },

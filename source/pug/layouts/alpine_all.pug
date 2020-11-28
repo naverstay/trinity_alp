@@ -75,13 +75,6 @@ script.
         }
     }
 
-    function configuratorAlpineInit(q) {
-        console.log('configuratorAlpineInit', this, q);
-        fetch('/source/data/brand.json')
-            .then(response => response.json())
-            .then(data => { console.log('brand.json', data);  return brand = data})
-    }
-
     function configuratorAlpine () {
         return {
             brand: {
@@ -94,11 +87,40 @@ script.
                 fac: [],
                 ups: []
             },
+            partTypeIds: {
+                CPU: 1,
+                RAM: 2,
+                SSD: 3,
+                SATA: 4,
+                SAS: 5,
+                DVD: 6,
+                RAID: 7,
+                OtherContr: 8,
+                SP: 9,
+                Soft: 10,
+                Other: 11,
+                UPS: 36,
+                Services: 47,
+                GPU: 50,
+                Switch: 52,
+                Cache: 54
+            },
             switchParam(evt, prm, ind) {
-                console.log('this.configurator', this.configurator);
-
                 evt.preventDefault();
                 this.configurator[prm] = ind;
+
+                return false;
+            },
+            toggleParam(evt, prm, name) {
+                evt.preventDefault();
+
+                var pos = this.configurator[prm].indexOf(name);
+
+                if (pos > -1) {
+                    this.configurator[prm].splice(pos, 1)
+                } else {
+                    this.configurator[prm].push(name)
+                }
 
                 return false;
             },
@@ -108,16 +130,31 @@ script.
             getLink(index, item, prm) {
                 return '<a class="switcher__link" href="#" @click="{ switchParam($event, \'' + prm +  '\', ' + (index + 1) + ') }" :class="{ active: ' + (index + 1) + ' === activeParam(\'' + prm + '\') }">' + item + '</a>'
             },
-            activeParam(prm, ind) {
-                console.log('this.configurator', this.configurator, prm, ind);
+            activeParam(prm, name) {
+                return this.configurator[prm].indexOf(name) > -1
+            },
+            checkVisibility(cpu, fac, ups) {
+                let ret = true;
 
-                return this.configurator[prm].indexOf(ind) > -1
+                if (this.configurator.cpu.length && this.configurator.cpu.indexOf(cpu) < 0) {
+                    ret = false;
+                }
+
+                if (this.configurator.fac.length && this.configurator.fac.indexOf(fac) < 0) {
+                    ret = false;
+                }
+
+                if (this.configurator.ups.length && this.configurator.ups.indexOf(ups) < 0) {
+                    ret = false;
+                }
+
+                return ret
             },
             availableParam(prm) {
                 let find = [];
                 let slug = {cpu: 'xCPU', fac: '', ups: 'xPS'};
 
-                for (const x of brand.configs) {
+                for (const x of brand.config.parts) {
                     let check = (x[prm] + slug[prm]).toUpperCase();
 
                     if (find.indexOf(check) === -1) {
@@ -126,32 +163,6 @@ script.
                         this.configurator[prm].push(x[prm])
                     }
                 }
-
-                console.log('this.configurator', this.configurator);
-
-                //-console.log('find', prm, find);
-                //-
-                //-if (prm === 'fac') {
-                //-    find = find.sort(function (a, b) {
-                //-        if (a > b) {
-                //-            return -1;
-                //-        }
-                //-        if (a < b) {
-                //-            return 1;
-                //-        }
-                //-        return 0;
-                //-    })
-                //-} else {
-                //-    find = find.sort(function (a, b) {
-                //-        if (a < b) {
-                //-            return -1;
-                //-        }
-                //-        if (a > b) {
-                //-            return 1;
-                //-        }
-                //-        return 0;
-                //-    })
-                //-}
 
                 return find
             },
@@ -164,552 +175,17 @@ script.
                 return this.configurator[prm]
             },
             init() {
-                fetch('/source/data/config2.json')
+                fetch('/source/data/filter.json')
                     .then(response => response.json())
                     .then(response => {
                          console.log('fetched', response);
 
                          this.brand = response;
                     });
+
+
+
+
             }
         }
     }
-
-    var brand = {
-        "configs": [
-            {
-                "cpu": 1,
-                "fac": "u1",
-                "ups": 0,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u4",
-                            "tower"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0,
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 1,
-                "fac": "u1",
-                "ups": 1,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u3",
-                            "u4"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0,
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 1,
-                "fac": "u2",
-                "ups": 0,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u4",
-                            "tower"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0,
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 1,
-                "fac": "u2",
-                "ups": 1,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u3",
-                            "u4"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0,
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 1,
-                "fac": "u3",
-                "ups": 1,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u3",
-                            "u4"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 1,
-                "fac": "u4",
-                "ups": 0,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u4",
-                            "tower"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0,
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 1,
-                "fac": "u4",
-                "ups": 1,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2,
-                            4
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u3",
-                            "u4"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0,
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 2,
-                "fac": "u1",
-                "ups": 0,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u4",
-                            "tower"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0,
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 2,
-                "fac": "u1",
-                "ups": 1,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u3",
-                            "u4"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0,
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 2,
-                "fac": "u2",
-                "ups": 0,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u4",
-                            "tower"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0,
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 2,
-                "fac": "u2",
-                "ups": 1,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u3",
-                            "u4"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0,
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 2,
-                "fac": "u3",
-                "ups": 1,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u3",
-                            "u4"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 2,
-                "fac": "u4",
-                "ups": 0,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u4",
-                            "tower"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0,
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 2,
-                "fac": "u4",
-                "ups": 1,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2,
-                            4
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u3",
-                            "u4"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0,
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 4,
-                "fac": "u4",
-                "ups": 1,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2,
-                            4
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u4"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 8,
-                "fac": "u5",
-                "ups": 1,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": []
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u5"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            1
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 1,
-                "fac": "tower",
-                "ups": 0,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u4",
-                            "tower"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0
-                        ]
-                    }
-                ]
-            },
-            {
-                "cpu": 2,
-                "fac": "tower",
-                "ups": 0,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u4",
-                            "tower"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0
-                        ]
-                    }
-                ]
-            }
-        ],
-        "id": 5,
-        "tag": "trinity",
-        "title": "Trinity",
-        "url": "configurator.html"
-    }
-
-
