@@ -3,6 +3,18 @@
 mixin buildSwitch(name)
     - var cls = '__' + name;
 
+    //-if (alpineTemplates)
+    //-    <template x-for="(item, index, collection) in items" :key="index">
+    //-    <!-- You can also reference "collection" inside the iteration if you need. -->
+    //-    <!-- Current item. -->
+    //-    <div x-text="item"></div>
+    //-    <!-- Same as above. -->
+    //-    <div x-text="collection[index]"></div>
+    //-    <!-- Previous item. -->
+    //-    <div x-text="collection[index - 1]"></div>
+    //-    </template>
+    //-else
+
     .switcher__list(class=  cls)
         - var array = serverParams[name];
         - for (var i = 0; i < array.length; i++)

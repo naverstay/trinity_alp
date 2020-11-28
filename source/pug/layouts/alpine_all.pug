@@ -94,6 +94,13 @@ script.
 
                 return this.configurator[prm]
             },
+            availableParam(prm) {
+                for (const x of brand.configs) {
+                    console.log('x', x);
+                }
+
+                return this.configurator[prm]
+            },
             getCategory(cat) {
 
                 for (const x of brand.configs) {
