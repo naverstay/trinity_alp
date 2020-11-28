@@ -13,30 +13,38 @@ const prod = {
     devtool: 'source-map',
 
     plugins: [
-        //new CopyWebpackPlugin({
-        //    patterns: [
-        //        {
-        //            from: '../manifest.json',
-        //            to: 'manifest.json'
-        //        },
-        //        {
-        //            from: '../browserconfig.xml',
-        //            to: 'browserconfig.xml'
-        //        },
-        //        {
-        //            from: '../source/media/favicons/android-chrome-192x192.png',
-        //            to: 'source/media/android-chrome-192x192.png'
-        //        },
-        //        {
-        //            from: '../source/media/favicons/android-chrome-256x256.png',
-        //            to: 'source/media/android-chrome-256x256.png'
-        //        },
-        //        {
-        //            from: '../source/media/favicons/mstile-150x150.png',
-        //            to: 'source/media/mstile-150x150.png'
-        //        }
-        //    ]
-        //}),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: PATHS.media + '/data/brand.json',
+                    to: PATHS.build + '/source/data/brand.json'
+                },
+                {
+                    from: PATHS.media + '/data/config2.json',
+                    to: PATHS.build + '/source/data/config2.json'
+                },
+                {
+                    from: PATHS.source + '/../manifest.json',
+                    to: PATHS.build + '/manifest.json'
+                },
+                {
+                    from: PATHS.source + '/../browserconfig.xml',
+                    to: PATHS.build + '/browserconfig.xml'
+                },
+                {
+                    from: PATHS.source + '/../source/media/favicons/android-chrome-192x192.png',
+                    to: PATHS.build + '/source/media/android-chrome-192x192.png'
+                },
+                {
+                    from: PATHS.source + '/../source/media/favicons/android-chrome-256x256.png',
+                    to: PATHS.build + '/source/media/android-chrome-256x256.png'
+                },
+                {
+                    from: PATHS.source + '/../source/media/favicons/mstile-150x150.png',
+                    to: PATHS.build + '/source/media/mstile-150x150.png'
+                }
+            ]
+        }),
         new MiniCssExtractPlugin({
             filename: 'styles/[name].[hash].css',
             chunkFilename: 'styles/[id].[hash].css'

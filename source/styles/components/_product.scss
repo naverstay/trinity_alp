@@ -114,11 +114,17 @@
 
         @include respond-to-min($wide) {
             margin: 0 -15px 50px;
-            justify-content: space-between;
 
             > li {
-                flex: 1 0;
                 padding: 15px 15px 0;
+            }
+
+            &:not(.__wide) {
+                justify-content: space-between;
+
+                > li {
+                    flex: 1 0;
+                }
             }
         }
     }

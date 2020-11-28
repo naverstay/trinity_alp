@@ -56,5 +56,11 @@
             border-color: $blue;
             color: #fff;
         }
+
+        &.disabled {
+            pointer-events: none;
+            cursor: default;
+            color: rgba(0, 0, 0, 0.3);
+        }
     }
 }

@@ -75,12 +75,24 @@ script.
         }
     }
 
-    function configuratorAlpine() {
+    function configuratorAlpineInit(q) {
+        console.log('configuratorAlpineInit', this, q);
+        fetch('/source/data/brand.json')
+            .then(response => response.json())
+            .then(data => { console.log('brand.json', data);  return brand = data})
+    }
+
+    function configuratorAlpine () {
         return {
+            brand: {
+                config: {
+                    parts: []
+                }
+            },
             configurator: {
-                cpu: 0,
-                fac: 0,
-                ups: 0
+                cpu: [],
+                fac: [],
+                ups: []
             },
             switchParam(evt, prm, ind) {
                 console.log('this.configurator', this.configurator);
@@ -90,13 +102,16 @@ script.
 
                 return false;
             },
+            getCheck(index, item, prm) {
+                return '<label class="checkbox_v2"><input type="checkbox" value="3" :checked="{ activeParam(\'' + prm + '\', ' + (index + 1) + ') }"><span class="checkbox__text">' + item + '</span></label>'
+            },
             getLink(index, item, prm) {
                 return '<a class="switcher__link" href="#" @click="{ switchParam($event, \'' + prm +  '\', ' + (index + 1) + ') }" :class="{ active: ' + (index + 1) + ' === activeParam(\'' + prm + '\') }">' + item + '</a>'
             },
-            activeParam(prm) {
-                console.log('this.configurator', this.configurator);
+            activeParam(prm, ind) {
+                console.log('this.configurator', this.configurator, prm, ind);
 
-                return this.configurator[prm]
+                return this.configurator[prm].indexOf(ind) > -1
             },
             availableParam(prm) {
                 let find = [];
@@ -107,8 +122,12 @@ script.
 
                     if (find.indexOf(check) === -1) {
                         find.push(check)
+
+                        this.configurator[prm].push(x[prm])
                     }
                 }
+
+                console.log('this.configurator', this.configurator);
 
                 //-console.log('find', prm, find);
                 //-
@@ -143,6 +162,15 @@ script.
                 }
 
                 return this.configurator[prm]
+            },
+            init() {
+                fetch('/source/data/config2.json')
+                    .then(response => response.json())
+                    .then(response => {
+                         console.log('fetched', response);
+
+                         this.brand = response;
+                    });
             }
         }
     }
@@ -360,35 +388,6 @@ script.
                 ]
             },
             {
-                "cpu": 1,
-                "fac": "tower",
-                "ups": 0,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u4",
-                            "tower"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0
-                        ]
-                    }
-                ]
-            },
-            {
                 "cpu": 2,
                 "fac": "u1",
                 "ups": 0,
@@ -599,35 +598,6 @@ script.
                 ]
             },
             {
-                "cpu": 2,
-                "fac": "tower",
-                "ups": 0,
-                "availableParams": [
-                    {
-                        "type": "cpu",
-                        "values": [
-                            1,
-                            2
-                        ]
-                    },
-                    {
-                        "type": "fac",
-                        "values": [
-                            "u1",
-                            "u2",
-                            "u4",
-                            "tower"
-                        ]
-                    },
-                    {
-                        "type": "ups",
-                        "values": [
-                            0
-                        ]
-                    }
-                ]
-            },
-            {
                 "cpu": 4,
                 "fac": "u4",
                 "ups": 1,
@@ -676,6 +646,64 @@ script.
                         ]
                     }
                 ]
+            },
+            {
+                "cpu": 1,
+                "fac": "tower",
+                "ups": 0,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "fac",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u4",
+                            "tower"
+                        ]
+                    },
+                    {
+                        "type": "ups",
+                        "values": [
+                            0
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 2,
+                "fac": "tower",
+                "ups": 0,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "fac",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u4",
+                            "tower"
+                        ]
+                    },
+                    {
+                        "type": "ups",
+                        "values": [
+                            0
+                        ]
+                    }
+                ]
             }
         ],
         "id": 5,
@@ -684,5 +712,4 @@ script.
         "url": "configurator.html"
     }
 
-    console.log('brand', brand);
 

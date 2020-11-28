@@ -14,7 +14,33 @@
 
 .input_v1 {
     @extend %input_v1;
+}
 
+.checkbox_v2 {
+    position: relative;
+    cursor: default;
+
+    .checkbox__text {
+        @extend %no-user-select;
+        @extend .switcher__link;
+        cursor: pointer;
+    }
+
+    input {
+        display: none;
+
+        &:checked + .checkbox__text {
+            background: $blue;
+            border-color: $blue;
+            color: #fff;
+        }
+
+        &:disabled + .checkbox__text {
+            pointer-events: none;
+            cursor: default;
+            color: rgba(0, 0, 0, 0.3);
+        }
+    }
 }
 
 .checkbox_v1 {

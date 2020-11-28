@@ -6,16 +6,20 @@ mixin buildSwitch(name)
     .switcher__list(class=  cls)
         if (alpineTemplates)
             template(x-for="(item, index, collection) in availableParam('" + name + "')" :key='index' x-if="true")
-                li(x-html='getLink(index, item, "' + name + '" )')
+                li(x-html='getCheck(index, item, "' + name + '" )')
 
         else
             - var array = serverParams[name];
             - for (var i = 0; i < array.length; i++)
-                li()
-                    a.switcher__link(href='#' @click="{ switchParam($event, '" + name + "', " + (i + 1) + ") }" :class= "{ active: " + (i + 1) + " === activeParam('" + name + "') }")= array[i]
+                li
+                    label.checkbox_v2
+                        input(type='checkbox' value= i :checked="{ activeParam('" + name + "', " + (i + 1) + ") }" )
+                        span.checkbox__text()= array[i]
+
+                    //-a.switcher__link(href='#' @click="{ switchParam($event, '" + name + "', " + (i + 1) + ") }" :class= "{ active: " + (i + 1) + " === activeParam('" + name + "') }")= array[i]
 
 section.page__section.__gray
-    .switcher__holder
+    //.switcher__holder
         +buildSwitch('cpu')
         +buildSwitch('fac')
         +buildSwitch('ups')

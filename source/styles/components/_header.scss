@@ -513,7 +513,7 @@
         max-width: 500px;
         max-height: 100vh;
         overflow-x: hidden;
-        overflow-y: auto;
+        overflow-y: scroll;
         padding-top: 2em;
         padding-bottom: 50px;
         background: #fff;
@@ -525,8 +525,6 @@
         transform: translate3d(-100%, 0, 0);
         opacity: 0;
         visibility: hidden;
-        -webkit-transition: all 0.4s linear;
-        -o-transition: all 0.4s linear;
         transition: all 0.4s linear;
 
         .controls-block {
