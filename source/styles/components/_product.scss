@@ -202,8 +202,7 @@
         }
 
         &-subcaption {
-            font-family: $fontCirceBold;
-            font-size: 18px;
+            font: 18px $fontCirceBold;
         }
 
         &-toggle {

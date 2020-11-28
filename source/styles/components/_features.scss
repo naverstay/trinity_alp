@@ -315,7 +315,7 @@
             right: 75px;
             width: 380px;
             height: 220px;
-            @include retina('/system/callback_form_paper', png , 380px, 220px);
+            @include retina('/system/callback_form_paper', png, 380px, 220px);
             background-repeat: no-repeat;
             -webkit-background-size: cover;
             background-size: cover;

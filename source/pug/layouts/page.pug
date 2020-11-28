@@ -2,14 +2,18 @@ include ../components/breadcrumbs
 
 mixin page(body_cls)
     - var ie11 = false;
+    - var alpineTemplates = false;
     - var xData = ' siteData() ';
+
+    //- alpineTemplates = true;
+
     body(class= body_cls x-data=xData :class="{ 'menu-expanded': mainMenuIsOpen() }")
         .main
             //- Header
             include ../components/header
 
             if (!ie11)
-                .container: .page_content: .wrapper
+                .container: .page_content(x-data=" configuratorAlpine() "): .wrapper
                     +breadcrumbs(breadcrumbs)
 
                     .page__title: h1= pageTitle
@@ -41,3 +45,5 @@ mixin page(body_cls)
             gtag('config', 'UA-56237358-2');
 
         include alpine_all
+
+

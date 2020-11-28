@@ -3,29 +3,13 @@ extends ../../layouts/master.pug
 block vars
     - var pageTitle = 'Конфигуратор серверов Тринити';
     - var breadcrumbs = ['Конфигуратор серверов', 'Тринити'];
-    - var serverParams = {cpu : ['1хCPU', '2хCPU', '4хCPU', '8хCPU'], factor : ['1U', '2U', '3U', '4U', '5U', 'TOWER'], ps : ['1хPS', '2хPS', '4хPS']};
+    - var serverParams = {cpu : ['1хCPU', '2хCPU', '4хCPU', '8хCPU'], fac : ['1U', '2U', '3U', '4U', '5U', 'TOWER'], ups : ['1хPS', '2хPS', '4хPS']};
 
     - var serverParamsJS = 'configurator: {';
     each val, key in serverParams
         - serverParamsJS += '\n' + key + ':0,';
 
     - serverParamsJS = serverParamsJS.replace(/,$/, '\n') + '}';
-
-block scripts
-    script.
-        function switcherMenu() {
-            return {
-                #{serverParamsJS},
-                switchParam(evt, prm, ind) {
-                    evt.preventDefault();
-                    this.configurator[prm] = ind;
-                    return false;
-                },
-                activeParam(prm) {
-                    return this.configurator[prm]
-                },
-            }
-        }
 
 block content
     // ### pug/pages/trinity/index.pug
@@ -35,20 +19,32 @@ block content
     section.page__section
         .product__panel
             ul.product__list.__wide
-                - var i = 0;
-                while i < 4
-                    li: .product__block
-                        .product__img
-                            img(src=require('media/content/config_1.jpg'))
+                if (alpineTemplates)
+                    <template x-for="(item, index, collection) in items" :key="index">
+                    <!-- You can also reference "collection" inside the iteration if you need. -->
+                    <!-- Current item. -->
+                    <div x-text="item"></div>
+                    <!-- Same as above. -->
+                    <div x-text="collection[index]"></div>
+                    <!-- Previous item. -->
+                    <div x-text="collection[index - 1]"></div>
+                    </template>
+                else
+                    - var i = 0;
+                    while i < 4
+                        li: .product__block
+                            .product__img
+                                img(src=require('media/content/config_1.jpg'))
 
-                        .product__name Сервер E110-M5
+                            .product__name Сервер E110-M5
 
-                        include ../../components/options
+                            include ../../components/options
 
-                        a.product__btn(href='configurator.html') Сконфигурировать
+                            a.product__btn(href='configurator.html') Сконфигурировать
 
-                    - i++;
+                        - i++;
 
         include ../../components/description
 
     // ### pug/pages/trinity/index.pug
+

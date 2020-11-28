@@ -2,16 +2,17 @@
 
 mixin buildSwitch(name)
     - var cls = '__' + name;
+
     .switcher__list(class=  cls)
         - var array = serverParams[name];
         - for (var i = 0; i < array.length; i++)
             li()
-                a.switcher__link(href='#' @click="{ switchParam($event, '" + name + "', " + i + ") }" :class= "{ active: " + i + " === activeParam('" + name + "') }")= array[i]
+                a.switcher__link(href='#' @click="{ switchParam($event, '" + name + "', " + (i + 1) + ") }" :class= "{ active: " + (i + 1) + " === activeParam('" + name + "') }")= array[i]
 
 section.page__section.__gray
-    .switcher__holder(x-data=' switcherMenu() ')
+    .switcher__holder
         +buildSwitch('cpu')
-        +buildSwitch('factor')
-        +buildSwitch('ps')
+        +buildSwitch('fac')
+        +buildSwitch('ups')
 
 // pug/components/switcher.pug ###

@@ -14,7 +14,6 @@ $hamburger: 1200px;
 $icomoon-font-path: "@~fonts";
 $icomoon-font-family: "trinity_icons";
 
-$fontPTSans: 'PT Sans', sans-serif;
 $fontGilroyExtraBold: 'Gilroy-ExtraBold', sans-serif;
 $fontCirceExtraLight: 'Circe-ExtraLight', sans-serif;
 $fontCirceLight: 'Circe-Light', sans-serif;
@@ -22,18 +21,7 @@ $fontCirceRegular: 'Circe-Regular', sans-serif;
 $fontCirceBold: 'Circe-Bold', sans-serif;
 $fontCirceExtraBold: 'Circe-ExtraBold', sans-serif;
 
-$default-font: 'Circe-Regular', sans-serif;
-$FlightCyrillic: 'FlightCyrillic', sans-serif;
-$AeroBonusHeavy: 'AeroBonusHeavy', sans-serif;
-$AeroBonusBold: 'AeroBonusBold', sans-serif;
-$AeroBonusRegular: 'AeroBonusRegular', sans-serif;
-
-$PTSerif: 'PT Serif', serif;
-$font_1: "Trebuchet MS", Helvetica, sans-serif;
-$font_2: 'DSGooseRegular', Arial, Helvetica, sans-serif;
-$font_3: Arial, Helvetica, sans-serif;
-$Tahoma: Tahoma, sans-serif;
-$PTRoubleSans: PTRoubleSans, sans-serif;
+$default-font: $fontCirceRegular;
 
 $cross_font_ArialBlack: 'Arial Black', 'Helvetica CY', 'Nimbus Sans L', sans-serif;
 $cross_font_Arial: Arial, 'Helvetica CY', 'Nimbus Sans L', sans-serif;

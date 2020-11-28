@@ -12,7 +12,6 @@ script.
                 return this.showMainMenu === true
             },
 
-
             activeMenu: 0,
             toggleDropdownMenu(index, ref) {
                 let that = this;
@@ -76,4 +75,572 @@ script.
         }
     }
 
+    function configuratorAlpine() {
+        return {
+            configurator: {
+                cpu: 0,
+                fac: 0,
+                ups: 0
+            },
+            switchParam(evt, prm, ind) {
+                console.log('this.configurator', this.configurator);
+
+                evt.preventDefault();
+                this.configurator[prm] = ind;
+                return false;
+            },
+            activeParam(prm) {
+                console.log('this.configurator', this.configurator);
+
+                return this.configurator[prm]
+            },
+            getCategory(cat) {
+
+                for (const x of brand.configs) {
+
+                }
+
+                return this.configurator[prm]
+            }
+        }
+    }
+
+    var brand = {
+        "configs": [
+            {
+                "cpu": 1,
+                "factor": "u1",
+                "ps": 0,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u4",
+                            "tower"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            0,
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 1,
+                "factor": "u1",
+                "ps": 1,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u3",
+                            "u4"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            0,
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 1,
+                "factor": "u2",
+                "ps": 0,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u4",
+                            "tower"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            0,
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 1,
+                "factor": "u2",
+                "ps": 1,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u3",
+                            "u4"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            0,
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 1,
+                "factor": "u3",
+                "ps": 1,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u3",
+                            "u4"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 1,
+                "factor": "u4",
+                "ps": 0,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u4",
+                            "tower"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            0,
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 1,
+                "factor": "u4",
+                "ps": 1,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2,
+                            4
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u3",
+                            "u4"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            0,
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 1,
+                "factor": "tower",
+                "ps": 0,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u4",
+                            "tower"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            0
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 2,
+                "factor": "u1",
+                "ps": 0,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u4",
+                            "tower"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            0,
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 2,
+                "factor": "u1",
+                "ps": 1,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u3",
+                            "u4"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            0,
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 2,
+                "factor": "u2",
+                "ps": 0,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u4",
+                            "tower"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            0,
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 2,
+                "factor": "u2",
+                "ps": 1,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u3",
+                            "u4"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            0,
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 2,
+                "factor": "u3",
+                "ps": 1,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u3",
+                            "u4"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 2,
+                "factor": "u4",
+                "ps": 0,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u4",
+                            "tower"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            0,
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 2,
+                "factor": "u4",
+                "ps": 1,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2,
+                            4
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u3",
+                            "u4"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            0,
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 2,
+                "factor": "tower",
+                "ps": 0,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u1",
+                            "u2",
+                            "u4",
+                            "tower"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            0
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 4,
+                "factor": "u4",
+                "ps": 1,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": [
+                            1,
+                            2,
+                            4
+                        ]
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u4"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "cpu": 8,
+                "factor": "u5",
+                "ps": 1,
+                "availableParams": [
+                    {
+                        "type": "cpu",
+                        "values": []
+                    },
+                    {
+                        "type": "factor",
+                        "values": [
+                            "u5"
+                        ]
+                    },
+                    {
+                        "type": "ps",
+                        "values": [
+                            1
+                        ]
+                    }
+                ]
+            }
+        ],
+        "id": 5,
+        "tag": "trinity",
+        "title": "Trinity",
+        "url": "configurator.html"
+    }
+
+    console.log('brand', brand);
 

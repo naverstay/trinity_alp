@@ -79,7 +79,7 @@ const FONTS_LOADER = {
         //
         //    return '[path][name].[ext]';
         //}
-        name: 'fonts/[name].[ext]'
+        name: '/fonts/[name].[ext]'
     }
 };
 
@@ -121,14 +121,14 @@ const loaders = [
     },
     {
         test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/,
-        exclude: [/fonts/],
+        exclude: /fonts/,
         use: [
             IMAGE_LOADER
         ]
     },
     {
         test: /\.(eot|woff|woff2|ttf|svg)$/,
-        exclude: [/media/],
+        exclude: /media/,
         use: [
             FONTS_LOADER
         ]

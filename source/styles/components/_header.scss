@@ -96,7 +96,7 @@
 }
 
 .tel-link {
-    font: 20px 'Circe-Bold', sans-serif;
+    font: 20px $fontCirceBold;
     letter-spacing: -.035em;
 }
 
@@ -110,7 +110,7 @@
     text-transform: uppercase;
 
     a {
-        font: 18px 'Circe-Bold', sans-serif;
+        font: 18px $fontCirceBold;
     }
 }
 

@@ -43,7 +43,6 @@
         h1 {
             color: $black;
             font: 36px $fontGilroyExtraBold;
-            font-weight: 900;
         }
 
         @include respond-to-min($tab) {
