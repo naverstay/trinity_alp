@@ -87,7 +87,11 @@ script.
 
                 evt.preventDefault();
                 this.configurator[prm] = ind;
+
                 return false;
+            },
+            getLink(index, item, prm) {
+                return '<a class="switcher__link" href="#" @click="{ switchParam($event, \'' + prm +  '\', ' + (index + 1) + ') }" :class="{ active: ' + (index + 1) + ' === activeParam(\'' + prm + '\') }">' + item + '</a>'
             },
             activeParam(prm) {
                 console.log('this.configurator', this.configurator);
@@ -95,11 +99,42 @@ script.
                 return this.configurator[prm]
             },
             availableParam(prm) {
+                let find = [];
+                let slug = {cpu: 'xCPU', fac: '', ups: 'xPS'};
+
                 for (const x of brand.configs) {
-                    console.log('x', x);
+                    let check = (x[prm] + slug[prm]).toUpperCase();
+
+                    if (find.indexOf(check) === -1) {
+                        find.push(check)
+                    }
                 }
 
-                return this.configurator[prm]
+                //-console.log('find', prm, find);
+                //-
+                //-if (prm === 'fac') {
+                //-    find = find.sort(function (a, b) {
+                //-        if (a > b) {
+                //-            return -1;
+                //-        }
+                //-        if (a < b) {
+                //-            return 1;
+                //-        }
+                //-        return 0;
+                //-    })
+                //-} else {
+                //-    find = find.sort(function (a, b) {
+                //-        if (a < b) {
+                //-            return -1;
+                //-        }
+                //-        if (a > b) {
+                //-            return 1;
+                //-        }
+                //-        return 0;
+                //-    })
+                //-}
+
+                return find
             },
             getCategory(cat) {
 
@@ -116,8 +151,8 @@ script.
         "configs": [
             {
                 "cpu": 1,
-                "factor": "u1",
-                "ps": 0,
+                "fac": "u1",
+                "ups": 0,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -127,7 +162,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -136,7 +171,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             0,
                             1
@@ -146,8 +181,8 @@ script.
             },
             {
                 "cpu": 1,
-                "factor": "u1",
-                "ps": 1,
+                "fac": "u1",
+                "ups": 1,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -157,7 +192,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -166,7 +201,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             0,
                             1
@@ -176,8 +211,8 @@ script.
             },
             {
                 "cpu": 1,
-                "factor": "u2",
-                "ps": 0,
+                "fac": "u2",
+                "ups": 0,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -187,7 +222,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -196,7 +231,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             0,
                             1
@@ -206,8 +241,8 @@ script.
             },
             {
                 "cpu": 1,
-                "factor": "u2",
-                "ps": 1,
+                "fac": "u2",
+                "ups": 1,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -217,7 +252,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -226,7 +261,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             0,
                             1
@@ -236,8 +271,8 @@ script.
             },
             {
                 "cpu": 1,
-                "factor": "u3",
-                "ps": 1,
+                "fac": "u3",
+                "ups": 1,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -247,7 +282,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -256,7 +291,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             1
                         ]
@@ -265,8 +300,8 @@ script.
             },
             {
                 "cpu": 1,
-                "factor": "u4",
-                "ps": 0,
+                "fac": "u4",
+                "ups": 0,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -276,7 +311,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -285,7 +320,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             0,
                             1
@@ -295,8 +330,8 @@ script.
             },
             {
                 "cpu": 1,
-                "factor": "u4",
-                "ps": 1,
+                "fac": "u4",
+                "ups": 1,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -307,7 +342,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -316,7 +351,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             0,
                             1
@@ -326,8 +361,8 @@ script.
             },
             {
                 "cpu": 1,
-                "factor": "tower",
-                "ps": 0,
+                "fac": "tower",
+                "ups": 0,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -337,7 +372,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -346,7 +381,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             0
                         ]
@@ -355,8 +390,8 @@ script.
             },
             {
                 "cpu": 2,
-                "factor": "u1",
-                "ps": 0,
+                "fac": "u1",
+                "ups": 0,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -366,7 +401,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -375,7 +410,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             0,
                             1
@@ -385,8 +420,8 @@ script.
             },
             {
                 "cpu": 2,
-                "factor": "u1",
-                "ps": 1,
+                "fac": "u1",
+                "ups": 1,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -396,7 +431,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -405,7 +440,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             0,
                             1
@@ -415,8 +450,8 @@ script.
             },
             {
                 "cpu": 2,
-                "factor": "u2",
-                "ps": 0,
+                "fac": "u2",
+                "ups": 0,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -426,7 +461,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -435,7 +470,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             0,
                             1
@@ -445,8 +480,8 @@ script.
             },
             {
                 "cpu": 2,
-                "factor": "u2",
-                "ps": 1,
+                "fac": "u2",
+                "ups": 1,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -456,7 +491,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -465,7 +500,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             0,
                             1
@@ -475,8 +510,8 @@ script.
             },
             {
                 "cpu": 2,
-                "factor": "u3",
-                "ps": 1,
+                "fac": "u3",
+                "ups": 1,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -486,7 +521,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -495,7 +530,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             1
                         ]
@@ -504,8 +539,8 @@ script.
             },
             {
                 "cpu": 2,
-                "factor": "u4",
-                "ps": 0,
+                "fac": "u4",
+                "ups": 0,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -515,7 +550,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -524,7 +559,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             0,
                             1
@@ -534,8 +569,8 @@ script.
             },
             {
                 "cpu": 2,
-                "factor": "u4",
-                "ps": 1,
+                "fac": "u4",
+                "ups": 1,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -546,7 +581,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -555,7 +590,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             0,
                             1
@@ -565,8 +600,8 @@ script.
             },
             {
                 "cpu": 2,
-                "factor": "tower",
-                "ps": 0,
+                "fac": "tower",
+                "ups": 0,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -576,7 +611,7 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u1",
                             "u2",
@@ -585,7 +620,7 @@ script.
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             0
                         ]
@@ -594,8 +629,8 @@ script.
             },
             {
                 "cpu": 4,
-                "factor": "u4",
-                "ps": 1,
+                "fac": "u4",
+                "ups": 1,
                 "availableParams": [
                     {
                         "type": "cpu",
@@ -606,13 +641,13 @@ script.
                         ]
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u4"
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             1
                         ]
@@ -621,21 +656,21 @@ script.
             },
             {
                 "cpu": 8,
-                "factor": "u5",
-                "ps": 1,
+                "fac": "u5",
+                "ups": 1,
                 "availableParams": [
                     {
                         "type": "cpu",
                         "values": []
                     },
                     {
-                        "type": "factor",
+                        "type": "fac",
                         "values": [
                             "u5"
                         ]
                     },
                     {
-                        "type": "ps",
+                        "type": "ups",
                         "values": [
                             1
                         ]

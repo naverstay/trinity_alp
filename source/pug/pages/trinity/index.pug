@@ -20,29 +20,21 @@ block content
         .product__panel
             ul.product__list.__wide
                 if (alpineTemplates)
-                    <template x-for="(item, index, collection) in items" :key="index">
-                    <!-- You can also reference "collection" inside the iteration if you need. -->
-                    <!-- Current item. -->
-                    <div x-text="item"></div>
-                    <!-- Same as above. -->
-                    <div x-text="collection[index]"></div>
-                    <!-- Previous item. -->
-                    <div x-text="collection[index - 1]"></div>
-                    </template>
+
                 else
-                    - var i = 0;
-                    while i < 4
-                        li: .product__block
-                            .product__img
-                                img(src=require('media/content/config_1.jpg'))
+                - var i = 0;
+                while i < 4
+                    li: .product__block
+                        .product__img
+                            img(src=require('media/content/config_1.jpg'))
 
-                            .product__name Сервер E110-M5
+                        .product__name Сервер E110-M5
 
-                            include ../../components/options
+                        include ../../components/options
 
-                            a.product__btn(href='configurator.html') Сконфигурировать
+                        a.product__btn(href='configurator.html') Сконфигурировать
 
-                        - i++;
+                    - i++;
 
         include ../../components/description
 
