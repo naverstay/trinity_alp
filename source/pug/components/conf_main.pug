@@ -76,12 +76,23 @@ mixin build_options(arr)
         - var ssd = ['SATA', 'SAS', 'SSD']
         each d in ssd
             .configurator__label= d
-            +loop_while(3)
+            if (templ)
                 .configurator__controls
                     .configurator__cell
-                        +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
+                        select(x-model="preset." + d +".id" id='preset_' + d + '_id' @change=" $nextTick(() => { updateSelect('" + d + "', 1); updatePreset(); }); ")
+                            template(x-for="(item, index) in optionsList('" + d + "')" :key="item.id" x-if="true")
+                                option(x-text='item.text' :value='item.id')
                     .configurator__cell.__multiply
-                        +selectBox(1)
+                        select(x-model="preset." + d + ".count" id="preset_" + d + "_count" @change=" updatePreset() ")
+                            template(x-for="item in optionsCount('" + d + "')" :key="item" x-if="true")
+                                option(x-text='item' :value='item')
+            else
+                +loop_while(3)
+                    .configurator__controls
+                        .configurator__cell
+                            +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
+                        .configurator__cell.__multiply
+                            +selectBox(1)
 
     .configurator__row
         .configurator__icon
@@ -170,7 +181,7 @@ mixin build_options(arr)
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
     .configurator__total
-        .configurator__total-info Корзина на 4 SAS/SATA 3,5” диска с возможностью горячей замены / Для установки дисков SAS требуется RAID-контроллер / Полноразмерный слот PCI-E /  Одинарный блок питания 350Вт / Поддержка одного процессора Intel® Xeon®  E3-1200 v6 и Core i3 / 4 сокета DDR4 Unbuffered ECC / 2 порта Gigabit Ethernet /  Встроенный IPMI.
+        .configurator__total-info(__x-text='preset.totalDescription') Корзина на 4 SAS/SATA 3,5” диска с возможностью горячей замены / Для установки дисков SAS требуется RAID-контроллер / Полноразмерный слот PCI-E /  Одинарный блок питания 350Вт / Поддержка одного процессора Intel® Xeon®  E3-1200 v6 и Core i3 / 4 сокета DDR4 Unbuffered ECC / 2 порта Gigabit Ethernet /  Встроенный IPMI.
         .configurator__total-price
             .configurator__total-label Сумма
             .configurator__total-val(x-text='"$" + preset.totalPriceD') $1,596

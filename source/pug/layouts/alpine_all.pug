@@ -971,6 +971,7 @@ script.
                 ups: []
             },
             preset: {
+                totalDescription: '0',
                 exchangeRate: 75,
                 totalPrice: 0,
                 totalPriceD: 0,
@@ -1129,7 +1130,7 @@ script.
 
                 return find
             },
-            getPrice(ty, id) {
+            getInfo(ty, id) {
                 let ret = 0;
                 let arr = this.brand[this.partTypeIds[ty]];
 
@@ -1137,7 +1138,7 @@ script.
                     let a = arr[i];
 
                     if (a.id === id) {
-                        ret = a.price;
+                        ret = {description: a.description, price: a.price};
                     }
                 }
 
@@ -1149,14 +1150,17 @@ script.
             },
             updatePreset(num) {
                 let price = 0;
+                let descr = '';
 
                 for (typeId in this.partTypeIds) {
                     if (this.preset[typeId].id) {
-                        this.preset.totalPrice
-                        price += (num !== void 0 ? num : (this.preset[typeId].count || 0)) * this.getPrice(typeId, this.preset[typeId].id);
+                        let info = this.getInfo(typeId, this.preset[typeId].id);
+                        descr += ' / ' + info.name;
+                        price += (num !== void 0 ? num : (this.preset[typeId].count || 0)) * info.price;
                     }
                 }
 
+                this.preset.totalDescription = descr.trim().replace(/^\//, '');
                 this.preset.totalPrice = price;
                 this.preset.totalPriceR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice);
                 this.preset.totalPriceD = this.pricePrint(this.preset.totalPrice);

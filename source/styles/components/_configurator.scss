@@ -301,6 +301,7 @@
             line-height: 1.5;
             padding: 24px 20px;
             margin-bottom: 30px;
+            flex: 1;
 
             @include respond-to-min($dt) {
                 margin-bottom: 0;
@@ -317,7 +318,6 @@
                 flex-flow: column nowrap;
                 padding: 0 0 0 32px;
                 justify-content: center;
-                flex: 1;
             }
         }
 
