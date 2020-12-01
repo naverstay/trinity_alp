@@ -3,6 +3,10 @@
 // Styles
 import 'styles/_app.scss';
 
+import customSelect from './scripts/customSelect';
+
+require('./scripts/slideToggle');
+
 //require('alpinejs/dist/alpine.js');
 //require('alpinejs/dist/alpine-ie11.js');
 
@@ -51,11 +55,70 @@ if (/naverstay\.me/.test(location.origin)) {
     }(window, document, scr);
 }
 
+function browserCheck() {
+    let ie, myNav = navigator.userAgent.toLowerCase(),
+        html = document.documentElement;
+
+    if (('ontouchstart' in window) || (window.DocumentTouch && document instanceof window.DocumentTouch)) {
+        html.classList.add('is-touch');
+        console.log('touch');
+    }
+
+    if ((myNav.indexOf('msie') !== -1)) {
+        ie = ((myNav.indexOf('msie') !== -1) ? parseInt(myNav.split('msie')[1]) : false);
+        html.className += ' ie';
+        html.className += ' ie' + ie;
+    } else if (!!myNav.match(/trident.*rv\:11\./)) {
+        ie = 11;
+        html.className += ' ie' + ie;
+    }
+
+    if (myNav.indexOf('safari') !== -1) {
+        if (myNav.indexOf('chrome') == -1) {
+            html.className += ' safari';
+        } else {
+            html.className += ' chrome';
+        }
+    }
+
+    if (myNav.indexOf('firefox') !== -1) {
+        html.className += ' firefox';
+    }
+
+    if ((myNav.indexOf('windows') !== -1)) {
+        html.className += ' windows';
+    }
+
+    if (navigator.platform.toLowerCase().indexOf('mac') !== -1) {
+        html.className += ' macos';
+    }
+}
+
+browserCheck();
+
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Ready!');
 
-    require('./scripts/slideToggle');
-    //require('scripts/demo');
+    window.cstSel = {};
+
+    window.CS = customSelect;
+
+    let allSlct = document.getElementsByTagName("select");
+
+    for (let i = 0; i < allSlct.length; i++) {
+        window.cstSel[allSlct[i].id || 'some_select_' + i] = customSelect(allSlct[i])[0];
+    }
+
+    //let cstSlcts = customSelect('select', {
+    //    containerClass: 'custom-select-container',
+    //    openerClass: 'custom-select-opener',
+    //    panelClass: 'custom-select-panel',
+    //    optionClass: 'custom-select-option',
+    //    optgroupClass: 'custom-select-optgroup',
+    //    isSelectedClass: 'is-selected',
+    //    hasFocusClass: 'has-focus',
+    //    isDisabledClass: 'is-disabled',
+    //    isOpenClass: 'is-open'
+    //});
+
 });
-
-

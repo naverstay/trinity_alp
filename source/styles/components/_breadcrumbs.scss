@@ -1,17 +1,21 @@
 /* src/assets/styles/components/_breadcrumbs.scss  */
 
 .breadcrumbs {
-    padding: 32px 0 16px;
+    padding: 32px 0 10px;
+    white-space: nowrap;
+    overflow-x: auto;
 
     @include respond-to-min($dt) {
-        padding-bottom: 30px;
+        padding-bottom: 24px;
     }
 }
 
 .breadcrumbs li {
-    float: left;
+    display: inline-block;
+    vertical-align: top;
     position: relative;
     padding-left: 36px;
+    margin-bottom: 6px;
 }
 
 .breadcrumbs li {
