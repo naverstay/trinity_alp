@@ -5,10 +5,11 @@ import 'styles/_app.scss';
 
 import customSelect from './scripts/customSelect';
 
+require('./scripts/serializeForm');
 require('./scripts/slideToggle');
 
-//require('alpinejs/dist/alpine.js');
-//require('alpinejs/dist/alpine-ie11.js');
+require('alpinejs/dist/alpine.js');
+require('alpinejs/dist/alpine-ie11.js');
 
 console.log('app.js');
 

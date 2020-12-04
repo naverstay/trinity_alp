@@ -69,6 +69,7 @@
 
         @include respond-to-min($dt) {
             width: 300px;
+            margin-top: 28px;
             display: block;
 
             &-col {
@@ -79,7 +80,6 @@
     }
 
     &__main {
-
         .configurator__row {
             margin-top: 42px;
             padding-bottom: 42px;
@@ -210,6 +210,19 @@
         position: relative;
         max-width: 100%;
 
+        &-rm {
+            cursor: pointer;
+            position: absolute;
+            left: 20px;
+            top: 3px;
+            font-size: 24px;
+            color: #616161;
+
+            @include respond-to-min($tab) {
+                left: 25px;
+            }
+        }
+
         &:first-child {
             flex: 1 0 auto;
 
@@ -219,18 +232,7 @@
         }
 
         &.__multiply {
-            &::before {
-                content: 'х';
-                position: absolute;
-                left: 20px;
-                top: 3px;
-                font-size: 24px;
-                color: #616161;
 
-                @include respond-to-min($tab) {
-                    left: 25px;
-                }
-            }
         }
 
         + .configurator__cell {

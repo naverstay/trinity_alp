@@ -1,0 +1,11 @@
+//- ### pug/components/popup.pug
+
+#popup_thanks.popup__holder.hide
+    .popup__wrapper
+        .popup__title() Заголовок
+        .popup__text() Данные отправлены
+
+        .popup__controls
+            span.btn(@click=" togglePopup(false) ") Закрыть
+
+//- pug/components/popup.pug ###

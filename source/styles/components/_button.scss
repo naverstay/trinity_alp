@@ -56,7 +56,9 @@
 }
 
 .btn {
+    @extend %no-user-select;
     @extend %blue_btn_hover;
+    cursor: pointer;
     display: inline-flex;
     height: 52px;
     -webkit-box-align: center;

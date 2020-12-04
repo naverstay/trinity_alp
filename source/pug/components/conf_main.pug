@@ -25,6 +25,7 @@ mixin build_options(arr)
                         template(x-for="(item, index) in optionsList('CPU')" :key="item.id" x-if="true")
                             option(x-text='item.text' :value='item.id')
                 .configurator__cell.__multiply
+                    .configurator__cell-rm(@click=' removeItem("CPU") ') x
                     select(x-model="preset.CPU.count" id="preset_CPU_count" @change=" updatePreset() ")
                         template(x-for="item in optionsCount('CPU')" :key="item" x-if="true")
                             option(x-text='item' :value='item')
@@ -32,6 +33,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
                 .configurator__cell.__multiply
+                    .configurator__cell-rm x
                     +selectBox(1)
 
     .configurator__row
@@ -45,6 +47,7 @@ mixin build_options(arr)
                         template(x-for="(item, index) in optionsList('RAM')" :key="item.id" x-if="true")
                             option(x-text='item.text' :value='item.id')
                 .configurator__cell.__multiply
+                    .configurator__cell-rm(@click=' removeItem("RAM") ') x
                     select(x-model="preset.RAM.count" id="preset_RAM_count" @change=" updatePreset() ")
                         template(x-for="item in optionsCount('RAM')" :key="item" x-if="true")
                             option(x-text='item' :value='item')
@@ -52,6 +55,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
                 .configurator__cell.__multiply
+                    .configurator__cell-rm x
                     +selectBox(1)
 
     .configurator__row
@@ -77,12 +81,13 @@ mixin build_options(arr)
         each d in ssd
             .configurator__label= d
             if (templ)
-                .configurator__controls
+                .configurator__controls(x-ref='controls_list_' + d)
                     .configurator__cell
-                        select(x-model="preset." + d +".id" id='preset_' + d + '_id' @change=" $nextTick(() => { updateSelect('" + d + "', 1); updatePreset(); }); ")
+                        select(x-model="preset." + d +".id" id='preset_' + d + '_id' @change=" $nextTick(() => { updateSelect('" + d + "', 1); updatePreset(undefined, $event, $refs.controls_list_" + d +  "); }); ")
                             template(x-for="(item, index) in optionsList('" + d + "')" :key="item.id" x-if="true")
                                 option(x-text='item.text' :value='item.id')
                     .configurator__cell.__multiply
+                        .configurator__cell-rm(@click=' removeItem("' + d + '") ') x
                         select(x-model="preset." + d + ".count" id="preset_" + d + "_count" @change=" updatePreset() ")
                             template(x-for="item in optionsCount('" + d + "')" :key="item" x-if="true")
                                 option(x-text='item' :value='item')
@@ -92,6 +97,7 @@ mixin build_options(arr)
                         .configurator__cell
                             +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
                         .configurator__cell.__multiply
+                            .configurator__cell-rm x
                             +selectBox(1)
 
     .configurator__row
