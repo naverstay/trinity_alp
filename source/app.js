@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let allSlct = document.getElementsByTagName("select");
 
     for (let i = 0; i < allSlct.length; i++) {
-        window.cstSel[allSlct[i].id || 'some_select_' + i] = customSelect(allSlct[i])[0];
+        //window.cstSel[allSlct[i].id || 'some_select_' + i] = customSelect(allSlct[i])[0];
     }
 
     //let cstSlcts = customSelect('select', {

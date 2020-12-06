@@ -6,6 +6,10 @@
         @extend %clearfix;
         position: relative;
 
+        .swiper-wrapper {
+            height: auto;
+        }
+
         @include respond-to-min($dt) {
             padding-right: 210px;
         }

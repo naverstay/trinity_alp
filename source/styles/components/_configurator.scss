@@ -237,10 +237,12 @@
 
         + .configurator__cell {
             min-width: 170px;
+            max-width: 170px;
             padding-left: 55px;
 
             @include respond-to-min($dt) {
                 min-width: 190px;
+                max-width: 190px;
                 padding-left: 90px;
             }
         }

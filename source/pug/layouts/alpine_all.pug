@@ -3,6 +3,7 @@ script.
          return {
             popupText: 'Сообщение',
             popupTitle: 'Заголовок',
+            loaded: false,
             popupShow: false,
             showMainMenu: false,
             mainPopup(show, txt) {
@@ -22,6 +23,7 @@ script.
                 return this.showMainMenu === true
             },
 
+            items: [{title: 'test', tags: ['ok1', 'ok2']}, {title: 'test2', tags: ['ok2']}],
             activeMenu: 0,
             toggleDropdownMenu(index, ref) {
                 let that = this;
@@ -995,16 +997,28 @@ script.
                     count: ''
                 },
                 SSD: {
-                    id: '',
-                    count: ''
+                    list: {
+                        0: {
+                            id: '',
+                            count: ''
+                        }
+                    }
                 },
                 SATA: {
-                    id: '',
-                    count: ''
+                    list: {
+                        0: {
+                            id: '',
+                            count: ''
+                        }
+                    }
                 },
                 SAS: {
-                    id: '',
-                    count: ''
+                    list: {
+                        0: {
+                            id: '',
+                            count: ''
+                        }
+                    }
                 },
                 DVD: {
                     id: '',
@@ -1012,11 +1026,11 @@ script.
                 },
                 RAID: {
                     id: '',
-                    count: ''
+                    count: '1'
                 },
                 OtherContr: {
                     id: '',
-                    count: ''
+                    count: '1'
                 },
                 SP: {
                     id: '',
@@ -1024,19 +1038,19 @@ script.
                 },
                 Soft: {
                     id: '',
-                    count: ''
+                    count: '1'
                 },
                 Other: {
                     id: '',
-                    count: ''
+                    count: '1'
                 },
                 UPS: {
                     id: '',
-                    count: ''
+                    count: '1'
                 },
                 Services: {
                     id: '',
-                    count: ''
+                    count: '1'
                 },
                 GPU: {
                     id: '',
@@ -1044,7 +1058,7 @@ script.
                 },
                 Switch: {
                     id: '',
-                    count: ''
+                    count: '1'
                 },
                 Cache: {
                     id: '',
@@ -1057,6 +1071,9 @@ script.
                 }
             },
             counts: {
+                "3": "4",
+                "4": "4",
+                "5": "4",
                 "10": "1",
                 "11": "4"
             },
@@ -1077,6 +1094,19 @@ script.
                 GPU: 50,
                 Switch: 52,
                 Cache: 54
+            },
+            selectOptionO: {
+                au: 'Australia',
+                be: 'Belgium',
+                cn: 'China',
+                fr: 'France',
+                de: 'Germany',
+                it: 'Italy',
+                mx: 'Mexico',
+                es: 'Spain',
+                tr: 'Turkey',
+                gb: 'United Kingdom',
+                us: 'United States'
             },
             updateTimer: 0,
             switchParam(evt, prm, ind) {
@@ -1141,16 +1171,19 @@ script.
                 return find
             },
             getInfo(ty, id) {
-                let ret = 0;
-                let arr = this.brand[this.partTypeIds[ty]];
+                let ret = {description: '', price: ''};
+                let arr = this.brand[this.partTypeIds[ty] + ''];
+
 
                 for (let i = 0; i < arr.length; i++) {
                     let a = arr[i];
 
-                    if (a.id === id) {
+                    if (a.id + '' === id + '') {
                         ret = {description: a.description, price: a.price};
                     }
                 }
+
+                console.log('getInfo', arr, ty, id, ret);
 
                 return ret;
             },
@@ -1159,14 +1192,37 @@ script.
                 return (val + '').replace(rx, '$& ')
             },
             updatePreset(num, evt, parent) {
+                console.log('updatePreset', num);
                 let price = 0;
                 let descr = '';
 
                 for (typeId in this.partTypeIds) {
-                    if (this.preset[typeId].id) {
-                        let info = this.getInfo(typeId, this.preset[typeId].id);
+                    let item = this.preset[typeId];
+
+                    console.log('typeId', typeId, 'list' in item, item);
+
+                    if ('list' in item) {
+                        let keys = Object.keys(item.list);
+
+                        console.log('list', keys);
+
+                        for (let i = 0; i < keys.length; i++) {
+                            let a = item.list[keys[i]];
+                            let info = this.getInfo(typeId, a.id);
+
+                            console.log('info', a, info);
+
+                            descr += ' / ' + info.name;
+                            price += (num !== void 0 ? num : (a.count || 0)) * info.price;
+                        }
+
+                    } else if (item.id) {
+                        let info = this.getInfo(typeId, item.id);
+
+                        console.log('info', item, info);
+
                         descr += ' / ' + info.name;
-                        price += (num !== void 0 ? num : (this.preset[typeId].count || 0)) * info.price;
+                        price += (num !== void 0 ? num : (item.count || 0)) * info.price;
                     }
                 }
 
@@ -1186,11 +1242,11 @@ script.
                 this.updateTimer = setTimeout(function () {
                     let id = 'preset_' + type + '_count';
 
-                    console.log('updateSelect', id);
+                    console.log('updateSelect', id, num);
 
                     let sel = document.getElementById(id);
 
-                    console.log(id, window.cstSel);
+                    console.log(id, window.cstSel, sel);
 
                     if (id in window.cstSel) {
                         for (let i = 0; i < window.cstSel[id].panel.children.length; i++) {
@@ -1206,9 +1262,25 @@ script.
 
                 return this.offer[typeId];
             },
+            selectOption(typeId) {
+                let ret = {};
+                let typeCode = this.partTypeIds[typeId];
+
+                //console.log('count', count);
+
+                for (const x of this.brand[typeCode]) {
+                    ret[x.id] = x.name;
+                }
+
+                //console.log('selectOption', ret);
+
+                return ret
+            },
             optionsList(typeId, count) {
                 let ret = [];
                 let typeCode = this.partTypeIds[typeId];
+
+                //console.log('count', count);
 
                 for (const x of this.brand[typeCode]) {
                     ret.push({
@@ -1221,11 +1293,20 @@ script.
 
                 return ret
             },
+            updateInput(inp) {
+                console.log('updateInput js', inp);
+            },
             optionsCount(typeId) {
                 let ret = [];
                 let typeCode = this.partTypeIds[typeId];
-                let id = this.preset[typeId].id + '';
+                let id = '';
                 let count = 0;
+
+                if (typeof this.preset[typeId].id === 'string') {
+                    id += this.preset[typeId].id
+                } else {
+                    id += this.preset[typeId].list[0].id
+                }
 
                 for (const x of this.brand[typeCode]) {
                     if (id = x.id + '') {
@@ -1236,15 +1317,162 @@ script.
 
                 if (count) {
                     for (let i = 0; i < +count; i++) {
+                        //console.log('push', i, count);
                         ret.push(i + 1);
                     }
                 }
 
-                console.log('optionsCount', this.brand[typeCode], count, ret);
+                return ret
+            },
+            selectOptionCount(typeId) {
+                let ret = {};
+                let typeCode = this.partTypeIds[typeId];
+                let id = '';
+                let count = 0;
+
+                if (typeof this.preset[typeId].id === 'string') {
+                    id += this.preset[typeId].id
+                } else {
+                    id += this.preset[typeId].list[0].id
+                }
+
+                for (const x of this.brand[typeCode]) {
+                    if (id = x.id + '') {
+                        count = x.count || this.counts[typeCode] || 1;
+                        break;
+                    }
+                }
+
+                if (count) {
+                    for (let i = 0; i < +count; i++) {
+                        //console.log('push', i, count);
+                        ret[(i + 1)] = i + 1;
+                    }
+                }
+
+                return ret
+            },
+            getHDD(typeId) {
+                let ret = unlinkObj(this.preset[typeId].list);
+
+                let optionList = unlinkObj(this.optionsList(typeId, 1));
+
+                ret = unlinkObj(ret);
+
+                let keys = Object.keys(ret);
+
+                for (let i = 0; i < keys.length; i++) {
+                    let x = ret[keys[i]];
+
+                    x.optionList = optionList;
+                }
+
+                //console.log('getHDD', typeId, this.optionsList(typeId, 1), ret);
+
+                return ret;
+            },
+            controlsCount(typeId) {
+                let ret = [];
+                let typeCode = this.partTypeIds[typeId];
+                let arr = this.preset[typeId].list;
+
+                for (let i = 0; i < arr.length; i++) {
+                    let obj = {optionsList: []};
+
+                    //obj.optionsList = this.optionsList(typeId, 1);
+
+                    ret.push(this.optionsList(typeId, 1));
+                }
+
+                console.log('controlsCount', this.brand[typeCode], ret);
 
                 return ret
             },
             init() {
+                this.loaded = true;
+                //this.preset = {
+                //    totalDescription: '0',
+                //    exchangeRate: 75,
+                //    totalPrice: 0,
+                //    totalPriceD: 0,
+                //    totalPriceR: 0,
+                //    CPU: {
+                //        id: '',
+                //        count: ''
+                //    },
+                //    RAM: {
+                //        id: '',
+                //        count: ''
+                //    },
+                //    SSD: {
+                //        list: [{
+                //            id: '1',
+                //            count: '1',
+                //            selected: false
+                //        }]
+                //    },
+                //    SATA: {
+                //        list: [{
+                //            id: '2',
+                //            count: '2',
+                //            selected: false
+                //        }]
+                //    },
+                //    SAS: {
+                //        list: [{
+                //            id: '3',
+                //            count: '3',
+                //            selected: false
+                //        }]
+                //    },
+                //    DVD: {
+                //        id: '',
+                //        count: ''
+                //    },
+                //    RAID: {
+                //        id: '',
+                //        count: ''
+                //    },
+                //    OtherContr: {
+                //        id: '',
+                //        count: ''
+                //    },
+                //    SP: {
+                //        id: '',
+                //        count: ''
+                //    },
+                //    Soft: {
+                //        id: '',
+                //        count: ''
+                //    },
+                //    Other: {
+                //        id: '',
+                //        count: ''
+                //    },
+                //    UPS: {
+                //        id: '',
+                //        count: ''
+                //    },
+                //    Services: {
+                //        id: '',
+                //        count: ''
+                //    },
+                //    GPU: {
+                //        id: '',
+                //        count: ''
+                //    },
+                //    Switch: {
+                //        id: '',
+                //        count: ''
+                //    },
+                //    Cache: {
+                //        id: '',
+                //        count: ''
+                //    }
+                //};
+
+                console.log('loaded', this.loaded);
+
                 //let that = this;
                 //fetch('/source/data/filter.json')
                 //    .then(function (response) {
@@ -1263,8 +1491,26 @@ script.
         let dataString = el.getAttribute('x-data');
         return eval(`(${dataString})`);
     }
-    function removeItem(show, txt) {
-        console.log('removeItem', show, txt);
+    function removeItem(show, el) {
+        console.log('removeItem', show, el);
+    }
+
+    function initSelects() {
+
+        setTimeout(function () {
+            let slcts = document.getElementsByClassName('initSelect');
+
+            console.log('slcts', slcts);
+
+            for (let i = 0; i < slcts.length; i++) {
+                window.CS(slcts[i]);
+            }
+        },1000)
+
+    }
+
+    function unlinkObj(obj) {
+        return JSON.parse(JSON.stringify(obj));
     }
 
     function togglePopup(show, txt) {
@@ -1287,13 +1533,125 @@ script.
             return JSON.parse(JSON.stringify(formData));
         })
         .then(function(result) {
-          //console.log('Success:', result, siteData());
+          console.log('Success:', result, siteData());
 
           togglePopup(true, 'Данные отправлены');
         })
         .catch(function(error) {
           console.error('Error:', error);
         });
-
     }
 
+    function alpineSelect(config) {
+        return {
+            data: config.data,
+            allData: config.allData,
+            emptyOptionsMessage: config.emptyOptionsMessage || 'No results match your search.',
+            focusedOptionIndex: null,
+            name: config.name,
+            model: config.model,
+            open: false,
+            options: {},
+            placeholder: config.placeholder || 'Select an option',
+            search: '',
+            value: config.value,
+            closeListbox: function () {
+                this.open = false;
+                this.focusedOptionIndex = null;
+                this.search = '';
+            },
+            focusNextOption: function () {
+                if (this.focusedObjectIndex === null) return this.focusedObjectIndex = Object.keys(this.options).length - 1;
+                if (this.focusedOptionIndex + 1 >= Object.keys(this.options).length) return;
+                this.focusedOptionIndex++;
+
+                //if (this.focusedOptionIndex in this.$refs.listbox.children) {
+                //    this.$refs.listbox.children[this.focusedOptionIndex].scrollIntoView({
+                //        block: "center",
+                //    });
+                //}
+            },
+            focusPreviousOption: function () {
+                if (this.focusedObjectIndex === null) return this.focusedObjectIndex = 0;
+                if (this.focusedOptionIndex <= 0) return;
+                this.focusedOptionIndex--;
+
+                //if (this.focusedOptionIndex in this.$refs.listbox.children) {
+                //    this.$refs.listbox.children[this.focusedOptionIndex].scrollIntoView({
+                //        block: "center",
+                //    });
+                //}
+            },
+            init: function () {
+                let that = this;
+                that.options = that.data;
+
+                console.log('that.data', typeof that.data === 'function');
+
+                if (typeof that.data === 'function') {
+                    that.options = that.data();
+                }
+
+                if (!(that.value in that.options)) {
+                    that.value = null;
+                }
+
+                that.$watch('search', (function (value) {
+                    let find = that.data
+
+                    if (typeof that.data === 'function') {
+                        find = that.data();
+                    }
+
+                    if (!that.open || !value) {
+                        return that.options = find;
+                    }
+
+                    that.options = Object.keys(find)
+                        .filter(function (key) {
+                            return (find[key] + '').toLowerCase().includes((value + '').toLowerCase())
+                        })
+                        .reduce(function (options, key) {
+                            options[key] = find[key];
+                            console.log('options', options);
+                            return options
+                        }, {})
+                }));
+            },
+            selectOption: function () {
+                if (!this.open) return this.toggleListboxVisibility();
+                this.value = Object.keys(this.options)[this.focusedOptionIndex];
+                this.closeListbox();
+
+                let ds = this.$el.parentNode.dataset;
+                let inp = document.querySelector('input[data-preset="' + ds.preset + '"][data-index="' + ds.index + '"]')
+
+                inp.value = this.value;
+
+                if ("createEvent" in document) {
+                    let evt = document.createEvent("HTMLEvents");
+                    evt.initEvent("input", false, true);
+                    inp.dispatchEvent(evt);
+                } else {
+                    inp.fireEvent("onchange");
+                }
+            },
+            toggleListboxVisibility: function () {
+                let that = this;
+                if (this.open) {
+                    return this.closeListbox();
+                }
+                this.focusedOptionIndex = Object.keys(this.options).indexOf(this.value);
+                if (this.focusedOptionIndex < 0) {
+                    this.focusedOptionIndex = 0;
+                }
+                this.open = true;
+                this.$nextTick(function () {
+                    that.$refs.search.focus();
+                    //that.$refs.listbox.children[that.focusedOptionIndex].scrollIntoView({
+                    //    block: "nearest"
+                    //});
+                });
+            },
+        }
+    }
