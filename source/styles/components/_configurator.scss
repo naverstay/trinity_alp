@@ -194,6 +194,17 @@
         }
     }
 
+    &__warn {
+        display: inline-block;
+        vertical-align: top;
+        font-size: 14px;
+        background: #e8f0f4;
+        color: #818181;
+        padding: 3px 4px 3px;
+        border-radius: 3px;
+        margin-bottom: 15px;
+    }
+
     &__label {
         font: 900 18px $fontGilroyExtraBold;
         margin-bottom: 10px;

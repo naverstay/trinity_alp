@@ -988,19 +988,20 @@ script.
                 totalPrice: 0,
                 totalPriceD: 0,
                 totalPriceR: 0,
+                hddCount: 0,
                 CPU: {
                     id: '',
-                    count: ''
+                    count: '0'
                 },
                 RAM: {
                     id: '',
-                    count: ''
+                    count: '0'
                 },
                 SSD: {
                     list: [
                         {
                             id: '',
-                            count: ''
+                            count: '0'
                         }
                     ]
                 },
@@ -1008,25 +1009,25 @@ script.
                     list: [
                         {
                             id: '',
-                            count: ''
+                            count: '0'
                         }
                     ]
                 },
                 SATA_0: {
                     id: '',
-                    count: ''
+                    count: '0'
                 },
                 SAS: {
                     list: [
                         {
                             id: '',
-                            count: ''
+                            count: '0'
                         }
                     ]
                 },
                 DVD: {
                     id: '',
-                    count: ''
+                    count: '0'
                 },
                 RAID: {
                     id: '',
@@ -1038,7 +1039,7 @@ script.
                 },
                 SP: {
                     id: '',
-                    count: ''
+                    count: '0'
                 },
                 Soft: {
                     id: '',
@@ -1058,7 +1059,7 @@ script.
                 },
                 GPU: {
                     id: '',
-                    count: ''
+                    count: '0'
                 },
                 Switch: {
                     id: '',
@@ -1066,7 +1067,7 @@ script.
                 },
                 Cache: {
                     id: '',
-                    count: ''
+                    count: '0'
                 }
             },
             brand__: {
@@ -1200,6 +1201,7 @@ script.
 
                 //return;
 
+                let hddCount = 0;
                 let price = 0;
                 let descr = '';
 
@@ -1219,6 +1221,10 @@ script.
 
                             console.log('info', a, info);
 
+                            if (['SATA', 'SAS', 'SSD'].indexOf(typeId) !== -1) {
+                                hddCount += parseInt(a.count || 0);
+                            }
+
                             descr += ' / ' + info.name;
                             price += (num !== void 0 ? num : (a.count || 0)) * info.price;
                         }
@@ -1233,6 +1239,7 @@ script.
                     }
                 }
 
+                this.preset.hddCount = hddCount;
                 this.preset.totalDescription = descr.trim().replace(/^\//, '');
                 this.preset.totalPrice = price;
                 this.preset.totalPriceR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice);
@@ -1410,11 +1417,11 @@ script.
                 //    totalPriceR: 0,
                 //    CPU: {
                 //        id: '',
-                //        count: ''
+                //        count: '0'
                 //    },
                 //    RAM: {
                 //        id: '',
-                //        count: ''
+                //        count: '0'
                 //    },
                 //    SSD: {
                 //        list: [{
@@ -1439,47 +1446,47 @@ script.
                 //    },
                 //    DVD: {
                 //        id: '',
-                //        count: ''
+                //        count: '0'
                 //    },
                 //    RAID: {
                 //        id: '',
-                //        count: ''
+                //        count: '0'
                 //    },
                 //    OtherContr: {
                 //        id: '',
-                //        count: ''
+                //        count: '0'
                 //    },
                 //    SP: {
                 //        id: '',
-                //        count: ''
+                //        count: '0'
                 //    },
                 //    Soft: {
                 //        id: '',
-                //        count: ''
+                //        count: '0'
                 //    },
                 //    Other: {
                 //        id: '',
-                //        count: ''
+                //        count: '0'
                 //    },
                 //    UPS: {
                 //        id: '',
-                //        count: ''
+                //        count: '0'
                 //    },
                 //    Services: {
                 //        id: '',
-                //        count: ''
+                //        count: '0'
                 //    },
                 //    GPU: {
                 //        id: '',
-                //        count: ''
+                //        count: '0'
                 //    },
                 //    Switch: {
                 //        id: '',
-                //        count: ''
+                //        count: '0'
                 //    },
                 //    Cache: {
                 //        id: '',
-                //        count: ''
+                //        count: '0'
                 //    }
                 //};
 
