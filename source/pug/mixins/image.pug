@@ -14,8 +14,8 @@ mixin loop_while(counter)
         block
         -i++;
 
-mixin select(data, preset)
-    .custom-select-container.customSelect(data-preset=preset x-data=data x-init=" init() " @click.away='closeListbox()' @keydown.escape='closeListbox()' :class="{ 'is-disabled': disabled }")
+mixin select(data, preset, disabled)
+    .custom-select-container.customSelect(data-preset=preset x-data=data x-init=" init() " @click.away='closeListbox()' @keydown.escape='closeListbox()' data-class=(disabled ? "{ 'is-disabled': \"" + disabled  + "\"}" : null))
         span.custom-select-opener(x-ref='button' @click='toggleListboxVisibility()' :aria-expanded='open' aria-haspopup='listbox')
             span(x-show='!open' x-text='value in options ? options[value] : placeholder' :class="{ 'custom-select-placeholder': ! (value in options) }")
             input.custom-select-value(x-ref='value' type='hidden' :name='name' x-model='value')
