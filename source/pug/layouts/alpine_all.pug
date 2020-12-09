@@ -1188,7 +1188,7 @@ script.
                     }
                 }
 
-                console.log('getInfo', arr, ty, id, ret);
+                // console.log('getInfo', arr, ty, id, ret);
 
                 return ret;
             },
@@ -1196,8 +1196,16 @@ script.
                 let rx = /\d{1,3}(?=(\d{3})+(?!\d))/g;
                 return (val + '').replace(rx, '$& ')
             },
+            appendEl(typeId, c) {
+                // console.log('appendEl', typeId, c);
+
+                this.preset[typeId].list.push({
+                    id: '',
+                    count: '0'
+                });
+            },
             updatePreset(num, evt, parent) {
-                console.log('updatePreset', num);
+                // console.log('updatePreset', num);
 
                 //return;
 
@@ -1205,24 +1213,29 @@ script.
                 let price = 0;
                 let descr = '';
 
-                for (typeId in this.partTypeIds) {
+                for (let typeId in this.partTypeIds) {
                     let item = this.preset[typeId];
 
-                    console.log('typeId', typeId, 'list' in item, item);
+                    // console.log('typeId', typeId, 'list' in item, item);
 
                     if ('list' in item) {
                         let keys = Object.keys(item.list);
 
-                        console.log('list', keys);
+                        // console.log('list', keys);
 
                         for (let i = 0; i < keys.length; i++) {
                             let a = item.list[keys[i]];
                             let info = this.getInfo(typeId, a.id);
 
-                            console.log('info', a, info);
+                            // console.log('info', a, info);
 
                             if (['SATA', 'SAS', 'SSD'].indexOf(typeId) !== -1) {
-                                hddCount += parseInt(a.count || 0);
+                                let c = parseInt(a.count || 0);
+                                hddCount += c;
+
+                                if (i === keys.length - 1 && c) {
+                                    this.appendEl(typeId, c);
+                                }
                             }
 
                             descr += ' / ' + info.name;
@@ -1232,7 +1245,7 @@ script.
                     } else if (item.id) {
                         let info = this.getInfo(typeId, item.id);
 
-                        console.log('info', item, info);
+                        // console.log('info', item, info);
 
                         descr += ' / ' + info.name;
                         price += (num !== void 0 ? num : (item.count || 0)) * info.price;
@@ -1246,7 +1259,7 @@ script.
                 this.preset.totalPriceD = this.pricePrint(this.preset.totalPrice);
 
                 if (evt) {
-                    console.log('after', evt.target, parent);
+                    // console.log('after', evt.target, parent);
                 }
             },
             updateSelect(type, num) {
@@ -1256,11 +1269,11 @@ script.
                 this.updateTimer = setTimeout(function () {
                     let id = 'preset_' + type + '_count';
 
-                    console.log('updateSelect', id, num);
+                    // console.log('updateSelect', id, num);
 
                     let sel = document.getElementById(id);
 
-                    console.log(id, window.cstSel, sel);
+                    // console.log(id, window.cstSel, sel);
 
                     if (id in window.cstSel) {
                         for (let i = 0; i < window.cstSel[id].panel.children.length; i++) {
@@ -1286,7 +1299,7 @@ script.
                     ret[x.id] = x.name;
                 }
 
-                console.log('selectOption', typeId, ret);
+                // console.log('selectOption', typeId, ret);
 
                 return ret
             },
@@ -1306,9 +1319,6 @@ script.
                 }
 
                 return ret
-            },
-            updateInput(inp) {
-                console.log('updateInput js', inp);
             },
             optionsCount(typeId) {
                 let ret = [];
@@ -1389,6 +1399,14 @@ script.
                 console.log('getHDD', typeId, ret, this.optionsList(typeId, 1));
 
                 return ret;
+            },
+            removeItem(typeId, ind) {
+                console.log('removeItem', typeId, ind);
+
+                if (typeId in this.preset && this.preset[typeId].list.length > 1) {
+                    this.preset[typeId].list.splice(ind, 1);
+                    this.updatePreset();
+                }
             },
             controlsCount(typeId) {
                 let ret = [];
@@ -1510,10 +1528,6 @@ script.
         let dataString = el.getAttribute('x-data');
         return eval(`(${dataString})`);
     }
-    function removeItem(show, el) {
-        console.log('removeItem', show, el);
-    }
-
     function initSelects() {
         setTimeout(function () {
             let slcts = document.getElementsByClassName('initSelect');
