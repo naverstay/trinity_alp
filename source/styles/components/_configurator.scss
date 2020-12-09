@@ -210,6 +210,10 @@
         position: relative;
         max-width: 100%;
 
+        input {
+            max-width: 100%;
+        }
+
         &-rm {
             cursor: pointer;
             position: absolute;

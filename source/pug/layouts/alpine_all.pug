@@ -997,28 +997,32 @@ script.
                     count: ''
                 },
                 SSD: {
-                    list: {
-                        0: {
+                    list: [
+                        {
                             id: '',
                             count: ''
                         }
-                    }
+                    ]
                 },
                 SATA: {
-                    list: {
-                        0: {
+                    list: [
+                        {
                             id: '',
                             count: ''
                         }
-                    }
+                    ]
+                },
+                SATA_0: {
+                    id: '',
+                    count: ''
                 },
                 SAS: {
-                    list: {
-                        0: {
+                    list: [
+                        {
                             id: '',
                             count: ''
                         }
-                    }
+                    ]
                 },
                 DVD: {
                     id: '',
@@ -1193,6 +1197,9 @@ script.
             },
             updatePreset(num, evt, parent) {
                 console.log('updatePreset', num);
+
+                //return;
+
                 let price = 0;
                 let descr = '';
 
@@ -1272,7 +1279,7 @@ script.
                     ret[x.id] = x.name;
                 }
 
-                //console.log('selectOption', ret);
+                console.log('selectOption', typeId, ret);
 
                 return ret
             },
@@ -1353,21 +1360,26 @@ script.
                 return ret
             },
             getHDD(typeId) {
-                let ret = unlinkObj(this.preset[typeId].list);
+                let ret = (this.preset[typeId].list);
 
-                let optionList = unlinkObj(this.optionsList(typeId, 1));
+                //let optionList = unlinkObj(this.optionsList(typeId, 1));
 
-                ret = unlinkObj(ret);
+                //ret = unlinkObj(ret);
 
-                let keys = Object.keys(ret);
+                //for (let i = 0; i < ret.length; i++) {
+                //    let r = ret[i];
+                //    r.optionList = optionList;
+                //}
 
-                for (let i = 0; i < keys.length; i++) {
-                    let x = ret[keys[i]];
+                //let keys = Object.keys(ret);
+                //
+                //for (let i = 0; i < keys.length; i++) {
+                //    let x = ret[keys[i]];
+                //
+                //    x.optionList = optionList;
+                //}
 
-                    x.optionList = optionList;
-                }
-
-                //console.log('getHDD', typeId, this.optionsList(typeId, 1), ret);
+                console.log('getHDD', typeId, ret, this.optionsList(typeId, 1));
 
                 return ret;
             },
@@ -1496,7 +1508,6 @@ script.
     }
 
     function initSelects() {
-
         setTimeout(function () {
             let slcts = document.getElementsByClassName('initSelect');
 
@@ -1506,7 +1517,6 @@ script.
                 window.CS(slcts[i]);
             }
         },1000)
-
     }
 
     function unlinkObj(obj) {
@@ -1619,22 +1629,29 @@ script.
                 }));
             },
             selectOption: function () {
-                if (!this.open) return this.toggleListboxVisibility();
-                this.value = Object.keys(this.options)[this.focusedOptionIndex];
-                this.closeListbox();
+                let that = this;
+                if (!that.open) return that.toggleListboxVisibility();
+                that.value = Object.keys(that.options)[that.focusedOptionIndex];
+                that.closeListbox();
 
-                let ds = this.$el.parentNode.dataset;
+                let ds = that.$el.parentNode.dataset;
                 let inp = document.querySelector('input[data-preset="' + ds.preset + '"][data-index="' + ds.index + '"]')
 
-                inp.value = this.value;
+                inp.value = that.value;
 
-                if ("createEvent" in document) {
-                    let evt = document.createEvent("HTMLEvents");
-                    evt.initEvent("input", false, true);
-                    inp.dispatchEvent(evt);
-                } else {
-                    inp.fireEvent("onchange");
-                }
+                console.log('update', that.value);
+
+                setTimeout(function () {
+                    if ("createEvent" in document) {
+                        let evt = document.createEvent("HTMLEvents");
+                        evt.initEvent("input", false, true);
+                        inp.dispatchEvent(evt);
+                        console.log('new val dispatchEvent', that.value, inp.value);
+                    } else {
+                        inp.fireEvent("oninput");
+                        console.log('new val onchange', that.value, inp.value);
+                    }
+                }, 1);
             },
             toggleListboxVisibility: function () {
                 let that = this;

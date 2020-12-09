@@ -3,8 +3,6 @@
 // Styles
 import 'styles/_app.scss';
 
-import customSelect from './scripts/customSelect';
-
 require('./scripts/serializeForm');
 require('./scripts/slideToggle');
 
@@ -99,27 +97,4 @@ browserCheck();
 
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Ready!');
-
-    window.cstSel = {};
-
-    window.CS = customSelect;
-
-    let allSlct = document.getElementsByTagName("select");
-
-    for (let i = 0; i < allSlct.length; i++) {
-        //window.cstSel[allSlct[i].id || 'some_select_' + i] = customSelect(allSlct[i])[0];
-    }
-
-    //let cstSlcts = customSelect('select', {
-    //    containerClass: 'custom-select-container',
-    //    openerClass: 'custom-select-opener',
-    //    panelClass: 'custom-select-panel',
-    //    optionClass: 'custom-select-option',
-    //    optgroupClass: 'custom-select-optgroup',
-    //    isSelectedClass: 'is-selected',
-    //    hasFocusClass: 'has-focus',
-    //    isDisabledClass: 'is-disabled',
-    //    isOpenClass: 'is-open'
-    //});
-
 });
