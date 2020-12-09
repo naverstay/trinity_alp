@@ -1582,6 +1582,7 @@ script.
             name: config.name,
             model: config.model,
             open: false,
+            disabled: config.disabled || false,
             options: {},
             placeholder: config.placeholder || 'Select an option',
             search: '',
@@ -1676,15 +1677,15 @@ script.
             },
             toggleListboxVisibility: function () {
                 let that = this;
-                if (this.open) {
-                    return this.closeListbox();
+                if (that.open || that.disabled) {
+                    return that.closeListbox();
                 }
-                this.focusedOptionIndex = Object.keys(this.options).indexOf(this.value);
-                if (this.focusedOptionIndex < 0) {
-                    this.focusedOptionIndex = 0;
+                that.focusedOptionIndex = Object.keys(that.options).indexOf(that.value);
+                if (that.focusedOptionIndex < 0) {
+                    that.focusedOptionIndex = 0;
                 }
-                this.open = true;
-                this.$nextTick(function () {
+                that.open = true;
+                that.$nextTick(function () {
                     that.$refs.search.focus();
                     //that.$refs.listbox.children[that.focusedOptionIndex].scrollIntoView({
                     //    block: "nearest"

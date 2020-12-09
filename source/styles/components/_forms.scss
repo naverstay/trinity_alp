@@ -87,7 +87,8 @@
     position: relative;
 
     &.is-disabled {
-        opacity: .333;
+        opacity: .75;
+        pointer-events: none;
     }
 
     .custom-select-search {
