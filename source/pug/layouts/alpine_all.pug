@@ -982,104 +982,105 @@ script.
                 ups: []
             },
             preset: {
+                loaded: false,
                 totalDescription: '',
                 exchangeRate: 75,
                 totalPrice: 0,
                 totalPriceD: 0,
                 totalPriceR: 0,
-                hddCount: 0,
-                CPU: {
-                    id: '',
-                    show: false,
-                    count: '0'
-                },
-                RAM: {
-                    id: '',
-                    show: false,
-                    count: '0'
-                },
-                SSD: {
-                    list: [
-                        {
-                            id: '',
-                            show: false,
-                            count: '0'
-                        }
-                    ]
-                },
-                SATA: {
-                    list: [
-                        {
-                            id: '',
-                            show: false,
-                            count: '0'
-                        }
-                    ]
-                },
-                SAS: {
-                    list: [
-                        {
-                            id: '',
-                            show: false,
-                            count: '0'
-                        }
-                    ]
-                },
-                DVD: {
-                    id: '',
-                    show: false,
-                    count: '0'
-                },
-                RAID: {
-                    id: '',
-                    show: false,
-                    count: '1'
-                },
-                OtherContr: {
-                    id: '',
-                    show: false,
-                    count: '1'
-                },
-                SP: {
-                    id: '',
-                    show: false,
-                    count: '0'
-                },
-                Soft: {
-                    id: '',
-                    show: false,
-                    count: '1'
-                },
-                Other: {
-                    id: '',
-                    show: false,
-                    count: '1'
-                },
-                UPS: {
-                    id: '',
-                    show: false,
-                    count: '1'
-                },
-                Services: {
-                    id: '',
-                    show: false,
-                    count: '1'
-                },
-                GPU: {
-                    id: '',
-                    show: false,
-                    count: '0'
-                },
-                Switch: {
-                    id: '',
-                    show: false,
-                    count: '1'
-                },
-                Cache: {
-                    id: '',
-                    show: false,
-                    count: '0'
-                }
+                hddCount: 0
+                //CPU: {
+                //    id: '',
+                //    show: false,
+                //    count: '0'
+                //},
+                //RAM: {
+                //    id: '',
+                //    show: false,
+                //    count: '0'
+                //},
+                //SSD: {
+                //    list: [
+                //        {
+                //            id: '',
+                //            show: false,
+                //            count: '0'
+                //        }
+                //    ]
+                //},
+                //SATA: {
+                //    list: [
+                //        {
+                //            id: '',
+                //            show: false,
+                //            count: '0'
+                //        }
+                //    ]
+                //},
+                //SAS: {
+                //    list: [
+                //        {
+                //            id: '',
+                //            show: false,
+                //            count: '0'
+                //        }
+                //    ]
+                //},
+                //DVD: {
+                //    id: '',
+                //    show: false,
+                //    count: '0'
+                //},
+                //RAID: {
+                //    id: '',
+                //    show: false,
+                //    count: '1'
+                //},
+                //OtherContr: {
+                //    id: '',
+                //    show: false,
+                //    count: '1'
+                //},
+                //SP: {
+                //    id: '',
+                //    show: false,
+                //    count: '0'
+                //},
+                //Soft: {
+                //    id: '',
+                //    show: false,
+                //    count: '1'
+                //},
+                //Other: {
+                //    id: '',
+                //    show: false,
+                //    count: '1'
+                //},
+                //UPS: {
+                //    id: '',
+                //    show: false,
+                //    count: '1'
+                //},
+                //Services: {
+                //    id: '',
+                //    show: false,
+                //    count: '1'
+                //},
+                //GPU: {
+                //    id: '',
+                //    show: false,
+                //    count: '0'
+                //},
+                //Switch: {
+                //    id: '',
+                //    show: false,
+                //    count: '1'
+                //},
+                //Cache: {
+                //    id: '',
+                //    show: false,
+                //    count: '0'
+                //}
             },
             counts: {
                 "3": "4",
@@ -1087,6 +1088,15 @@ script.
                 "5": "4",
                 "10": "1",
                 "11": "4"
+            },
+            preselected: {
+                "RAID": "1",
+                "OtherContr": "1",
+                "Soft": "1",
+                "Other": "1",
+                "UPS": "1",
+                "Services": "1",
+                "Switch": "1"
             },
             partTypeIds: {
                 CPU: 1,
@@ -1210,6 +1220,10 @@ script.
 
                     // console.log('typeId', typeId, 'list' in item, item);
 
+                    if (!item) {
+                        continue;
+                    }
+
                     if ('list' in item) {
                         let keys = Object.keys(item.list);
 
@@ -1323,10 +1337,12 @@ script.
                 let id = '';
                 let count = 0;
 
-                if (typeof this.preset[typeId].id === 'string') {
-                    id += this.preset[typeId].id
-                } else {
-                    id += this.preset[typeId].list[0].id
+                if (typeId in this.preset) {
+                    if (typeof this.preset[typeId].id === 'string') {
+                        id += this.preset[typeId].id
+                    } else {
+                        id += this.preset[typeId].list[0].id
+                    }
                 }
 
                 if (typeCode in this.brand) {
@@ -1353,10 +1369,12 @@ script.
                 let id = '';
                 let count = 0;
 
-                if (typeof this.preset[typeId].id === 'string') {
-                    id += this.preset[typeId].id
-                } else {
-                    id += this.preset[typeId].list[0].id
+                if (typeId in this.preset) {
+                    if (typeof this.preset[typeId].id === 'string') {
+                        id += this.preset[typeId].id
+                    } else {
+                        id += this.preset[typeId].list[0].id
+                    }
                 }
 
                 //console.log('selectOptionCount', typeId, id);
@@ -1403,15 +1421,26 @@ script.
                 //    x.optionList = optionList;
                 //}
 
-                console.log('getHDD', typeId, ret, this.optionsList(typeId, 1));
+                console.log('getHDD', typeId, ret, this.preset, this.preset[typeId], this.optionsList(typeId, 1));
 
                 return ret;
             },
             removeItem(typeId, ind) {
                 console.log('removeItem', typeId, ind);
 
-                if (typeId in this.preset && this.preset[typeId].list.length > 1) {
-                    this.preset[typeId].list.splice(ind, 1);
+                let rm = this.preset[typeId];
+
+                if (rm) {
+                    if ('list' in rm) {
+                        if (rm.list.length > 1) {
+                            rm.list.splice(ind, 1);
+                        }
+                    } else {
+                        console.log('count 0', rm);
+                        //rm.count = '0';
+                        //rm.id = '';
+                    }
+
                     this.updatePreset();
                 }
             },
@@ -1433,19 +1462,27 @@ script.
                 return ret
             },
             init() {
+                let ssd = ['SATA', 'SAS', 'SSD'];
+
                 for (let x in this.partTypeIds) {
                     if (this.partTypeIds.hasOwnProperty(x)) {
                         if ((this.partTypeIds[x] + '') in this.brand) {
-                            let prst = this.preset[x];
+                            let count = this.preselected.hasOwnProperty(x) || '0';
 
-                            if ('list' in prst) {
-                                prst.list[0].show = true;
+                            if (ssd.indexOf(x) > -1) {
+                                console.log('preselected', x);
+
+                                this.preset[x] = {list: [{id: '', show: true, count: count}]};
                             } else {
-                                prst.show = true;
+                                this.preset[x] = {id: '', show: true, count: count};
                             }
                         }
                     }
                 }
+
+
+
+                this.preset.loaded = true;
 
                 console.log('this.preset', this.preset);
 
@@ -1556,8 +1593,6 @@ script.
             init: function () {
                 let that = this;
                 that.options = that.data;
-
-                console.log('that.data', typeof that.data === 'function');
 
                 if (typeof that.data === 'function') {
                     that.options = that.data();

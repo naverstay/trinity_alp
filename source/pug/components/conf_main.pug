@@ -13,7 +13,7 @@ mixin build_options(arr)
     each o, oi in arr
         option(x-text)
 
-.configurator__main
+.configurator__main: template(x-if=" preset.loaded ")
     .configurator__row(x-show=" preset.CPU.show " x-cloak)
         .configurator__icon
             img(src=require('media/system/config_cpu.png'))
@@ -100,7 +100,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    .configurator__row(x-show=" preset.SATA.list[0].show || preset.SAS.list[0].show || preset.SSD.list[0].show " x-cloak)
+    .configurator__row(x-show__=" preset.SATA.list[0].show || preset.SAS.list[0].show || preset.SSD.list[0].show " x-cloak)
         .configurator__icon
             img(src=require('media/system/config_ssd.png'))
         .configurator__label Жесткие диски
@@ -108,7 +108,7 @@ mixin build_options(arr)
 
         - var ssd = ['SATA', 'SAS', 'SSD']
         each d in ssd
-            div(x-show=" preset." + d + ".list[0].show " x-cloak)
+            template(x-if=" preset.hasOwnProperty('" + d + "') " x-cloak)
                 .configurator__label= d
                 if (templ)
                     template(x-for="(item, index, collection) in getHDD('" + d + "')" :key="item" x-if="true")
