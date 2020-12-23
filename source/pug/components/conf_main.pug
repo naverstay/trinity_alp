@@ -14,7 +14,7 @@ mixin build_options(arr)
         option(x-text)
 
 .configurator__main
-    .configurator__row
+    .configurator__row(x-show=" preset.CPU.count !== '' " x-cloak)
         .configurator__icon
             img(src=require('media/system/config_cpu.png'))
         .configurator__label Процессор
@@ -47,7 +47,7 @@ mixin build_options(arr)
                     .configurator__cell-rm x
                     +selectBox(1)
 
-    .configurator__row
+    .configurator__row(x-show=" preset.RAM.count !== '' " x-cloak)
         .configurator__icon
             img(src=require('media/system/config_ram.png'))
         .configurator__label Оперативная память
@@ -80,7 +80,7 @@ mixin build_options(arr)
                     .configurator__cell-rm x
                     +selectBox(1)
 
-    .configurator__row
+    .configurator__row(x-show=" preset.RAID.count !== '' " x-cloak)
         .configurator__icon
             img(src=require('media/system/config_raid.png'))
         .configurator__label Raid контроллер
@@ -100,7 +100,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    .configurator__row
+    .configurator__row(__x-show=" preset.SATA.count !== '' || preset.SAS.count !== '' || preset.SSD.count !== '' " x-cloak)
         .configurator__icon
             img(src=require('media/system/config_ssd.png'))
         .configurator__label Жесткие диски
@@ -134,7 +134,7 @@ mixin build_options(arr)
                             .configurator__cell-rm x
                             +selectBox(1)
 
-    .configurator__row
+    .configurator__row(x-show=" preset.OtherContr.count !== '' " x-cloak)
         .configurator__icon
             img(src=require('media/system/config_other.png'))
         .configurator__label Прочие контроллеры X2
@@ -156,7 +156,7 @@ mixin build_options(arr)
                     .configurator__cell
                         +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    .configurator__row
+    .configurator__row(x-show=" preset.Other.count !== '' " x-cloak)
         .configurator__icon
             img(src=require('media/system/config_misc.png'))
         .configurator__label Прочие компоненты
@@ -176,7 +176,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    .configurator__row
+    .configurator__row(x-show=" preset.Soft.count !== '' " x-cloak)
         .configurator__icon
             img(src=require('media/system/config_soft.png'))
         .configurator__label Программное обеспечение
@@ -196,7 +196,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    .configurator__row
+    .configurator__row(x-show=" preset.UPS.count !== '' " x-cloak)
         .configurator__icon
             img(src=require('media/system/config_ups.png'))
         .configurator__label ИБП
@@ -216,7 +216,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    .configurator__row
+    .configurator__row(x-show=" preset.Switch.count !== '' " x-cloak)
         .configurator__icon
             img(src=require('media/system/config_switch.png'))
         .configurator__label Коммутаторы
@@ -236,7 +236,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    .configurator__row
+    .configurator__row(x-show=" preset.Services.count !== '' " x-cloak)
         .configurator__icon
             img(src=require('media/system/config_service.png'))
         .configurator__label Сервисное обслуживание
@@ -257,7 +257,8 @@ mixin build_options(arr)
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
     .configurator__total
-        .configurator__total-info(__x-text='preset.totalDescription') Корзина на 4 SAS/SATA 3,5” диска с возможностью горячей замены / Для установки дисков SAS требуется RAID-контроллер / Полноразмерный слот PCI-E /  Одинарный блок питания 350Вт / Поддержка одного процессора Intel® Xeon®  E3-1200 v6 и Core i3 / 4 сокета DDR4 Unbuffered ECC / 2 порта Gigabit Ethernet /  Встроенный IPMI.
+        .configurator__total-info(x-html='preset.totalDescription')
+        //- Корзина на 4 SAS/SATA 3,5” диска с возможностью горячей замены / Для установки дисков SAS требуется RAID-контроллер / Полноразмерный слот PCI-E /  Одинарный блок питания 350Вт / Поддержка одного процессора Intel® Xeon®  E3-1200 v6 и Core i3 / 4 сокета DDR4 Unbuffered ECC / 2 порта Gigabit Ethernet /  Встроенный IPMI.
         .configurator__total-price
             .configurator__total-label Сумма
             .configurator__total-val(x-text='"$" + preset.totalPriceD') $1,596
