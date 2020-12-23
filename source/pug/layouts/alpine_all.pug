@@ -990,17 +990,20 @@ script.
                 hddCount: 0,
                 CPU: {
                     id: '',
-                    count: ''
+                    show: false,
+                    count: '0'
                 },
                 RAM: {
                     id: '',
-                    count: ''
+                    show: false,
+                    count: '0'
                 },
                 SSD: {
                     list: [
                         {
                             id: '',
-                            count: ''
+                            show: false,
+                            count: '0'
                         }
                     ]
                 },
@@ -1008,70 +1011,74 @@ script.
                     list: [
                         {
                             id: '',
-                            count: ''
+                            show: false,
+                            count: '0'
                         }
                     ]
-                },
-                SATA_0: {
-                    id: '',
-                    count: ''
                 },
                 SAS: {
                     list: [
                         {
                             id: '',
-                            count: ''
+                            show: false,
+                            count: '0'
                         }
                     ]
                 },
                 DVD: {
                     id: '',
-                    count: ''
+                    show: false,
+                    count: '0'
                 },
                 RAID: {
                     id: '',
-                    count: '' // 1
+                    show: false,
+                    count: '1'
                 },
                 OtherContr: {
                     id: '',
-                    count: '' // 1
+                    show: false,
+                    count: '1'
                 },
                 SP: {
                     id: '',
-                    count: ''
+                    show: false,
+                    count: '0'
                 },
                 Soft: {
                     id: '',
-                    count: '' // 1
+                    show: false,
+                    count: '1'
                 },
                 Other: {
                     id: '',
-                    count: '' // 1
+                    show: false,
+                    count: '1'
                 },
                 UPS: {
                     id: '',
-                    count: '' // 1
+                    show: false,
+                    count: '1'
                 },
                 Services: {
                     id: '',
-                    count: '' // 1
+                    show: false,
+                    count: '1'
                 },
                 GPU: {
                     id: '',
-                    count: ''
+                    show: false,
+                    count: '0'
                 },
                 Switch: {
                     id: '',
-                    count: '' // 1
+                    show: false,
+                    count: '1'
                 },
                 Cache: {
                     id: '',
-                    count: ''
-                }
-            },
-            brand__: {
-                config: {
-                    parts: []
+                    show: false,
+                    count: '0'
                 }
             },
             counts: {
@@ -1098,19 +1105,6 @@ script.
                 GPU: 50,
                 Switch: 52,
                 Cache: 54
-            },
-            selectOptionO: {
-                au: 'Australia',
-                be: 'Belgium',
-                cn: 'China',
-                fr: 'France',
-                de: 'Germany',
-                it: 'Italy',
-                mx: 'Mexico',
-                es: 'Spain',
-                tr: 'Turkey',
-                gb: 'United Kingdom',
-                us: 'United States'
             },
             updateTimer: 0,
             switchParam(evt, prm, ind) {
@@ -1176,17 +1170,17 @@ script.
             },
             getInfo(ty, id) {
                 let ret = {description: '', price: ''};
-                let arr = this.brand[this.partTypeIds[ty] + ''];
+                let arr = this.brand[this.partTypeIds[ty] + ''] || [];
 
-                for (let i = 0; i < arr.length; i++) {
-                    let a = arr[i];
+                if (arr.length) {
+                    for (let i = 0; i < arr.length; i++) {
+                        let a = arr[i];
 
-                    if (a.id + '' === id + '') {
-                        ret = {description: a.description || a.name, price: a.price};
+                        if (a.id + '' === id + '') {
+                            ret = {description: a.description || a.name, price: a.price};
+                        }
                     }
                 }
-
-                // console.log('getInfo', arr, ty, id, ret);
 
                 return ret;
             },
@@ -1294,8 +1288,10 @@ script.
 
                 //console.log('count', count);
 
-                for (const x of this.brand[typeCode]) {
-                    ret[x.id] = x.name;
+                if (typeCode in this.brand) {
+                    for (const x of this.brand[typeCode]) {
+                        ret[x.id] = x.name;
+                    }
                 }
 
                 // console.log('selectOption', typeId, ret);
@@ -1308,13 +1304,15 @@ script.
 
                 //console.log('count', count);
 
-                for (const x of this.brand[typeCode]) {
-                    ret.push({
-                        id: x.id,
-                        isDelete: true,
-                        count: x.count || this.counts[typeCode] || 1,
-                        text: x.name
-                    });
+                if (typeCode in this.brand) {
+                    for (const x of this.brand[typeCode]) {
+                        ret.push({
+                            id: x.id,
+                            isDelete: true,
+                            count: x.count || this.counts[typeCode] || 1,
+                            text: x.name
+                        });
+                    }
                 }
 
                 return ret
@@ -1331,10 +1329,12 @@ script.
                     id += this.preset[typeId].list[0].id
                 }
 
-                for (const x of this.brand[typeCode]) {
-                    if (id = x.id + '') {
-                        count = x.count || this.counts[typeCode] || 1;
-                        break;
+                if (typeCode in this.brand) {
+                    for (const x of this.brand[typeCode]) {
+                        if (id = x.id + '') {
+                            count = x.count || this.counts[typeCode] || 1;
+                            break;
+                        }
                     }
                 }
 
@@ -1365,10 +1365,12 @@ script.
                 //    return ret
                 //}
 
-                for (const x of this.brand[typeCode]) {
-                    if (id = x.id + '') {
-                        count = x.count || this.counts[typeCode] || 1;
-                        break;
+                if (typeCode in this.brand) {
+                    for (const x of this.brand[typeCode]) {
+                        if (id = x.id + '') {
+                            count = x.count || this.counts[typeCode] || 1;
+                            break;
+                        }
                     }
                 }
 
@@ -1431,94 +1433,19 @@ script.
                 return ret
             },
             init() {
-                this.preset = {
-                    totalDescription: '',
-                    exchangeRate: 75,
-                    totalPrice: 0,
-                    totalPriceD: 0,
-                    totalPriceR: 0,
-                    hddCount: 0,
-                    CPU: {
-                        id: '',
-                        count: '0'
-                    },
-                    RAM: {
-                        id: '',
-                        count: '0'
-                    },
-                    SSD: {
-                        list: [
-                            {
-                                id: '',
-                                count: '0'
+                for (let x in this.partTypeIds) {
+                    if (this.partTypeIds.hasOwnProperty(x)) {
+                        if ((this.partTypeIds[x] + '') in this.brand) {
+                            let prst = this.preset[x];
+
+                            if ('list' in prst) {
+                                prst.list[0].show = true;
+                            } else {
+                                prst.show = true;
                             }
-                        ]
-                    },
-                    SATA: {
-                        list: [
-                            {
-                                id: '',
-                                count: '0'
-                            }
-                        ]
-                    },
-                    SATA_0: {
-                        id: '',
-                        count: '0'
-                    },
-                    SAS: {
-                        list: [
-                            {
-                                id: '',
-                                count: '0'
-                            }
-                        ]
-                    },
-                    DVD: {
-                        id: '',
-                        count: '0'
-                    },
-                    RAID: {
-                        id: '',
-                        count: '1'
-                    },
-                    OtherContr: {
-                        id: '',
-                        count: '1'
-                    },
-                    SP: {
-                        id: '',
-                        count: '0'
-                    },
-                    Soft: {
-                        id: '',
-                        count: '1'
-                    },
-                    Other: {
-                        id: '',
-                        count: '1'
-                    },
-                    UPS: {
-                        id: '',
-                        count: '1'
-                    },
-                    Services: {
-                        id: '',
-                        count: '1'
-                    },
-                    GPU: {
-                        id: '',
-                        count: '0'
-                    },
-                    Switch: {
-                        id: '',
-                        count: '1'
-                    },
-                    Cache: {
-                        id: '',
-                        count: '0'
+                        }
                     }
-                };
+                }
 
                 console.log('this.preset', this.preset);
 
