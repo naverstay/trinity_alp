@@ -13,8 +13,8 @@ mixin build_options(arr)
     each o, oi in arr
         option(x-text)
 
-.configurator__main: template(x-if=" preset.loaded ")
-    .configurator__row(x-show=" preset.CPU.show " x-cloak)
+.configurator__main
+    template(x-if="  preset.loaded && preset.hasOwnProperty('CPU') "  ): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_cpu.png'))
         .configurator__label Процессор
@@ -47,7 +47,7 @@ mixin build_options(arr)
                     .configurator__cell-rm x
                     +selectBox(1)
 
-    .configurator__row(x-show=" preset.RAM.show " x-cloak)
+    template(x-if="  preset.loaded && preset.hasOwnProperty('RAM') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_ram.png'))
         .configurator__label Оперативная память
@@ -80,7 +80,7 @@ mixin build_options(arr)
                     .configurator__cell-rm x
                     +selectBox(1)
 
-    .configurator__row(x-show=" preset.RAID.show " x-cloak)
+    template(x-if="  preset.loaded && preset.hasOwnProperty('RAID') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_raid.png'))
         .configurator__label Raid контроллер
@@ -100,7 +100,32 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    .configurator__row(x-show__=" preset.SATA.list[0].show || preset.SAS.list[0].show || preset.SSD.list[0].show " x-cloak)
+    //-if (templ)
+        template(x-if=" preset.hddList.length "): .configurator__row
+            .configurator__icon
+                img(src=require('media/system/config_ssd.png'))
+            .configurator__label Жесткие диски
+            .configurator__warn(x-show=" preset.hddList.length > 4 " x-cloak) Дополнительные компоненты будут поставлены отдельно
+
+            template(x-if=" preset.loaded " x-for=" (hdd, id) in preset.hddList ")
+                .configurator__label(x-text=" hdd.name ")
+                template(x-for="(item, index, collection) in getHDD(hdd.name)" :key="item" x-if="true")
+                    .configurator__controls()
+                        .configurator__cell(data-preset=d :data-index=' index ')
+                            //- var ref = "collection[index]";
+                            //- var ref = "preset." + d + '.list[0]';
+                            //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
+                            input.input_v1_(type='hidden' @input=" updatePreset() " x-model=" collection[index].id " :name="'preset_' + hdd.name + '_list_' + index + '_id'" :data-index=' index ' data-preset=d )
+                            +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption(hdd.name), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_" + d + "_") + "', placeholder: 'Выберите из списка' })", 'd')
+
+                        //-.configurator__cell.__multiply(data-preset= d + '_count' :data-index=' index ')
+                            //-p(x-text=' item.id.length ')
+                            input.input_v1_(type='hidden' @input=" updatePreset() " x-model=" collection[index].count " :name="'preset_' + hdd.name + '_list_' + index + '_count'" :data-index=' index ' data-preset=d + '_count')
+                            .configurator__cell-rm(@click=" removeItem('" + d + "', $event.target.dataset.index) " :data-index=' index ') x
+                            +select("alpineSelect({ data: ()=> configuratorAlpine().selectOptionCount(hdd.name), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_" + d + "_") + "', placeholder: 'Выберите из списка' })", 'd', " !item.id.length ")
+
+
+    template(x-if=" preset.hasOwnProperty('SATA') || preset.hasOwnProperty('SAS') || preset.hasOwnProperty('SSD') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_ssd.png'))
         .configurator__label Жесткие диски
@@ -108,7 +133,7 @@ mixin build_options(arr)
 
         - var ssd = ['SATA', 'SAS', 'SSD']
         each d in ssd
-            template(x-if=" preset.hasOwnProperty('" + d + "') " x-cloak)
+            template(x-if="  preset.loaded && preset.hasOwnProperty('" + d + "') " x-cloak)
                 .configurator__label= d
                 if (templ)
                     template(x-for="(item, index, collection) in getHDD('" + d + "')" :key="item" x-if="true")
@@ -135,7 +160,7 @@ mixin build_options(arr)
                                 .configurator__cell-rm x
                                 +selectBox(1)
 
-    .configurator__row(x-show=" preset.OtherContr.show " x-cloak)
+    template(x-if="  preset.loaded && preset.hasOwnProperty('OtherContr') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_other.png'))
         .configurator__label Прочие контроллеры X2
@@ -157,7 +182,7 @@ mixin build_options(arr)
                     .configurator__cell
                         +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    .configurator__row(x-show=" preset.Other.show " x-cloak)
+    template(x-if="  preset.loaded && preset.hasOwnProperty('Other') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_misc.png'))
         .configurator__label Прочие компоненты
@@ -177,7 +202,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    .configurator__row(x-show=" preset.Soft.show " x-cloak)
+    template(x-if="  preset.loaded && preset.hasOwnProperty('Soft') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_soft.png'))
         .configurator__label Программное обеспечение
@@ -197,7 +222,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    .configurator__row(x-show=" preset.UPS.show " x-cloak)
+    template(x-if="  preset.loaded && preset.hasOwnProperty('UPS') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_ups.png'))
         .configurator__label ИБП
@@ -217,7 +242,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    .configurator__row(x-show=" preset.Switch.show " x-cloak)
+    template(x-if="  preset.loaded && preset.hasOwnProperty('Switch') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_switch.png'))
         .configurator__label Коммутаторы
@@ -237,7 +262,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    .configurator__row(x-show=" preset.Services.show " x-cloak)
+    template(x-if="  preset.loaded && preset.hasOwnProperty('Services') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_service.png'))
         .configurator__label Сервисное обслуживание

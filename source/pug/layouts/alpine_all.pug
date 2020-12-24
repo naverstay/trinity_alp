@@ -988,99 +988,8 @@ script.
                 totalPrice: 0,
                 totalPriceD: 0,
                 totalPriceR: 0,
-                hddCount: 0
-                //CPU: {
-                //    id: '',
-                //    show: false,
-                //    count: '0'
-                //},
-                //RAM: {
-                //    id: '',
-                //    show: false,
-                //    count: '0'
-                //},
-                //SSD: {
-                //    list: [
-                //        {
-                //            id: '',
-                //            show: false,
-                //            count: '0'
-                //        }
-                //    ]
-                //},
-                //SATA: {
-                //    list: [
-                //        {
-                //            id: '',
-                //            show: false,
-                //            count: '0'
-                //        }
-                //    ]
-                //},
-                //SAS: {
-                //    list: [
-                //        {
-                //            id: '',
-                //            show: false,
-                //            count: '0'
-                //        }
-                //    ]
-                //},
-                //DVD: {
-                //    id: '',
-                //    show: false,
-                //    count: '0'
-                //},
-                //RAID: {
-                //    id: '',
-                //    show: false,
-                //    count: '1'
-                //},
-                //OtherContr: {
-                //    id: '',
-                //    show: false,
-                //    count: '1'
-                //},
-                //SP: {
-                //    id: '',
-                //    show: false,
-                //    count: '0'
-                //},
-                //Soft: {
-                //    id: '',
-                //    show: false,
-                //    count: '1'
-                //},
-                //Other: {
-                //    id: '',
-                //    show: false,
-                //    count: '1'
-                //},
-                //UPS: {
-                //    id: '',
-                //    show: false,
-                //    count: '1'
-                //},
-                //Services: {
-                //    id: '',
-                //    show: false,
-                //    count: '1'
-                //},
-                //GPU: {
-                //    id: '',
-                //    show: false,
-                //    count: '0'
-                //},
-                //Switch: {
-                //    id: '',
-                //    show: false,
-                //    count: '1'
-                //},
-                //Cache: {
-                //    id: '',
-                //    show: false,
-                //    count: '0'
-                //}
+                hddCount: 0,
+                hddList: []
             },
             counts: {
                 "3": "4",
@@ -1239,6 +1148,7 @@ script.
                                 if (['SATA', 'SAS', 'SSD'].indexOf(typeId) !== -1) {
                                     let c = parseInt(a.count || 0);
                                     hddCount += c;
+                                    hddList.push(c);
 
                                     if (i === keys.length - 1 && c) {
                                         this.appendEl(typeId, c);
@@ -1470,9 +1380,10 @@ script.
                             let count = this.preselected.hasOwnProperty(x) || '0';
 
                             if (ssd.indexOf(x) > -1) {
-                                this.preset[x] = {list: [{id: '', show: true, count: count}]};
+                                this.preset.hddList.push({name: x, list: [{id: '', count: count}]})
+                                this.preset[x] = {list: [{id: '', count: count}]};
                             } else {
-                                this.preset[x] = {id: '', show: true, count: count};
+                                this.preset[x] = {id: '', count: count};
                             }
                         }
                     }
@@ -1480,7 +1391,7 @@ script.
 
                 this.preset.loaded = true;
 
-                //console.log('this.preset', this.preset);
+                console.log('this.preset', this.preset);
 
                 //let that = this;
                 //fetch('/source/data/filter.json')
