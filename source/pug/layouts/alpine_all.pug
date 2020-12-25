@@ -988,8 +988,7 @@ script.
                 totalPrice: 0,
                 totalPriceD: 0,
                 totalPriceR: 0,
-                hddCount: 0,
-                hddList: []
+                hddCount: 0
             },
             counts: {
                 "3": "4",
@@ -1115,9 +1114,7 @@ script.
                     count: '0'
                 });
             },
-            updatePreset(num, evt) {
-                 console.log('updatePreset', num);
-
+            updatePreset(num, evt, skip) {
                 //return;
 
                 let hddCount = 0;
@@ -1148,7 +1145,7 @@ script.
                                 if (['SATA', 'SAS', 'SSD'].indexOf(typeId) !== -1) {
                                     let c = parseInt(a.count || 0);
                                     hddCount += c;
-                                    hddList.push(c);
+                                    //hddList.push(c);
 
                                     if (i === keys.length - 1 && c) {
                                         this.appendEl(typeId, c);
@@ -1171,9 +1168,15 @@ script.
 
                 this.preset.hddCount = hddCount;
                 this.preset.totalDescription = descr.trim().replace(/^\//, '');
-                this.preset.totalPrice = price;
+
+                if (!skip) {
+                    this.preset.totalPrice = price;
+                }
+
                 this.preset.totalPriceR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice);
                 this.preset.totalPriceD = this.pricePrint(this.preset.totalPrice);
+
+                console.log('updatePreset', num, this.preset);
 
                 if (evt) {
                     // console.log('after', evt.target, parent);
@@ -1331,7 +1334,7 @@ script.
                 //    x.optionList = optionList;
                 //}
 
-                console.log('getHDD', typeId, ret, this.preset, this.preset[typeId], this.optionsList(typeId, 1));
+                //console.log('getHDD', typeId, ret, this.preset, this.preset[typeId], this.optionsList(typeId, 1));
 
                 return ret;
             },
@@ -1374,22 +1377,34 @@ script.
             init() {
                 let ssd = ['SATA', 'SAS', 'SSD'];
 
-                for (let x in this.partTypeIds) {
-                    if (this.partTypeIds.hasOwnProperty(x)) {
-                        if ((this.partTypeIds[x] + '') in this.brand) {
-                            let count = this.preselected.hasOwnProperty(x) || '0';
+                if (window.hasOwnProperty('order')) {
+                    console.log('loading order');
+                    this.preset = window.order;
+                    this.preset.loaded = true;
+                    this.updatePreset(null, null, true);
+                } else {
+                    for (let x in this.partTypeIds) {
+                        if (this.partTypeIds.hasOwnProperty(x)) {
+                            if ((this.partTypeIds[x] + '') in this.brand) {
 
-                            if (ssd.indexOf(x) > -1) {
-                                this.preset.hddList.push({name: x, list: [{id: '', count: count}]})
-                                this.preset[x] = {list: [{id: '', count: count}]};
-                            } else {
-                                this.preset[x] = {id: '', count: count};
+                                if (!this.preset.hasOwnProperty(x)) {
+                                    let count = this.preselected.hasOwnProperty(x) || '0';
+
+                                    if (ssd.indexOf(x) > -1) {
+                                        //this.preset.hddList.push({name: x, list: [{id: '', count: count}]})
+                                        this.preset[x] = {list: [{id: '', count: count}]};
+                                    } else {
+                                        this.preset[x] = {id: '', count: count};
+                                    }
+                                }
+
                             }
                         }
                     }
-                }
 
-                this.preset.loaded = true;
+                    this.preset.loaded = true;
+                    this.updatePreset();
+                }
 
                 console.log('this.preset', this.preset);
 
@@ -1540,21 +1555,24 @@ script.
                 let ds = that.$el.parentNode.dataset;
                 let inp = document.querySelector('input[data-preset="' + ds.preset + '"][data-index="' + ds.index + '"]')
 
-                inp.value = that.value;
+                if (inp) {
+                    inp.value = that.value;
+                    console.log('update', that.value);
 
-                console.log('update', that.value);
-
-                setTimeout(function () {
-                    if ("createEvent" in document) {
-                        let evt = document.createEvent("HTMLEvents");
-                        evt.initEvent("input", false, true);
-                        inp.dispatchEvent(evt);
-                        console.log('new val dispatchEvent', that.value, inp.value);
-                    } else {
-                        inp.fireEvent("oninput");
-                        console.log('new val onchange', that.value, inp.value);
-                    }
-                }, 1);
+                    setTimeout(function () {
+                        if ("createEvent" in document) {
+                            let evt = document.createEvent("HTMLEvents");
+                            evt.initEvent("input", false, true);
+                            inp.dispatchEvent(evt);
+                            console.log('new val dispatchEvent', that.value, inp.value);
+                        } else {
+                            inp.fireEvent("oninput");
+                            console.log('new val oninput', that.value, inp.value);
+                        }
+                    }, 1);
+                } else {
+                    console.log('no_inp', inp, ds);
+                }
             },
             toggleListboxVisibility: function () {
                 let that = this;

@@ -144,6 +144,7 @@
     }
 
     .custom-select-panel {
+        @extend %no-user-select;
         //max-height: 0;
         transition: max-height .3s ease-out, overflow-y 0.03s 0.3s;
         overflow: hidden;

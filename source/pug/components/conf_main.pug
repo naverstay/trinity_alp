@@ -133,7 +133,7 @@ mixin build_options(arr)
 
         - var ssd = ['SATA', 'SAS', 'SSD']
         each d in ssd
-            template(x-if="  preset.loaded && preset.hasOwnProperty('" + d + "') " x-cloak)
+            template(x-if="  preset.loaded && preset.hasOwnProperty('" + d + "') " x-cloak): div
                 .configurator__label= d
                 if (templ)
                     template(x-for="(item, index, collection) in getHDD('" + d + "')" :key="item" x-if="true")
@@ -166,7 +166,7 @@ mixin build_options(arr)
         .configurator__label Прочие контроллеры X2
         if (templ)
             - var d = 'OtherContr';
-                .configurator__cell(data-preset= d data-index='0')
+            .configurator__cell(data-preset= d data-index='0')
                 - var ref = "'select_" + d + "_' + index + '_value'";
                 input.input_v1_(type='hidden' @input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
                 +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)

@@ -1,0 +1,111 @@
+extends ../../layouts/master.pug
+
+block vars
+    - var pageTitle = 'Конфигуратор серверов Тринити';
+    - var breadcrumbs = ['Конфигуратор серверов', 'Тринити', 'Сервер E111-M5'];
+    - var serverParams = {cpu : ['1хCPU', '2хCPU', '4хCPU', '8хCPU'], fac : ['1U', '2U', '3U', '4U', '5U', 'TOWER'], ups : ['1хPS', '2хPS', '4хPS']};
+    - var sliderMode = 'trinity';
+
+    - var serverParamsJS = 'configurator: {';
+    each val, key in serverParams
+        - serverParamsJS += '\n' + key + ':0,';
+
+    - serverParamsJS = serverParamsJS.replace(/,$/, '\n') + '}';
+
+block scripts
+    script.
+        window.order = {
+            loaded: false,
+            totalDescription: '',
+            exchangeRate: 75,
+            totalPrice: 100500,
+            totalPriceD: 0,
+            totalPriceR: 0,
+            hddCount: 0,
+            CPU: {
+                id: '41',
+                count: '1'
+            },
+            RAM: {
+                id: '28',
+                count: '1'
+            },
+            SSD: {
+                list: [
+                    {
+                        id: '89',
+                        count: '1'
+                    }
+                ]
+            },
+            SATA: {
+                list: [
+                    {
+                        id: '35',
+                        count: '1'
+                    }
+                ]
+            },
+            SAS: {
+                list: [
+                    {
+                        id: '102',
+                        count: '1'
+                    }
+                ]
+            },
+            RAID: {
+                id: '467',
+                count: '1'
+            },
+            OtherContr: {
+                id: '86',
+                count: '1'
+            },
+            SP: {
+                id: '',
+                count: '1'
+            },
+            Soft: {
+                id: '1294',
+                count: '1'
+            },
+            Other: {
+                id: '11',
+                count: '1'
+            },
+            UPS: {
+                id: '882',
+                count: '1'
+            },
+            Services: {
+                id: '894',
+                count: '1'
+            },
+            Switch: {
+                id: '1238',
+                count: '1'
+            }
+        }
+
+block content
+    // ### pug/pages/configurator/index.pug
+
+    section.page__section
+        include ../../components/slider
+
+        form.configurator__holder(action='#' method="post"  @submit.prevent=" configaratorSubmit($event) ")
+            include ../../components/conf_main
+
+            include ../../components/conf_aside
+
+            include ../../components/conf_form
+
+            .configurator__cell
+                button.btn Получить предложение
+
+        include ../../components/warranty
+
+        include ../../components/description
+
+    // pug/pages/configurator/index.pug ###
