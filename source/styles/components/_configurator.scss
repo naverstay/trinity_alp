@@ -156,6 +156,12 @@
 
     &__controls {
         @extend %global_flex_block_row_nowrap_flex-start_stretch;
+
+        .__disabled {
+            @extend %no-user-select;
+            opacity: .75;
+            pointer-events: none;
+        }
     }
 
     &__icon {

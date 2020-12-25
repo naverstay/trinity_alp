@@ -1479,6 +1479,12 @@ script.
             placeholder: config.placeholder || 'Select an option',
             search: '',
             value: config.value,
+            checkDisabled: function (d) {
+
+                console.log('checkDisabled', configuratorAlpine(), d);
+
+                return false;
+            },
             closeListbox: function () {
                 this.open = false;
                 this.focusedOptionIndex = null;

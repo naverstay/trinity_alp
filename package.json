@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "webpack-dev-server --mode development",
     "prod": "webpack --mode production",
-    "start": "yarn clean && yarn dev --open",
+    "start": "yarn build && yarn dev --open",
     "build": "yarn clean && yarn prod",
     "serv": "static build",
     "clean": "rimraf ./build/*"

@@ -86,7 +86,9 @@
 .custom-select-container {
     position: relative;
 
+    &.is_disabled,
     &.is-disabled {
+        @extend %no-user-select;
         opacity: .75;
         pointer-events: none;
     }

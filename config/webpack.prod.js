@@ -16,6 +16,14 @@ const prod = {
         new CopyWebpackPlugin({
             patterns: [
                 {
+                    from: PATHS.source + '/vendor/alpine.min.js',
+                    to: PATHS.build + '/vendor/alpine.min.js'
+                },
+                {
+                    from: PATHS.source + '/vendor/alpine-ie11.min.js',
+                    to: PATHS.build + '/vendor/alpine-ie11.min.js'
+                },
+                {
                     from: PATHS.media + '/data/brand.json',
                     to: PATHS.build + '/source/data/brand.json'
                 },
