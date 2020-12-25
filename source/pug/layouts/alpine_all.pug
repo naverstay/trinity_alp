@@ -1114,7 +1114,7 @@ script.
                     count: '0'
                 });
             },
-            updatePreset(num, evt, skip) {
+            updatePreset(skip) {
                 //return;
 
                 let hddCount = 0;
@@ -1152,7 +1152,7 @@ script.
                                     }
                                 }
 
-                                let count = +(num !== void 0 ? num : (a.count || 0));
+                                let count = +((a.count || 0));
                                 descr += (count && info.description) ? ' / ' + info.description : '';
                                 price += count * info.price;
                             }
@@ -1160,7 +1160,7 @@ script.
 
                     } else if (item.id) {
                         let info = this.getInfo(typeId, item.id);
-                        let count = +(num !== void 0 ? num : (item.count || 0));
+                        let count = +((item.count || 0));
                         descr += (count && info.description) ? ' / ' + info.description : '';
                         price += count * info.price;
                     }
@@ -1176,11 +1176,7 @@ script.
                 this.preset.totalPriceR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice);
                 this.preset.totalPriceD = this.pricePrint(this.preset.totalPrice);
 
-                console.log('updatePreset', num, this.preset);
-
-                if (evt) {
-                    // console.log('after', evt.target, parent);
-                }
+                //console.log('updatePreset', num, this.preset);
             },
             updateSelect(type, num) {
                 clearTimeout(this.updateTimer);
@@ -1381,7 +1377,7 @@ script.
                     console.log('loading order');
                     this.preset = window.order;
                     this.preset.loaded = true;
-                    this.updatePreset(null, null, true);
+                    this.updatePreset(true);
                 } else {
                     for (let x in this.partTypeIds) {
                         if (this.partTypeIds.hasOwnProperty(x)) {
@@ -1518,6 +1514,13 @@ script.
 
                 if (typeof that.data === 'function') {
                     that.options = that.data();
+                }
+
+                let ds = that.$el.parentNode.dataset;
+                let inp = document.querySelector('input[data-preset="' + ds.preset + '"][data-index="' + ds.index + '"]')
+
+                if (inp && inp.value) {
+                    that.value = inp.value;
                 }
 
                 if (!(that.value in that.options)) {
