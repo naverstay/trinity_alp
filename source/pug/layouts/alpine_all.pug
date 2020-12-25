@@ -1171,10 +1171,9 @@ script.
 
                 if (!skip) {
                     this.preset.totalPrice = price;
+                    this.preset.totalPriceR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice);
+                    this.preset.totalPriceD = this.pricePrint(this.preset.totalPrice);
                 }
-
-                this.preset.totalPriceR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice);
-                this.preset.totalPriceD = this.pricePrint(this.preset.totalPrice);
 
                 //console.log('updatePreset', num, this.preset);
             },
