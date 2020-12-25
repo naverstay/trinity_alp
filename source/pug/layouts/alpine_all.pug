@@ -1166,11 +1166,10 @@ script.
                     }
                 }
 
-                this.preset.hddCount = hddCount;
-                this.preset.totalDescription = descr.trim().replace(/^\//, '');
-
                 if (!skip) {
                     this.preset.totalPrice = price;
+                    this.preset.hddCount = hddCount;
+                    this.preset.totalDescription = descr.trim().replace(/^\//, '');
                     this.preset.totalPriceR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice);
                     this.preset.totalPriceD = this.pricePrint(this.preset.totalPrice);
                 }
