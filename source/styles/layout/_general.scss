@@ -40,7 +40,8 @@ body {
     color: $default_t_color;
     margin: 0;
     padding: 0;
-    @include retina('/system/main_bg');
+    background: #fff;
+    //@include retina('/system/main_bg');
 
 }
 

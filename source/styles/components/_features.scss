@@ -180,7 +180,7 @@
         left: 0;
         height: 2em;
         opacity: .85;
-        @include retina('/system/main_bg');
+        //@include retina('/system/main_bg');
         //@include linear-gradient(top, #f6f6f6, .85, #f6f6f6, 1);
     }
 
