@@ -12,6 +12,10 @@
     width: 100%;
 }
 
+.input_hidden {
+    display: none !important;
+}
+
 .input_v1 {
     @extend %input_v1;
 }

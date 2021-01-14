@@ -23,11 +23,11 @@ mixin build_options(arr)
                 - var d = 'CPU';
                 .configurator__cell(data-preset=d data-index='0')
                     - var ref = "'select_" + d + "_' + index + '_value'";
-                    input.input_v1_(type='hidden' @input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id " data-index='0' data-preset=d )
+                    input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id " data-index='0' data-preset=d )
                     +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
 
                 .configurator__cell.__multiply(:class="{ __disabled: " + "!preset." + d + ".id.length" + " }" data-preset=(d + '_count') data-index='0')
-                    input.input_v1_(type='hidden' @input=" updatePreset() " x-model="preset." + d + ".count" name="preset_" + d + "_count" data-index='0' data-preset=(d + '_count') )
+                    input.input_hidden(value='1' @input=" updatePreset() " x-model="preset." + d + ".count" name="preset_" + d + "_count" data-index='0' data-preset=(d + '_count') )
                     .configurator__cell-rm(@click=" removeItem('" + d + "', $event.target.dataset.index) " data-index='0') x
                     +select("alpineSelect({ data: ()=> configuratorAlpine().selectOptionCount('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("preset." + d + ".id") + "', placeholder: 'Выберите из списка' })", "preset." + d + ".count", "preset." + d + ".id")
 
@@ -56,11 +56,11 @@ mixin build_options(arr)
                 - var d = 'RAM';
                 .configurator__cell(data-preset=d data-index='0')
                     - var ref = "'select_" + d + "_' + index + '_value'";
-                    input.input_v1_(type='hidden' @input=" updatePreset() " x-model="preset." + d +".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
+                    input.input_hidden(@input=" updatePreset() " x-model="preset." + d +".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
                     +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
 
                 .configurator__cell.__multiply( :class="{ __disabled: " + "!preset." + d + ".id.length" + " }" data-preset=(d + '_count') data-index='0')
-                    input.input_v1_(type='hidden' @input=" updatePreset() " x-model="preset." + d + ".count" name="preset_" + d + "_count" data-index='0' data-preset=(d + '_count'))
+                    input.input_hidden(value='1' @input=" updatePreset() " x-model="preset." + d + ".count" name="preset_" + d + "_count" data-index='0' data-preset=(d + '_count'))
                     .configurator__cell-rm(@click=" removeItem('" + d + "', $event.target.dataset.index) " data-index='0') x
                     +select("alpineSelect({ data: ()=> configuratorAlpine().selectOptionCount('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("preset." + d + ".id") + "', placeholder: 'Выберите из списка' })", "preset." + d + ".count", " !item.id.length ")
 
@@ -89,7 +89,7 @@ mixin build_options(arr)
                 - var d = 'RAID';
                 .configurator__cell(data-preset=d data-index='0')
                     - var ref = "'select_" + d + "_' + index + '_value'";
-                    input.input_v1_(type='hidden' @input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
+                    input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
                     +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset." + d + ".id") + "', placeholder: 'Выберите из списка' })", d)
 
                 //-.configurator__cell
@@ -115,12 +115,12 @@ mixin build_options(arr)
                             //- var ref = "collection[index]";
                             //- var ref = "preset." + d + '.list[0]';
                             //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
-                            input.input_v1_(type='hidden' @input=" updatePreset() " x-model=" collection[index].id " :name="'preset_' + hdd.name + '_list_' + index + '_id'" :data-index=' index ' data-preset=d )
+                            input.input_hidden(@input=" updatePreset() " x-model=" collection[index].id " :name="'preset_' + hdd.name + '_list_' + index + '_id'" :data-index=' index ' data-preset=d )
                             +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption(hdd.name), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("preset_" + d + "_") + "', placeholder: 'Выберите из списка' })", 'd')
 
                         //-.configurator__cell.__multiply( :class="{ __disabled: " + "!preset." + d + ".id.length" + " }" data-preset=(d + '_count') :data-index=' index ')
                             //-p(x-text=' item.id.length ')
-                            input.input_v1_(type='hidden' @input=" updatePreset() " x-model=" collection[index].count " :name="'preset_' + hdd.name + '_list_' + index + '_count'" :data-index=' index ' data-preset=(d + '_count'))
+                            input.input_hidden(@input=" updatePreset() " x-model=" collection[index].count " :name="'preset_' + hdd.name + '_list_' + index + '_count'" :data-index=' index ' data-preset=(d + '_count'))
                             .configurator__cell-rm(@click=" removeItem('" + d + "', $event.target.dataset.index) " :data-index=' index ') x
                             +select("alpineSelect({ data: ()=> configuratorAlpine().selectOptionCount(hdd.name), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("preset_" + d + "_") + "', placeholder: 'Выберите из списка' })", 'd', " !item.id.length ")
 
@@ -142,12 +142,12 @@ mixin build_options(arr)
                                 //- var ref = "collection[index]";
                                 //- var ref = "preset." + d + '.list[0]';
                                 //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
-                                input.input_v1_(type='hidden' @input=" updatePreset() " x-model=" collection[index].id " :name="'preset_" + d + "_list_' + index + '_id'" :data-index=' index ' data-preset=d )
+                                input.input_hidden(@input=" updatePreset() " x-model=" collection[index].id " :name="'preset_" + d + "_list_' + index + '_id'" :data-index=' index ' data-preset=d )
                                 +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + (" collection[index].id ") + "', placeholder: 'Выберите из списка' })", " collection[index].id ")
 
                             .configurator__cell.__multiply( :class="{ __disabled: " + "!collection[index].id.length" + " }" data-preset=(d + '_count') :data-index=' index ')
                                 //-p(x-text=' item.id.length ')
-                                input.input_v1_(type='hidden' @input=" updatePreset() " x-model=" collection[index].count " :name="'preset_" + d + "_list_' + index + '_count'" :data-index=' index ' data-preset=(d + '_count'))
+                                input.input_hidden(@input=" updatePreset() " x-model=" collection[index].count " :name="'preset_" + d + "_list_' + index + '_count'" :data-index=' index ' data-preset=(d + '_count'))
                                 .configurator__cell-rm(  @click=" removeItem('" + d + "', $event.target.dataset.index) " :data-index=' index ') x
                                 +select("alpineSelect({ data: ()=> configuratorAlpine().selectOptionCount('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + (" collection[index].count ") + "', placeholder: 'Выберите из списка' })", d, " !collection[index].id.length ")
 
@@ -168,7 +168,7 @@ mixin build_options(arr)
             - var d = 'OtherContr';
             .configurator__cell(data-preset=d data-index='0')
                 - var ref = "'select_" + d + "_' + index + '_value'";
-                input.input_v1_(type='hidden' @input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
+                input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
                 +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
 
             //-.configurator__controls
@@ -191,7 +191,7 @@ mixin build_options(arr)
                 - var d = 'Other';
                 .configurator__cell(data-preset=d data-index='0')
                     - var ref = "'select_" + d + "_' + index + '_value'";
-                    input.input_v1_(type='hidden' @input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
+                    input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
                     +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
 
                 //-.configurator__cell
@@ -211,7 +211,7 @@ mixin build_options(arr)
                 - var d = 'Soft';
                 .configurator__cell(data-preset=d data-index='0')
                     - var ref = "'select_" + d + "_' + index + '_value'";
-                    input.input_v1_(type='hidden' @input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
+                    input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
                     +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
 
                 //-.configurator__cell
@@ -231,7 +231,7 @@ mixin build_options(arr)
                 - var d = 'UPS';
                 .configurator__cell(data-preset=d data-index='0')
                     - var ref = "'select_" + d + "_' + index + '_value'";
-                    input.input_v1_(type='hidden' @input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
+                    input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
                     +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
 
                 //-.configurator__cell
@@ -251,7 +251,7 @@ mixin build_options(arr)
                 - var d = 'Switch';
                 .configurator__cell(data-preset=d data-index='0')
                     - var ref = "'select_" + d + "_' + index + '_value'";
-                    input.input_v1_(type='hidden' @input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id " data-index='0' data-preset=d )
+                    input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id " data-index='0' data-preset=d )
                     +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
 
                 //-.configurator__cell
@@ -271,7 +271,7 @@ mixin build_options(arr)
                 - var d = 'Services';
                 .configurator__cell(data-preset=d data-index='0')
                     - var ref = "'select_" + d + "_' + index + '_value'";
-                    input.input_v1_(type='hidden' @input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
+                    input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
                     +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
 
                 //-.configurator__cell

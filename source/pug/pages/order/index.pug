@@ -14,10 +14,77 @@ block vars
 
 block scripts
     script.
+        window.order_ = {
+            "totalDescription": "",
+            "exchangeRate": 74,
+            "totalPrice": 755,
+            "totalPriceD": 755,
+            "totalPriceR": 55870,
+            "platformPrice": 208,
+            "hddCount": 8,
+            "CPU": {
+                "id": "",
+                "count": 0
+            },
+            "RAM": {
+                "id": "",
+                "count": 0
+            },
+            "RAID": {
+                "id": "",
+                "count": 0
+            },
+            "OtherContr": {
+                "id": "",
+                "count": 0
+            },
+            "Soft": {
+                "id": "",
+                "count": 0
+            },
+            "Other": {
+                "id": "",
+                "count": 0
+            },
+            "UPS": {
+                "id": "",
+                "count": 0
+            },
+            "Services": {
+                "id": "",
+                "count": 0
+            },
+            "Switch": {
+                "id": "",
+                "count": 0
+            },
+            "loaded": true
+        };
+
+        window.order_2 = {
+            "loaded": false,
+            "totalDescription": " Intel® Xeon® Scalable 6128 Gold 6 Core 3.40G 19.25M 115W / 8GB DDR4-2666 ECC Reg",
+            "exchangeRate": "0",
+            "totalPrice": 2938,
+            "platformPrice": 208,
+            "totalPriceD": "2 938.00",
+            "totalPriceR": "0.00",
+            "hddCount": 0,
+            "CPU": {
+                "id": "1163",
+                "count": "1"
+            },
+            "RAM": {
+                "id": "1245",
+                "count": "8"
+            }
+        };
+
         window.order = {
             loaded: false,
             totalDescription: 'Intel® Xeon® 4C/4T E3-1220v6 3000/8M, 80W, LGA1151 / 4GB, DDR4, 2400 MHz, PC4-17000, ECC, Unbuffered  / SSD 240GB, Read Intensive / 1TB, 7200rpm, SATA, Enterprise / 12TB, 7200rpm, SATA, Enterprise / 900GB, 2.5", 10000rpm, SAS / LSI MegaRAID SAS 9361 - 4i(4port SAS3, 1GB) / Контроллер FibreChannel, 2 x 8 Gbit, Dual port, Qlogic / Предустановка Windows Server 2019 Std Rus, 16 core / APC Smart - UPS RT мощностью 2200VA / <b>Опция «Невозврат носителя»</b><p > Для защиты конфиденциальных данных предоставляется возможность невозврата накопителей информации(жестких дисков, твердотельных накопителей). Покупатель обязан предоставить в Тринити документ об утилизации, указав заводской серийный номер производителя комплектующей, и фотографию приведённого в неработоспособное состояние накопителя.</p><p>Срок гарантийного обслуживания 3 года.</p> / Zyxel XGS2210-28, 24xGE, 4xSFP+, стекируемый (до 2)',
             exchangeRate: 70,
+            platformPrice: 208,
             totalPrice: 6836,
             totalPriceD: '6 836.00',
             totalPriceR: '478 520.00',
@@ -90,7 +157,7 @@ block scripts
                 id: '1238',
                 count: '1'
             }
-        }
+        };
 
 block content
     // ### pug/pages/configurator/index.pug

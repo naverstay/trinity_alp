@@ -985,6 +985,7 @@ script.
                 loaded: false,
                 totalDescription: '',
                 exchangeRate: 75,
+                platformPrice: 208,
                 totalPrice: 0,
                 totalPriceD: 0,
                 totalPriceR: 0,
@@ -998,6 +999,8 @@ script.
                 "11": "4"
             },
             preselected: {
+                "CPU": "1",
+                "RAM": "1",
                 "RAID": "1",
                 "OtherContr": "1",
                 "Soft": "1",
@@ -1121,10 +1124,12 @@ script.
                 let price = 0;
                 let descr = '';
 
+                console.log('this.preset', this.preset);
+
                 for (let typeId in this.partTypeIds) {
                     let item = this.preset[typeId];
 
-                    // console.log('typeId', typeId, 'list' in item, item);
+                     console.log('typeId', typeId, item);
 
                     if (!item) {
                         continue;
@@ -1167,7 +1172,7 @@ script.
                 }
 
                 if (!skip) {
-                    this.preset.totalPrice = price;
+                    this.preset.totalPrice = price + (this.preset.platformPrice || 0);
                     this.preset.hddCount = hddCount;
                     this.preset.totalDescription = descr.trim().replace(/^\//, '');
                     this.preset.totalPriceR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice);
@@ -1345,34 +1350,17 @@ script.
                     } else {
                         console.log('count 0', rm);
                         //rm.count = '0';
-                        //rm.id = '';
+                        rm.id = '';
                     }
 
                     this.updatePreset();
                 }
             },
-            controlsCount(typeId) {
-                let ret = [];
-                let typeCode = this.partTypeIds[typeId];
-                let arr = this.preset[typeId].list;
-
-                for (let i = 0; i < arr.length; i++) {
-                    let obj = {optionsList: []};
-
-                    //obj.optionsList = this.optionsList(typeId, 1);
-
-                    ret.push(this.optionsList(typeId, 1));
-                }
-
-                console.log('controlsCount', this.brand[typeCode], ret);
-
-                return ret
-            },
             init() {
                 let ssd = ['SATA', 'SAS', 'SSD'];
 
                 if (window.hasOwnProperty('order')) {
-                    console.log('loading order');
+                    console.log('loading order', window.order);
                     this.preset = window.order;
                     this.preset.loaded = true;
                     //this.updatePreset(true);
@@ -1382,7 +1370,9 @@ script.
                             if ((this.partTypeIds[x] + '') in this.brand) {
 
                                 if (!this.preset.hasOwnProperty(x)) {
-                                    let count = this.preselected.hasOwnProperty(x) || '0';
+                                    let count = this.preselected.hasOwnProperty(x) ? this.preselected[x] : '0';
+
+                                    console.log('preselected', x, count);
 
                                     if (ssd.indexOf(x) > -1) {
                                         //this.preset.hddList.push({name: x, list: [{id: '', count: count}]})
@@ -1466,6 +1456,8 @@ script.
     }
 
     function alpineSelect(config) {
+        console.log('alpineSelect', config);
+
         return {
             data: config.data,
             allData: config.allData,
@@ -1480,9 +1472,7 @@ script.
             search: '',
             value: config.value,
             checkDisabled: function (d) {
-
                 console.log('checkDisabled', configuratorAlpine(), d);
-
                 return false;
             },
             closeListbox: function () {
