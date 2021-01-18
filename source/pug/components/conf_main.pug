@@ -14,7 +14,7 @@ mixin build_options(arr)
         option(x-text)
 
 .configurator__main
-    template(x-if="  preset.loaded && preset.hasOwnProperty('CPU') "  ): .configurator__row
+    template(x-if=" preset.loaded && preset.hasOwnProperty('CPU') "  ): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_cpu.png'))
         .configurator__label Процессор
@@ -47,7 +47,7 @@ mixin build_options(arr)
                     .configurator__cell-rm x
                     +selectBox(1)
 
-    template(x-if="  preset.loaded && preset.hasOwnProperty('RAM') "): .configurator__row
+    template(x-if=" preset.loaded && preset.hasOwnProperty('RAM') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_ram.png'))
         .configurator__label Оперативная память
@@ -80,7 +80,7 @@ mixin build_options(arr)
                     .configurator__cell-rm x
                     +selectBox(1)
 
-    template(x-if="  preset.loaded && preset.hasOwnProperty('RAID') "): .configurator__row
+    template(x-if=" preset.loaded && preset.hasOwnProperty('RAID') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_raid.png'))
         .configurator__label Raid контроллер
@@ -133,7 +133,7 @@ mixin build_options(arr)
 
         - var ssd = ['SATA', 'SAS', 'SSD']
         each d in ssd
-            template(x-if="  preset.loaded && preset.hasOwnProperty('" + d + "') " x-cloak): div
+            template(x-if=" preset.loaded && preset.hasOwnProperty('" + d + "') " x-cloak): div
                 .configurator__label= d
                 if (templ)
                     template(x-for="(item, index, collection) in getHDD('" + d + "')" :key="item" x-if="true")
@@ -160,7 +160,7 @@ mixin build_options(arr)
                                 .configurator__cell-rm x
                                 +selectBox(1)
 
-    template(x-if="  preset.loaded && preset.hasOwnProperty('OtherContr') "): .configurator__row
+    template(x-if=" preset.loaded && preset.hasOwnProperty('OtherContr') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_other.png'))
         .configurator__label Прочие контроллеры X2
@@ -182,7 +182,7 @@ mixin build_options(arr)
                     .configurator__cell
                         +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    template(x-if="  preset.loaded && preset.hasOwnProperty('Other') "): .configurator__row
+    template(x-if=" preset.loaded && preset.hasOwnProperty('Other') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_misc.png'))
         .configurator__label Прочие компоненты
@@ -202,7 +202,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    template(x-if="  preset.loaded && preset.hasOwnProperty('Soft') "): .configurator__row
+    template(x-if=" preset.loaded && preset.hasOwnProperty('Soft') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_soft.png'))
         .configurator__label Программное обеспечение
@@ -222,7 +222,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    template(x-if="  preset.loaded && preset.hasOwnProperty('UPS') "): .configurator__row
+    template(x-if=" preset.loaded && preset.hasOwnProperty('UPS') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_ups.png'))
         .configurator__label ИБП
@@ -242,7 +242,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    template(x-if="  preset.loaded && preset.hasOwnProperty('Switch') "): .configurator__row
+    template(x-if=" preset.loaded && preset.hasOwnProperty('Switch') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_switch.png'))
         .configurator__label Коммутаторы
@@ -262,7 +262,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    template(x-if="  preset.loaded && preset.hasOwnProperty('Services') "): .configurator__row
+    template(x-if=" preset.loaded && preset.hasOwnProperty('Services') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_service.png'))
         .configurator__label Сервисное обслуживание
