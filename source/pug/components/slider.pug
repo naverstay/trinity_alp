@@ -11,13 +11,18 @@
 
         .prodThumbSlider.swiper-container.__thumb
             .swiper-wrapper
-                +loop_while(2)
-                    .swiper-slide
-                        img(src=require('media/content/slide_1.png'))
-                    .swiper-slide
-                        img(src=require('media/content/slide_2.png'))
-                    .swiper-slide
-                        img(src=require('media/content/slide_3.png'))
+                .swiper-slide(data-slide-index='0')
+                    img(src=require('media/content/slide_1.png'))
+                .swiper-slide(data-slide-index='1')
+                    img(src=require('media/content/slide_2.png'))
+                .swiper-slide(data-slide-index='2')
+                    img(src=require('media/content/slide_3.png'))
+                .swiper-slide(data-slide-index='3')
+                    img(src=require('media/content/slide_1.png'))
+                .swiper-slide(data-slide-index='4')
+                    img(src=require('media/content/slide_2.png'))
+                .swiper-slide(data-slide-index='5')
+                    img(src=require('media/content/slide_3.png'))
 
     .slider__logo
         .product__item

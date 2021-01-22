@@ -39,7 +39,7 @@ block content
                                 each ups, ui in serverParams.ups
                                     if (ui < 4 && (ci + fi + ui) % 3)
                                         li(x-show= ' checkVisibility("' + (cpu + '", "' + fac + '", "' + ups) + '") '): .product__block
-                                            .product__img
+                                            a.product__img(href='configurator.html')
                                                 img(src=require('media/content/config_1.jpg'))
 
                                             .product__name Сервер E110-M5
