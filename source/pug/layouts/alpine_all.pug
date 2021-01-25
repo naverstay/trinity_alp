@@ -2622,7 +2622,7 @@ script.
                 cpu: [],
                 fac: [],
                 ups: [],
-                anyMatch: [],
+                anyMatch: false,
             },
             preset: {
                 loaded: false,
@@ -2705,12 +2705,6 @@ script.
 
                 this.configurator.anyMatch = false;
 
-                setTimeout(function () {
-                    if (!that.configurator.anyMatch) {
-                        togglePopup(true, 'Нет подходящих комплектаций');
-                    }
-                }, 100);
-
                 return false;
             },
             getCheck(index, item, prm) {
@@ -2740,6 +2734,8 @@ script.
                 if (ret) {
                     this.configurator.anyMatch = true;
                 }
+
+                setCookie('configurator', JSON.stringify(this.configurator))
 
                 return ret
             },
@@ -2794,8 +2790,6 @@ script.
                 let price = 0;
                 let descr = '';
 
-                console.log('this.preset', this.preset);
-
                 for (let typeId in this.partTypeIds) {
                     let item = this.preset[typeId];
 
@@ -2848,8 +2842,6 @@ script.
                     this.preset.totalPriceR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice);
                     this.preset.totalPriceD = this.pricePrint(this.preset.totalPrice);
                 }
-
-                //console.log('updatePreset', num, this.preset);
             },
             updateSelect(type, num) {
                 clearTimeout(this.updateTimer);
@@ -3008,8 +3000,6 @@ script.
                 return ret;
             },
             removeItem(typeId, ind) {
-                console.log('removeItem', typeId, ind);
-
                 let rm = this.preset[typeId];
 
                 if (rm) {
@@ -3028,6 +3018,11 @@ script.
             },
             init() {
                 let ssd = ['SATA', 'SAS', 'SSD'];
+                let cookie = getCookie('configurator');
+
+                if (cookie) {
+                    this.configurator = JSON.parse(cookie);
+                }
 
                 if (window.hasOwnProperty('order')) {
                     console.log('loading order', window.order);
@@ -3113,11 +3108,40 @@ script.
     }
 
     function inputChangeFunc(inp) {
-        document.cookie = inp.target.name + "=" + inp.target.value;
+        setCookie(inp.target.name, inp.target.value);
+    }
+
+    function getCookie(name) {
+        let cookie = " " + document.cookie;
+        let search = " " + name + "=";
+        let setStr = null;
+        let offset = 0;
+        let end = 0;
+        if (cookie.length > 0) {
+            offset = cookie.indexOf(search);
+            if (offset != -1) {
+                offset += search.length;
+                end = cookie.indexOf(";", offset)
+                if (end == -1) {
+                    end = cookie.length;
+                }
+                setStr = unescape(cookie.substring(offset, end));
+            }
+        }
+        return (setStr);
+    }
+
+    function setCookie(name, value, expires, path, domain, secure) {
+        if (name) {
+            document.cookie = name + "=" + escape(value || '') +
+                ((expires) ? "; expires=" + expires : "") +
+                ((path) ? "; path=" + path : "") +
+                ((domain) ? "; domain=" + domain : "") +
+                ((secure) ? "; secure" : "");
+        }
     }
 
     function configuratorSubmit(frm) {
-        let that = this;
         let formData = serializeForm(frm.target);
 
         fetch('./source/data/brand.json', {
@@ -3132,7 +3156,6 @@ script.
         })
         .then(function(result) {
           console.log('Success:', result, siteData());
-
           togglePopup(true, 'Данные отправлены');
         })
         .catch(function(error) {

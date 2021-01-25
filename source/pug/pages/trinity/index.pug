@@ -18,6 +18,8 @@ block content
 
     section.page__section
         .product__panel
+            .configurator__warn(x-show=" !configurator.anyMatch " x-cloak) Нет подходящих комплектаций
+
             ul.product__list.__wide
                 //-if (alpineTemplates)
                 //-    template(x-for='part in brand.config.parts' :key='part.id')
