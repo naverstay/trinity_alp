@@ -9,8 +9,6 @@ require('./scripts/slideToggle');
 //require('alpinejs/dist/alpine.js');
 //require('alpinejs/dist/alpine-ie11.js');
 
-console.log('app.js');
-
 if (/naverstay\.me/.test(location.origin)) {
     var scr = {
         "scripts": [
@@ -94,7 +92,3 @@ function browserCheck() {
 }
 
 browserCheck();
-
-document.addEventListener('DOMContentLoaded', function () {
-    console.log('Ready!');
-});

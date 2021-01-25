@@ -34,13 +34,14 @@ block content
 
                 //-else
 
+                - var counter = 0;
                 each cpu, ci in serverParams.cpu
                     if (ci < 4)
                         each fac, fi in serverParams.fac
                             if (fi < 4)
                                 each ups, ui in serverParams.ups
                                     if (ui < 4 && (ci + fi + ui) % 3 && ui !== 2)
-                                        li(x-show= ' checkVisibility("' + (cpu + '", "' + fac + '", "' + ups) + '") '): .product__block
+                                        li(x-show= ' checkVisibility("' + (counter) + '", "' + (cpu + '", "' + fac + '", "' + ups) + '") '): .product__block
                                             a.product__img(href='configurator.html')
                                                 img(src=require('media/content/config_1.jpg'))
 
@@ -49,6 +50,7 @@ block content
                                             include ../../components/options
 
                                             a.product__btn(href='configurator.html') Сконфигурировать
+                                            - counter++;
 
         include ../../components/description
 

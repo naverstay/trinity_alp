@@ -2693,17 +2693,19 @@ script.
             },
             toggleParam(evt, prm, name) {
                 evt.preventDefault();
-                let that = this;
 
                 let pos = this.configurator[prm].indexOf(name);
 
                 if (pos > -1) {
-                    this.configurator[prm].splice(pos, 1)
+                    this.configurator[prm].splice(pos, 1);
+
                 } else {
-                    this.configurator[prm].push(name)
+                    this.configurator[prm].push(name);
                 }
 
-                this.configurator.anyMatch = false;
+                setTimeout(function () {
+                    setCookie('configurator', JSON.stringify(this.configurator));
+                }, 100);
 
                 return false;
             },
@@ -2716,8 +2718,12 @@ script.
             activeParam(prm, name) {
                 return this.configurator[prm].indexOf(name) > -1
             },
-            checkVisibility(cpu, fac, ups) {
+            checkVisibility(ind, cpu, fac, ups) {
                 let ret = true;
+
+                if (ind == 0) {
+                    this.configurator.anyMatch = false;
+                }
 
                 if (this.configurator.cpu.length && this.configurator.cpu.indexOf(cpu) < 0) {
                     ret = false;
@@ -2734,8 +2740,6 @@ script.
                 if (ret) {
                     this.configurator.anyMatch = true;
                 }
-
-                setCookie('configurator', JSON.stringify(this.configurator))
 
                 return ret
             },
