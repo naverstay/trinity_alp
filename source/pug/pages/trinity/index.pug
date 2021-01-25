@@ -37,7 +37,7 @@ block content
                         each fac, fi in serverParams.fac
                             if (fi < 4)
                                 each ups, ui in serverParams.ups
-                                    if (ui < 4 && (ci + fi + ui) % 3)
+                                    if (ui < 4 && (ci + fi + ui) % 3 && ui !== 2)
                                         li(x-show= ' checkVisibility("' + (cpu + '", "' + fac + '", "' + ups) + '") '): .product__block
                                             a.product__img(href='configurator.html')
                                                 img(src=require('media/content/config_1.jpg'))

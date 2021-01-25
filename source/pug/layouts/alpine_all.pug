@@ -2621,7 +2621,8 @@ script.
             configurator: {
                 cpu: [],
                 fac: [],
-                ups: []
+                ups: [],
+                anyMatch: [],
             },
             preset: {
                 loaded: false,
@@ -2692,14 +2693,23 @@ script.
             },
             toggleParam(evt, prm, name) {
                 evt.preventDefault();
+                let that = this;
 
-                var pos = this.configurator[prm].indexOf(name);
+                let pos = this.configurator[prm].indexOf(name);
 
                 if (pos > -1) {
                     this.configurator[prm].splice(pos, 1)
                 } else {
                     this.configurator[prm].push(name)
                 }
+
+                this.configurator.anyMatch = false;
+
+                setTimeout(function () {
+                    if (!that.configurator.anyMatch) {
+                        togglePopup(true, 'Нет подходящих комплектаций');
+                    }
+                }, 100);
 
                 return false;
             },
@@ -2725,6 +2735,10 @@ script.
 
                 if (this.configurator.ups.length && this.configurator.ups.indexOf(ups) < 0) {
                     ret = false;
+                }
+
+                if (ret) {
+                    this.configurator.anyMatch = true;
                 }
 
                 return ret
@@ -3093,11 +3107,16 @@ script.
     }
 
     function togglePopup(show, txt) {
-        let root = document.getElementsByTagName('body')[0];
-        document.getElementById('popup_thanks').classList[show ? 'remove' : 'add']('hide');
+        let popup = document.getElementById('popup_thanks');
+        popup.querySelector('.popup__text').textContent = txt || '';
+        popup.classList[show ? 'remove' : 'add']('hide');
     }
 
-    function configaratorSubmit(frm) {
+    function inputChangeFunc(inp) {
+        document.cookie = inp.target.name + "=" + inp.target.value;
+    }
+
+    function configuratorSubmit(frm) {
         let that = this;
         let formData = serializeForm(frm.target);
 
@@ -3122,8 +3141,6 @@ script.
     }
 
     function alpineSelect(config) {
-        console.log('alpineSelect', config);
-
         return {
             data: config.data,
             allData: config.allData,
