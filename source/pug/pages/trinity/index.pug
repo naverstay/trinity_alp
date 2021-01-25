@@ -17,8 +17,8 @@ block content
     include ../../components/switchers
 
     section.page__section
-        .product__panel
-            .configurator__warn(x-show=" !configurator.anyMatch " x-cloak) Нет подходящих комплектаций
+        .product__panel(x-cloak)
+            .configurator__warn(x-show=" !configurator.anyMatch ") Нет подходящих комплектаций
 
             ul.product__list.__wide
                 //-if (alpineTemplates)

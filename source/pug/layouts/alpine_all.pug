@@ -2693,6 +2693,7 @@ script.
             },
             toggleParam(evt, prm, name) {
                 evt.preventDefault();
+                let that = this;
 
                 let pos = this.configurator[prm].indexOf(name);
 
@@ -2704,7 +2705,7 @@ script.
                 }
 
                 setTimeout(function () {
-                    setCookie('configurator', JSON.stringify(this.configurator));
+                    setCookie('configurator', JSON.stringify(that.configurator));
                 }, 100);
 
                 return false;
@@ -3023,6 +3024,8 @@ script.
             init() {
                 let ssd = ['SATA', 'SAS', 'SSD'];
                 let cookie = getCookie('configurator');
+
+                console.log('cookie', JSON.parse(cookie));
 
                 if (cookie) {
                     this.configurator = JSON.parse(cookie);
