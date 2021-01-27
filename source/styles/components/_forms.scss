@@ -159,6 +159,11 @@
         top: 100%;
         z-index: 1;
         width: 100%;
+
+        .select-list {
+            max-height: 280px;
+            overflow-y: auto;
+        }
     }
 
     &.is-open {
