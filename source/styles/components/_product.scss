@@ -12,6 +12,7 @@
         font-size: 24px;
         font-family: $fontCirceExtraBold;
         margin-bottom: 12px;
+        min-height: 2.6667em;
     }
 
     &__img {
@@ -38,7 +39,7 @@
     }
 
     &__options {
-        margin-bottom: 35px;
+        flex: 1;
 
         li {
             font-size: 14px;
@@ -104,7 +105,7 @@
             }
 
             @include respond-to-min($dt) {
-                margin-bottom: 35px;
+                margin-bottom: 50px;
 
                 > li {
                     min-width: 25%;
@@ -132,6 +133,9 @@
     &__block {
         max-width: 276px;
         margin: 0 auto 20px;
+        height: 100%;
+        display: flex;
+        flex-flow: column;
     }
 
     &__item {
