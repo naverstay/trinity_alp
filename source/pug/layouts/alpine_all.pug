@@ -2700,11 +2700,13 @@ script.
                             let info = this.getInfo(typeId, a.id);
 
                             if (a.id.length) {
-                                if (this.multiple.indexOf(typeId) !== -1) {
-                                    let c = parseInt(a.count || 0);
-                                    hddCount += c;
-                                    //hddList.push(c);
+                                let c = parseInt(a.count || 0);
 
+                                if (['SATA', 'SAS', 'SSD'].indexOf(typeId) !== -1) {
+                                    hddCount += c;
+                                }
+
+                                if (this.multiple.indexOf(typeId) !== -1) {
                                     if (i === keys.length - 1 && c) {
                                         this.appendEl(typeId, c);
                                     }
