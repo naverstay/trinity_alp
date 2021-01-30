@@ -251,6 +251,11 @@
 
             &:not(:only-child) {
                 max-width: calc(100% - 170px);
+
+                &.__wide {
+                    max-width: calc(100% - 55px);
+                    width: 100%;
+                }
             }
         }
 
@@ -263,10 +268,18 @@
             max-width: 170px;
             padding-left: 55px;
 
+            &.__remove {
+                min-width: 0;
+            }
+
             @include respond-to-min($dt) {
                 min-width: 190px;
                 max-width: 190px;
                 padding-left: 90px;
+
+                &.__remove {
+                    min-width: 0;
+                }
             }
         }
     }

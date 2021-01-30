@@ -1,6 +1,6 @@
 script.
     function siteData() {
-         return {
+        return {
             popupText: 'Сообщение',
             popupTitle: 'Заголовок',
             popupShow: false,
@@ -8,9 +8,6 @@ script.
             mainPopup(show, txt) {
                 this.popupShow = show;
                 this.popupText = txt;
-
-                console.log('siteData togglePopup', this.popupShow, this.popupText);
-
             },
             openMainMenu() {
                 this.showMainMenu = true
@@ -2540,6 +2537,7 @@ script.
                 "Services": "1",
                 "Switch": "1"
             },
+            multiple: ['SATA', 'SAS', 'SSD', 'OtherContr', 'Other'],
             partTypeIds: {
                 "CPU": 46,
                 "RAM": 43,
@@ -2673,7 +2671,7 @@ script.
 
                 this.preset[typeId].list.push({
                     id: '',
-                    count: '0'
+                    count: this.preselected.hasOwnProperty(typeId) ? this.preselected[typeId] : '0'
                 });
             },
             updatePreset(skip) {
@@ -2686,7 +2684,7 @@ script.
                 for (let typeId in this.partTypeIds) {
                     let item = this.preset[typeId];
 
-                     //console.log('typeId', typeId, item);
+                    //console.log('typeId', typeId, item);
 
                     if (!item) {
                         continue;
@@ -2702,7 +2700,7 @@ script.
                             let info = this.getInfo(typeId, a.id);
 
                             if (a.id.length) {
-                                if (['SATA', 'SAS', 'SSD'].indexOf(typeId) !== -1) {
+                                if (this.multiple.indexOf(typeId) !== -1) {
                                     let c = parseInt(a.count || 0);
                                     hddCount += c;
                                     //hddList.push(c);
@@ -2733,6 +2731,8 @@ script.
                     this.preset.totalPriceR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice);
                     this.preset.totalPriceD = this.pricePrint(this.preset.totalPrice);
                 }
+
+                //console.log('updatePreset', this.preset);
             },
             updateSelect(type, num) {
                 clearTimeout(this.updateTimer);
@@ -2840,12 +2840,6 @@ script.
                     }
                 }
 
-                //console.log('selectOptionCount', typeId, id);
-
-                //if (id.length === 0) {
-                //    return ret
-                //}
-
                 if (typeCode in this.brand) {
                     for (const x of this.brand[typeCode]) {
                         if (id = x.id + '') {
@@ -2865,29 +2859,8 @@ script.
 
                 return ret
             },
-            getHDD(typeId) {
-                let ret = (this.preset[typeId].list);
-
-                //let optionList = unlinkObj(this.optionsList(typeId, 1));
-
-                //ret = unlinkObj(ret);
-
-                //for (let i = 0; i < ret.length; i++) {
-                //    let r = ret[i];
-                //    r.optionList = optionList;
-                //}
-
-                //let keys = Object.keys(ret);
-                //
-                //for (let i = 0; i < keys.length; i++) {
-                //    let x = ret[keys[i]];
-                //
-                //    x.optionList = optionList;
-                //}
-
-                //console.log('getHDD', typeId, ret, this.preset, this.preset[typeId], this.optionsList(typeId, 1));
-
-                return ret;
+            getParamList(typeId) {
+                return (this.preset[typeId].list);
             },
             removeItem(typeId, ind) {
                 let rm = this.preset[typeId];
@@ -2898,7 +2871,6 @@ script.
                             rm.list.splice(ind, 1);
                         }
                     } else {
-                        console.log('count 0', rm);
                         //rm.count = '0';
                         rm.id = '';
                     }
@@ -2907,7 +2879,7 @@ script.
                 }
             },
             init() {
-                let ssd = ['SATA', 'SAS', 'SSD'];
+                let multiFields = this.multiple;
                 let cookie = getCookie('configurator');
 
                 if (cookie) {
@@ -2927,7 +2899,7 @@ script.
                                 if (!this.preset.hasOwnProperty(x)) {
                                     let count = this.preselected.hasOwnProperty(x) ? this.preselected[x] : '0';
 
-                                    if (ssd.indexOf(x) > -1) {
+                                    if (multiFields.indexOf(x) > -1) {
                                         //this.preset.hddList.push({name: x, list: [{id: '', count: count}]})
                                         this.preset[x] = {list: [{id: '', count: count}]};
                                     } else {
@@ -3012,16 +2984,16 @@ script.
             },
             //body: JSON.stringify(formData)
         })
-        .then(function () {
-            return JSON.parse(JSON.stringify(formData));
-        })
-        .then(function(result) {
-          console.log('Success:', result, siteData());
-          togglePopup(true, 'Данные отправлены');
-        })
-        .catch(function(error) {
-          console.error('Error:', error);
-        });
+            .then(function () {
+                return JSON.parse(JSON.stringify(formData));
+            })
+            .then(function (result) {
+                console.log('Success:', result);
+                togglePopup(true, 'Данные отправлены');
+            })
+            .catch(function (error) {
+                console.error('Error:', error);
+            });
     }
 
     function alpineSelect(config) {
