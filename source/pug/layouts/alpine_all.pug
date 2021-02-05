@@ -2585,12 +2585,12 @@ script.
 
                 if (pos > -1) {
                     this.configurator[prm].splice(pos, 1);
-
                 } else {
                     this.configurator[prm].push(name);
                 }
 
                 setTimeout(function () {
+                    setSearch(that.configurator);
                     setCookie('configurator', JSON.stringify(that.configurator));
                 }, 100);
 
@@ -2598,9 +2598,6 @@ script.
             },
             getCheck(index, item, prm) {
                 return '<label class="checkbox_v2"><input type="checkbox" value="3" :checked="{ activeParam(\'' + prm + '\', ' + (index + 1) + ') }"><span class="checkbox__text">' + item + '</span></label>'
-            },
-            getLink(index, item, prm) {
-                return '<a class="switcher__link" href="#" @click="{ switchParam($event, \'' + prm + '\', ' + (index + 1) + ') }" :class="{ active: ' + (index + 1) + ' === activeParam(\'' + prm + '\') }">' + item + '</a>'
             },
             activeParam(prm, name) {
                 return this.configurator[prm].indexOf(name) > -1
@@ -2882,10 +2879,30 @@ script.
             },
             init() {
                 let multiFields = this.multiple;
-                let cookie = getCookie('configurator');
+                let config = {};
+                let search = parseUrlQuery();
 
-                if (cookie) {
-                    this.configurator = JSON.parse(cookie);
+                if (search.hasOwnProperty('cpu')) {
+                    config.cpu = search.cpu.split(',')
+                }
+
+                if (search.hasOwnProperty('fac')) {
+                    config.fac = search.fac.split(',')
+                }
+
+                if (search.hasOwnProperty('ups')) {
+                    config.ups = search.ups.split(',')
+                }
+
+                if (!Object.keys(config).length) {
+                    config = JSON.parse(getCookie('configurator'));
+                } else {
+
+                }
+
+                if (config) {
+                    this.configurator = config;
+                    setCookie('configurator', JSON.stringify(this.configurator));
                 }
 
                 if (window.hasOwnProperty('order')) {
@@ -2944,6 +2961,45 @@ script.
 
     function inputChangeFunc(inp) {
         setCookie(inp.target.name, inp.target.value);
+    }
+
+    function parseUrlQuery() {
+        var data = {};
+        if (location.search) {
+            var pair = (location.search.substr(1)).split('&');
+            for (var i = 0; i < pair.length; i++) {
+                var param = pair[i].split('=');
+                data[param[0]] = decodeURIComponent(param[1]);
+            }
+        }
+        return data;
+    }
+
+    function setSearch(data) {
+        let srch = parseUrlQuery();
+        let ret = '';
+
+        srch.cpu = data.cpu.join(',');
+        srch.fac = data.fac.join(',');
+        srch.ups = data.ups.join(',');
+
+        let keys = Object.keys(srch);
+
+        for (let i = 0; i < keys.length; i++) {
+            let key = keys[i];
+            let val = srch[key];
+
+            if (val) {
+                ret += '&' + key + '=' + val;
+            }
+        }
+
+        console.log('parseUrlQuery', data, srch, ret, ret.substring(1));
+
+        window.history.pushState({}, document.title, location.pathname + '?' + ret.substring(1));
+
+        //window.history.replaceState({}, document.title, location.pathname + '?' + ret.substring(1));
+
     }
 
     function getCookie(name) {
