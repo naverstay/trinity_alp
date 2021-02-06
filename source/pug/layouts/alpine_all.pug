@@ -2979,9 +2979,9 @@ script.
         let srch = parseUrlQuery();
         let ret = '';
 
-        srch.cpu = data.cpu.join(',');
-        srch.fac = data.fac.join(',');
-        srch.ups = data.ups.join(',');
+        srch.cpu = data.hasOwnProperty(cpu) ? data.cpu.join(',') : '';
+        srch.fac = data.hasOwnProperty(fac) ? data.fac.join(',') : '';
+        srch.ups = data.hasOwnProperty(ups) ? data.ups.join(',') : '';
 
         let keys = Object.keys(srch);
 
@@ -2993,8 +2993,6 @@ script.
                 ret += '&' + key + '=' + val;
             }
         }
-
-        console.log('parseUrlQuery', data, srch, ret, ret.substring(1));
 
         window.history.pushState({}, document.title, location.pathname + '?' + ret.substring(1));
 
