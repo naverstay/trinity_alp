@@ -166,7 +166,7 @@ mixin build_options(arr)
         .configurator__label Прочие контроллеры X2
         if (templ)
             - var d = 'OtherContr';
-            template(x-for="(item, index, collection) in getParamList('" + d + "')" :key="item" x-if="true")
+            //-template(x-for="(item, index, collection) in getParamList('" + d + "')" :key="item" x-if="true")
                 .configurator__controls()
                     .configurator__cell.__wide(data-preset=d :data-index=' index ')
                         //- var ref = "collection[index]";
@@ -178,7 +178,7 @@ mixin build_options(arr)
                     .configurator__cell.__remove( :class="{ __disabled: " + "!collection[index].id.length" + " }" data-preset=(d + '_count') :data-index=' index ')
                         .configurator__cell-rm(  @click=" removeItem('" + d + "', $event.target.dataset.index) " :data-index=' index ') x
 
-            //-.configurator__cell(data-preset=d data-index='0')
+            .configurator__cell(data-preset=d data-index='0')
                 - var ref = "'select_" + d + "_' + index + '_value'";
                 input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
                 +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
@@ -285,7 +285,7 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    template(x-if=" preset.loaded && preset.hasOwnProperty('Services') "): .configurator__row
+    //-template(x-if=" preset.loaded && preset.hasOwnProperty('Services') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_service.png'))
         .configurator__label Сервисное обслуживание
