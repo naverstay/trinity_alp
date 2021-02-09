@@ -2506,8 +2506,7 @@ script.
             configurator: {
                 cpu: [],
                 fac: [],
-                ups: [],
-                anyMatch: false,
+                ups: []
             },
             preset: {
                 loaded: false,
@@ -2581,12 +2580,16 @@ script.
                 evt.preventDefault();
                 let that = this;
 
-                let pos = this.configurator[prm].indexOf(name);
+                if (this.configurator.hasOwnProperty(prm)) {
+                    let pos = this.configurator.hasOwnProperty(prm) ? this.configurator[prm].indexOf(name) : -1;
 
-                if (pos > -1) {
-                    this.configurator[prm].splice(pos, 1);
+                    if (pos > -1) {
+                        this.configurator[prm].splice(pos, 1);
+                    } else {
+                        this.configurator[prm].push(name);
+                    }
                 } else {
-                    this.configurator[prm].push(name);
+                    this.configurator[prm] = [name]
                 }
 
                 setTimeout(function () {
@@ -2600,29 +2603,22 @@ script.
                 return '<label class="checkbox_v2"><input type="checkbox" value="3" :checked="{ activeParam(\'' + prm + '\', ' + (index + 1) + ') }"><span class="checkbox__text">' + item + '</span></label>'
             },
             activeParam(prm, name) {
-                return this.configurator[prm].indexOf(name) > -1
+                return this.configurator.hasOwnProperty(prm) && this.configurator[prm].indexOf(name) > -1
             },
-            checkVisibility(ind, cpu, fac, ups) {
+            checkVisibility(cpu, fac, ups) {
                 let ret = true;
+                let that = this;
 
-                if (ind == 0) {
-                    this.configurator.anyMatch = false;
-                }
-
-                if (this.configurator.cpu.length && this.configurator.cpu.indexOf(cpu) < 0) {
+                if (that.configurator.hasOwnProperty('cpu') && that.configurator.cpu.length && that.configurator.cpu.indexOf(cpu) < 0) {
                     ret = false;
                 }
 
-                if (this.configurator.fac.length && this.configurator.fac.indexOf(fac) < 0) {
+                if (that.configurator.hasOwnProperty('fac') && that.configurator.fac.length && that.configurator.fac.indexOf(fac) < 0) {
                     ret = false;
                 }
 
-                if (this.configurator.ups.length && this.configurator.ups.indexOf(ups) < 0) {
+                if (that.configurator.hasOwnProperty('ups') && that.configurator.ups.length && that.configurator.ups.indexOf(ups) < 0) {
                     ret = false;
-                }
-
-                if (ret) {
-                    this.configurator.anyMatch = true;
                 }
 
                 return ret
@@ -2680,8 +2676,6 @@ script.
 
                 for (let typeId in this.partTypeIds) {
                     let item = this.preset[typeId];
-
-                    //console.log('typeId', typeId, item);
 
                     if (!item) {
                         continue;
@@ -2877,8 +2871,7 @@ script.
                     this.updatePreset();
                 }
             },
-            init() {
-                let multiFields = this.multiple;
+            loadHistory() {
                 let config = {};
                 let search = parseUrlQuery();
 
@@ -2904,6 +2897,12 @@ script.
                     this.configurator = config;
                     setCookie('configurator', JSON.stringify(this.configurator));
                 }
+            },
+            init() {
+                let multiFields = this.multiple;
+                let that = this;
+
+                that.loadHistory();
 
                 if (window.hasOwnProperty('order')) {
                     console.log('loading order', window.order);
@@ -2944,6 +2943,10 @@ script.
                 this.preset.totalPrice = parseInt(this.preset.totalPrice || 0)
                 this.preset.platformPrice = parseInt(this.preset.platformPrice || 0)
 
+                window.onpopstate = function () {
+                    that.loadHistory();
+                }
+
                 console.log('this.preset', this.preset);
             }
         }
@@ -2979,9 +2982,9 @@ script.
         let srch = parseUrlQuery();
         let ret = '';
 
-        srch.cpu = data.hasOwnProperty(cpu) ? data.cpu.join(',') : '';
-        srch.fac = data.hasOwnProperty(fac) ? data.fac.join(',') : '';
-        srch.ups = data.hasOwnProperty(ups) ? data.ups.join(',') : '';
+        srch.cpu = data.hasOwnProperty('cpu') ? data.cpu.join(',') : '';
+        srch.fac = data.hasOwnProperty('fac') ? data.fac.join(',') : '';
+        srch.ups = data.hasOwnProperty('ups') ? data.ups.join(',') : '';
 
         let keys = Object.keys(srch);
 

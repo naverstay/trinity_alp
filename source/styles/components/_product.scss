@@ -83,10 +83,30 @@
         overflow-x: auto;
         overflow-y: hidden;
         margin: 0 -13px 70px;
+        min-height: 25px;
 
         > li {
             flex: 0 0;
             padding: 13px 13px 10px;
+
+            &:first-child {
+                z-index: 0;
+                position: absolute;
+                padding-top: 0;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+
+            &:not(:first-child) {
+                background: #fff;
+                position: relative;
+                z-index: 1;
+            }
+        }
+
+        .configurator__warn {
+
         }
 
         &.__wide {
