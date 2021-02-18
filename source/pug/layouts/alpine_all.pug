@@ -2796,7 +2796,7 @@ script.
                 return (parseFloat(val).toFixed(2) + '').replace(rx, '$& ')
             },
             appendEl(typeId, c) {
-                console.log('appendEl', typeId, c);
+                //console.log('appendEl', typeId, c);
 
                 this.preset[typeId].list.push({
                     id: '',
@@ -2806,7 +2806,6 @@ script.
             updatePreset(skip) {
                 //return;
 
-                let that = this;
                 let hddCount = 0;
                 let price = 0;
                 let descr = '';
@@ -2821,30 +2820,35 @@ script.
                     if ('list' in item) {
                         let keys = Object.keys(item.list);
 
-                        //console.log('list', keys);
+                        for (let ind = 0; ind < keys.length; ind++) {
+                            let component = item.list[keys[ind]];
 
-                        for (let i = 0; i < keys.length; i++) {
-                            let a = item.list[keys[i]];
+                            if (!component) {
+                                continue;
+                            }
 
-                            //if (a.hasOwnProperty('id')) {
-                            let info = this.getInfo(typeId, a.id);
+                            let info = this.getInfo(typeId, component.id);
 
-                            //console.log('typeId', typeId, a, info);
+                            //console.log('typeId', typeId, component, info);
 
-                            if (a.id.length && i < keys.length) {
-                                let c = parseInt(a.count || 0);
+                            if (component.id.length && ind < keys.length) {
+                                let c = parseInt(component.count || 0);
 
                                 if (['SATA', 'SAS', 'SSD'].indexOf(typeId) !== -1) {
                                     hddCount += c;
                                 }
 
-                                let count = +((a.count || 0));
+                                let count = +((component.count || 0));
 
                                 if (this.multiple.indexOf(typeId) !== -1) {
-                                    if (info.price === '' && info.description === '') {
+                                    if (!info.price && component.id == '0') {
                                         count = 0;
-                                        that.removeItem(typeId, i);
-                                    } else if (i === keys.length - 1 && c) {
+                                        let len = this.preset[typeId].list.length;
+
+                                        if (len > 1 && (len - 1) > ind) {
+                                            return this.removeItem(typeId, ind);
+                                        }
+                                    } else if (ind === keys.length - 1 && c) {
                                         this.appendEl(typeId, c);
                                     }
                                 }
@@ -2852,7 +2856,6 @@ script.
                                 descr += (count && info.description) ? ' / ' + info.description : '';
                                 price += count * info.price;
                             }
-                            //}
                         }
                     } else if (item.id) {
                         let info = this.getInfo(typeId, item.id);
