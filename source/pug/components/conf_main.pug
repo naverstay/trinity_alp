@@ -168,6 +168,14 @@ mixin build_options(arr)
             - var d = 'OtherContr';
             template(x-for="(item, index, collection) in getParamList('" + d + "')" :key="item" x-if="true")
                 .configurator__controls()
+                    .configurator__cell(data-preset=d :data-index=' index ')
+                        //- var ref = "collection[index]";
+                        //- var ref = "preset." + d + '.list[0]';
+                        //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
+                        input.input_hidden(@input=" updatePreset() " x-model=" collection[index].id " :name="'preset_" + d + "_list_' + index + '_id'" :data-index=' index ' data-preset=d )
+                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + (" collection[index].id ") + "', placeholder: 'Выберите из списка' })", " collection[index].id ")
+
+                //-.configurator__controls()
                     .configurator__cell.__wide(data-preset=d :data-index=' index ')
                         //- var ref = "collection[index]";
                         //- var ref = "preset." + d + '.list[0]';
@@ -202,46 +210,57 @@ mixin build_options(arr)
             - var d = 'Other';
             //-template(x-for="(item, index, collection) in getParamList('" + d + "')" :key="item" x-if="true")
                 .configurator__controls()
-                    .configurator__cell.__wide(data-preset=d :data-index=' index ')
+                    .configurator__cell(data-preset=d :data-index=' index ')
                         //- var ref = "collection[index]";
                         //- var ref = "preset." + d + '.list[0]';
                         //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
                         input.input_hidden(@input=" updatePreset() " x-model=" collection[index].id " :name="'preset_" + d + "_list_' + index + '_id'" :data-index=' index ' data-preset=d )
                         +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + (" collection[index].id ") + "', placeholder: 'Выберите из списка' })", " collection[index].id ")
 
-                    .configurator__cell.__remove( :class="{ __disabled: " + "!collection[index].id.length" + " }" data-preset=(d + '_count') :data-index=' index ')
+                    //-.configurator__cell.__remove( :class="{ __disabled: " + "!collection[index].id.length" + " }" data-preset=(d + '_count') :data-index=' index ')
                         .configurator__cell-rm(  @click=" removeItem('" + d + "', $event.target.dataset.index) " :data-index=' index ') x
 
-            .configurator__cell(data-preset=d data-index='0')
-                - var ref = "'select_" + d + "_' + index + '_value'";
-                input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
-                +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
-
-                //-.configurator__cell
-                    select(x-model="preset.Other.id" id='preset_Other_id' @change!=" $nextTick(() => { updateSelect('Other', 1); updatePreset(); }); ")
-                        template(x-for="(item, index) in optionsList('Other')" :key="item.id" x-if="true")
-                            option(x-text='item.text' :value='item.id')
-        else
-            .configurator__cell
-                +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
-
-    template(x-if=" preset.loaded && preset.hasOwnProperty('Soft') "): .configurator__row
-        .configurator__icon
-            img(src=require('media/system/config_soft.png'))
-        .configurator__label Программное обеспечение
-        .configurator__controls
-            if (templ)
-                - var d = 'Soft';
+            .configurator__controls()
                 .configurator__cell(data-preset=d data-index='0')
                     - var ref = "'select_" + d + "_' + index + '_value'";
                     input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
                     +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
 
                 //-.configurator__cell
-                    select(x-model="preset.Soft.id" id='preset_Soft_id' @change!=" $nextTick(() => { updateSelect('Soft', 1); updatePreset(); }); ")
-                        template(x-for="(item, index) in optionsList('Soft')" :key="item.id" x-if="true")
+                    select(x-model="preset.Other.id" id='preset_Other_id' @change!=" $nextTick(() => { updateSelect('Other', 1); updatePreset(); }); ")
+                        template(x-for="(item, index) in optionsList('Other')" :key="item.id" x-if="true")
                             option(x-text='item.text' :value='item.id')
-            else
+        else
+            .configurator__controls()
+                .configurator__cell
+                    +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
+
+    template(x-if=" preset.loaded && preset.hasOwnProperty('Soft') "): .configurator__row
+        .configurator__icon
+            img(src=require('media/system/config_soft.png'))
+        .configurator__label Программное обеспечение
+        if (templ)
+            - var d = 'Soft';
+            template(x-for="(item, index, collection) in getParamList('" + d + "')" :key="item" x-if="true")
+                .configurator__controls()
+                    .configurator__cell(data-preset=d :data-index=' index ')
+                        //- var ref = "collection[index]";
+                        //- var ref = "preset." + d + '.list[0]';
+                        //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
+                        input.input_hidden(@input=" updatePreset() " x-model=" collection[index].id " :name="'preset_" + d + "_list_' + index + '_id'" :data-index=' index ' data-preset=d )
+                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + (" collection[index].id ") + "', placeholder: 'Выберите из списка' })", " collection[index].id ")
+
+            //-.configurator__cell(data-preset=d data-index='0')
+                - var ref = "'select_" + d + "_' + index + '_value'";
+                input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
+                +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
+
+            //-.configurator__cell
+                select(x-model="preset.Soft.id" id='preset_Soft_id' @change!=" $nextTick(() => { updateSelect('Soft', 1); updatePreset(); }); ")
+                    template(x-for="(item, index) in optionsList('Soft')" :key="item.id" x-if="true")
+                        option(x-text='item.text' :value='item.id')
+        else
+            .configurator__controls
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
@@ -249,10 +268,19 @@ mixin build_options(arr)
         .configurator__icon
             img(src=require('media/system/config_ups.png'))
         .configurator__label ИБП
-        .configurator__controls
-            if (templ)
-                - var d = 'UPS';
-                .configurator__cell(data-preset=d data-index='0')
+
+        if (templ)
+            - var d = 'UPS';
+            template(x-for="(item, index, collection) in getParamList('" + d + "')" :key="item" x-if="true")
+                .configurator__controls()
+                    .configurator__cell(data-preset=d :data-index=' index ')
+                        //- var ref = "collection[index]";
+                        //- var ref = "preset." + d + '.list[0]';
+                        //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
+                        input.input_hidden(@input=" updatePreset() " x-model=" collection[index].id " :name="'preset_" + d + "_list_' + index + '_id'" :data-index=' index ' data-preset=d )
+                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + (" collection[index].id ") + "', placeholder: 'Выберите из списка' })", " collection[index].id ")
+
+                //-.configurator__cell(data-preset=d data-index='0')
                     - var ref = "'select_" + d + "_' + index + '_value'";
                     input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
                     +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
@@ -261,7 +289,8 @@ mixin build_options(arr)
                     select(x-model="preset.UPS.id" id='preset_UPS_id' @change!=" $nextTick(() => { updateSelect('UPS', 1); updatePreset(); }); ")
                         template(x-for="(item, index) in optionsList('UPS')" :key="item.id" x-if="true")
                             option(x-text='item.text' :value='item.id')
-            else
+        else
+            .configurator__controls
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
@@ -269,19 +298,28 @@ mixin build_options(arr)
         .configurator__icon
             img(src=require('media/system/config_switch.png'))
         .configurator__label Коммутаторы
-        .configurator__controls
-            if (templ)
-                - var d = 'Switch';
-                .configurator__cell(data-preset=d data-index='0')
-                    - var ref = "'select_" + d + "_' + index + '_value'";
-                    input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id " data-index='0' data-preset=d )
-                    +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
+        if (templ)
+            - var d = 'Switch';
+            template(x-for="(item, index, collection) in getParamList('" + d + "')" :key="item" x-if="true")
+                .configurator__controls()
+                    .configurator__cell(data-preset=d :data-index=' index ')
+                        //- var ref = "collection[index]";
+                        //- var ref = "preset." + d + '.list[0]';
+                        //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
+                        input.input_hidden(@input=" updatePreset() " x-model=" collection[index].id " :name="'preset_" + d + "_list_' + index + '_id'" :data-index=' index ' data-preset=d )
+                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + (" collection[index].id ") + "', placeholder: 'Выберите из списка' })", " collection[index].id ")
+
+            //-.configurator__cell(data-preset=d data-index='0')
+                - var ref = "'select_" + d + "_' + index + '_value'";
+                input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id " data-index='0' data-preset=d )
+                +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
 
                 //-.configurator__cell
                     select(x-model="preset.Switch.id" id='preset_Switch_id' @change!=" $nextTick(() => { updateSelect('Switch', 1); updatePreset(); }); ")
                         template(x-for="(item, index) in optionsList('Switch')" :key="item.id" x-if="true")
                             option(x-text='item.text' :value='item.id')
-            else
+        else
+            .configurator__controls
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 

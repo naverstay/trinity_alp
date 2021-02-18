@@ -17,7 +17,7 @@ mixin loop_while(counter)
 mixin select(data, preset, disabled)
     .custom-select-container.customSelect(data-preset=preset x-data=data x-init=" init() " @click.away='closeListbox()' @keydown.escape='closeListbox()' )
         span.custom-select-opener(x-ref='button' @click='toggleListboxVisibility()' :aria-expanded='open' aria-haspopup='listbox')
-            span(x-show='!open' x-text='value in options ? options[value].name : placeholder' :class="{ 'custom-select-placeholder': ! (value in options) }")
+            span(x-show='!open' x-html='value in options ? ((options[value].name + "").length ? options[value].name : placeholder) : placeholder' :class="{ 'custom-select-placeholder': ! (value in options) }")
             input.custom-select-value(x-ref='value' type='hidden' :name='name' x-model='value')
             input.custom-select-search(x-ref='search' x-show='open' x-model='search' @keydown.enter.stop.prevent='selectOption()' @keydown.arrow-up.prevent='focusPreviousOption()' @keydown.arrow-down.prevent='focusNextOption()' type='search')
 
