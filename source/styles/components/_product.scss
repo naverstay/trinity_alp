@@ -130,13 +130,12 @@
 
                 > li {
                     min-width: 50%;
-
-
                 }
             }
 
             @include respond-to-min($dt) {
                 margin-bottom: 50px;
+                min-height: 50px;
 
                 > li {
                     min-width: 25%;

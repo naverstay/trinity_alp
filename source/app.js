@@ -156,6 +156,8 @@ document.addEventListener('DOMContentLoaded', function () {
         isSticky;
 
     window.fixTotalBox = function () {
+        if (!totalBox) return;
+
         var totalBoxHeight = totalBox.offsetHeight;
 
         isSticky = totalBox.classList.contains('stuck');

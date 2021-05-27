@@ -13,7 +13,7 @@ mixin build_options(arr)
     each o, oi in arr
         option(x-text)
 
-div
+.configurator__wrapper
     template(x-if=" preset.loaded && preset.hasOwnProperty('CPU') "  ): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_cpu.png'))
@@ -343,30 +343,30 @@ div
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    #stuck_wrapper(x-cloak): #total_box.configurator__total-sticky: .configurator__total
-        //-.configurator__total-info(x-html='preset.totalDescription')
-        //- Корзина на 4 SAS/SATA 3,5” диска с возможностью горячей замены / Для установки дисков SAS требуется RAID-контроллер / Полноразмерный слот PCI-E /  Одинарный блок питания 350Вт / Поддержка одного процессора Intel® Xeon®  E3-1200 v6 и Core i3 / 4 сокета DDR4 Unbuffered ECC / 2 порта Gigabit Ethernet /  Встроенный IPMI.
+#stuck_wrapper(x-cloak): #total_box.configurator__total-sticky: .configurator__total
+    //-.configurator__total-info(x-html='preset.totalDescription')
+    //- Корзина на 4 SAS/SATA 3,5” диска с возможностью горячей замены / Для установки дисков SAS требуется RAID-контроллер / Полноразмерный слот PCI-E /  Одинарный блок питания 350Вт / Поддержка одного процессора Intel® Xeon®  E3-1200 v6 и Core i3 / 4 сокета DDR4 Unbuffered ECC / 2 порта Gigabit Ethernet /  Встроенный IPMI.
 
-        .configurator__cell
-            span.btn.scrollTo(data-target='configurator__form') Получить предложение
+    .configurator__cell
+        span.btn.scrollTo(data-target='configurator__form') Получить предложение
 
-        .configurator__share.tablet-hidden
-            p: a(href='#') Нашли дешевле?
-            p: a(href='#') Сделаем скидку!
+    .configurator__share.tablet-hidden
+        p: a(href='#') Нашли дешевле?
+        p: a(href='#') Сделаем скидку!
 
-        .configurator__counter
-            span.configurator__counter-btn.__plus.btn(@click="updateCounter($event, 1)") +
-            .configurator__counter-value: input#item_count(type='number' min='1' x-model="preset.itemCount")
-            span.configurator__counter-btn.__minus.btn(@click="updateCounter($event, -1)") -
+    .configurator__counter
+        span.configurator__counter-btn.__plus.btn(@click="updateCounter($event, 1)") +
+        .configurator__counter-value: input#item_count(type='number' min='1' x-model="preset.itemCount")
+        span.configurator__counter-btn.__minus.btn(@click="updateCounter($event, -1)") -
 
-        .configurator__total-price
-            .configurator__total-label Цена
-            .configurator__total-val(x-text='"$" + preset.totalPriceD') $1,596
-            .configurator__total-val(x-text='preset.totalPriceR + " ₽"') 132 945 ₽
+    .configurator__total-price
+        .configurator__total-label Цена
+        .configurator__total-val(x-text='"$" + preset.totalPriceD') $1,596
+        .configurator__total-val(x-text='preset.totalPriceR + " ₽"') 132 945 ₽
 
-        .configurator__total-price
-            .configurator__total-label Сумма
-            .configurator__total-val(x-text='"$" + preset.totalPriceItemsD') $1,596
-            .configurator__total-val(x-text='preset.totalPriceItemsR + " ₽"') 132 945 ₽
+    .configurator__total-price
+        .configurator__total-label Сумма
+        .configurator__total-val(x-text='"$" + preset.totalPriceItemsD') $1,596
+        .configurator__total-val(x-text='preset.totalPriceItemsR + " ₽"') 132 945 ₽
 
 // pug/components/conf_main.pug ###

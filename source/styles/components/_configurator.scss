@@ -26,12 +26,17 @@
 
         &-inner {
             width: 100%;
-            padding-top: 1px;
+            padding-top: 10px;
 
             @include respond-to-min($tab) {
                 border-top: 1px solid #1e70b8;
+                padding-top: 20px;
                 float: left;
                 left: 0;
+            }
+
+            @include respond-to-min($dt) {
+                padding-top: 40px;
             }
         }
 
@@ -64,6 +69,10 @@
                 }
             }
         }
+    }
+
+    &__wrapper {
+
     }
 
     &__holder {
@@ -176,7 +185,7 @@
 
         .configurator__row {
             //margin-top: 42px;
-            padding-bottom: 42px;
+            padding-bottom: 18px;
 
             + .configurator__row {
 
@@ -197,7 +206,7 @@
 
             @include respond-to-max($dt) {
                 //margin-top: 46px;
-                padding-bottom: 38px;
+                //padding-bottom: 38px;
 
                 &:first-child {
                     margin-top: 22px;
@@ -309,7 +318,7 @@
 
     &__label {
         font: 900 18px $fontGilroyExtraBold;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
         width: 100%;
 
         + .configurator__label {
