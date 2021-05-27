@@ -13,7 +13,7 @@ mixin build_options(arr)
     each o, oi in arr
         option(x-text)
 
-.configurator__main
+div
     template(x-if=" preset.loaded && preset.hasOwnProperty('CPU') "  ): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_cpu.png'))
@@ -23,7 +23,7 @@ mixin build_options(arr)
                 - var d = 'CPU';
                 .configurator__cell(data-preset=d data-index='0')
                     - var ref = "'select_" + d + "_' + index + '_value'";
-                    input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id " data-index='0' data-preset=d )
+                    input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
                     +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
 
                 .configurator__cell.__multiply(:class="{ __disabled: " + "!preset." + d + ".id.length" + " }" data-preset=(d + '_count') data-index='0')
@@ -132,13 +132,13 @@ mixin build_options(arr)
         .configurator__warn(x-show=" preset.hddCount > 4 " x-cloak='') Дополнительные компоненты будут поставлены отдельно
 
         - var ssd = ['SATA', 'SAS', 'SSD']
-        each d in ssd
+        each d, si in ssd
             template(x-if=" preset.loaded && preset.hasOwnProperty('" + d + "') " x-cloak): div
                 .configurator__label= d
                 if (templ)
                     template(x-for="(item, index, collection) in getParamList('" + d + "')" :key="item" x-if="true")
                         .configurator__controls()
-                            .configurator__cell(data-preset=d :data-index=' index ')
+                            .configurator__cell(data-preset=d :data-index=' index ' :class= (si === 1 ? "{ __disabled: !preset.RAID.id.length" + " }" : null))
                                 //- var ref = "collection[index]";
                                 //- var ref = "preset." + d + '.list[0]';
                                 //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
@@ -243,7 +243,7 @@ mixin build_options(arr)
             - var d = 'Soft';
             template(x-for="(item, index, collection) in getParamList('" + d + "')" :key="item" x-if="true")
                 .configurator__controls()
-                    .configurator__cell(data-preset=d :data-index=' index ')
+                    .configurator__cell(data-preset=d :data-index=' index ' :class=  "{ __disabled: !preset.CPU.id.length" + " }" )
                         //- var ref = "collection[index]";
                         //- var ref = "preset." + d + '.list[0]';
                         //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
@@ -311,7 +311,7 @@ mixin build_options(arr)
 
             //-.configurator__cell(data-preset=d data-index='0')
                 - var ref = "'select_" + d + "_' + index + '_value'";
-                input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id " data-index='0' data-preset=d )
+                input.input_hidden(@input=" updatePreset() " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
                 +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
 
                 //-.configurator__cell
@@ -343,13 +343,30 @@ mixin build_options(arr)
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
 
-    .configurator__total
-        .configurator__total-info(x-html='preset.totalDescription')
+    #stuck_wrapper(x-cloak): #total_box.configurator__total-sticky: .configurator__total
+        //-.configurator__total-info(x-html='preset.totalDescription')
         //- Корзина на 4 SAS/SATA 3,5” диска с возможностью горячей замены / Для установки дисков SAS требуется RAID-контроллер / Полноразмерный слот PCI-E /  Одинарный блок питания 350Вт / Поддержка одного процессора Intel® Xeon®  E3-1200 v6 и Core i3 / 4 сокета DDR4 Unbuffered ECC / 2 порта Gigabit Ethernet /  Встроенный IPMI.
+
+        .configurator__cell
+            span.btn.scrollTo(data-target='configurator__form') Получить предложение
+
+        .configurator__share.tablet-hidden
+            p: a(href='#') Нашли дешевле?
+            p: a(href='#') Сделаем скидку!
+
+        .configurator__counter
+            span.configurator__counter-btn.__plus.btn(@click="updateCounter($event, 1)") +
+            .configurator__counter-value: input#item_count(type='number' min='1' x-model="preset.itemCount")
+            span.configurator__counter-btn.__minus.btn(@click="updateCounter($event, -1)") -
+
         .configurator__total-price
-            .configurator__total-label Сумма
+            .configurator__total-label Цена
             .configurator__total-val(x-text='"$" + preset.totalPriceD') $1,596
             .configurator__total-val(x-text='preset.totalPriceR + " ₽"') 132 945 ₽
 
+        .configurator__total-price
+            .configurator__total-label Сумма
+            .configurator__total-val(x-text='"$" + preset.totalPriceItemsD') $1,596
+            .configurator__total-val(x-text='preset.totalPriceItemsR + " ₽"') 132 945 ₽
 
 // pug/components/conf_main.pug ###

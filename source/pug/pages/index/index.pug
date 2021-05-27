@@ -7,27 +7,32 @@ block vars
 block content
     // ### pug/pages/index/index.pug
 
-    section.page__section
-        .product__panel
-            ul.product__list
-                - var i = 0;
-                while i < (productList.length)
-                    li: a.product__item(href='trinity.html')
-                        img(src=require('media/logos/prod_' + productList[i] + '.png'))
-                    - i++;
+    section.page__section: .configurator__holder
+        .configurator__main
+            .product__panel
+                ul.product__list.__small
+                    - var i = 0;
+                    while i < (productList.length)
+                        li: a.product__item(href='trinity.html')
+                            img(src=require('media/logos/prod_' + productList[i] + '.png'))
+                        - i++;
 
-        .product__description(x-data=' slideActions() ' :class="{ '_expanded': isOpen() , '_collapsed': !isOpen() }")
-            h3.product__description-caption Описание конфигуратора
-            .product__description-text
-                p  Конфигуратор  — среда разработки информационных систем на базе платформы «1С Предприятие».  Разработка прикладного решения обычно называется программирование или конфигурированием 1С.  С помощью данной среды возможно произвести не только доработку какого-либо решения, но и разработать собственную, полноценную конфигурацию.
+            .product__description(x-data=' slideActions() ' :class="{ '_expanded': isOpen() , '_collapsed': !isOpen() }")
+                h3.product__description-caption Описание конфигуратора
+                .product__description-text
+                    p  Конфигуратор  — среда разработки информационных систем на базе платформы «1С Предприятие».  Разработка прикладного решения обычно называется программирование или конфигурированием 1С.  С помощью данной среды возможно произвести не только доработку какого-либо решения, но и разработать собственную, полноценную конфигурацию.
 
-            .product__description-text.slideBlock(style='display:none;')
-                p  Конфигуратор  — среда разработки информационных систем на базе платформы «1С Предприятие».  Разработка прикладного решения обычно называется программирование или конфигурированием 1С.  С помощью данной среды возможно произвести не только доработку какого-либо решения, но и разработать собственную, полноценную конфигурацию.
+                .product__description-text.slideBlock(style='display:none;')
+                    p  Конфигуратор  — среда разработки информационных систем на базе платформы «1С Предприятие».  Разработка прикладного решения обычно называется программирование или конфигурированием 1С.  С помощью данной среды возможно произвести не только доработку какого-либо решения, но и разработать собственную, полноценную конфигурацию.
 
-            .text-right
-                a.product__description-toggle(href='#' @click='{ slideToggle($event, $el) }')
-                    span.show__expanded Развернуть
-                    span.show__collapsed Свернуть
+                .text-right
+                    a.product__description-toggle(href='#' @click='{ slideToggle($event, $el) }')
+                        span.show__expanded Развернуть
+                        span.show__collapsed Свернуть
+
+        .aside__holder
+            include ../../components/conf_features
+            include ../../components/conf_links
 
     // pug/pages/index/index.pug ###
 

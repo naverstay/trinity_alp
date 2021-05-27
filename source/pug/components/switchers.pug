@@ -18,7 +18,7 @@ mixin buildSwitch(name)
 
                     a.switcher__link(href='#' class=( i > 3 ? 'disabled' : '') @click="{ toggleParam($event, '" + name + "', '" + (array[i]) + "') }" :class= "{ active: activeParam('" + name + "', '" + (array[i]) + "') }")= array[i]
 
-section.page__section.__gray
+section.page__section
     .switcher__holder
         +buildSwitch('cpu')
         +buildSwitch('fac')

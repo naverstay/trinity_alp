@@ -167,6 +167,17 @@ textarea:focus::-moz-placeholder {
     color: rgba(0, 0, 0, 0) !important;
 }
 
+input[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
 a {
     text-decoration: none;
 }

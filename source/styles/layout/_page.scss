@@ -3,7 +3,8 @@
 .page {
     &__section {
         position: relative;
-        padding: 32px 0 44px;
+        padding-bottom: 44px;
+        //padding: 32px 0 44px;
 
         &::before {
             content: '';
@@ -28,9 +29,9 @@
             }
         }
 
-        @include respond-to-min($dt) {
-            padding: 34px 0 44px;
-        }
+        //@include respond-to-min($dt) {
+        //    padding: 34px 0 44px;
+        //}
 
         &.__pad-0 {
             padding-top: 0;
@@ -57,6 +58,7 @@
         color: $blue;
         font-size: 18px;
         margin-bottom: 20px;
+        padding-top: 32px;
     }
 }
 

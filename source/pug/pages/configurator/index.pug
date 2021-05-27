@@ -1,6 +1,7 @@
 extends ../../layouts/master.pug
 
 block vars
+    - var price = false;
     - var pageTitle = 'Конфигуратор серверов Тринити';
     - var breadcrumbs = ['Конфигуратор серверов', 'Тринити', 'Сервер E111-M5'];
     - var serverParams = {cpu : ['1хCPU', '2хCPU', '4хCPU', '8хCPU'], fac : ['1U', '2U', '3U', '4U', '5U', 'TOWER'], ups : ['1хPS', '2хPS', '4хPS']};
@@ -17,18 +18,41 @@ block scripts
 block content
     // ### pug/pages/configurator/index.pug
 
+    .product__panel
+        ul.product__list
+            - var i = 0;
+            while i < (productList.length)
+                li: a.product__item(href='trinity.html' class= (i ? '' : ' active'))
+                    img(src=require('media/logos/prod_' + productList[i] + '.png'))
+                - i++;
+
     section.page__section
-        include ../../components/slider
+        .configurator__holder.__bordered
+            .configurator__main
+                include ../../components/slider
 
-        form.configurator__holder(action='#' method="post"  @submit.prevent=" configuratorSubmit($event) ")
-            include ../../components/conf_main
+                .configurator__tabs()
+                    section#tab_configurator.configurator__tabs-panel(:class="{ 'active': activeTab === 'configurator' }")
+                        .configurator__tabs-btn.btn(:class="{ 'active': activeTab === 'configurator' }" @click="setActiveTab('configurator')") Конфигуратор
+                        .configurator__tabs-inner(x-show="activeTab === 'configurator'")
+                            form(action='#' method="post"  @submit.prevent=" configuratorSubmit($event) ")
+                                include ../../components/conf_main
 
-            include ../../components/conf_aside
+                                include ../../components/conf_form
 
-            include ../../components/conf_form
+                                .configurator__cell
+                                    button.btn Получить предложение
 
-            .configurator__cell
-                button.btn Получить предложение
+                    section#tab_specifications.configurator__tabs-panel(:class="{ 'active': activeTab === 'specifications' }")
+                        .configurator__tabs-btn.btn(:class="{ 'active': activeTab === 'specifications' }" @click="setActiveTab('specifications')") Технические характеристики
+                        .configurator__tabs-inner(x-show="activeTab === 'specifications'")
+                            include ../../components/conf_specifications
+
+            .aside__holder
+                include ../../components/conf_partner
+                include ../../components/conf_features
+                include ../../components/conf_links
+                include ../../components/conf_aside
 
         include ../../components/warranty
 

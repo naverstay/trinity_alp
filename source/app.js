@@ -52,43 +52,151 @@ if (/naverstay\.me/.test(location.origin)) {
     }(window, document, scr);
 }
 
+function setInputFilter(textbox, inputFilter) {
+    ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
+        textbox.addEventListener(event, function () {
+            if (inputFilter(this.value)) {
+                this.oldValue = this.value;
+                this.oldSelectionStart = this.selectionStart;
+                this.oldSelectionEnd = this.selectionEnd;
+            } else if (this.hasOwnProperty("oldValue")) {
+                this.value = this.oldValue;
+                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+            } else {
+                this.value = "";
+            }
+        });
+    });
+}
+
 function browserCheck() {
-    let ie, myNav = navigator.userAgent.toLowerCase(),
+    var ie, userAgent = navigator.userAgent.toLowerCase(),
         html = document.documentElement;
 
-    if (('ontouchstart' in window) || (window.DocumentTouch && document instanceof window.DocumentTouch)) {
-        html.classList.add('is-touch');
-        console.log('touch');
-    }
-
-    if ((myNav.indexOf('msie') !== -1)) {
-        ie = ((myNav.indexOf('msie') !== -1) ? parseInt(myNav.split('msie')[1]) : false);
+    if ((userAgent.indexOf('msie') !== -1)) {
+        ie = ((userAgent.indexOf('msie') !== -1) ? parseInt(userAgent.split('msie')[1]) : false);
         html.className += ' ie';
         html.className += ' ie' + ie;
-    } else if (!!myNav.match(/trident.*rv\:11\./)) {
+    } else if (!!userAgent.match(/trident.*rv\:11\./)) {
         ie = 11;
         html.className += ' ie' + ie;
     }
 
-    if (myNav.indexOf('safari') !== -1) {
-        if (myNav.indexOf('chrome') == -1) {
+    if (userAgent.indexOf('safari') !== -1) {
+        if (userAgent.indexOf('chrome') === -1) {
             html.className += ' safari';
         } else {
             html.className += ' chrome';
         }
     }
 
-    if (myNav.indexOf('firefox') !== -1) {
+    if (userAgent.indexOf('firefox') !== -1) {
         html.className += ' firefox';
     }
 
-    if ((myNav.indexOf('windows') !== -1)) {
-        html.className += ' windows';
+    var platform = window.navigator.platform,
+        macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+        windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+        iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+        os = '';
+
+    if (macosPlatforms.indexOf(platform) !== -1) {
+        os = 'macos';
+    } else if (iosPlatforms.indexOf(platform) !== -1) {
+        os = 'ios';
+    } else if (windowsPlatforms.indexOf(platform) !== -1) {
+        os = 'windows';
+    } else if (/android/.test(userAgent)) {
+        os = 'android';
+    } else if (!os && /linux/.test(platform)) {
+        os = 'linux';
     }
 
-    if (navigator.platform.toLowerCase().indexOf('mac') !== -1) {
-        html.className += ' macos';
-    }
+    html.className += os ? ' ' + os : '';
 }
 
 browserCheck();
+
+var itemCounter = document.getElementById('item_count');
+
+if (itemCounter) {
+    setInputFilter(itemCounter, function (value) {
+        return /^[1-9][0-9]*$/.test(value);
+    });
+}
+
+window.smoothScrollTo = function (target, startY, endY, duration) {
+    let distanceY = endY - startY;
+    let startTime = new Date().getTime();
+
+    function easeInOutQuart(time, from, distance, duration) {
+        if ((time /= duration / 2) < 1) {
+            return distance / 2 * Math.pow(time, 4) + from;
+        }
+
+        return -distance / 2 * ((time -= 2) * Math.pow(time, 3) - 2) + from;
+    }
+
+    let timer = window.setInterval(() => {
+        let time = new Date().getTime() - startTime;
+        let newY = easeInOutQuart(time, startY, distanceY, duration);
+
+        if (time >= duration) {
+            window.clearInterval(timer);
+        }
+
+        target.scrollTo(0, newY);
+    }, 1000 / 60);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    var totalBox = document.getElementById('total_box'),
+        totalBoxWrapper = document.getElementById('stuck_wrapper'),
+        temp,
+        isSticky;
+
+    window.fixTotalBox = function () {
+        var totalBoxHeight = totalBox.offsetHeight;
+
+        isSticky = totalBox.classList.contains('stuck');
+        temp = totalBoxWrapper;
+
+        if (!temp) return;
+
+        if ((temp.getBoundingClientRect().top + totalBoxHeight) > window.innerHeight) {
+            if (!isSticky) {
+                totalBoxWrapper.style.height = totalBoxHeight + 'px';
+                totalBox.classList.add('stuck');
+            }
+        } else {
+            if (isSticky) {
+                totalBoxWrapper.style.height = '';
+                totalBox.classList.remove('stuck');
+            }
+        }
+    }
+
+    window.addEventListener('scroll', function () {
+        window.fixTotalBox();
+    });
+
+    window.fixTotalBox();
+
+    let scrollTo = document.querySelectorAll('.scrollTo');
+
+    if (scrollTo.length) {
+        for (let i = 0; i < scrollTo.length; i++) {
+            const btn = scrollTo[i];
+
+            btn.addEventListener("click", function (e) {
+                var target = document.getElementById(e.target.dataset.target);
+
+                if (target) {
+                    window.smoothScrollTo(window, window.pageYOffset, window.pageYOffset + target.getBoundingClientRect().top - 20, 1000);
+                }
+
+                return false;
+            });
+        }
+    }
+});

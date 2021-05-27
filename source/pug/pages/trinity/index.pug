@@ -14,11 +14,21 @@ block vars
 block content
     // ### pug/pages/trinity/index.pug
 
-    include ../../components/switchers
+    .product__panel
+        ul.product__list
+            - var i = 0;
+            while i < (productList.length)
+                li: a.product__item(href='trinity.html' class= (i ? '' : ' active'))
+                    img(src=require('media/logos/prod_' + productList[i] + '.png'))
+                - i++;
 
-    section.page__section
-        .product__panel(x-cloak)
-            //-.configurator__warn(x-show=" !configurator.anyMatch ") Нет подходящих комплектаций
+
+    section.page__section: .configurator__holder.__switcher
+        .configurator__main
+            include ../../components/switchers
+
+            .product__panel(x-cloak)
+                //-.configurator__warn(x-show=" !configurator.anyMatch ") Нет подходящих комплектаций
 
             ul.product__list.__wide
                 //-if (alpineTemplates)
@@ -52,9 +62,15 @@ block content
                                             include ../../components/options
 
                                             a.product__btn(href='configurator.html') Сконфигурировать
+
                                             - counter++;
 
-        include ../../components/description
+            include ../../components/description
+
+        .aside__holder
+            include ../../components/conf_partner
+            include ../../components/conf_features
+            include ../../components/conf_links
 
     // ### pug/pages/trinity/index.pug
 

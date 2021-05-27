@@ -22,7 +22,7 @@
 }
 
 .page_content {
-    padding: 0 0 90px 0;
+    padding: 0 0 46px 0;
     position: relative;
     z-index: 1;
     max-width: 100%;
@@ -152,18 +152,52 @@
     display: none;
 }
 
+.tablet-hidden {
+    @include respond-to-max ($dt) {
+        display: none !important;
+    }
+}
+
 .desktop-hidden {
-    display: none;
+    @include respond-to-min ($wide) {
+        display: none !important;
+    }
 }
 
-@media screen and (max-width: 1199px) {
-    .desktop-hidden {
-        display: block;
-    }
+@include respond-to-max ($wide) {
     .mob-hidden {
-        display: none;
+        display: none !important;
     }
 }
 
+.partner__block {
+    display: block;
+    margin-bottom: 60px;
+    position: relative;
 
+    img {
+        display: inline-block;
+        max-width: 100%;
+    }
 
+    @include respond-to-min($dt) {
+        margin-top: 32px;
+        margin-bottom: 46px;
+
+        .configurator__holder.__bordered & {
+            margin-top: 0;
+        }
+
+        .configurator__holder.__switcher & {
+            height: 150px;
+            overflow: hidden;
+
+            img {
+                top: 50%;
+                left: 50%;
+                position: absolute;
+                @include transform_translate(-50%, -50%);
+            }
+        }
+    }
+}

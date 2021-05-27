@@ -2,6 +2,7 @@ include ../components/breadcrumbs
 
 mixin page(body_cls)
     - var ie11 = false;
+    - var price = true;
     - var alpineTemplates = false;
     - var xData = ' siteData() ';
 
@@ -18,7 +19,7 @@ mixin page(body_cls)
 
                     .page__title: h1= pageTitle
 
-                    include ../components/workflow
+                    //- include ../components/workflow
 
                     //- Content
                     block content

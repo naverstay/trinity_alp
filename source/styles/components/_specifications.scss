@@ -1,0 +1,45 @@
+/* src/assets/styles/components/_specifications.scss  */
+
+.specifications {
+
+    &__holder {
+        margin-bottom: 40px;
+
+        .col {
+            font-size: 16px;
+            line-height: 1.5em;
+            letter-spacing: normal;
+            word-spacing: normal;
+        }
+
+        @include respond-to-min($dt) {
+            display: flex;
+            margin: 0 -25px;
+            flex-flow: row nowrap;
+
+            .col_33 {
+                padding: 0 25px;
+                width: 33.333%;
+            }
+        }
+
+        .block {
+            margin-top: 30px;
+
+            h4 {
+                color: #1c70b7;
+                font-size: 1.2em;
+            }
+        }
+    }
+
+    &__list {
+
+        li {
+            list-style-type: disc;
+            margin-left: 18px;
+            margin-top: 2px;
+        }
+    }
+}
+

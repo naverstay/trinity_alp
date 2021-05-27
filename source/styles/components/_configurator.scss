@@ -1,11 +1,79 @@
 /* src/assets/styles/components/_configurator.scss  */
 
+.aside__holder {
+    @include respond-to-max($dt) {
+        padding-top: 30px;
+    }
+}
+
 .configurator {
+
+    &__tabs {
+        @extend %clearfix;
+        width: 100%;
+
+        &-panel {
+            @include respond-to-max($dt) {
+                &.active + .configurator__tabs-panel {
+                    margin-top: 30px;
+                }
+            }
+
+            @include respond-to-min($tab) {
+                display: inline;
+            }
+        }
+
+        &-inner {
+            width: 100%;
+            padding-top: 1px;
+
+            @include respond-to-min($tab) {
+                border-top: 1px solid #1e70b8;
+                float: left;
+                left: 0;
+            }
+        }
+
+        &-btn.btn {
+
+            &:not(.active) {
+                color: #1c70b7;
+                background: none;
+
+                &:hover {
+                    color: #fff;
+                }
+            }
+
+            @include respond-to-max($tab) {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            @include respond-to-min($tab) {
+                display: inline-flex;
+                height: 60px;
+                min-width: 262px;
+                font-size: 20px;
+                text-align: center;
+
+                .configurator__holder & {
+                    padding-left: 36px;
+                    padding-right: 36px;
+                }
+            }
+        }
+    }
 
     &__holder {
         @extend %global_flex_block_row_wrap_flex-start;
         display: block;
         margin-bottom: 20px;
+
+        &.__bordered {
+            border-top: 1px solid #e9e9e9;
+        }
 
         .btn {
             padding-left: 26px;
@@ -15,7 +83,7 @@
 
         @include respond-to-min($tab) {
             display: flex;
-            margin-bottom: 50px;
+            //margin-bottom: 50px;
         }
     }
 
@@ -32,11 +100,35 @@
         }
 
         &-list {
-            margin-bottom: 42px;
+            &:not(.__alone) {
+                margin-bottom: 42px;
+            }
 
             li {
                 margin-bottom: 3px;
             }
+        }
+
+        &-feature {
+            color: #fff;
+            position: relative;
+            font-size: 16px;
+            list-style: disc;
+
+            + .configurator__aside-feature {
+                margin-top: 12px;
+            }
+
+            //&::before {
+            //    content: '';
+            //    position: absolute;
+            //    width: 5px;
+            //    height: 5px;
+            //    border-radius: 2px;
+            //    left: -20px;
+            //    top: 5px;
+            //    background: #fff;
+            //}
         }
 
         &-link {
@@ -69,7 +161,7 @@
 
         @include respond-to-min($dt) {
             width: 300px;
-            margin-top: 28px;
+            margin-top: 40px;
             display: block;
 
             &-col {
@@ -83,28 +175,28 @@
         width: 100%;
 
         .configurator__row {
-            margin-top: 42px;
+            //margin-top: 42px;
             padding-bottom: 42px;
 
             + .configurator__row {
 
                 &::before {
-                    content: '';
-                    position: absolute;
-                    top: -42px;
-                    right: -15px;
-                    left: -15px;
-                    border-top: 1px solid #e9e9e9;
-
-                    @include respond-to-min($tab) {
-                        left: 0;
-                        right: 0;
-                    }
+                    //content: '';
+                    //position: absolute;
+                    //top: -42px;
+                    //right: -15px;
+                    //left: -15px;
+                    //border-top: 1px solid #e9e9e9;
+                    //
+                    //@include respond-to-min($tab) {
+                    //    left: 0;
+                    //    right: 0;
+                    //}
                 }
             }
 
             @include respond-to-max($dt) {
-                margin-top: 46px;
+                //margin-top: 46px;
                 padding-bottom: 38px;
 
                 &:first-child {
@@ -113,6 +205,12 @@
 
                 &::before {
                     top: -46px;
+                }
+            }
+
+            @include respond-to-min($dt) {
+                &:last-child {
+                    margin-bottom: 15px;
                 }
             }
         }
@@ -126,25 +224,21 @@
 
     &__form {
         width: 100%;
-        margin-bottom: 35px;
+        //margin-bottom: 35px;
 
         .configurator__row {
             padding-top: 7px;
-            padding-bottom: 13px;
-
-            + .configurator__row {
-                margin-top: 15px;
-            }
+            padding-bottom: 7px;
 
             .configurator__icon {
                 top: -7px;
             }
         }
 
-        @include respond-to-min($dt) {
-            padding-right: 340px;
-            margin-bottom: 60px;
-        }
+        //@include respond-to-min($dt) {
+        //    padding-right: 340px;
+        //    margin-bottom: 60px;
+        //}
     }
 
     &__row {
@@ -290,7 +384,6 @@
         + .configurator__label {
             margin-top: 30px;
         }
-
     }
 
     &__options {
@@ -331,8 +424,147 @@
         }
     }
 
+    &__share {
+        font-size: 17px;
+        padding-left: 30px;
+        flex: 1 0 15%;
+
+        a {
+            color: $blue;
+        }
+
+        p {
+            + p {
+                margin-top: 3px;
+            }
+        }
+    }
+
+    &__counter {
+        position: relative;
+        width: 194px;
+        min-width: 194px;
+        padding: 0 32px;
+        text-align: center;
+        margin-bottom: 10px;
+
+        @include respond-to-min($dt) {
+            margin-right: 15px;
+            margin-bottom: 0;
+        }
+
+        @include respond-to-min($wide) {
+            order: 1;
+        }
+
+        &-value {
+            input {
+                display: block;
+                width: 100%;
+                height: 52px;
+                font-size: 25px;
+                line-height: 30px;
+                padding: 11px 5px;
+                background: #fff;
+                text-align: center;
+                color: $blue;
+
+                @include respond-to-min($dt) {
+                    height: 60px;
+                    padding: 15px 5px;
+                }
+            }
+        }
+
+        &-btn.btn {
+            @extend %no-user-select;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            padding: 0;
+            height: auto;
+            width: 32px;
+            color: #fff;
+            font-size: 25px;
+            line-height: 1;
+            background: $blue;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &.__plus {
+                left: 0;
+            }
+
+            &.__minus {
+                right: 0;
+            }
+        }
+    }
+
     &__total {
         @extend %global_flex_block_column_nowrap_flex-start_stretch;
+
+        &-sticky {
+            padding: 10px;
+            margin-bottom: 28px;
+            background: #e2ecf6;
+            max-width: 1290px;
+
+            &.stuck {
+                @include respond-to-min($tab) {
+                    position: fixed;
+                    bottom: -28px;
+                    z-index: 10;
+                    width: calc(100% - 30px);
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+
+                @include respond-to-min($wide) {
+                    width: calc(100% - 68px);
+                }
+            }
+
+            .configurator__total-label {
+                padding-left: 0;
+            }
+
+            .configurator__cell {
+                flex: 0 0 auto;
+
+                @include respond-to-max($dt) {
+                    margin: 0 10px 10px 0;
+                    max-width: 100% !important;
+                }
+
+                @include respond-to-max($mob) {
+                    margin-right: 0;
+                }
+            }
+
+            @include respond-to-min($dt) {
+                padding: 22px 11px 30px 86px;
+                margin-right: -340px;
+            }
+
+            @include respond-to-min($wide) {
+                padding: 22px 30px 30px 105px;
+                max-width: 1252px;
+            }
+        }
+
+        .configurator__total-sticky & {
+            margin-bottom: 0;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: space-between;
+
+            @include respond-to-min($wide) {
+                flex-flow: row nowrap;
+            }
+        }
 
         &-info {
             background: #f6f6f6;
@@ -351,13 +583,45 @@
 
         &-price {
             @extend %global_flex_block_row_wrap_space_between_stretch;
-            padding: 0 20px 67px;
-            min-width: 177px;
+            padding-top: 10px;
+
+            @include respond-to-max($dt) {
+                width: 100%;
+            }
 
             @include respond-to-min($dt) {
+                padding-right: 10px;
+
+                ~ .configurator__total-price {
+                    padding-right: 0;
+                    padding-left: 10px;
+                }
+            }
+
+            @include respond-to-min($wide) {
+                min-width: 177px;
+                margin: 0;
                 flex-flow: column nowrap;
                 padding: 0 0 0 32px;
                 justify-content: center;
+            }
+
+            .configurator__total-sticky & {
+                @include respond-to-min($dt) {
+                    flex: 1 0 50%;
+                }
+
+                @include respond-to-min($wide) {
+                    flex: 1 0 auto;
+                    flex-flow: column nowrap;
+                    padding: 0 0 0 32px;
+                    justify-content: center;
+
+                    &:last-child {
+                        min-width: 235px;
+                        order: 2;
+                    }
+                }
             }
         }
 
@@ -380,13 +644,18 @@
             background: #f6f6f6;
             width: calc(50% - 6px);
 
-            @include respond-to-min($dt) {
+            @include respond-to-min($wide) {
                 background: none;
                 text-align: left;
                 padding: 0;
                 margin-top: 0;
                 white-space: nowrap;
                 width: 100%;
+            }
+
+            .configurator__total-sticky & {
+                font-size: 24px;
+                font-weight: 900;
             }
         }
 

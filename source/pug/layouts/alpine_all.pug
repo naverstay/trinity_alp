@@ -2649,9 +2649,12 @@ script.
                 totalDescription: '',
                 exchangeRate: 75,
                 platformPrice: 208,
+                itemCount: 1,
                 totalPrice: 0,
                 totalPriceD: 0,
+                totalPriceItemsD: 0,
                 totalPriceR: 0,
+                totalPriceItemsR: 0,
                 hddCount: 0
             },
             counts: {
@@ -2706,6 +2709,7 @@ script.
                 Cache: 54
             },
             updateTimer: 0,
+            activeTab: 'configurator',
             switchParam(evt, prm, ind) {
                 evt.preventDefault();
                 this.configurator[prm] = ind;
@@ -2803,6 +2807,35 @@ script.
                     count: this.preselected.hasOwnProperty(typeId) ? this.preselected[typeId] : '0'
                 });
             },
+            setActiveTab(tab) {
+                this.activeTab = tab;
+                let target = document.getElementById('tab_' + tab);
+
+                setTimeout(function () {
+                    if (target && window.innerWidth < 640) {
+                        window.smoothScrollTo(window, window.pageYOffset, window.pageYOffset + target.getBoundingClientRect().top, 1000);
+                    }
+
+                    window.fixTotalBox();
+                }, 0);
+            },
+            updateCounter(evt, upd) {
+                let inp = evt.target.parentNode.querySelector('input[type=number]');
+                if (upd > 0) {
+                    inp.stepUp();
+                } else {
+                    inp.stepDown();
+                }
+
+                this.preset.itemCount = parseInt(inp.value);
+
+                if (isNaN(this.preset.itemCount)) {
+                    this.preset.itemCount = 1;
+                }
+
+                this.preset.totalPriceItemsD = this.pricePrint(this.preset.totalPrice * this.preset.itemCount);
+                this.preset.totalPriceItemsR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice * this.preset.itemCount);
+            },
             updatePreset(skip) {
                 //return;
 
@@ -2865,12 +2898,15 @@ script.
                     }
                 }
 
+
                 if (!skip) {
                     this.preset.totalPrice = price + (this.preset.platformPrice || 0);
                     this.preset.hddCount = hddCount;
                     this.preset.totalDescription = descr.trim().replace(/^\//, '');
                     this.preset.totalPriceR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice);
                     this.preset.totalPriceD = this.pricePrint(this.preset.totalPrice);
+                    this.preset.totalPriceItemsD = this.pricePrint(this.preset.totalPrice * this.preset.itemCount);
+                    this.preset.totalPriceItemsR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice * this.preset.itemCount);
                 }
 
                 //console.log('updatePreset', this.preset);
@@ -3001,7 +3037,13 @@ script.
                 return ret
             },
             getParamList(typeId) {
-                return (this.preset[typeId].list);
+                let ret = this.preset[typeId].list;
+
+                if (ret) {
+
+                }
+
+                return ret;
             },
             removeItem(typeId, ind) {
                 let rm = this.preset[typeId];
@@ -3014,7 +3056,21 @@ script.
                     } else {
                         //rm.count = '0';
                         rm.id = '';
+                        let inp = document.querySelector('input[data-preset="' + typeId + '"][data-index="0"]');
+                        inp.value = ''
+
+                        setTimeout(function () {
+                            if ("createEvent" in document) {
+                                let evt = document.createEvent("HTMLEvents");
+                                evt.initEvent("change", false, true);
+                                inp.dispatchEvent(evt);
+                            } else {
+                                inp.fireEvent("onchange");
+                            }
+                        }, 10);
                     }
+
+                    console.log('removeItem', typeId, this.preset);
 
                     this.updatePreset();
                 }
@@ -3088,8 +3144,12 @@ script.
                     this.preset.totalPriceR = this.pricePrint(this.preset.totalPriceR);
                 }
 
+                this.preset.itemCount = parseInt(this.preset.itemCount || 1)
                 this.preset.totalPrice = parseInt(this.preset.totalPrice || 0)
                 this.preset.platformPrice = parseInt(this.preset.platformPrice || 0)
+
+                this.preset.totalPriceItemsD = this.pricePrint(this.preset.totalPrice * this.preset.itemCount)
+                this.preset.totalPriceItemsR = this.pricePrint(this.preset.totalPrice * this.preset.itemCount * this.preset.exchangeRate)
 
                 window.onpopstate = function () {
                     that.loadHistory();
@@ -3214,6 +3274,7 @@ script.
             open: false,
             options: {},
             placeholder: config.placeholder || 'Select an option',
+            selectedValue: '',
             search: '',
             checkDisabled: function (d) {
                 console.log('checkDisabled', configuratorAlpine(), d);
@@ -3257,6 +3318,12 @@ script.
                 let ds = that.$el.parentNode.dataset;
                 let inp = document.querySelector('input[data-preset="' + ds.preset + '"][data-index="' + ds.index + '"]')
 
+                inp.addEventListener('change', function () {
+                    that.selectedValue = that.value = inp.value;
+                });
+
+                console.log('config', config);
+
                 if (inp && inp.value) {
                     let cur = null;
                     let keys = Object.keys(that.options);
@@ -3268,6 +3335,7 @@ script.
                     }
 
                     that.value = cur;
+                    that.selectedValue = cur;
                 }
 
                 if (!(that.value in that.options)) {
@@ -3310,6 +3378,7 @@ script.
                     let keys = Object.keys(that.options);
 
                     inp.value = that.options[keys[that.value]].id;
+                    that.selectedValue = that.options[keys[that.value]].id;
 
                     setTimeout(function () {
                         if ("createEvent" in document) {

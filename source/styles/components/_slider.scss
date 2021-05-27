@@ -10,9 +10,9 @@
             height: auto;
         }
 
-        @include respond-to-min($dt) {
-            padding-right: 210px;
-        }
+        //@include respond-to-min($wide) {
+        //    padding-right: 210px;
+        //}
     }
 
     &__logo {
@@ -71,7 +71,7 @@
             }
         }
 
-        @include respond-to-min($dt) {
+        @include respond-to-min($wide) {
             float: left;
             width: 420px;
             margin-bottom: 10px;
@@ -101,9 +101,9 @@
             }
         }
 
-        @include respond-to-min($dt) {
+        @include respond-to-min($wide) {
             min-height: 100px;
-            padding-top: 15px;
+            padding-top: 5px;
             padding-bottom: 0;
             margin-left: 470px;
         }
