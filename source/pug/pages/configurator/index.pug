@@ -18,11 +18,11 @@ block scripts
 block content
     // ### pug/pages/configurator/index.pug
 
-    .product__panel
-        ul.product__list
+    .brand__panel
+        ul.brand__list
             - var i = 0;
             while i < (productList.length)
-                li: a.product__item(href='trinity.html' class= (i ? '' : ' active'))
+                li: a.brand__item(href='trinity.html' class= (i ? '' : ' active'))
                     img(src=require('media/logos/prod_' + productList[i] + '.png'))
                 - i++;
 

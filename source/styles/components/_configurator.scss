@@ -59,9 +59,12 @@
             @include respond-to-min($tab) {
                 display: inline-flex;
                 height: 60px;
-                min-width: 262px;
                 font-size: 20px;
                 text-align: center;
+            }
+
+            @include respond-to-min($wide) {
+                min-width: 262px;
 
                 .configurator__holder & {
                     padding-left: 36px;
@@ -354,6 +357,10 @@
 
             &:not(:only-child) {
                 max-width: calc(100% - 170px);
+
+                @include respond-to-min($tab) {
+                    max-width: calc(100% - 190px);
+                }
 
                 &.__wide {
                     max-width: calc(100% - 55px);
