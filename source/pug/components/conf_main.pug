@@ -143,7 +143,7 @@ mixin build_options(arr)
                                 //- var ref = "preset." + d + '.list[0]';
                                 //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
                                 input.input_hidden(@input=" updatePreset() " x-model="collection[index].id" :name="'preset_" + d + "_list_' + index + '_id'" :data-index=' index ' data-preset=d )
-                                +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("collection[index].id") + "', placeholder: 'Выберите из списка' })", "collection[index].id")
+                                +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("collection[index].id") + "', placeholder: 'Выберите из списка' })", d)
 
                             .configurator__cell.__multiply( :class="{ __disabled: " + "!collection[index].id.length" + " }" data-preset=(d + '_count') :data-index=' index ')
                                 //-p(x-text=' item.id.length ')
@@ -173,7 +173,7 @@ mixin build_options(arr)
                         //- var ref = "preset." + d + '.list[0]';
                         //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
                         input.input_hidden(@input=" updatePreset() " x-model="collection[index].id" :name="'preset_" + d + "_list_' + index + '_id'" :data-index=' index ' data-preset=d )
-                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("collection[index].id") + "', placeholder: 'Выберите из списка' })", "collection[index].id")
+                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("collection[index].id") + "', placeholder: 'Выберите из списка' })", d)
 
                 //-.configurator__controls()
                     .configurator__cell.__wide(data-preset=d :data-index=' index ')
@@ -181,7 +181,7 @@ mixin build_options(arr)
                         //- var ref = "preset." + d + '.list[0]';
                         //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
                         input.input_hidden(@input=" updatePreset() " x-model= collection[index].id" :name="'preset_" + d + "_list_' + index + '_id'" :data-index=' index ' data-preset=d )
-                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ( collection[index].id") + "', placeholder: 'Выберите из списка' })", "collection[index].id")
+                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ( collection[index].id") + "', placeholder: 'Выберите из списка' })", d)
 
                     .configurator__cell.__remove( :class="{ __disabled: " + "!collection[index].id.length" + " }" data-preset=(d + '_count') :data-index=' index ')
                         .configurator__cell-rm(  @click=" removeItem('" + d + "', $event.target.dataset.index) " :data-index=' index ') x
@@ -215,7 +215,7 @@ mixin build_options(arr)
                         //- var ref = "preset." + d + '.list[0]';
                         //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
                         input.input_hidden(@input=" updatePreset() " x-model= collection[index].id" :name="'preset_" + d + "_list_' + index + '_id'" :data-index=' index ' data-preset=d )
-                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ( collection[index].id") + "', placeholder: 'Выберите из списка' })", "collection[index].id")
+                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ( collection[index].id") + "', placeholder: 'Выберите из списка' })", d)
 
                     //-.configurator__cell.__remove( :class="{ __disabled: " + "!collection[index].id.length" + " }" data-preset=(d + '_count') :data-index=' index ')
                         .configurator__cell-rm(  @click=" removeItem('" + d + "', $event.target.dataset.index) " :data-index=' index ') x
@@ -241,6 +241,15 @@ mixin build_options(arr)
         .configurator__label Программное обеспечение
         if (templ)
             - var d = 'Soft';
+            //-template(x-for="(item, index, collection) in getParamList('" + d + "')" :key="item" x-if="true")
+                .configurator__controls()
+                    .configurator__cell(data-preset=d :data-index=' index ' :class=  "{ __disabled: !preset.CPU.id.length" + " }" )
+                        //- var ref = "collection[index]";
+                        //- var ref = "preset." + d + '.list[0]';
+                        //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
+                        input.input_hidden(@input=" updatePreset() " x-model="collection[index].id" :name="'preset_" + d + "_list_' + index + '_id'" :data-index=' index ' data-preset=d )
+                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("collection[index].id") + "', placeholder: 'Выберите из списка' })", d)
+
             template(x-for="(item, index, collection) in getParamList('" + d + "')" :key="item" x-if="true")
                 .configurator__controls()
                     .configurator__cell(data-preset=d :data-index=' index ' :class=  "{ __disabled: !preset.CPU.id.length" + " }" )
@@ -248,7 +257,7 @@ mixin build_options(arr)
                         //- var ref = "preset." + d + '.list[0]';
                         //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
                         input.input_hidden(@input=" updatePreset() " x-model="collection[index].id" :name="'preset_" + d + "_list_' + index + '_id'" :data-index=' index ' data-preset=d )
-                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("collection[index].id") + "', placeholder: 'Выберите из списка' })", "collection[index].id")
+                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("collection[index].id") + "', placeholder: 'Выберите из списка' })", d)
 
             //-.configurator__cell(data-preset=d data-index='0')
                 - var ref = "'select_" + d + "_' + index + '_value'";
@@ -278,7 +287,7 @@ mixin build_options(arr)
                         //- var ref = "preset." + d + '.list[0]';
                         //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
                         input.input_hidden(@input=" updatePreset() " x-model="collection[index].id" :name="'preset_" + d + "_list_' + index + '_id'" :data-index=' index ' data-preset=d )
-                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("collection[index].id") + "', placeholder: 'Выберите из списка' })", "collection[index].id")
+                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("collection[index].id") + "', placeholder: 'Выберите из списка' })", d)
 
                 //-.configurator__cell(data-preset=d data-index='0')
                     - var ref = "'select_" + d + "_' + index + '_value'";
@@ -307,7 +316,7 @@ mixin build_options(arr)
                         //- var ref = "preset." + d + '.list[0]';
                         //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')
                         input.input_hidden(@input=" updatePreset() " x-model="collection[index].id" :name="'preset_" + d + "_list_' + index + '_id'" :data-index=' index ' data-preset=d )
-                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("collection[index].id") + "', placeholder: 'Выберите из списка' })", "collection[index].id")
+                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("collection[index].id") + "', placeholder: 'Выберите из списка' })", d)
 
             //-.configurator__cell(data-preset=d data-index='0')
                 - var ref = "'select_" + d + "_' + index + '_value'";
