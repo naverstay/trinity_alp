@@ -14,7 +14,7 @@ mixin page(body_cls)
             include ../components/header
 
             if (!ie11)
-                .container: .page_content(x-data=' configuratorAlpine() ' x-on:update-preset.window="console.log('update-preset ALL', $event.detail); preset = $event.detail.preset; preset.update(123)" x-init=" $watch('preset', value => console.log('$watch preset', value)); init(); " ): .wrapper
+                .container: .page_content(x-data=' configuratorAlpine() ' x-id="alpinePage" x-on:update-preset.window="console.log('update-preset GLOBAL', $event.detail); preset = {...$event.detail.preset};" x-init=" $watch('preset', value => console.log('$watch_preset', value)); init(); " ): .wrapper
                     +breadcrumbs(breadcrumbs)
 
                     .page__title: h1= pageTitle
@@ -47,5 +47,3 @@ mixin page(body_cls)
             gtag('config', 'UA-56237358-2');
 
         include alpine_all
-
-

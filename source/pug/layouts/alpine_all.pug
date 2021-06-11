@@ -1,4 +1,96 @@
 script.
+    window.preset = {
+        loaded: false,
+        totalDescription: '',
+        exchangeRate: 75,
+        currencyOnlyRub: true,
+        platformPrice: 208,
+        itemCount: 1,
+        totalPrice: 0,
+        totalPriceD: 0,
+        totalPriceItemsD: 0,
+        totalPriceR: 0,
+        totalPriceItemsR: 0,
+        hddCount: 0,
+        components: {
+            "Soft": [
+                {
+                    "id": "",
+                    "name": "",
+                    "count": 0
+                },
+                {
+                    "id": "1274",
+                    "type_id": 48,
+                    "brand_id": "30",
+                    "name": "Предустановка UNIX Server 2019 Std Rus, any core",
+                    "short_na1 me": "Предустановка UNIX Server 2019 Std Rus, any core",
+                    "description": "Предустановка UNIX Server 2019 Std Rus, any core",
+                    "max_core": 0,
+                    "price": 877,
+                    "base_price": 877,
+                    "value": "1",
+                    "is_composite": "1",
+                    "is_enabled": "1",
+                    "simple_mode": "1",
+                    "core_count": 1,
+                    "count": 0
+                },
+                {
+                    "id": "1273",
+                    "type_id": 48,
+                    "brand_id": "30",
+                    "name": "Предустановка UNIX Server 2019 Std Rus, 8 core",
+                    "short_na1 me": "Предустановка UNIX Server 2019 Std Rus, any core",
+                    "description": "Предустановка UNIX Server 2019 Std Rus, any core",
+                    "max_core": 8,
+                    "price": 877,
+                    "base_price": 877,
+                    "value": "1",
+                    "is_composite": "1",
+                    "is_enabled": "1",
+                    "simple_mode": "1",
+                    "core_count": 1,
+                    "count": 0
+                },
+                {
+                    "id": "1272",
+                    "type_id": 48,
+                    "brand_id": "30",
+                    "name": "Предустановка Windows Server 2019 Std Rus, 16 core",
+                    "short_na1 me": "Предустановка Windows Server 2019 Std Rus, 16 core",
+                    "description": "Предустановка Windows Server 2019 Std Rus, 16 core",
+                    "max_core": 16,
+                    "price": 877,
+                    "base_price": 877,
+                    "value": "1",
+                    "is_composite": "1",
+                    "is_enabled": "1",
+                    "simple_mode": "1",
+                    "core_count": 1,
+                    "count": 0
+                },
+                {
+                    "id": "1271",
+                    "type_id": 48,
+                    "brand_id": "30",
+                    "name": "Предустановка Windows Server 2019 Std Rus, 24 core",
+                    "short_na1 me": "Предустановка Windows Server 2019 Std Rus, 24 core",
+                    "description": "Предустановка Windows Server 2019 Std Rus, 24 core",
+                    "max_core": 24,
+                    "price": 1303,
+                    "base_price": 1303,
+                    "value": "1",
+                    "is_composite": "1",
+                    "is_enabled": "1",
+                    "simple_mode": "1",
+                    "core_count": 1,
+                    "count": 0
+                }
+            ]
+        }
+    };
+
     function siteData() {
         return {
             popupText: 'Сообщение',
@@ -88,7 +180,7 @@ script.
             brand: {
                 "38": [
                     {
-                        "id": "0",
+                        "id": "",
                         "type_id": "38",
                         "brand_id": "0",
                         "name": "Нет данных",
@@ -334,7 +426,7 @@ script.
                 ],
                 "41": [
                     {
-                        "id": "0",
+                        "id": "",
                         "type_id": "41",
                         "brand_id": "21",
                         "name": "",
@@ -1382,7 +1474,7 @@ script.
                 ],
                 "47": [
                     {
-                        "id": "0",
+                        "id": "",
                         "type_id": "47",
                         "brand_id": "0",
                         "name": "",
@@ -1416,7 +1508,7 @@ script.
                 ],
                 "48": [
                     {
-                        "id": "0",
+                        "id": "",
                         "type_id": "48",
                         "brand_id": "0",
                         "name": "",
@@ -1438,7 +1530,7 @@ script.
                         "name": "Предустановка UNIX Server 2019 Std Rus, any core",
                         "short_na1 me": "Предустановка UNIX Server 2019 Std Rus, any core",
                         "description": "Предустановка UNIX Server 2019 Std Rus, any core",
-                        "core_limit": 0,
+                        "max_core": 0,
                         "price": 877,
                         "base_price": 877,
                         "value": "1",
@@ -1455,7 +1547,7 @@ script.
                         "name": "Предустановка Windows Server 2019 Std Rus, 16 core",
                         "short_na1 me": "Предустановка Windows Server 2019 Std Rus, 16 core",
                         "description": "Предустановка Windows Server 2019 Std Rus, 16 core",
-                        "core_limit": 16,
+                        "max_core": 16,
                         "price": 877,
                         "base_price": 877,
                         "value": "1",
@@ -1472,7 +1564,7 @@ script.
                         "name": "Предустановка Windows Server 2019 Std Rus, 24 core",
                         "short_na1 me": "Предустановка Windows Server 2019 Std Rus, 24 core",
                         "description": "Предустановка Windows Server 2019 Std Rus, 24 core",
-                        "core_limit": 24,
+                        "max_core": 24,
                         "price": 1303,
                         "base_price": 1303,
                         "value": "1",
@@ -1485,7 +1577,7 @@ script.
                 ],
                 "49": [
                     {
-                        "id": "0",
+                        "id": "",
                         "type_id": "49",
                         "brand_id": "0",
                         "name": "",
@@ -1599,7 +1691,7 @@ script.
                 ],
                 "50": [
                     {
-                        "id": "0",
+                        "id": "",
                         "type_id": "50",
                         "brand_id": "0",
                         "name": "",
@@ -1719,100 +1811,7 @@ script.
                 fac: [],
                 ups: []
             },
-            preset: {
-                update: function (val) {
-                    console.log('preset update', val, configuratorAlpine())
-                },
-                loaded: false,
-                totalDescription: '',
-                exchangeRate: 75,
-                currencyOnlyRub: true,
-                platformPrice: 208,
-                itemCount: 1,
-                totalPrice: 0,
-                totalPriceD: 0,
-                totalPriceItemsD: 0,
-                totalPriceR: 0,
-                totalPriceItemsR: 0,
-                hddCount: 0,
-                components: {
-                    "Soft": [
-                        {
-                            "id": "0",
-                            "name": "",
-                            "count": 0
-                        },
-                        {
-                            "id": "1274",
-                            "type_id": 48,
-                            "brand_id": "30",
-                            "name": "Предустановка UNIX Server 2019 Std Rus, any core",
-                            "short_na1 me": "Предустановка UNIX Server 2019 Std Rus, any core",
-                            "description": "Предустановка UNIX Server 2019 Std Rus, any core",
-                            "core_limit": 0,
-                            "price": 877,
-                            "base_price": 877,
-                            "value": "1",
-                            "is_composite": "1",
-                            "is_enabled": "1",
-                            "simple_mode": "1",
-                            "core_count": 1,
-                            "count": 0
-                        },
-                        {
-                            "id": "1273",
-                            "type_id": 48,
-                            "brand_id": "30",
-                            "name": "Предустановка UNIX Server 2019 Std Rus, 8 core",
-                            "short_na1 me": "Предустановка UNIX Server 2019 Std Rus, any core",
-                            "description": "Предустановка UNIX Server 2019 Std Rus, any core",
-                            "core_limit": 8,
-                            "price": 877,
-                            "base_price": 877,
-                            "value": "1",
-                            "is_composite": "1",
-                            "is_enabled": "1",
-                            "simple_mode": "1",
-                            "core_count": 1,
-                            "count": 0
-                        },
-                        {
-                            "id": "1272",
-                            "type_id": 48,
-                            "brand_id": "30",
-                            "name": "Предустановка Windows Server 2019 Std Rus, 16 core",
-                            "short_na1 me": "Предустановка Windows Server 2019 Std Rus, 16 core",
-                            "description": "Предустановка Windows Server 2019 Std Rus, 16 core",
-                            "core_limit": 16,
-                            "price": 877,
-                            "base_price": 877,
-                            "value": "1",
-                            "is_composite": "1",
-                            "is_enabled": "1",
-                            "simple_mode": "1",
-                            "core_count": 1,
-                            "count": 0
-                        },
-                        {
-                            "id": "1271",
-                            "type_id": 48,
-                            "brand_id": "30",
-                            "name": "Предустановка Windows Server 2019 Std Rus, 24 core",
-                            "short_na1 me": "Предустановка Windows Server 2019 Std Rus, 24 core",
-                            "description": "Предустановка Windows Server 2019 Std Rus, 24 core",
-                            "core_limit": 24,
-                            "price": 1303,
-                            "base_price": 1303,
-                            "value": "1",
-                            "is_composite": "1",
-                            "is_enabled": "1",
-                            "simple_mode": "1",
-                            "core_count": 1,
-                            "count": 0
-                        }
-                    ]
-                }
-            },
+            preset: {},
             counts: {
                 "3": "4",
                 "4": "4",
@@ -1958,7 +1957,7 @@ script.
             appendEl(typeId, c) {
                 //console.log('appendEl', typeId, c);
 
-                this.preset[typeId].list.push({
+                window.preset[typeId].list.push({
                     id: '',
                     count: this.preselectedCount(typeId)
                 });
@@ -1986,17 +1985,17 @@ script.
                     inp.stepDown();
                 }
 
-                this.preset.itemCount = parseInt(inp.value);
+                window.preset.itemCount = parseInt(inp.value);
 
-                if (isNaN(this.preset.itemCount)) {
-                    this.preset.itemCount = 1;
+                if (isNaN(window.preset.itemCount)) {
+                    window.preset.itemCount = 1;
                 }
 
-                this.preset.totalPriceItemsD = this.pricePrint(this.preset.totalPrice * this.preset.itemCount);
-                this.preset.totalPriceItemsR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice * this.preset.itemCount);
+                window.preset.totalPriceItemsD = this.pricePrint(window.preset.totalPrice * window.preset.itemCount);
+                window.preset.totalPriceItemsR = this.pricePrint(window.preset.exchangeRate * window.preset.totalPrice * window.preset.itemCount);
             },
             getPreset() {
-                return this.preset;
+                return window.preset;
             },
             updatePreset(skip) {
                 //return;
@@ -2006,75 +2005,83 @@ script.
                 let price = 0;
                 let descr = '';
 
-                for (let typeId in this.partTypeIds) {
-                    let item = this.preset[typeId];
+                if (typeof skip === 'string') {
+                    this.updateDependencies(skip);
+                }
 
-                    if (!item) {
-                        continue;
-                    }
+                for (let typeId in that.partTypeIds) {
+                    if (that.partTypeIds.hasOwnProperty(typeId)) {
+                        let item = window.preset[typeId];
 
-                    if ('list' in item) {
-                        let keys = Object.keys(item.list);
-
-                        for (let ind = 0; ind < keys.length; ind++) {
-                            let component = item.list[keys[ind]];
-
-                            if (!component) {
-                                continue;
-                            }
-
-                            let info = this.getInfo(typeId, component.id);
-
-                            //console.log('typeId', typeId, component, info);
-
-                            if (component.id.length && ind < keys.length) {
-                                let c = parseInt(component.count || 0);
-
-                                if (['SATA', 'SAS', 'SSD'].indexOf(typeId) !== -1) {
-                                    hddCount += c;
-                                }
-
-                                let count = +((component.count || 0));
-
-                                if (this.multiple.indexOf(typeId) !== -1) {
-                                    if (!info.price && component.id == '0') {
-                                        count = 0;
-                                        let len = this.preset[typeId].list.length;
-
-                                        if (len > 1 && (len - 1) > ind) {
-                                            return this.removeItem(typeId, ind);
-                                        }
-                                    } else if (ind === keys.length - 1 && c) {
-                                        this.appendEl(typeId, c);
-                                    }
-                                }
-
-                                descr += (count && info.description) ? ' / ' + info.description : '';
-                                price += count * info.price;
-                            }
+                        if (!item) {
+                            continue;
                         }
-                    } else if (item.id) {
-                        let info = this.getInfo(typeId, item.id);
-                        let count = +((item.count || 0));
-                        descr += (count && info.description) ? ' / ' + info.description : '';
-                        price += count * info.price;
+
+                        if ('list' in item) {
+                            let keys = Object.keys(item.list);
+
+                            for (let ind = 0; ind < keys.length; ind++) {
+                                let component = item.list[keys[ind]];
+
+                                if (!component) {
+                                    continue;
+                                }
+
+                                let info = that.getInfo(typeId, component.id);
+
+                                //console.log('typeId', typeId, component, info);
+
+                                if (component.id.length && ind < keys.length) {
+                                    let c = parseInt(component.count || 0);
+
+                                    if (['SATA', 'SAS', 'SSD'].indexOf(typeId) !== -1) {
+                                        hddCount += c;
+                                    }
+
+                                    let count = +((component.count || 0));
+
+                                    if (that.multiple.indexOf(typeId) !== -1) {
+                                        if (!info.price && component.id == '0') {
+                                            count = 0;
+                                            let len = window.preset[typeId].list.length;
+
+                                            if (len > 1 && (len - 1) > ind) {
+                                                return that.removeItem(typeId, ind);
+                                            }
+                                        } else if (ind === keys.length - 1 && c) {
+                                            that.appendEl(typeId, c);
+                                        }
+                                    }
+
+                                    descr += (count && info.description) ? ' / ' + info.description : '';
+                                    price += count * info.price;
+                                }
+                            }
+                        } else if (item.id) {
+                            let info = that.getInfo(typeId, item.id);
+                            let count = +((item.count || 0));
+                            descr += (count && info.description) ? ' / ' + info.description : '';
+                            price += count * info.price;
+
+
+                        }
                     }
                 }
 
                 if (!skip) {
-                    this.preset.totalPrice = price + (this.preset.platformPrice || 0);
-                    this.preset.hddCount = hddCount;
-                    this.preset.totalDescription = descr.trim().replace(/^\//, '');
-                    this.preset.totalPriceR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice);
-                    this.preset.totalPriceD = this.pricePrint(this.preset.totalPrice);
-                    this.preset.totalPriceItemsD = this.pricePrint(this.preset.totalPrice * this.preset.itemCount);
-                    this.preset.totalPriceItemsR = this.pricePrint(this.preset.exchangeRate * this.preset.totalPrice * this.preset.itemCount);
+                    window.preset.totalPrice = price + (window.preset.platformPrice || 0);
+                    window.preset.hddCount = hddCount;
+                    window.preset.totalDescription = descr.trim().replace(/^\//, '');
+                    window.preset.totalPriceR = that.pricePrint(window.preset.exchangeRate * window.preset.totalPrice);
+                    window.preset.totalPriceD = that.pricePrint(window.preset.totalPrice);
+                    window.preset.totalPriceItemsD = that.pricePrint(window.preset.totalPrice * window.preset.itemCount);
+                    window.preset.totalPriceItemsR = that.pricePrint(window.preset.exchangeRate * window.preset.totalPrice * window.preset.itemCount);
                 }
 
                 setTimeout(function () {
                     let event = new CustomEvent("update-preset", {
                         detail: {
-                            preset: that.preset
+                            preset: window.preset
                         }
                     });
 
@@ -2083,14 +2090,14 @@ script.
                     that.checkFixedBlock()
                 }, 10);
 
-                //console.log('updatePreset', this.preset);
+                //console.log('updatePreset', window.preset);
             },
             preselectedCount(typeId) {
                 return this.preselected.hasOwnProperty(typeId) ? this.preselected[typeId] : '0';
             },
             updateSelect(type, num) {
                 clearTimeout(this.updateTimer);
-                this.preset[type].count = num !== void 0 ? num : this.counts[type] || 1;
+                window.preset[type].count = num !== void 0 ? num : this.counts[type] || 1;
 
                 this.updateTimer = setTimeout(function () {
                     let id = 'preset_' + type + '_count';
@@ -2119,14 +2126,14 @@ script.
                 let that = this;
                 let ret = {};
                 let typeCode = that.partTypeIds[typeId];
-                let curCPU = that.preset.CPU ? that.brand[that.partTypeIds['CPU']].find(f => f.id === that.preset.CPU.id) : void 0;
+                let curCPU = window.preset.CPU ? that.brand[that.partTypeIds['CPU']].find(f => f.id === window.preset.CPU.id) : void 0;
 
                 if (typeCode in that.brand) {
                     let iter = 0;
                     let list = that.brand[typeCode];
 
                     if (typeId === 'Soft' && curCPU) {
-                        list = list.filter(s => s.id === '' || s.core_limit >= curCPU.core_count);
+                        list = list.filter(s => s.id === '' || s.max_core <= curCPU.core_count);
                     }
 
                     for (const x of list) {
@@ -2135,7 +2142,7 @@ script.
                     }
                 }
 
-                console.log('selectOption', typeId, curCPU, that.getPreset(), typeCode, that.preset, ret);
+                console.log('selectOption', typeId, curCPU, typeCode, window.preset, ret);
 
                 return ret
             },
@@ -2164,11 +2171,11 @@ script.
                 let id = '';
                 let count = 0;
 
-                if (typeId in this.preset) {
-                    if (typeof this.preset[typeId].id === 'string') {
-                        id += this.preset[typeId].id
+                if (typeId in window.preset) {
+                    if (typeof window.preset[typeId].id === 'string') {
+                        id += window.preset[typeId].id
                     } else {
-                        id += this.preset[typeId].list[0].id
+                        id += window.preset[typeId].list[0].id
                     }
                 }
 
@@ -2196,11 +2203,11 @@ script.
                 let id = '';
                 let count = 0;
 
-                if (typeId in this.preset) {
-                    if (typeof this.preset[typeId].id === 'string') {
-                        id += this.preset[typeId].id
+                if (typeId in window.preset) {
+                    if (typeof window.preset[typeId].id === 'string') {
+                        id += window.preset[typeId].id
                     } else {
-                        id += this.preset[typeId].list[0].id
+                        id += window.preset[typeId].list[0].id
                     }
                 }
 
@@ -2224,11 +2231,10 @@ script.
                 return ret
             },
             getParamList(typeId) {
-                console.log('getParamList', typeId, this.preset[typeId]);
-                return this.preset[typeId].list;
+                console.log('getParamList', typeId, window.preset[typeId]);
+                return window.preset[typeId].list;
             },
             triggerUpdate(inp) {
-                let that = this;
                 setTimeout(function () {
                     if ("createEvent" in document) {
                         let evt = document.createEvent("HTMLEvents");
@@ -2237,10 +2243,19 @@ script.
                     } else {
                         inp.fireEvent("onchange");
                     }
-                }, 10);
+                }, 5);
+            },
+            updateDependencies(typeId) {
+                if (typeId === 'CPU' && window?.preset?.Soft) {
+                    window.preset.Soft.list = [{id: '', count: this.preselectedCount('Soft')}];
+                }
+
+                if (typeId === 'RAID' && !window?.preset?.RAID?.id?.length) {
+                    window.preset.SAS.list = [{id: '', count: '0'}];
+                }
             },
             removeItem(typeId, ind) {
-                let rm = this.preset[typeId];
+                let rm = window.preset[typeId];
 
                 if (rm) {
                     if ('list' in rm) {
@@ -2248,28 +2263,28 @@ script.
                             rm.list.splice(ind, 1);
                         }
                     } else {
-                        rm.count = '';
+                        rm.count = this.preselectedCount(typeId);
                         rm.id = '';
                     }
 
-                    if (typeId === 'CPU') {
-                        this.preset.Soft.list = [{id: '', count: this.preselectedCount('Soft')}];
-                    }
+                    this.updateDependencies(typeId);
+
+                    console.log('removeItem', typeId, ind, window.preset);
 
                     //let inpCount = document.querySelector('input[data-preset="' + typeId + '_count"][data-index="' + (ind || 0) + '"]');
-
+                    //
                     //if (inpCount) {
-                        //inpCount.value = this.preselected.hasOwnProperty(typeId) ? this.preselected[typeId] : '0';
-                        //this.triggerUpdate(inpCount);
+                    //    inpCount.value = this.preselectedCount('Soft');
+                    //    this.triggerUpdate(inpCount);
                     //}
 
                     let inp = document.querySelector('input[data-preset="' + typeId + '"][data-index="' + (ind || 0) + '"]');
 
                     inp.value = '';
 
-                    this.updatePreset();
-
                     this.triggerUpdate(inp);
+
+                    this.updatePreset();
                 }
             },
             loadHistory() {
@@ -2298,6 +2313,8 @@ script.
                     this.configurator = config;
                     setCookie('configurator', JSON.stringify(this.configurator));
                 }
+
+                console.log('loadHistory', config);
             },
             init() {
                 let multiFields = this.multiple;
@@ -2305,56 +2322,58 @@ script.
 
                 that.loadHistory();
 
-                if (window.hasOwnProperty('order')) {
+                if (!window.preset.loaded && window.hasOwnProperty('order')) {
                     console.log('loading order', window.order);
-                    this.preset = window.order;
-                    this.preset.loaded = true;
-                    //this.updatePreset(true);
+                    window.preset = window.order;
+                    window.preset.loaded = true;
+                    this.updatePreset(true);
                 } else {
                     for (let x in this.partTypeIds) {
                         if (this.partTypeIds.hasOwnProperty(x)) {
                             if ((this.partTypeIds[x] + '') in this.brand) {
 
-                                this.preset.components[x] = this.selectOption(x) // this.brand[this.partTypeIds[x]];
+                                window.preset.components[x] = this.selectOption(x) // this.brand[this.partTypeIds[x]];
 
-                                if (!this.preset.hasOwnProperty(x)) {
+                                if (!window.preset.hasOwnProperty(x)) {
                                     let count = that.preselectedCount(x);
 
                                     if (multiFields.indexOf(x) > -1) {
-                                        //this.preset.hddList.push({name: x, list: [{id: '', count: count}]})
-                                        this.preset[x] = {list: [{id: '', count: count}]};
+                                        //window.preset.hddList.push({name: x, list: [{id: '', count: count}]})
+                                        window.preset[x] = {list: [{id: '', count: count}]};
                                     } else {
-                                        this.preset[x] = {id: '', count: count};
+                                        window.preset[x] = {id: '', count: count};
                                     }
                                 }
                             }
                         }
                     }
 
-                    this.preset.loaded = true;
+                    window.preset.loaded = true;
                     this.updatePreset();
                 }
 
-                if (this.preset.totalPriceD == parseInt(this.preset.totalPriceD)) {
-                    this.preset.totalPriceD = this.pricePrint(this.preset.totalPriceD);
+                if (window.preset.totalPriceD == parseInt(window.preset.totalPriceD)) {
+                    window.preset.totalPriceD = this.pricePrint(window.preset.totalPriceD);
                 }
 
-                if (this.preset.totalPriceR == parseInt(this.preset.totalPriceR)) {
-                    this.preset.totalPriceR = this.pricePrint(this.preset.totalPriceR);
+                if (window.preset.totalPriceR == parseInt(window.preset.totalPriceR)) {
+                    window.preset.totalPriceR = this.pricePrint(window.preset.totalPriceR);
                 }
 
-                this.preset.itemCount = parseInt(this.preset.itemCount || 1)
-                this.preset.totalPrice = parseInt(this.preset.totalPrice || 0)
-                this.preset.platformPrice = parseInt(this.preset.platformPrice || 0)
+                window.preset.itemCount = parseInt(window.preset.itemCount || 1)
+                window.preset.totalPrice = parseInt(window.preset.totalPrice || 0)
+                window.preset.platformPrice = parseInt(window.preset.platformPrice || 0)
 
-                this.preset.totalPriceItemsD = this.pricePrint(this.preset.totalPrice * this.preset.itemCount)
-                this.preset.totalPriceItemsR = this.pricePrint(this.preset.totalPrice * this.preset.itemCount * this.preset.exchangeRate)
+                window.preset.totalPriceItemsD = this.pricePrint(window.preset.totalPrice * window.preset.itemCount)
+                window.preset.totalPriceItemsR = this.pricePrint(window.preset.totalPrice * window.preset.itemCount * window.preset.exchangeRate)
 
-                window.onpopstate = function () {
-                    that.loadHistory();
+                if (!window.preset.loaded) {
+                    window.onpopstate = function () {
+                        that.loadHistory();
+                    }
                 }
 
-                console.log('this.preset', this.preset);
+                console.log('window.preset', window.preset);
             }
         }
     }
@@ -2513,7 +2532,7 @@ script.
                     that.options = that.data();
                 }
 
-                console.log('config', config, that.options);
+                //console.log('selectConfig', typeof that.data, config, that.options);
             },
             init: function () {
                 let that = this;

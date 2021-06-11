@@ -15,8 +15,8 @@ mixin loop_while(counter)
         -i++;
 
 mixin select(data, preset, disabled)
-    .custom-select-container.customSelect(x-data=data data-preset=preset x-init=" init() " @click.away='closeListbox()' @keydown.escape='closeListbox()' x-on:update-preset.window="console.log('update-preset.window " + preset + "', options, data, typeof data, $event.detail); update(); ")
-        span.custom-select-opener(x-ref='button' @click='toggleListboxVisibility()' :aria-expanded='open' aria-haspopup='listbox' :class="{ 'has-value': (selectedValue + '').length > 0 && selectedValue != 0 }")
+    .custom-select-container.customSelect(x-data='(' + data + ')' data-preset=preset x-init=" init() " @click.away='closeListbox()' @keydown.escape='closeListbox()' x-on:update-preset.window="console.log('update-preset.window select " + preset + "', $event.detail); update(); ")
+        span.custom-select-opener(x-ref='button' @click='toggleListboxVisibility()' :aria-expanded='open' aria-haspopup='listbox' :class="{ 'has-value': selectedValue && ((selectedValue + '').length > 0 && selectedValue != 0) }")
             span(x-show='!open' x-html='value in options ? ((options[value].name + "").length ? options[value].name : placeholder) : placeholder' :class="{ 'custom-select-placeholder': !(value in options) }")
             input.custom-select-value(x-ref='value' type='hidden' :name='name' x-model='value')
             input.custom-select-search(x-ref='search' x-show='open' x-model='search' @keydown.enter.stop.prevent='optionClick()' @keydown.arrow-up.prevent='focusPreviousOption()' @keydown.arrow-down.prevent='focusNextOption()' type='search')
