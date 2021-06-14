@@ -1,4 +1,5 @@
 script.
+    window.dev = false;
     window.preset = {
         loaded: false,
         totalDescription: '',
@@ -117,7 +118,7 @@ script.
                 let that = this;
 
                 ref && window.slideToggle(ref, 300, function (ret) {
-                    console.log('ret', ret);
+                    window.dev && console.log('ret', ret);
 
                     if (ret === 'up') {
                         that.activeMenu = 0;
@@ -2049,7 +2050,7 @@ script.
                 return (parseFloat(val).toFixed(2) + '').replace(rx, '$& ')
             },
             appendEl(typeId, c) {
-                //console.log('appendEl', typeId, c);
+                //window.dev && console.log('appendEl', typeId, c);
 
                 window.preset[typeId].list.push({
                     id: '',
@@ -2123,7 +2124,7 @@ script.
 
                                 let info = that.getInfo(typeId, component.id);
 
-                                //console.log('typeId', typeId, component, info);
+                                //window.dev && console.log('typeId', typeId, component, info);
 
                                 if (component.id.length && ind < keys.length) {
                                     let c = parseInt(component.count || 0);
@@ -2184,7 +2185,7 @@ script.
                     that.checkFixedBlock()
                 }, 10);
 
-                //console.log('updatePreset', window.preset);
+                //window.dev && console.log('updatePreset', window.preset);
             },
             preselectedCount(typeId) {
                 return this.preselected.hasOwnProperty(typeId) ? this.preselected[typeId] : '0';
@@ -2196,11 +2197,11 @@ script.
                 this.updateTimer = setTimeout(function () {
                     let id = 'preset_' + type + '_count';
 
-                    // console.log('updateSelect', id, num);
+                    // window.dev && console.log('updateSelect', id, num);
 
                     let sel = document.getElementById(id);
 
-                    // console.log(id, window.cstSel, sel);
+                    // window.dev && console.log(id, window.cstSel, sel);
 
                     if (id in window.cstSel) {
                         for (let i = 0; i < window.cstSel[id].panel.children.length; i++) {
@@ -2236,7 +2237,7 @@ script.
                     }
                 }
 
-                console.log('selectOption', typeId, curCPU, typeCode, window.preset, ret);
+                window.dev && console.log('selectOption', typeId, curCPU, typeCode, window.preset, ret);
 
                 return ret
             },
@@ -2244,7 +2245,7 @@ script.
                 let ret = [];
                 let typeCode = this.partTypeIds[typeId];
 
-                //console.log('count', count);
+                //window.dev && console.log('count', count);
 
                 if (typeCode in this.brand) {
                     for (const x of this.brand[typeCode]) {
@@ -2285,7 +2286,7 @@ script.
 
                 if (count) {
                     for (let i = 0; i < +count; i++) {
-                        //console.log('push', i, count);
+                        //window.dev && console.log('push', i, count);
                         ret.push(i + 1);
                     }
                 }
@@ -2328,7 +2329,7 @@ script.
             },
             getParamList(typeId) {
                 let that = this;
-                console.log('getParamList', typeId, window.preset[typeId]);
+                window.dev && console.log('getParamList', typeId, window.preset[typeId]);
                 return window.preset[typeId].list;
             },
             triggerUpdate(inp) {
@@ -2367,7 +2368,7 @@ script.
 
                     this.updateDependencies(typeId);
 
-                    console.log('removeItem', typeId, ind, window.preset);
+                    window.dev && console.log('removeItem', typeId, ind, window.preset);
 
                     //let inpCount = document.querySelector('input[data-preset="' + typeId + '_count"][data-index="' + (ind || 0) + '"]');
                     //
@@ -2412,7 +2413,7 @@ script.
                     setCookie('configurator', JSON.stringify(this.configurator));
                 }
 
-                console.log('loadHistory', config);
+                window.dev && console.log('loadHistory', config);
             },
             init() {
                 let that = this;
@@ -2421,7 +2422,7 @@ script.
                 that.loadHistory();
 
                 if (!window.preset.loaded && window.hasOwnProperty('order')) {
-                    console.log('loading order', window.order);
+                    window.dev && console.log('loading order', window.order);
                     window.preset = window.order;
                     window.preset.loaded = true;
                     this.updatePreset(true);
@@ -2471,7 +2472,7 @@ script.
                     }
                 }
 
-                console.log('init window.preset', window.preset);
+                window.dev && console.log('init window.preset', window.preset);
             }
         }
     }
@@ -2571,7 +2572,7 @@ script.
                 return JSON.parse(JSON.stringify(formData));
             })
             .then(function (result) {
-                console.log('Success:', result);
+                window.dev && console.log('Success:', result);
                 togglePopup(true, 'Данные отправлены');
             })
             .catch(function (error) {
@@ -2592,7 +2593,7 @@ script.
             selectedValue: '',
             search: '',
             checkDisabled: function (d) {
-                console.log('checkDisabled', configuratorAlpine(), d);
+                window.dev && console.log('checkDisabled', configuratorAlpine(), d);
                 return false;
             },
             closeListbox: function () {
@@ -2630,7 +2631,7 @@ script.
                     that.options = that.data();
                 }
 
-                console.log('selectConfig', typeof that.data, config, that.options);
+                window.dev && console.log('selectConfig', typeof that.data, config, that.options);
             },
             init: function () {
                 let that = this;
@@ -2641,7 +2642,7 @@ script.
 
                 let inp = that.$el.parentNode.querySelector('input') // document.querySelector('input[data-preset="' + ds.preset + '"][data-index="' + ds.index + '"]')
 
-                console.log('### ds', ds, inp);
+                window.dev && console.log('### ds', ds, inp);
 
                 inp.addEventListener('change', function () {
                     that.selectedValue = that.value = inp.value;
@@ -2682,7 +2683,7 @@ script.
                         })
                         .reduce(function (options, key) {
                             options[key] = find[key];
-                            console.log('options', options);
+                            window.dev && console.log('options', options);
                             return options
                         }, {})
                 }));
@@ -2708,14 +2709,14 @@ script.
                             let evt = document.createEvent("HTMLEvents");
                             evt.initEvent("input", false, true);
                             inp.dispatchEvent(evt);
-                            console.log('new val dispatchEvent', that.value, inp.value);
+                            window.dev && console.log('new val dispatchEvent', that.value, inp.value);
                         } else {
                             inp.fireEvent("oninput");
-                            console.log('new val oninput', that.value, inp.value);
+                            window.dev && console.log('new val oninput', that.value, inp.value);
                         }
                     }, 10);
                 } else {
-                    console.log('no_inp', inp, ds);
+                    window.dev && console.log('no_inp', inp, ds);
                 }
             },
             toggleListboxVisibility: function () {
