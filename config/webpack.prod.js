@@ -24,6 +24,14 @@ const prod = {
                     to: PATHS.build + '/vendor/alpine-ie11.min.js'
                 },
                 {
+                    from: PATHS.source + '/vendor/alpine.js',
+                    to: PATHS.build + '/vendor/alpine.js'
+                },
+                {
+                    from: PATHS.source + '/vendor/alpine-ie11.js',
+                    to: PATHS.build + '/vendor/alpine-ie11.js'
+                },
+                {
                     from: PATHS.media + '/data/brand.json',
                     to: PATHS.build + '/source/data/brand.json'
                 },

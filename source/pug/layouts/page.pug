@@ -15,7 +15,7 @@ mixin page(body_cls)
             include ../components/header
 
             if (!ie11)
-                .container: .page_content(x-data=' configuratorAlpine() ' x-on:update-preset.window="console.log('update-preset GLOBAL', $event.detail); $nextTick(() => { preset = {...$event.detail.preset};})" x-init=" $watch('preset', value => console.log('$watch_preset', value)); init(); " ): .wrapper
+                .container: .page_content(x-data=' configuratorAlpine() ' x-on:update-preset.window="console.log('update-preset GLOBAL', $event.detail);  preset = {...$event.detail.preset};" x-init=" $watch('preset', value => console.log('$watch_preset', value)); init(); " ): .wrapper
                     +breadcrumbs(breadcrumbs)
 
                     .page__title: h1= pageTitle
@@ -32,8 +32,8 @@ mixin page(body_cls)
             include ../components/footer
             include ../components/popup
 
-        script(type="module" src="vendor/alpine.min.js?v=" + date)
-        script(nomodule src="vendor/alpine-ie11.min.js?v=" + date defer)
+        script(type="module" src="vendor/alpine.js?v=" + date)
+        script(nomodule src="vendor/alpine-ie11.js?v=" + date defer)
 
         //- block scripts
         block scripts

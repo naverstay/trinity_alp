@@ -69,12 +69,7 @@ const common = {
             page
         ],
         inject: 'body'
-    })).concat([
-        //new webpack.ProvidePlugin({
-        //  $: 'jquery',
-        //  jQuery: 'jquery'
-        //})
-    ])
+    })).concat([])
 };
 
 module.exports = common;
