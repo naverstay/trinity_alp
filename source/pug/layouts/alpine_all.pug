@@ -2172,15 +2172,13 @@ script.
                         }
                     }
 
-                    if (!initiator) {
-                        window.preset.totalPrice = price + (window.preset.platformPrice || 0);
-                        window.preset.hddCount = hddCount;
-                        window.preset.totalDescription = descr.trim().replace(/^\//, '');
-                        window.preset.totalPriceR = that.pricePrint(window.preset.exchangeRate * window.preset.totalPrice);
-                        window.preset.totalPriceD = that.pricePrint(window.preset.totalPrice);
-                        window.preset.totalPriceItemsD = that.pricePrint(window.preset.totalPrice * window.preset.itemCount);
-                        window.preset.totalPriceItemsR = that.pricePrint(window.preset.exchangeRate * window.preset.totalPrice * window.preset.itemCount);
-                    }
+                    window.preset.totalPrice = price + (window.preset.platformPrice || 0);
+                    window.preset.hddCount = hddCount;
+                    window.preset.totalDescription = descr.trim().replace(/^\//, '');
+                    window.preset.totalPriceR = that.pricePrint(window.preset.exchangeRate * window.preset.totalPrice);
+                    window.preset.totalPriceD = that.pricePrint(window.preset.totalPrice);
+                    window.preset.totalPriceItemsD = that.pricePrint(window.preset.totalPrice * window.preset.itemCount);
+                    window.preset.totalPriceItemsR = that.pricePrint(window.preset.exchangeRate * window.preset.totalPrice * window.preset.itemCount);
 
                     let event = new CustomEvent("update-preset", {
                         detail: {
@@ -2191,7 +2189,7 @@ script.
                     window.dispatchEvent(event);
 
                     that.checkFixedBlock()
-                }, 10);
+                }, 5);
 
                 //window.dev && console.log('updatePreset', window.preset);
             },
