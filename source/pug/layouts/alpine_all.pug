@@ -2643,9 +2643,9 @@ script.
 
                 console.log('### ds', ds, inp);
 
-                //inp.addEventListener('change', function () {
-                //    that.selectedValue = that.value = inp.value;
-                //});
+                inp.addEventListener('change', function () {
+                    that.selectedValue = that.value = inp.value;
+                });
 
                 if (inp && inp.value) {
                     let cur = null;
