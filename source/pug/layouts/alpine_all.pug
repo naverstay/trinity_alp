@@ -1,5 +1,5 @@
 script.
-    window.dev = false;
+    window.dev = true;
     window.preset = {
         loaded: false,
         totalDescription: '',
@@ -1985,7 +1985,7 @@ script.
                 setTimeout(function () {
                     setSearch(that.configurator);
                     setCookie('configurator', JSON.stringify(that.configurator));
-                }, 100);
+                }, 1);
 
                 return false;
             },
@@ -2073,6 +2073,10 @@ script.
                 this.checkFixedBlock();
             },
             updateCounter(evt, upd) {
+                let that = this;
+
+                window.dev && console.log('updateCounter', evt, upd);
+
                 let inp = evt.target.parentNode.querySelector('input[type=number]');
                 if (upd > 0) {
                     inp.stepUp();
@@ -2086,94 +2090,98 @@ script.
                     window.preset.itemCount = 1;
                 }
 
-                window.preset.totalPriceItemsD = this.pricePrint(window.preset.totalPrice * window.preset.itemCount);
-                window.preset.totalPriceItemsR = this.pricePrint(window.preset.exchangeRate * window.preset.totalPrice * window.preset.itemCount);
+                that.updatePreset();
             },
             getPreset() {
                 return window.preset;
             },
-            updatePreset(skip) {
+            updatePreset(initiator) {
                 //return;
 
                 let that = this;
-                let hddCount = 0;
-                let price = 0;
-                let descr = '';
 
-                if (typeof skip === 'string') {
-                    this.updateDependencies(skip);
-                }
-
-                for (let typeId in that.partTypeIds) {
-                    if (that.partTypeIds.hasOwnProperty(typeId)) {
-                        let item = window.preset[typeId];
-
-                        if (!item) {
-                            continue;
-                        }
-
-                        if ('list' in item) {
-                            let keys = Object.keys(item.list);
-
-                            for (let ind = 0; ind < keys.length; ind++) {
-                                let component = item.list[keys[ind]];
-
-                                if (!component) {
-                                    continue;
-                                }
-
-                                let info = that.getInfo(typeId, component.id);
-
-                                //window.dev && console.log('typeId', typeId, component, info);
-
-                                if (component.id.length && ind < keys.length) {
-                                    let c = parseInt(component.count || 0);
-
-                                    if (['SATA', 'SAS', 'SSD'].indexOf(typeId) !== -1) {
-                                        hddCount += c;
-                                    }
-
-                                    let count = +((component.count || 0));
-
-                                    if (that.multiple.indexOf(typeId) !== -1) {
-                                        if (!info.price && component.id == '0') {
-                                            count = 0;
-                                            let len = window.preset[typeId].list.length;
-
-                                            if (len > 1 && (len - 1) > ind) {
-                                                return that.removeItem(typeId, ind);
-                                            }
-                                        } else if (ind === keys.length - 1 && c) {
-                                            that.appendEl(typeId, c);
-                                        }
-                                    }
-
-                                    descr += (count && info.description) ? ' / ' + info.description : '';
-                                    price += count * info.price;
-                                }
-                            }
-                        } else if (item.id) {
-                            let info = that.getInfo(typeId, item.id);
-                            let count = +((item.count || 0));
-                            descr += (count && info.description) ? ' / ' + info.description : '';
-                            price += count * info.price;
-
-
-                        }
-                    }
-                }
-
-                if (!skip) {
-                    window.preset.totalPrice = price + (window.preset.platformPrice || 0);
-                    window.preset.hddCount = hddCount;
-                    window.preset.totalDescription = descr.trim().replace(/^\//, '');
-                    window.preset.totalPriceR = that.pricePrint(window.preset.exchangeRate * window.preset.totalPrice);
-                    window.preset.totalPriceD = that.pricePrint(window.preset.totalPrice);
-                    window.preset.totalPriceItemsD = that.pricePrint(window.preset.totalPrice * window.preset.itemCount);
-                    window.preset.totalPriceItemsR = that.pricePrint(window.preset.exchangeRate * window.preset.totalPrice * window.preset.itemCount);
-                }
+                window.dev && console.log('updatePreset', initiator);
 
                 setTimeout(function () {
+                    let hddCount = 0;
+                    let price = 0;
+                    let descr = '';
+
+                    if (initiator) {
+                        that.updateDependencies(initiator);
+                    }
+
+                    for (let typeId in that.partTypeIds) {
+                        if (that.partTypeIds.hasOwnProperty(typeId)) {
+                            let item = window.preset[typeId];
+
+                            if (!item) {
+                                continue;
+                            }
+
+                            if ('list' in item) {
+                                let keys = Object.keys(item.list);
+
+                                for (let ind = 0; ind < keys.length; ind++) {
+                                    let component = item.list[keys[ind]];
+
+                                    if (!component) {
+                                        continue;
+                                    }
+
+                                    let info = that.getInfo(typeId, component.id);
+
+                                    //window.dev && console.log('typeId', typeId, component, info);
+
+                                    if (component.id.length && ind < keys.length) {
+                                        let c = parseInt(component.count || 0);
+
+                                        if (['SATA', 'SAS', 'SSD'].indexOf(typeId) !== -1) {
+                                            hddCount += c;
+                                        }
+
+                                        let count = +((component.count || 0));
+
+                                        if (that.multiple.indexOf(typeId) !== -1) {
+                                            if (!info.price && component.id == '0') {
+                                                count = 0;
+                                                let len = window.preset[typeId].list.length;
+
+                                                if (len > 1 && (len - 1) > ind) {
+                                                    return that.removeItem(typeId, ind);
+                                                }
+                                            } else if (ind === keys.length - 1 && c) {
+                                                that.appendEl(typeId, c);
+                                            }
+                                        }
+
+                                        descr += (count && info.description) ? ' / ' + info.description : '';
+                                        price += count * info.price;
+                                    } else {
+                                        if (item.list.length > 1 && ind < item.list.length - 1) {
+                                            item.list.splice(ind, 1);
+                                        }
+                                    }
+                                }
+                            } else if (item.id) {
+                                let info = that.getInfo(typeId, item.id);
+                                let count = +((item.count || 0));
+                                descr += (count && info.description) ? ' / ' + info.description : '';
+                                price += count * info.price;
+                            }
+                        }
+                    }
+
+                    if (!initiator) {
+                        window.preset.totalPrice = price + (window.preset.platformPrice || 0);
+                        window.preset.hddCount = hddCount;
+                        window.preset.totalDescription = descr.trim().replace(/^\//, '');
+                        window.preset.totalPriceR = that.pricePrint(window.preset.exchangeRate * window.preset.totalPrice);
+                        window.preset.totalPriceD = that.pricePrint(window.preset.totalPrice);
+                        window.preset.totalPriceItemsD = that.pricePrint(window.preset.totalPrice * window.preset.itemCount);
+                        window.preset.totalPriceItemsR = that.pricePrint(window.preset.exchangeRate * window.preset.totalPrice * window.preset.itemCount);
+                    }
+
                     let event = new CustomEvent("update-preset", {
                         detail: {
                             preset: window.preset
@@ -2189,28 +2197,6 @@ script.
             },
             preselectedCount(typeId) {
                 return this.preselected.hasOwnProperty(typeId) ? this.preselected[typeId] : '0';
-            },
-            updateSelect(type, num) {
-                clearTimeout(this.updateTimer);
-                window.preset[type].count = num !== void 0 ? num : this.counts[type] || 1;
-
-                this.updateTimer = setTimeout(function () {
-                    let id = 'preset_' + type + '_count';
-
-                    // window.dev && console.log('updateSelect', id, num);
-
-                    let sel = document.getElementById(id);
-
-                    // window.dev && console.log(id, window.cstSel, sel);
-
-                    if (id in window.cstSel) {
-                        for (let i = 0; i < window.cstSel[id].panel.children.length; i++) {
-                            window.cstSel[id].panel.removeChild(window.cstSel[id].panel.children[i])
-                        }
-
-                        window.cstSel[id].append(sel.options);
-                    }
-                }, 100);
             },
             selectModel(typeId) {
                 //this.offer[typeId] = ''
@@ -2296,7 +2282,7 @@ script.
             selectOptionCount(typeId) {
                 let that = this;
                 let ret = {};
-                let typeCode = this.partTypeIds[typeId];
+                let typeCode = that.partTypeIds[typeId];
                 let id = '';
                 let count = 0;
 
@@ -2308,10 +2294,10 @@ script.
                     }
                 }
 
-                if (typeCode in this.brand) {
-                    for (const x of this.brand[typeCode]) {
+                if (typeCode in that.brand) {
+                    for (const x of that.brand[typeCode]) {
                         if (id = x.id + '') {
-                            count = x.count || this.counts[typeCode] || 1;
+                            count = x.count || that.counts[typeCode] || 1;
                             break;
                         }
                     }
@@ -2356,34 +2342,36 @@ script.
                 let that = this;
                 let rm = window.preset[typeId];
 
+                window.dev && console.log('removeItem', rm, typeId, ind);
+
                 if (rm) {
                     if ('list' in rm) {
                         if (rm.list.length > 1) {
                             rm.list.splice(ind, 1);
                         }
                     } else {
-                        rm.count = this.preselectedCount(typeId);
+                        rm.count = '' // that.preselectedCount(typeId);
                         rm.id = '';
                     }
 
-                    this.updateDependencies(typeId);
+                    that.updateDependencies(typeId);
 
                     window.dev && console.log('removeItem', typeId, ind, window.preset);
 
                     //let inpCount = document.querySelector('input[data-preset="' + typeId + '_count"][data-index="' + (ind || 0) + '"]');
                     //
                     //if (inpCount) {
-                    //    inpCount.value = this.preselectedCount('Soft');
-                    //    this.triggerUpdate(inpCount);
+                    //    inpCount.value = that.preselectedCount('Soft');
+                    //    that.triggerUpdate(inpCount);
                     //}
 
                     let inp = document.querySelector('input[data-preset="' + typeId + '"][data-index="' + (ind || 0) + '"]');
 
                     inp.value = '';
 
-                    this.triggerUpdate(inp);
+                    that.triggerUpdate(inp);
 
-                    this.updatePreset();
+                    that.updatePreset();
                 }
             },
             loadHistory() {
@@ -2425,7 +2413,7 @@ script.
                     window.dev && console.log('loading order', window.order);
                     window.preset = window.order;
                     window.preset.loaded = true;
-                    this.updatePreset(true);
+                    that.updatePreset();
                 } else {
                     for (let x in that.partTypeIds) {
                         if (that.partTypeIds.hasOwnProperty(x)) {
@@ -2714,7 +2702,7 @@ script.
                             inp.fireEvent("oninput");
                             window.dev && console.log('new val oninput', that.value, inp.value);
                         }
-                    }, 10);
+                    }, 5);
                 } else {
                     window.dev && console.log('no_inp', inp, ds);
                 }
