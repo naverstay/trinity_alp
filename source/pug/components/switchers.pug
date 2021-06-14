@@ -3,7 +3,7 @@
 mixin buildSwitch(name)
     - var cls = '__' + name;
 
-    .switcher__list(class=  cls)
+    .switcher__list(class= cls)
         if (false)
             template(x-for="(item, index, collection) in availableParam('" + name + "')" :key='index' x-if="true")
                 li(x-html='getCheck(index, item, "' + name + '" )')
@@ -16,7 +16,7 @@ mixin buildSwitch(name)
                         input(type='checkbox' value= i :checked="{ activeParam('" + name + "', " + (i + 1) + ") }" )
                         span.checkbox__text()= array[i]
 
-                    a.switcher__link(href='#' class=( i > 3 ? 'disabled' : '') @click="{ toggleParam($event, '" + name + "', '" + (array[i]) + "') }" :class= "{ active: activeParam('" + name + "', '" + (array[i]) + "') }")= array[i]
+                    a.switcher__link(href='#' class=( i > 3 ? 'disabled' : '') @click=" toggleParam($event, '" + name + "', '" + (array[i]) + "') " :class= "{ active: activeParam('" + name + "', '" + (array[i]) + "') }")= array[i]
 
 section.page__section
     .switcher__holder

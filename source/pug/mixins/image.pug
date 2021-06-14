@@ -15,16 +15,16 @@ mixin loop_while(counter)
         -i++;
 
 mixin select(data, preset, disabled)
-    .custom-select-container.customSelect(x-data='(' + data + ')' data-preset=preset x-init=" init() " @click.away='closeListbox()' @keydown.escape='closeListbox()' x-on:update-preset.window="console.log('update-preset.window select " + preset + "', $event.detail); update(); ")
+    .custom-select-container.customSelect(x-data='(' + data + ')' data-preset=preset x-init=" $nextTick(() => { init() }) " @click.away='closeListbox()' @keydown.escape='closeListbox()' x-on:update-preset.window="console.log('update-preset.window select " + preset + "', $event.detail); update(); ")
         span.custom-select-opener(x-ref='button' @click='toggleListboxVisibility()' :aria-expanded='open' aria-haspopup='listbox' :class="{ 'has-value': selectedValue && ((selectedValue + '').length > 0 && selectedValue != 0) }")
-            span(x-show='!open' x-html='value in options ? ((options[value].name + "").length ? options[value].name : placeholder) : placeholder' :class="{ 'custom-select-placeholder': !(value in options) }")
+            span(x-show='!open' x-text='value in options ? ((options[value].name + "").length ? options[value].name : placeholder) : placeholder' :class="{ 'custom-select-placeholder': !(value in options) }")
             input.custom-select-value(x-ref='value' type='hidden' :name='name' x-model='value')
             input.custom-select-search(x-ref='search' x-show='open' x-model='search' @keydown.enter.stop.prevent='optionClick()' @keydown.arrow-up.prevent='focusPreviousOption()' @keydown.arrow-down.prevent='focusNextOption()' type='search')
 
         .custom-select-panel(x-show='open' x-cloak='')
             ul.select-list(x-ref='listbox' @keydown.enter.stop.prevent='optionClick()' @keydown.arrow-up.prevent='focusPreviousOption()' @keydown.arrow-down.prevent='focusNextOption()' role='listbox' :aria-activedescendant="focusedOptionIndex !== null ? name + 'Option' + focusedOptionIndex : null" tabindex='-1')
-                template(x-for='(key, index) in Object.keys(options)' :key='index' x-if="true")
-                    li.custom-select-option(:id="name + 'Option' + index" @click='optionClick()' @mouseenter='focusedOptionIndex = index' @mouseleave='focusedOptionIndex = null' role='option' :aria-selected='focusedOptionIndex === index' :class="{ 'is-selected': index === value, 'has-focus': index === focusedOptionIndex }")
-                        span(x-html='Object.values(options)[index].name')
+                template(x-for='(item, index) in options' :key='index' x-if="true")
+                    li.custom-select-option(:id="name + 'Option_' + index" @click='optionClick()' :data-key='item.id' :data-option='item.name' @mouseenter='focusedOptionIndex = index' @mouseleave='focusedOptionIndex = null' role='option' :aria-selected='focusedOptionIndex === index' :class="{ 'is-selected': index === value, 'has-focus': index === focusedOptionIndex }")
+                        span(x-text='item.name')
 
-                .custom-select-option(x-show='! Object.keys(options).length' x-text='emptyOptionsMessage')
+                .custom-select-option.__no-results(x-show='! options.length' x-text='emptyOptionsMessage')

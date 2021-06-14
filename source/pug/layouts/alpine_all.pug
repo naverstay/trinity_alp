@@ -146,24 +146,28 @@ script.
     function slideActions() {
         return {
             slideOpen: false,
-            slideToggle(evt, parent) {
+            slideToggle(evt, elm) {
                 evt.preventDefault();
 
                 let that = this;
 
-                if (parent) {
-                    let slide = parent.querySelectorAll('.slideBlock');
+                if (elm) {
+                    let parent = elm.closest('[x-data]');
 
-                    for (let i = 0; i < slide.length; i++) {
-                        const sld = slide[i];
+                    if (parent) {
+                        let slide = parent.querySelectorAll('.slideBlock');
 
-                        window.slideToggle(sld, 200, function (ret) {
-                            if (ret === 'up') {
-                                that.slideOpen = false;
-                            } else {
-                                that.slideOpen = true;
-                            }
-                        });
+                        for (let i = 0; i < slide.length; i++) {
+                            const sld = slide[i];
+
+                            window.slideToggle(sld, 200, function (ret) {
+                                if (ret === 'up') {
+                                    that.slideOpen = false;
+                                } else {
+                                    that.slideOpen = true;
+                                }
+                            });
+                        }
                     }
                 }
 
@@ -1811,7 +1815,97 @@ script.
                 fac: [],
                 ups: []
             },
-            preset: {},
+            preset: {
+                loaded: false,
+                totalDescription: '',
+                exchangeRate: 75,
+                currencyOnlyRub: true,
+                platformPrice: 208,
+                itemCount: 1,
+                totalPrice: 0,
+                totalPriceD: 0,
+                totalPriceItemsD: 0,
+                totalPriceR: 0,
+                totalPriceItemsR: 0,
+                hddCount: 0,
+                components: {
+                    "Soft": [
+                        {
+                            "id": "",
+                            "name": "",
+                            "count": 0
+                        },
+                        {
+                            "id": "1274",
+                            "type_id": 48,
+                            "brand_id": "30",
+                            "name": "Предустановка UNIX Server 2019 Std Rus, any core",
+                            "short_na1 me": "Предустановка UNIX Server 2019 Std Rus, any core",
+                            "description": "Предустановка UNIX Server 2019 Std Rus, any core",
+                            "max_core": 0,
+                            "price": 877,
+                            "base_price": 877,
+                            "value": "1",
+                            "is_composite": "1",
+                            "is_enabled": "1",
+                            "simple_mode": "1",
+                            "core_count": 1,
+                            "count": 0
+                        },
+                        {
+                            "id": "1273",
+                            "type_id": 48,
+                            "brand_id": "30",
+                            "name": "Предустановка UNIX Server 2019 Std Rus, 8 core",
+                            "short_na1 me": "Предустановка UNIX Server 2019 Std Rus, any core",
+                            "description": "Предустановка UNIX Server 2019 Std Rus, any core",
+                            "max_core": 8,
+                            "price": 877,
+                            "base_price": 877,
+                            "value": "1",
+                            "is_composite": "1",
+                            "is_enabled": "1",
+                            "simple_mode": "1",
+                            "core_count": 1,
+                            "count": 0
+                        },
+                        {
+                            "id": "1272",
+                            "type_id": 48,
+                            "brand_id": "30",
+                            "name": "Предустановка Windows Server 2019 Std Rus, 16 core",
+                            "short_na1 me": "Предустановка Windows Server 2019 Std Rus, 16 core",
+                            "description": "Предустановка Windows Server 2019 Std Rus, 16 core",
+                            "max_core": 16,
+                            "price": 877,
+                            "base_price": 877,
+                            "value": "1",
+                            "is_composite": "1",
+                            "is_enabled": "1",
+                            "simple_mode": "1",
+                            "core_count": 1,
+                            "count": 0
+                        },
+                        {
+                            "id": "1271",
+                            "type_id": 48,
+                            "brand_id": "30",
+                            "name": "Предустановка Windows Server 2019 Std Rus, 24 core",
+                            "short_na1 me": "Предустановка Windows Server 2019 Std Rus, 24 core",
+                            "description": "Предустановка Windows Server 2019 Std Rus, 24 core",
+                            "max_core": 24,
+                            "price": 1303,
+                            "base_price": 1303,
+                            "value": "1",
+                            "is_composite": "1",
+                            "is_enabled": "1",
+                            "simple_mode": "1",
+                            "core_count": 1,
+                            "count": 0
+                        }
+                    ]
+                }
+            },
             counts: {
                 "3": "4",
                 "4": "4",
@@ -1875,16 +1969,16 @@ script.
                 evt.preventDefault();
                 let that = this;
 
-                if (this.configurator.hasOwnProperty(prm)) {
-                    let pos = this.configurator.hasOwnProperty(prm) ? this.configurator[prm].indexOf(name) : -1;
+                if (that.configurator.hasOwnProperty(prm)) {
+                    let pos = that.configurator.hasOwnProperty(prm) ? that.configurator[prm].indexOf(name) : -1;
 
                     if (pos > -1) {
-                        this.configurator[prm].splice(pos, 1);
+                        that.configurator[prm].splice(pos, 1);
                     } else {
-                        this.configurator[prm].push(name);
+                        that.configurator[prm].push(name);
                     }
                 } else {
-                    this.configurator[prm] = [name]
+                    that.configurator[prm] = [name]
                 }
 
                 setTimeout(function () {
@@ -2166,6 +2260,7 @@ script.
                 return ret
             },
             optionsCount(typeId) {
+                let that = this;
                 let ret = [];
                 let typeCode = this.partTypeIds[typeId];
                 let id = '';
@@ -2198,6 +2293,7 @@ script.
                 return ret
             },
             selectOptionCount(typeId) {
+                let that = this;
                 let ret = {};
                 let typeCode = this.partTypeIds[typeId];
                 let id = '';
@@ -2231,6 +2327,7 @@ script.
                 return ret
             },
             getParamList(typeId) {
+                let that = this;
                 console.log('getParamList', typeId, window.preset[typeId]);
                 return window.preset[typeId].list;
             },
@@ -2255,6 +2352,7 @@ script.
                 }
             },
             removeItem(typeId, ind) {
+                let that = this;
                 let rm = window.preset[typeId];
 
                 if (rm) {
@@ -2317,8 +2415,8 @@ script.
                 console.log('loadHistory', config);
             },
             init() {
-                let multiFields = this.multiple;
                 let that = this;
+                let multiFields = that.multiple;
 
                 that.loadHistory();
 
@@ -2328,11 +2426,11 @@ script.
                     window.preset.loaded = true;
                     this.updatePreset(true);
                 } else {
-                    for (let x in this.partTypeIds) {
-                        if (this.partTypeIds.hasOwnProperty(x)) {
-                            if ((this.partTypeIds[x] + '') in this.brand) {
+                    for (let x in that.partTypeIds) {
+                        if (that.partTypeIds.hasOwnProperty(x)) {
+                            if ((that.partTypeIds[x] + '') in that.brand) {
 
-                                window.preset.components[x] = this.selectOption(x) // this.brand[this.partTypeIds[x]];
+                                window.preset.components[x] = that.selectOption(x) // that.brand[that.partTypeIds[x]];
 
                                 if (!window.preset.hasOwnProperty(x)) {
                                     let count = that.preselectedCount(x);
@@ -2349,23 +2447,23 @@ script.
                     }
 
                     window.preset.loaded = true;
-                    this.updatePreset();
+                    that.updatePreset();
                 }
 
                 if (window.preset.totalPriceD == parseInt(window.preset.totalPriceD)) {
-                    window.preset.totalPriceD = this.pricePrint(window.preset.totalPriceD);
+                    window.preset.totalPriceD = that.pricePrint(window.preset.totalPriceD);
                 }
 
                 if (window.preset.totalPriceR == parseInt(window.preset.totalPriceR)) {
-                    window.preset.totalPriceR = this.pricePrint(window.preset.totalPriceR);
+                    window.preset.totalPriceR = that.pricePrint(window.preset.totalPriceR);
                 }
 
                 window.preset.itemCount = parseInt(window.preset.itemCount || 1)
                 window.preset.totalPrice = parseInt(window.preset.totalPrice || 0)
                 window.preset.platformPrice = parseInt(window.preset.platformPrice || 0)
 
-                window.preset.totalPriceItemsD = this.pricePrint(window.preset.totalPrice * window.preset.itemCount)
-                window.preset.totalPriceItemsR = this.pricePrint(window.preset.totalPrice * window.preset.itemCount * window.preset.exchangeRate)
+                window.preset.totalPriceItemsD = that.pricePrint(window.preset.totalPrice * window.preset.itemCount)
+                window.preset.totalPriceItemsR = that.pricePrint(window.preset.totalPrice * window.preset.itemCount * window.preset.exchangeRate)
 
                 if (!window.preset.loaded) {
                     window.onpopstate = function () {
@@ -2373,7 +2471,7 @@ script.
                     }
                 }
 
-                console.log('window.preset', window.preset);
+                console.log('init window.preset', window.preset);
             }
         }
     }
@@ -2532,7 +2630,7 @@ script.
                     that.options = that.data();
                 }
 
-                //console.log('selectConfig', typeof that.data, config, that.options);
+                console.log('selectConfig', typeof that.data, config, that.options);
             },
             init: function () {
                 let that = this;
@@ -2540,11 +2638,14 @@ script.
                 that.update();
 
                 let ds = that.$el.parentNode.dataset;
-                let inp = document.querySelector('input[data-preset="' + ds.preset + '"][data-index="' + ds.index + '"]')
 
-                inp.addEventListener('change', function () {
-                    that.selectedValue = that.value = inp.value;
-                });
+                let inp = that.$el.parentNode.querySelector('input') // document.querySelector('input[data-preset="' + ds.preset + '"][data-index="' + ds.index + '"]')
+
+                console.log('### ds', ds, inp);
+
+                //inp.addEventListener('change', function () {
+                //    that.selectedValue = that.value = inp.value;
+                //});
 
                 if (inp && inp.value) {
                     let cur = null;
