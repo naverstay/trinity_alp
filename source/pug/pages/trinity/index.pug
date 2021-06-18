@@ -2,6 +2,7 @@ extends ../../layouts/master.pug
 
 block vars
     - filterConfig = true;
+    - price = true;
     - var pageTitle = 'Конфигуратор серверов Тринити';
     - var breadcrumbs = ['Конфигуратор серверов', 'Тринити'];
     - var serverParams = {cpu : ['1хCPU', '2хCPU', '4хCPU', '8хCPU'], fac : ['1U', '2U', '3U', '4U', '5U', 'TOWER'], ups : ['1хPS', '2хPS', '4хPS']};
@@ -59,7 +60,7 @@ block content
 
                                             .product__name: a(href='configurator.html') Сервер E110-M5
 
-                                            include ../../components/options
+                                            include ../../components/options_price
 
                                             a.product__btn(href='configurator.html') Сконфигурировать
 
