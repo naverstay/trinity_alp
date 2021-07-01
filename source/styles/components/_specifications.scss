@@ -1,5 +1,70 @@
 /* src/assets/styles/components/_specifications.scss  */
 
+.specifications_block {
+
+    > ul {
+        color: #7c7c7c;
+        padding: 0;
+        list-style: none;
+        font-size: 18px;
+        line-height: 1.35;
+
+        @include respond-to-max($tab) {
+            font-size: 16px;
+        }
+
+        > li {
+            &:not(:last-child) {
+                margin-bottom: .8em;
+            }
+
+            > dl {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: end;
+                -webkit-align-items: flex-end;
+                -ms-flex-align: end;
+                align-items: flex-end;
+
+                > dt, > dd {
+                    width: 50%;
+                }
+
+                > dt {
+                    font-weight: 700;
+                    color: #000;
+                    position: relative;
+                    z-index: 1;
+
+                    > span {
+                        background: #fff;
+                    }
+
+                    @include respond-to-min($mob) {
+
+                        &::after {
+                            content: '';
+                            display: block;
+                            width: 96%;
+                            position: absolute;
+                            left: 2%;
+                            bottom: .25em;
+                            z-index: -1;
+                            border-bottom: 1px dotted #b9b9b9;
+                        }
+                    }
+                }
+
+                @include respond-to-max($mob) {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
 .specifications {
 
     &__holder {

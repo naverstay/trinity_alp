@@ -1,6 +1,86 @@
 // ### pug/components/conf_specifications.pug
 
-.specifications__holder
+.specifications_block
+    ul
+        li: dl
+            dt
+                span Чипсет
+            dd
+                p
+                    span Intel® C621
+        li: dl
+            dt
+                span ОЗУ
+            dd
+                p
+                    span 12 DIMM ECC DDR4-2933/2666/2400/2133, до 768ГБ RDIMM или 1.5ТБ LRDIMM
+        li: dl
+            dt
+                span RAID контроллер
+            dd
+                div Интегрированный SATA RAID0, 1, 5, 10
+                div
+                    | Опционально полноценный аппаратный RAID-контроллер: Microsemi (Adaptec) или Broadcom (LSI)
+                div Для подключения внешних СХД опционально поставляются:
+                div SAS HBA LSI SAS 9300/9400-4e/8e/16e
+                div FC HBA Qlogic QLE2670/2672 (16Гбит/с, LC multimode)
+        li: dl
+            dt
+                span Сеть
+            dd
+                div 2 x 1GBase-T Ethernet (RJ45)
+                div Опционально поставляются карты 10/25/40/50/100Gigabit Ethernet или Infiniband
+        li: dl
+            dt
+                span Слоты расширения
+            dd
+                div "2 PCI-E 3.0 x16 (FHHL) slots
+                div 1 PCI-E 3.0 x8 (LP) slot
+                div 1 PCI-E 3.0 x16 for Add-on-Module (AOM) (внутренний)
+                div 1 PCI-E 3.0 x4 NVMe M.2 slot (внутренний)"
+        li: dl
+            dt
+                span Питание
+            dd
+                p
+                    span
+                        | Дублированный 750Вт блок питания, 220В 50Гц
+                        br
+        li: dl
+            dt
+                span Габариты
+            dd
+                p
+                    span
+                        | 19" 1U, 437х597х43мм (ШхГхВ)
+                        br
+        li: dl
+            dt
+                span Охлаждение
+            dd
+                p
+                    span
+                        | 4шт 40мм 14000RPM, опционально еще 2шт (рекомендуется для процессоров Gold)
+                        br
+        li: dl
+            dt
+                span Управление
+            dd
+                p
+                    span
+                        | IPMI 2.0 с функциями KVM-over-LAN и virtual media over LAN, выделенный порт RJ45
+                        br
+        li: dl
+            dt
+                span Интегрированные устройства
+            dd
+                p
+                    span
+                        | 4xUSB3.0, 12xSATA, Video, 2 разъема SuperDOM
+                        br
+
+
+//-.specifications__holder
     article
         div
             h4 Базовые параметры:

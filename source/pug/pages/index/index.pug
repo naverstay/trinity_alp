@@ -7,9 +7,17 @@ block vars
 block content
     // ### pug/pages/index/index.pug
 
+    .brand__panel
+        ul.brand__list
+            - var i = 0;
+            while i < (productList.length)
+                li: a.brand__item(href='trinity.html')
+                    img(src=require('media/logos/prod_' + productList[i] + '.png'))
+                - i++;
+
     section.page__section: .configurator__holder
         .configurator__main
-            .brand__panel
+            //-.brand__panel
                 ul.brand__list.__small
                     - var i = 0;
                     while i < (productList.length)
