@@ -31,13 +31,18 @@
                 > li {
                     width: 50%;
 
+                    i {
+                        display: block;
+                        font-style: normal;
+                    }
+
                     &:first-child {
                         font-weight: 700;
                         color: #000;
                         position: relative;
                         z-index: 1;
 
-                        > span {
+                        > b {
                             background: #fff;
                         }
 
