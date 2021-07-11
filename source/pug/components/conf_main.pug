@@ -370,12 +370,12 @@ mixin build_options(arr)
 
     .configurator__total-price
         .configurator__total-label Цена
-        .configurator__total-val(x-show='preset.currencyOnlyRub !== true' x-text='"$" + preset.totalPriceD') $1,596
-        .configurator__total-val(x-text='preset.totalPriceR + " ₽"') 132 945 ₽
+        .configurator__total-val(x-show='typeof preset.currencyOnlyRub === "string" ? preset.currencyOnlyRub :  preset.currencyOnlyRub !== true' x-text='"$" + preset.totalPriceD')
+        .configurator__total-val(x-text='typeof preset.totalPriceR === "string" ? preset.totalPriceR : preset.totalPriceR + " ₽"')
 
     .configurator__total-price
         .configurator__total-label Сумма
-        .configurator__total-val(x-show='preset.currencyOnlyRub !== true' x-text='"$" + preset.totalPriceItemsD') $1,596
-        .configurator__total-val(x-text='preset.totalPriceItemsR + " ₽"') 132 945 ₽
+        .configurator__total-val(x-show='typeof preset.currencyOnlyRub === "string" ? preset.currencyOnlyRub : preset.currencyOnlyRub !== true' x-text='"$" + preset.totalPriceItemsD')
+        .configurator__total-val(x-text='typeof preset.totalPriceItemsR === "string" ? preset.totalPriceItemsR : preset.totalPriceItemsR + " ₽"')
 
 // pug/components/conf_main.pug ###

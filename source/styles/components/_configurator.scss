@@ -568,6 +568,10 @@
             @include respond-to-min($wide) {
                 padding: 22px 30px 30px 105px;
                 max-width: 1252px;
+
+                //&.stuck {
+                //    padding: 10px 30px 10px 105px;
+                //}
             }
         }
 
