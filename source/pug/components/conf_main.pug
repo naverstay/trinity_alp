@@ -83,7 +83,7 @@ mixin build_options(arr)
     template(x-if=" preset.loaded && preset.hasOwnProperty('RAID') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_raid.png'))
-        .configurator__label Raid контроллер
+        .configurator__label RAID контроллер
         .configurator__controls
             if (templ)
                 - var d = 'RAID';
@@ -130,6 +130,7 @@ mixin build_options(arr)
             img(src=require('media/system/config_ssd.png'))
         .configurator__label Жесткие диски
         .configurator__warn(x-show=" preset.hddCount > 4 " x-cloak='') Дополнительные компоненты будут поставлены отдельно
+        .configurator__warn(x-show=" !preset?.RAID?.id?.length " x-cloak='') Для добавления SAS дисков, сначала выберите RAID контроллер
 
         - var ssd = ['SATA', 'SAS', 'SSD']
         each d, si in ssd
@@ -163,7 +164,7 @@ mixin build_options(arr)
     template(x-if=" preset.loaded && preset.hasOwnProperty('OtherContr') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_other.png'))
-        .configurator__label Прочие контроллеры X2
+        .configurator__label Прочие контроллеры
         if (templ)
             - var d = 'OtherContr';
             template(x-for="(item, index, collection) in getParamList('" + d + "')" :key="item" x-if="true")
@@ -276,7 +277,7 @@ mixin build_options(arr)
     template(x-if=" preset.loaded && preset.hasOwnProperty('UPS') "): .configurator__row
         .configurator__icon
             img(src=require('media/system/config_ups.png'))
-        .configurator__label ИБП
+        .configurator__label БП
 
         if (templ)
             - var d = 'UPS';

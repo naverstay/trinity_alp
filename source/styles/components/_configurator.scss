@@ -356,7 +356,7 @@
             flex: 1 0 auto;
 
             &:not(:only-child) {
-                max-width: calc(100% - 170px);
+                max-width: calc(100% - 30vw - 10px);
 
                 @include respond-to-min($tab) {
                     max-width: calc(100% - 190px);
@@ -458,11 +458,16 @@
 
     &__counter {
         position: relative;
-        width: 194px;
-        min-width: 194px;
+        width: Min(194px, 30vw);
+        min-width: Min(194px, 30vw);
         padding: 0 32px;
         text-align: center;
         margin-bottom: 10px;
+
+        //@include respond-to-max($dt) {
+        //    width: Min(194px, 20vw);
+        //    min-width: 194px;
+        //}
 
         @include respond-to-min($dt) {
             margin-right: 15px;
@@ -529,14 +534,16 @@
             max-width: 1290px;
 
             &.stuck {
-                @include respond-to-min($tab) {
-                    position: fixed;
-                    bottom: -28px;
-                    z-index: 10;
-                    width: calc(100% - 30px);
-                    left: 50%;
-                    transform: translateX(-50%);
-                }
+                position: fixed;
+                bottom: -28px;
+                z-index: 10;
+                width: calc(100% - 30px);
+                left: 50%;
+                transform: translateX(-50%);
+
+                //@include respond-to-min($dt) {
+                //    width: calc(100% - 30px);
+                //}
 
                 @include respond-to-min($wide) {
                     width: calc(100% - 68px);
@@ -552,7 +559,6 @@
 
                 @include respond-to-max($dt) {
                     margin: 0 10px 10px 0;
-                    max-width: 100% !important;
                 }
 
                 @include respond-to-max($mob) {
@@ -566,7 +572,7 @@
             }
 
             @include respond-to-min($wide) {
-                padding: 22px 30px 30px 105px;
+                padding: 15px 30px 15px 105px;
                 max-width: 1252px;
 
                 //&.stuck {
@@ -607,6 +613,10 @@
 
             @include respond-to-max($dt) {
                 width: 100%;
+            }
+
+            @include respond-to-max($tab) {
+                width: calc(50% - 5px);
             }
 
             @include respond-to-min($dt) {
@@ -662,7 +672,11 @@
             margin-top: 10px;
             text-align: center;
             background: #f6f6f6;
-            width: calc(50% - 6px);
+            width: calc(1000% - 6px);
+
+            @include respond-to-min($tab) {
+                width: calc(50% - 6px);
+            }
 
             @include respond-to-min($wide) {
                 background: none;

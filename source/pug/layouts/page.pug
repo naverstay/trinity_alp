@@ -18,8 +18,6 @@ mixin page(body_cls)
                 .container: .page_content(x-data=' configuratorAlpine() ' x-on:update-preset.window=" window.dev && console.log('update-preset GLOBAL', $event.detail);  preset = {...$event.detail.preset};" x-init=" $watch('preset', value => (window.dev && console.log('$watch_preset', value))); init(); " ): .wrapper
                     +breadcrumbs(breadcrumbs)
 
-                    .page__title: h1= pageTitle
-
                     //- include ../components/workflow
 
                     //- Content

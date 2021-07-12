@@ -5,8 +5,8 @@
     color: #000;
     margin-top: 75px;
     padding-top: 20px;
+    padding-bottom: 20px;
     box-sizing: border-box;
-    clear: both;
 
     &:before {
         content: '';
@@ -27,9 +27,10 @@
 .features_list {
     list-style: none;
     margin-left: -25px;
+    display: flex;
+    flex-flow: row wrap;
 
     li {
-        float: left;
         width: 25%;
         padding-left: 25px;
         margin-bottom: 60px;
@@ -62,6 +63,34 @@
                 line-height: 38px;
             }
         }
+
+        @include respond-to-max($dt) {
+            width: 33.33%;
+
+            &._wide {
+                width: 66.66%;
+                padding-top: 36px;
+                padding-left: 76px;
+            }
+        }
+
+        @include respond-to-max($tab) {
+            width: 50%;
+
+            &._wide {
+                width: 100%;
+                padding-top: 26px;
+                padding-left: 46px;
+            }
+        }
+
+        @include respond-to-max($mob) {
+            width: 100%;
+
+            &._wide {
+                width: 100%;
+            }
+        }
     }
 
     p {
@@ -77,30 +106,29 @@
     margin-bottom: 28px;
     background: left center no-repeat;
 
-    //&._tool {
-    //    @include retina('tool');
-    //}
-    //
-    //&._star {
-    //    @include retina('star');
-    //}
-    //
-    //&._check {
-    //    @include retina('check_2');
-    //}
-    //
-    //&._warranty {
-    //    @include retina('warranty');
-    //}
-    //
-    //&._delivery {
-    //    @include retina('delivery_2');
-    //}
-    //
-    //&._storage {
-    //    @include retina('storage');
-    //}
+    &._tool {
+        @include retina('/features/tool', png, 53px, 47px);
+    }
 
+    &._star {
+        @include retina('/features/star', png, 52px, 47px);
+    }
+
+    &._check {
+        @include retina('/features/check_2', png, 47px, 52px);
+    }
+
+    &._warranty {
+        @include retina('/features/warranty', png, 56px, 51px);
+    }
+
+    &._delivery {
+        @include retina('/features/delivery_2', png, 61px, 45px);
+    }
+
+    &._storage {
+        @include retina('/features/storage', png, 52px, 50px);
+    }
 }
 
 .feature_link {
@@ -130,6 +158,14 @@
 
     &:hover {
         text-decoration: underline;
+    }
+
+    @include respond-to-max($dt) {
+        padding-left: 35px;
+    }
+
+    @include respond-to-max($tab) {
+        padding-left: 15px;
     }
 }
 

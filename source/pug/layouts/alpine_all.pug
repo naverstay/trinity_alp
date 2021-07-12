@@ -4,8 +4,9 @@ script.
         loaded: false,
         totalDescription: '',
         exchangeRate: 75,
-        currencyOnlyRub: true,
+        currencyOnlyRub: false,
         platformPrice: 208,
+        platformPCI: 4,
         itemCount: 1,
         totalPrice: 0,
         totalPriceD: 0,
@@ -1820,8 +1821,9 @@ script.
                 loaded: false,
                 totalDescription: '',
                 exchangeRate: 75,
-                currencyOnlyRub: true,
+                currencyOnlyRub: false,
                 platformPrice: 208,
+                platformPCI: 4,
                 itemCount: 1,
                 totalPrice: 0,
                 totalPriceD: 0,
@@ -2050,7 +2052,13 @@ script.
                 return (parseFloat(val).toFixed(2) + '').replace(rx, '$& ')
             },
             appendEl(typeId, c) {
-                //window.dev && console.log('appendEl', typeId, c);
+                //window.dev && console.log('appendEl', typeId, window.preset[typeId].list);
+
+                if (typeId === 'OtherContr') {
+                    if (window.preset.platformPCI <= window.preset[typeId].list.length) {
+                        return false;
+                    }
+                }
 
                 window.preset[typeId].list.push({
                     id: '',
