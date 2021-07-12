@@ -1,13 +1,28 @@
 // ### pug/components/conf_links.pug
 
-.configurator__aside
+//-.configurator__aside
     .configurator__aside-col
         ul.configurator__aside-list.__alone
             li: a.configurator__aside-link(href='#') Конфигуратор СХД
 
-.configurator__aside
+//-.configurator__aside
     .configurator__aside-col
         ul.configurator__aside-list.__alone
             li: a.configurator__aside-link(href='#') Конфигуратор графических станций
+
+.aside_box
+    a.aside_link.aside_link_shd(href='https://storage.trinitygroup.ru/')
+        span.aside_link_text Конфигуратор СХД
+        span.aside_link_img._shd
+            img(src=require('media/system/conf_shd.png') alt='Конфигуратор СХД')
+
+.aside_box
+    a.aside_link.aside_link_shd(href='https://workstation.trinitygroup.ru/')
+        span.aside_link_text
+            | Конфигуратор
+            br
+            | графических станций
+        span.aside_link_img._gs
+            img(src=require('media/system/conf_gs.png') alt='Конфигуратор графических станций')
 
 // pug/components/conf_links.pug ###

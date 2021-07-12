@@ -6,6 +6,35 @@
     }
 }
 
+.aside_box {
+    margin-top: 40px;
+
+    @include respond-to-max($dt) {
+        margin-bottom: 60px;
+    }
+}
+
+.aside_link {
+    min-height: 195px;
+    background: #f6f6f6;
+    position: relative;
+    display: block;
+    text-decoration: none;
+}
+
+.aside_link_text {
+    display: block;
+    color: #1c70b7;
+    font: 22px/1.2 'Circe-Bold', sans-serif;
+    padding: 35px 35px 10px 50px;
+}
+
+.aside_link_img {
+    display: block;
+    text-align: center;
+    padding: 10px;
+}
+
 .configurator {
 
     &__tabs {
@@ -88,9 +117,14 @@
         }
 
         .btn {
-            padding-left: 26px;
-            padding-right: 26px;
             font-family: $fontCirceBold;
+            padding-left: 10px;
+            padding-right: 10px;
+
+            @include respond-to-min($mob) {
+                padding-left: 26px;
+                padding-right: 26px;
+            }
         }
 
         @include respond-to-min($tab) {
@@ -356,7 +390,11 @@
             flex: 1 0 auto;
 
             &:not(:only-child) {
-                max-width: calc(100% - 30vw - 10px);
+                max-width: calc(100% - 170px);
+
+                .configurator__total & {
+                    max-width: calc(100% - 30vw - 10px);
+                }
 
                 @include respond-to-min($tab) {
                     max-width: calc(100% - 190px);
@@ -690,6 +728,10 @@
             .configurator__total-sticky & {
                 font-size: 24px;
                 font-weight: 900;
+
+                @include respond-to-max($tab) {
+                    font-size: 18px;
+                }
             }
         }
 
