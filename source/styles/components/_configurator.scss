@@ -565,6 +565,11 @@
     &__total {
         @extend %global_flex_block_column_nowrap_flex-start_stretch;
 
+        &-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
         &-sticky {
             padding: 10px;
             margin-bottom: 28px;

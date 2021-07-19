@@ -4,7 +4,7 @@ script.
         loaded: false,
         totalDescription: '',
         exchangeRate: 75,
-        currencyOnlyRub: false,
+        currencyOnlyRub: true,
         platformPrice: 208,
         platformPCI: 4,
         itemCount: 1,
@@ -230,6 +230,7 @@ script.
                         "base_price": 132,
                         "value": "1",
                         "is_composite": "1",
+                        "preinstalled": true,
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
@@ -246,6 +247,7 @@ script.
                         "base_price": 186,
                         "value": "1",
                         "is_composite": "1",
+                        "preinstalled": true,
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
@@ -326,6 +328,7 @@ script.
                         "description": "300GB, 2.5&quot;, 10000rpm, SAS",
                         "price": 129,
                         "base_price": 129,
+                        "preinstalled": true,
                         "value": "1",
                         "is_composite": "1",
                         "is_enabled": "1",
@@ -342,6 +345,7 @@ script.
                         "description": "600GB, 2.5&quot;, 10000rpm, SAS",
                         "price": 218,
                         "base_price": 218,
+                        "preinstalled": true,
                         "value": "1",
                         "is_composite": "1",
                         "is_enabled": "1",
@@ -458,6 +462,7 @@ script.
                         "base_price": 522,
                         "value": "1",
                         "is_composite": "1",
+                        "preinstalled": true,
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
@@ -474,6 +479,7 @@ script.
                         "base_price": 462,
                         "value": "1",
                         "is_composite": "1",
+                        "preinstalled": true,
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
@@ -588,6 +594,7 @@ script.
                         "base_price": 170,
                         "value": "1",
                         "is_composite": "1",
+                        "preinstalled": true,
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
@@ -604,6 +611,7 @@ script.
                         "base_price": 366,
                         "value": "1",
                         "is_composite": "1",
+                        "preinstalled": true,
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
@@ -910,6 +918,7 @@ script.
                         "base_price": 78,
                         "value": "1",
                         "is_composite": "1",
+                        "preinstalled": true,
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
@@ -926,6 +935,7 @@ script.
                         "base_price": 118,
                         "value": "1",
                         "is_composite": "1",
+                        "preinstalled": true,
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
@@ -976,6 +986,7 @@ script.
                         "base_price": 2370,
                         "value": "1",
                         "is_composite": "1",
+                        "preinstalled": true,
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 6,
@@ -992,6 +1003,7 @@ script.
                         "base_price": 936,
                         "value": "1",
                         "is_composite": "1",
+                        "preinstalled": true,
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 4,
@@ -1821,7 +1833,7 @@ script.
                 loaded: false,
                 totalDescription: '',
                 exchangeRate: 75,
-                currencyOnlyRub: false,
+                currencyOnlyRub: true,
                 platformPrice: 208,
                 platformPCI: 4,
                 itemCount: 1,
@@ -1926,6 +1938,14 @@ script.
                 "UPS": "1",
                 "Services": "1",
                 "Switch": "1"
+            },
+            preinstalled: {
+                "CPU": "",
+                "RAM": "",
+                "RAID": "",
+                "SAS": "",
+                "SSD": "",
+                "SATA": "",
             },
             multiple: ['SATA', 'SAS', 'SSD', 'OtherContr', 'Soft', 'UPS', 'Switch'],
             partTypeIds: {
@@ -2040,7 +2060,7 @@ script.
                         let a = arr[i];
 
                         if (a.id + '' === id + '') {
-                            ret = {description: a.description || a.name, price: a.price};
+                            ret = {description: a.description || a.name, price: a.price, preinstalled: a.preinstalled};
                         }
                     }
                 }
@@ -2130,6 +2150,7 @@ script.
 
                             if ('list' in item) {
                                 let keys = Object.keys(item.list);
+                                let skipPreinstalled = false;
 
                                 for (let ind = 0; ind < keys.length; ind++) {
                                     let component = item.list[keys[ind]];
@@ -2144,6 +2165,8 @@ script.
 
                                     if (component.id.length && ind < keys.length) {
                                         let c = parseInt(component.count || 0);
+                                        let itemPrice = info.price;
+                                        let preinstallCorrection = 0;
 
                                         if (['SATA', 'SAS', 'SSD'].indexOf(typeId) !== -1) {
                                             hddCount += c;
@@ -2170,7 +2193,13 @@ script.
                                             priceRequest = true;
                                         }
 
-                                        price += count * info.price;
+                                        if (info.preinstalled && !skipPreinstalled) {
+                                            skipPreinstalled = true;
+                                            preinstallCorrection = 1;
+                                            that.preinstalled[typeId] = item.id;
+                                        }
+
+                                        price += Math.max(0, (count - preinstallCorrection)) * itemPrice;
                                     } else {
                                         if (item.list.length > 1 && ind < item.list.length - 1) {
                                             item.list.splice(ind, 1);
@@ -2180,13 +2209,20 @@ script.
                             } else if (item.id) {
                                 let info = that.getInfo(typeId, item.id);
                                 let count = +((item.count || 0));
+                                let itemPrice = info.price;
+                                let preinstallCorrection = 0;
                                 descr += (count && info.description) ? ' / ' + info.description : '';
 
-                                if (info.price === 0) {
+                                if (itemPrice === 0) {
                                     priceRequest = true;
                                 }
 
-                                price += count * info.price;
+                                if (info.preinstalled) {
+                                    preinstallCorrection = 1;
+                                    that.preinstalled[typeId] = item.id;
+                                }
+
+                                price += Math.max(0, (count - preinstallCorrection)) * itemPrice;
                             }
                         }
                     }
@@ -2364,12 +2400,22 @@ script.
                 if (rm) {
                     if ('list' in rm) {
                         if (rm.list.length > 1) {
+                            if (that.preinstalled[typeId] === rm.list[ind].id) {
+                                that.preinstalled[typeId] = '';
+                            }
+
                             rm.list.splice(ind, 1);
                         }
                     } else {
                         rm.count = '' // that.preselectedCount(typeId);
                         rm.id = '';
                     }
+
+                    if (that.preinstalled[typeId] === rm.id) {
+                        that.preinstalled[typeId] = '';
+                    }
+
+                    console.log('preinstalled', typeId, that.preinstalled);
 
                     that.updateDependencies(typeId);
 
@@ -2714,10 +2760,10 @@ script.
                             let evt = document.createEvent("HTMLEvents");
                             evt.initEvent("input", false, true);
                             inp.dispatchEvent(evt);
-                            window.dev && console.log('new val dispatchEvent', that.value, inp.value);
+                            window.dev && console.log('new val dispatchEvent', that.value, inp, inp.value);
                         } else {
                             inp.fireEvent("oninput");
-                            window.dev && console.log('new val oninput', that.value, inp.value);
+                            window.dev && console.log('new val oninput', that.value, inp, inp.value);
                         }
                     }, 5);
                 } else {
