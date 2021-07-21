@@ -5,6 +5,8 @@ script.
         "totalDescription": " Intel® Xeon® Scalable 6128 Gold 6 Core 3.40G 19.25M 115W",
         "exchangeRate": "75",
         "platformPrice": 1893,
+        "platformPCI": 4,
+        "itemCount": 1,
         "totalPriceD": "6 633.00",
         "totalPriceR": "497 475.00",
         "hddCount": "0",
@@ -44,39 +46,56 @@ script.
             "id": "1198",
             "count": "1"
         },
-        //"OtherContr": {
-        //    "list": [
-        //        {
-        //            "id": "",
-        //            "count": "0"
-        //        }
-        //    ]
-        //},
-        //"Soft": {
-        //    "id": "",
-        //    "count": "0"
-        //},
-        //"Other": {
-        //    "list": [
-        //        {
-        //            "id": "",
-        //            "count": "0"
-        //        }
-        //    ]
-        //},
-        //"UPS": {
-        //    "id": "",
-        //    "count": "0"
-        //},
-        //"Services": {
-        //    "id": "",
-        //    "count": "0"
-        //},
-        //"Switch": {
-        //    "id": "",
-        //    "count": "0"
-        //},
+        "OtherContr": {
+            "list": [
+                {
+                    "id": "",
+                    "count": "0"
+                }
+            ]
+        },
+        "Soft": {
+            "list": [
+                {
+                    "id": "",
+                    "count": "0"
+                }
+            ]
+        },
+        "Other": {
+            "list": [
+                {
+                    "id": "",
+                    "count": "0"
+                }
+            ]
+        },
+        "UPS": {
+            "list": [
+                {
+                    "id": "",
+                    "count": "0"
+                }
+            ]
+        },
+        "Services": {
+            "list": [
+                {
+                    "id": "",
+                    "count": "0"
+                }
+            ]
+        },
+        "Switch": {
+            "list": [
+                {
+                    "id": "",
+                    "count": "0"
+                }
+            ]
+        },
         "loaded": true,
+        "currencyOnlyRub": true,
         "totalPrice": 6633
     };
 
@@ -2447,7 +2466,6 @@ script.
                 return ret
             },
             getParamList(typeId) {
-                let that = this;
                 window.dev && console.log('getParamList', typeId, window.preset[typeId]);
                 return window.preset[typeId].list;
             },
@@ -2554,7 +2572,7 @@ script.
 
                 if (!window.preset.loaded && window.hasOwnProperty('order')) {
                     window.dev && console.log('loading order', window.order);
-                    window.preset = window.order;
+                    window.preset = Object.assign(window.preset, window.order);
                     window.preset.loaded = true;
                     that.updatePreset();
                 } else {
