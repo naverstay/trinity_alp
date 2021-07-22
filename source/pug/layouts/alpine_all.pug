@@ -299,7 +299,37 @@ script.
                         "simple_mode": "1",
                         "core_count": 1,
                         "count": 0
-                    }
+                    },
+                    {
+                        "id": "1296",
+                        "type_id": 38,
+                        "brand_id": "0",
+                        "name": "UPS 1",
+                        "short_name": "UPS 1",
+                        "description": "UPS 1",
+                        "price": 50,
+                        "base_price": 50,
+                        "value": "1",
+                        "is_composite": "1",
+                        "is_enabled": "1",
+                        "simple_mode": "1",
+                        "count": 1
+                    },
+                    {
+                        "id": "1297",
+                        "type_id": 38,
+                        "brand_id": "0",
+                        "name": "UPS 2",
+                        "short_name": "UPS 2",
+                        "description": "UPS 2",
+                        "price": 60,
+                        "base_price": 60,
+                        "value": "1",
+                        "is_composite": "1",
+                        "is_enabled": "1",
+                        "simple_mode": "1",
+                        "count": 1
+                    },
                 ],
                 "39": [
                     {
@@ -2062,7 +2092,15 @@ script.
                 "SSD": "",
                 "SATA": "",
             },
-            multiple: ['SATA', 'SAS', 'SSD', 'OtherContr', 'Soft', 'UPS', 'Switch'],
+            multiple: {
+                "SATA": 0,
+                "SAS": 0,
+                "SSD": 0,
+                "OtherContr": 0,
+                "Soft": 0,
+                "UPS": 3,
+                "Switch": 0
+            },
             partTypeIds: {
                 "CPU": 46,
                 "RAM": 43,
@@ -2187,6 +2225,8 @@ script.
                 return (parseFloat(val).toFixed(2) + '').replace(rx, '$& ')
             },
             appendEl(typeId, c) {
+                let that = this;
+
                 //window.dev && console.log('appendEl', typeId, window.preset[typeId].list);
 
                 if (typeId === 'OtherContr') {
@@ -2195,10 +2235,14 @@ script.
                     }
                 }
 
-                window.preset[typeId].list.push({
-                    id: '',
-                    count: this.preselectedCount(typeId)
-                });
+                if (that.multiple.hasOwnProperty(typeId)) {
+                    if (that.multiple[typeId] === 0 || that.multiple[typeId] > window.preset[typeId].list.length) {
+                        window.preset[typeId].list.push({
+                            id: '',
+                            count: this.preselectedCount(typeId)
+                        });
+                    }
+                }
             },
             checkFixedBlock() {
                 setTimeout(function () {
@@ -2289,7 +2333,7 @@ script.
 
                                         let count = +((component.count || 0));
 
-                                        if (that.multiple.indexOf(typeId) !== -1) {
+                                        if (that.multiple.hasOwnProperty(typeId)) {
                                             if (!info.price && component.id == '0') {
                                                 count = 0;
                                                 let len = window.preset[typeId].list.length;
@@ -2602,7 +2646,7 @@ script.
                                 if (!window.preset.hasOwnProperty(x)) {
                                     let count = that.preselectedCount(x);
 
-                                    if (multiFields.indexOf(x) > -1) {
+                                    if (multiFields.hasOwnProperty(x)) {
                                         //window.preset.hddList.push({name: x, list: [{id: '', count: count}]})
                                         window.preset[x] = {list: [{id: '', count: count}]};
                                     } else {
