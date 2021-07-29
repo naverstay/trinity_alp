@@ -131,7 +131,7 @@ mixin build_options(arr)
         .configurator__icon
             img(src=require('media/system/config_ssd.png'))
         .configurator__label Жесткие диски
-        .configurator__warn(x-show=" preset.hddCount > 4 " x-cloak='') Дополнительные компоненты будут поставлены отдельно
+        .configurator__warn(x-show=" preset.hddCount25 > 4 || preset.hddCount35 > 4 || (preset.hddCountSATA + preset.hddCountSAS) > (4 + preset.hddLimitSAS) " x-cloak='') Дополнительные компоненты будут поставлены отдельно
         .configurator__warn(x-show=" !preset?.RAID?.id?.length " x-cloak='') Для добавления SAS дисков, сначала выберите RAID контроллер
 
         - var ssd = ['SATA', 'SAS', 'SSD']
@@ -264,7 +264,7 @@ mixin build_options(arr)
 
             template(x-for="(item, index, collection) in getParamList('" + d + "')" :key="item" x-if="true")
                 .configurator__controls()
-                    .configurator__cell(data-preset=d :data-index=' index ' :class=  "{ __disabled: !preset?.CPU?.id?.length" + " }" )
+                    .configurator__cell(data-preset=d :data-index=' index ')
                         //- var ref = "collection[index]";
                         //- var ref = "preset." + d + '.list[0]';
                         //- p(x-html=' "#" + index + " __ " + collection.length + "#" ')

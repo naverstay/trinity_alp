@@ -113,6 +113,11 @@ script.
         totalPriceR: 0,
         totalPriceItemsR: 0,
         hddCount: 0,
+        hddCount25: 0,
+        hddCount35: 0,
+        hddCountSAS: 0,
+        hddLimitSAS: 0,
+        hddCountSATA: 0,
         components: {
             "Soft": [
                 {
@@ -144,7 +149,7 @@ script.
                     "name": "Предустановка UNIX Server 2019 Std Rus, 8 core",
                     "short_na1 me": "Предустановка UNIX Server 2019 Std Rus, any core",
                     "description": "Предустановка UNIX Server 2019 Std Rus, any core",
-                    "max_core": 8,
+                    "max_core": 0,
                     "price": 877,
                     "base_price": 877,
                     "value": "1",
@@ -161,7 +166,7 @@ script.
                     "name": "Предустановка Windows Server 2019 Std Rus, 16 core",
                     "short_na1 me": "Предустановка Windows Server 2019 Std Rus, 16 core",
                     "description": "Предустановка Windows Server 2019 Std Rus, 16 core",
-                    "max_core": 16,
+                    "max_core": 0,
                     "price": 877,
                     "base_price": 877,
                     "value": "1",
@@ -178,7 +183,7 @@ script.
                     "name": "Предустановка Windows Server 2019 Std Rus, 24 core",
                     "short_na1 me": "Предустановка Windows Server 2019 Std Rus, 24 core",
                     "description": "Предустановка Windows Server 2019 Std Rus, 24 core",
-                    "max_core": 24,
+                    "max_core": 0,
                     "price": 1303,
                     "base_price": 1303,
                     "value": "1",
@@ -459,6 +464,7 @@ script.
                         "base_price": 129,
                         "preinstalled": true,
                         "value": "1",
+                        "formFactor": "25",
                         "is_composite": "1",
                         "is_enabled": "1",
                         "simple_mode": "1",
@@ -476,6 +482,7 @@ script.
                         "base_price": 218,
                         "preinstalled": true,
                         "value": "1",
+                        "formFactor": "35",
                         "is_composite": "1",
                         "is_enabled": "1",
                         "simple_mode": "1",
@@ -492,6 +499,7 @@ script.
                         "price": 258,
                         "base_price": 258,
                         "value": "1",
+                        "formFactor": "35",
                         "is_composite": "1",
                         "is_enabled": "1",
                         "simple_mode": "1",
@@ -508,6 +516,7 @@ script.
                         "price": 261,
                         "base_price": 261,
                         "value": "1",
+                        "formFactor": "25",
                         "is_composite": "1",
                         "is_enabled": "1",
                         "simple_mode": "1",
@@ -524,6 +533,7 @@ script.
                         "price": 358,
                         "base_price": 358,
                         "value": "1",
+                        "formFactor": "25",
                         "is_composite": "1",
                         "is_enabled": "1",
                         "simple_mode": "1",
@@ -540,6 +550,7 @@ script.
                         "price": 212,
                         "base_price": 212,
                         "value": "1",
+                        "formFactor": "25",
                         "is_composite": "1",
                         "is_enabled": "1",
                         "simple_mode": "1",
@@ -556,6 +567,7 @@ script.
                         "price": 294,
                         "base_price": 294,
                         "value": "1",
+                        "formFactor": "25",
                         "is_composite": "1",
                         "is_enabled": "1",
                         "simple_mode": "1",
@@ -578,6 +590,7 @@ script.
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
+                        "sas_count": 2,
                         "count": 0
                     },
                     {
@@ -595,6 +608,7 @@ script.
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
+                        "sas_count": 2,
                         "count": 0
                     },
                     {
@@ -612,6 +626,7 @@ script.
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
+                        "sas_count": 3,
                         "count": 0
                     },
                     {
@@ -628,6 +643,7 @@ script.
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
+                        "sas_count": 1,
                         "count": 0
                     },
                     {
@@ -644,6 +660,7 @@ script.
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
+                        "sas_count": 5,
                         "count": 0
                     },
                     {
@@ -660,6 +677,7 @@ script.
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
+                        "sas_count": 3,
                         "count": 0
                     },
                     {
@@ -676,6 +694,7 @@ script.
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
+                        "sas_count": 4,
                         "count": 0
                     },
                     {
@@ -692,6 +711,7 @@ script.
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
+                        "sas_count": 2,
                         "count": 0
                     }
                 ],
@@ -1710,7 +1730,7 @@ script.
                         "name": "Предустановка Windows Server 2019 Std Rus, 16 core",
                         "short_na1 me": "Предустановка Windows Server 2019 Std Rus, 16 core",
                         "description": "Предустановка Windows Server 2019 Std Rus, 16 core",
-                        "max_core": 16,
+                        "max_core": 0,
                         "price": 877,
                         "base_price": 877,
                         "value": "1",
@@ -1727,7 +1747,7 @@ script.
                         "name": "Предустановка Windows Server 2019 Std Rus, 24 core",
                         "short_na1 me": "Предустановка Windows Server 2019 Std Rus, 24 core",
                         "description": "Предустановка Windows Server 2019 Std Rus, 24 core",
-                        "max_core": 24,
+                        "max_core": 0,
                         "price": 1303,
                         "base_price": 1303,
                         "value": "1",
@@ -1988,6 +2008,11 @@ script.
                 totalPriceR: 0,
                 totalPriceItemsR: 0,
                 hddCount: 0,
+                hddCount25: 0,
+                hddCount35: 0,
+                hddCountSAS: 0,
+                hddLimitSAS: 0,
+                hddCountSATA: 0,
                 components: {
                     "Soft": [
                         {
@@ -2019,7 +2044,7 @@ script.
                             "name": "Предустановка UNIX Server 2019 Std Rus, 8 core",
                             "short_na1 me": "Предустановка UNIX Server 2019 Std Rus, any core",
                             "description": "Предустановка UNIX Server 2019 Std Rus, any core",
-                            "max_core": 8,
+                            "max_core": 0,
                             "price": 877,
                             "base_price": 877,
                             "value": "1",
@@ -2036,7 +2061,7 @@ script.
                             "name": "Предустановка Windows Server 2019 Std Rus, 16 core",
                             "short_na1 me": "Предустановка Windows Server 2019 Std Rus, 16 core",
                             "description": "Предустановка Windows Server 2019 Std Rus, 16 core",
-                            "max_core": 16,
+                            "max_core": 0,
                             "price": 877,
                             "base_price": 877,
                             "value": "1",
@@ -2053,7 +2078,7 @@ script.
                             "name": "Предустановка Windows Server 2019 Std Rus, 24 core",
                             "short_na1 me": "Предустановка Windows Server 2019 Std Rus, 24 core",
                             "description": "Предустановка Windows Server 2019 Std Rus, 24 core",
-                            "max_core": 24,
+                            "max_core": 0,
                             "price": 1303,
                             "base_price": 1303,
                             "value": "1",
@@ -2213,7 +2238,7 @@ script.
                         let a = arr[i];
 
                         if (a.id + '' === id + '') {
-                            ret = {description: a.description || a.name, price: a.price, preinstalled: a.preinstalled};
+                            ret = {description: a.description || a.name, price: a.price, preinstalled: a.preinstalled, formFactor: a.formFactor, sas_count: a.sas_count};
                         }
                     }
                 }
@@ -2292,6 +2317,10 @@ script.
 
                 setTimeout(function () {
                     let hddCount = 0;
+                    let hddCount25 = 0;
+                    let hddCount35 = 0;
+                    let hddCountSAS = 0;
+                    let hddCountSATA = 0;
                     let price = 0;
                     let descr = '';
 
@@ -2327,8 +2356,22 @@ script.
                                         let itemPrice = info.price;
                                         let preinstallCorrection = 0;
 
-                                        if (['SATA', 'SAS', 'SSD'].indexOf(typeId) !== -1) {
-                                            hddCount += c;
+                                        switch (typeId) {
+                                            case 'SATA':
+                                                hddCountSATA += c;
+                                                break;
+                                            case 'SAS':
+                                                hddCountSAS += c;
+                                                break;
+                                            case 'SSD':
+                                                if (info.formFactor === '25') {
+                                                    hddCount25 += c;
+                                                } else if (info.formFactor === '35') {
+                                                    hddCount35 += c;
+                                                } else {
+                                                    hddCount += c;
+                                                }
+                                                break;
                                         }
 
                                         let count = +((component.count || 0));
@@ -2388,6 +2431,10 @@ script.
 
                     window.preset.totalPrice = priceRequest ? 'по запросу' : price + (window.preset.platformPrice || 0);
                     window.preset.hddCount = hddCount;
+                    window.preset.hddCount25 = hddCount25;
+                    window.preset.hddCount35 = hddCount35;
+                    window.preset.hddCountSAS = hddCountSAS;
+                    window.preset.hddCountSATA = hddCountSATA;
                     window.preset.totalDescription = descr.trim().replace(/^\//, '');
                     window.preset.totalPriceR = priceRequest ? 'по запросу' :  that.pricePrint(window.preset.exchangeRate * window.preset.totalPrice);
                     window.preset.totalPriceD = priceRequest ? 'по запросу' : that.pricePrint(window.preset.totalPrice);
@@ -2541,12 +2588,25 @@ script.
                 }, 5);
             },
             updateDependencies(typeId) {
+                let that = this;
+
                 if (typeId === 'CPU' && window?.preset?.Soft) {
-                    window.preset.Soft.list = [{id: '', count: this.preselectedCount('Soft')}];
+                    window.preset.Soft.list = [{id: '', count: that.preselectedCount('Soft')}];
                 }
 
-                if (typeId === 'RAID' && !window?.preset?.RAID?.id?.length) {
-                    window.preset.SAS.list = [{id: '', count: '0'}];
+                if (typeId === 'RAID') {
+                    if (!window?.preset?.RAID?.id?.length) {
+                        window.preset.SAS.list = [{id: '', count: '0'}];
+                        window.preset.hddCountSAS = 0;
+                        window.preset.hddLimitSAS = 0;
+                    } else {
+                        let component = that.getInfo(typeId, window.preset.RAID.id);
+
+                        console.log('component', component);
+                        if (component) {
+                            window.preset.hddLimitSAS = component.sas_count;
+                        }
+                    }
                 }
             },
             removeItem(typeId, ind) {
