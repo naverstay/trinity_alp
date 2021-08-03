@@ -99,6 +99,57 @@ script.
     //    "totalPrice": 6633
     //};
 
+    window.preset3 = {
+        "loaded": false,
+        "totalDescription": "",
+        "exchangeRate": 73.609999999999999,
+        "currencyOnlyRub": false,
+        "platformPrice": 0,
+        "platformPCI": "2",
+        "itemCount": 1,
+        "totalPrice": 0,
+        "totalPriceD": 0,
+        "totalPriceItemsD": 0,
+        "totalPriceR": 0,
+        "totalPriceItemsR": 0,
+        "hddCount": 0,
+        "hddCount25": 0,
+        "hddCount35": 0,
+        "hddCountSAS": 0,
+        "hddLimitSAS": 0,
+        "hddCountSATA": 0,
+        "components": {
+            "CPU": {"id": "", "count": 0, "list": [{"id": "1724", "count": 1}]},
+            "RAM": {"id": "", "count": 0, "list": [{"id": "1725", "count": 1}, {"id": "1726", "count": 1}]},
+            "SSD": {"list": [{"id": "", "count": 0}]},
+            "SATA": {"list": [{"id": "", "count": 0}]},
+            "SAS": {
+                "list": [{"id": "", "count": 0}, {"id": "1751", "count": 1}, {
+                    "id": "1754",
+                    "count": 1
+                }, {"id": "1752", "count": 1}, {"id": "1755", "count": 1}, {"id": "1753", "count": 1}]
+            },
+            "RAID": {
+                "id": "",
+                "count": 0,
+                "list": [{"id": "1728", "count": 1}, {"id": "1731", "count": 1}, {
+                    "id": "1729",
+                    "count": 1
+                }, {"id": "1730", "count": 1}]
+            },
+            "OtherContr": {"list": [{"id": "", "count": 0}]},
+            "Soft": {"id": "", "count": 0},
+            "Other": {"list": [{"id": "", "count": 0}]},
+            "UPS": {"id": "", "count": 0, "list": [{"id": "1733", "count": 1}, {"id": "1734", "count": 1}]},
+            "Services": {"id": "", "count": 0},
+            "Switch": {"id": "", "count": 0}
+        },
+        "CPU": {"id": "1724", "count": 1},
+        "RAM": {"id": "1726", "count": 1},
+        "RAID": {"id": "1729", "count": 1},
+        //"UPS": {"id": "1734", "count": 1}
+    };
+
     window.preset = {
         loaded: false,
         totalDescription: '',
@@ -608,7 +659,7 @@ script.
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
-                        "sas_count": 2,
+                        "sas_count": 8,
                         "count": 0
                     },
                     {
@@ -643,7 +694,7 @@ script.
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
-                        "sas_count": 1,
+                        "sas_count": 8,
                         "count": 0
                     },
                     {
@@ -694,7 +745,7 @@ script.
                         "is_enabled": "1",
                         "simple_mode": "1",
                         "core_count": 1,
-                        "sas_count": 4,
+                        "sas_count": 8,
                         "count": 0
                     },
                     {
@@ -2247,7 +2298,7 @@ script.
             },
             pricePrint(val) {
                 let rx = /\d{1,3}(?=(\d{3})+(?!\d))/g;
-                return (parseFloat(val).toFixed(2) + '').replace(rx, '$& ')
+                return (parseFloat(val).toFixed(0) + '').replace(rx, '$& ')
             },
             appendEl(typeId, c) {
                 let that = this;
@@ -2590,9 +2641,9 @@ script.
             updateDependencies(typeId) {
                 let that = this;
 
-                if (typeId === 'CPU' && window?.preset?.Soft) {
-                    window.preset.Soft.list = [{id: '', count: that.preselectedCount('Soft')}];
-                }
+                //if (typeId === 'CPU' && window?.preset?.Soft) {
+                //    window.preset.Soft.list = [{id: '', count: that.preselectedCount('Soft')}];
+                //}
 
                 if (typeId === 'RAID') {
                     if (!window?.preset?.RAID?.id?.length) {
