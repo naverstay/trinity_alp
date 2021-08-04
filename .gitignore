@@ -2,7 +2,6 @@
 .idea
 .vs
 node_modules
-build/*
 
 #npm
 package-lock.json

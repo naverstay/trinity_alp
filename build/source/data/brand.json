@@ -1,0 +1,536 @@
+{
+    "configs": [
+        {
+            "cpu": 1,
+            "fac": "u1",
+            "ups": 0,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u4",
+                        "tower"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        0,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 1,
+            "fac": "u1",
+            "ups": 1,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u3",
+                        "u4"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        0,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 1,
+            "fac": "u2",
+            "ups": 0,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u4",
+                        "tower"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        0,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 1,
+            "fac": "u2",
+            "ups": 1,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u3",
+                        "u4"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        0,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 1,
+            "fac": "u3",
+            "ups": 1,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u3",
+                        "u4"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 1,
+            "fac": "u4",
+            "ups": 0,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u4",
+                        "tower"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        0,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 1,
+            "fac": "u4",
+            "ups": 1,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2,
+                        4
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u3",
+                        "u4"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        0,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 2,
+            "fac": "u1",
+            "ups": 0,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u4",
+                        "tower"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        0,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 2,
+            "fac": "u1",
+            "ups": 1,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u3",
+                        "u4"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        0,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 2,
+            "fac": "u2",
+            "ups": 0,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u4",
+                        "tower"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        0,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 2,
+            "fac": "u2",
+            "ups": 1,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u3",
+                        "u4"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        0,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 2,
+            "fac": "u3",
+            "ups": 1,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u3",
+                        "u4"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 2,
+            "fac": "u4",
+            "ups": 0,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u4",
+                        "tower"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        0,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 2,
+            "fac": "u4",
+            "ups": 1,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2,
+                        4
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u3",
+                        "u4"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        0,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 4,
+            "fac": "u4",
+            "ups": 1,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2,
+                        4
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u4"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 8,
+            "fac": "u5",
+            "ups": 1,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": []
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u5"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 1,
+            "fac": "tower",
+            "ups": 0,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u4",
+                        "tower"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        0
+                    ]
+                }
+            ]
+        },
+        {
+            "cpu": 2,
+            "fac": "tower",
+            "ups": 0,
+            "availableParams": [
+                {
+                    "type": "cpu",
+                    "values": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "type": "fac",
+                    "values": [
+                        "u1",
+                        "u2",
+                        "u4",
+                        "tower"
+                    ]
+                },
+                {
+                    "type": "ups",
+                    "values": [
+                        0
+                    ]
+                }
+            ]
+        }
+    ],
+    "id": 5,
+    "tag": "trinity",
+    "title": "Trinity",
+    "url": "configurator.html"
+}
