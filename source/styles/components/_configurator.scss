@@ -666,8 +666,16 @@
             @extend %global_flex_block_row_wrap_space_between_stretch;
             padding-top: 10px;
 
-            @include respond-to-max($dt) {
+            @include respond-to-max($wide) {
                 width: 100%;
+
+                &.__small {
+                    width: calc(50% - 5px);
+
+                    .configurator__total-val {
+                        width: 100%;
+                    }
+                }
             }
 
             @include respond-to-max($tab) {

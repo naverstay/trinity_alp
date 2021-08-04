@@ -28,7 +28,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="cleartype" content="on">
     <meta name="msapplication-tap-highlight" content="no">
-  <link href="styles/0.b2e1e5aa2c159de21ef9.css" rel="stylesheet"></head>
+  <link href="styles/0.70325c899fb644a16416.css" rel="stylesheet"></head>
   <body x-data=" siteData() " :class="{ 'menu-expanded': mainMenuIsOpen() }">
     <div class="main">
 <header class="header">
@@ -620,14 +620,14 @@
                                     <input id="item_count" type="number" min="1" x-model="preset.itemCount">
                                   </div><span class="configurator__counter-btn __minus btn" @click="updateCounter($event, -1)">-</span>
                                 </div>
-                                <div class="configurator__total-price">
+                                <div class="configurator__total-price __small">
                                   <div class="configurator__total-label">Цена</div>
-                                  <div class="configurator__total-val" x-show="preset.currencyOnlyRub !== true" x-text="(preset.totalPriceD === &quot;по запросу&quot; ? &quot;&quot; : &quot;$&quot;) + preset.totalPriceD"></div>
+                                  <div class="configurator__total-val tab-vis" x-show="preset.currencyOnlyRub !== true" x-text="(preset.totalPriceD === &quot;по запросу&quot; ? &quot;&quot; : &quot;$&quot;) + preset.totalPriceD"></div>
                                   <div class="configurator__total-val" x-text="preset.totalPriceR + (preset.totalPriceR === &quot;по запросу&quot; ? &quot;&quot; : &quot; ₽&quot;)"></div>
                                 </div>
-                                <div class="configurator__total-price">
+                                <div class="configurator__total-price __small">
                                   <div class="configurator__total-label">Сумма</div>
-                                  <div class="configurator__total-val" x-show="preset.currencyOnlyRub !== true" x-text="(preset.totalPriceItemsD === &quot;по запросу&quot; ? &quot;&quot; : &quot;$&quot;) + preset.totalPriceItemsD"></div>
+                                  <div class="configurator__total-val tab-vis" x-show="preset.currencyOnlyRub !== true" x-text="(preset.totalPriceItemsD === &quot;по запросу&quot; ? &quot;&quot; : &quot;$&quot;) + preset.totalPriceItemsD"></div>
                                   <div class="configurator__total-val" x-text="preset.totalPriceItemsR + (preset.totalPriceItemsR === &quot;по запросу&quot; ? &quot;&quot; : &quot; ₽&quot;)"></div>
                                 </div>
                               </div>
@@ -1040,8 +1040,8 @@
     <div class="popup__controls"><span class="btn" @click=" togglePopup(false) ">Закрыть</span></div>
   </div>
 </div>
-    <script type="module" src="vendor/alpine.js?v=1627996139440"></script>
-    <script nomodule src="vendor/alpine-ie11.js?v=1627996139440" defer></script>
+    <script type="module" src="vendor/alpine.js?v=1628104897969"></script>
+    <script nomodule src="vendor/alpine-ie11.js?v=1628104897969" defer></script>
 <script>
   window.dev = true;
   
@@ -1198,7 +1198,7 @@
       loaded: false,
       totalDescription: '',
       exchangeRate: 75,
-      currencyOnlyRub: true,
+      currencyOnlyRub: false,
       platformPrice: 208,
       platformPCI: 4,
       itemCount: 1,
@@ -3093,7 +3093,7 @@
               loaded: false,
               totalDescription: '',
               exchangeRate: 75,
-              currencyOnlyRub: true,
+              currencyOnlyRub: false,
               platformPrice: 208,
               platformPCI: 4,
               itemCount: 1,
@@ -4107,5 +4107,5 @@
       }
   }
 </script>
-  <script type="text/javascript" src="js/common.b2e1e5aa2c159de21ef9.js"></script><script type="text/javascript" src="js/app.b2e1e5aa2c159de21ef9.js"></script><script type="text/javascript" src="js/configurator.b2e1e5aa2c159de21ef9.js"></script></body>
+  <script type="text/javascript" src="js/common.70325c899fb644a16416.js"></script><script type="text/javascript" src="js/app.70325c899fb644a16416.js"></script><script type="text/javascript" src="js/configurator.70325c899fb644a16416.js"></script></body>
 </html>

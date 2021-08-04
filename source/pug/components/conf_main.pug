@@ -391,14 +391,14 @@ include ../components/warranty
         .configurator__counter-value: input#item_count(type='number' min='1' x-model="preset.itemCount")
         span.configurator__counter-btn.__minus.btn(@click="updateCounter($event, -1)") -
 
-    .configurator__total-price
+    .configurator__total-price.__small
         .configurator__total-label Цена
-        .configurator__total-val(x-show='preset.currencyOnlyRub !== true' x-text='(preset.totalPriceD === "по запросу" ? "" : "$") + preset.totalPriceD')
+        .configurator__total-val.tab-vis(x-show='preset.currencyOnlyRub !== true' x-text='(preset.totalPriceD === "по запросу" ? "" : "$") + preset.totalPriceD')
         .configurator__total-val(x-text='preset.totalPriceR + (preset.totalPriceR === "по запросу" ? "" : " ₽")')
 
-    .configurator__total-price
+    .configurator__total-price.__small
         .configurator__total-label Сумма
-        .configurator__total-val(x-show='preset.currencyOnlyRub !== true' x-text='(preset.totalPriceItemsD === "по запросу" ? "" : "$") + preset.totalPriceItemsD')
+        .configurator__total-val.tab-vis(x-show='preset.currencyOnlyRub !== true' x-text='(preset.totalPriceItemsD === "по запросу" ? "" : "$") + preset.totalPriceItemsD')
         .configurator__total-val(x-text='preset.totalPriceItemsR + (preset.totalPriceItemsR === "по запросу" ? "" : " ₽")')
 
 // pug/components/conf_main.pug ###

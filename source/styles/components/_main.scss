@@ -170,6 +170,12 @@
     }
 }
 
+@include respond-to-max ($dt) {
+    .tab-vis {
+        display: none !important;
+    }
+}
+
 .partner__block {
     display: block;
     width: 300px;
