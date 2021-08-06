@@ -28,7 +28,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="cleartype" content="on">
     <meta name="msapplication-tap-highlight" content="no">
-  <link href="styles/0.9a6c93a5e261d17c25c6.css" rel="stylesheet"></head>
+  <link href="styles/0.b301a549e05b5e92c215.css" rel="stylesheet"></head>
   <body x-data=" siteData() " :class="{ 'menu-expanded': mainMenuIsOpen() }">
     <div class="main">
 <header class="header">
@@ -421,8 +421,8 @@
     <div class="popup__controls"><span class="btn" @click=" togglePopup(false) ">Закрыть</span></div>
   </div>
 </div>
-    <script type="module" src="vendor/alpine.js?v=1628274115635"></script>
-    <script nomodule src="vendor/alpine-ie11.js?v=1628274115635" defer></script>
+    <script type="module" src="vendor/alpine.js?v=1628284509248"></script>
+    <script nomodule src="vendor/alpine-ie11.js?v=1628284509248" defer></script>
 <script>
   window.dev = true;
   
@@ -2755,7 +2755,9 @@
               let target = document.getElementById('tab_' + tab);
   
               if (target && window.innerWidth < 640) {
-                  window.smoothScrollTo(window, window.pageYOffset, window.pageYOffset + target.getBoundingClientRect().top, 1000);
+                  setTimeout(function () {
+                      window.smoothScrollTo(window, window.pageYOffset, window.pageYOffset + target.getBoundingClientRect().top, 1000);
+                  }, 5)
               }
   
               this.checkFixedBlock();
@@ -3492,5 +3494,5 @@
       }
   }
 </script>
-  <script type="text/javascript" src="js/common.9a6c93a5e261d17c25c6.js"></script><script type="text/javascript" src="js/app.9a6c93a5e261d17c25c6.js"></script><script type="text/javascript" src="js/lenovo.9a6c93a5e261d17c25c6.js"></script></body>
+  <script type="text/javascript" src="js/common.b301a549e05b5e92c215.js"></script><script type="text/javascript" src="js/app.b301a549e05b5e92c215.js"></script><script type="text/javascript" src="js/lenovo.b301a549e05b5e92c215.js"></script></body>
 </html>

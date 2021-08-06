@@ -28,7 +28,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="cleartype" content="on">
     <meta name="msapplication-tap-highlight" content="no">
-  <link href="styles/0.9a6c93a5e261d17c25c6.css" rel="stylesheet"></head>
+  <link href="styles/0.b301a549e05b5e92c215.css" rel="stylesheet"></head>
   <body x-data=" siteData() " :class="{ 'menu-expanded': mainMenuIsOpen() }">
     <div class="main">
 <header class="header">
@@ -158,25 +158,25 @@
                   <!-- ### pug/components/switcher.pug-->
                   <section class="page__section">
                     <div class="switcher__holder">
-                                      <div class="switcher__list __cpu">
+                                      <ul class="switcher__list __cpu">
                                         <li><a class="switcher__link" href="#" @click=" toggleParam($event, 'cpu', '1хCPU') " :class="{ active: activeParam('cpu', '1хCPU') }">1хCPU</a></li>
                                         <li><a class="switcher__link" href="#" @click=" toggleParam($event, 'cpu', '2хCPU') " :class="{ active: activeParam('cpu', '2хCPU') }">2хCPU</a></li>
                                         <li><a class="switcher__link" href="#" @click=" toggleParam($event, 'cpu', '4хCPU') " :class="{ active: activeParam('cpu', '4хCPU') }">4хCPU</a></li>
                                         <li><a class="switcher__link" href="#" @click=" toggleParam($event, 'cpu', '8хCPU') " :class="{ active: activeParam('cpu', '8хCPU') }">8хCPU</a></li>
-                                      </div>
-                                      <div class="switcher__list __fac">
+                                      </ul>
+                                      <ul class="switcher__list __fac">
                                         <li><a class="switcher__link" href="#" @click=" toggleParam($event, 'fac', '1U') " :class="{ active: activeParam('fac', '1U') }">1U</a></li>
                                         <li><a class="switcher__link" href="#" @click=" toggleParam($event, 'fac', '2U') " :class="{ active: activeParam('fac', '2U') }">2U</a></li>
                                         <li><a class="switcher__link" href="#" @click=" toggleParam($event, 'fac', '3U') " :class="{ active: activeParam('fac', '3U') }">3U</a></li>
                                         <li><a class="switcher__link" href="#" @click=" toggleParam($event, 'fac', '4U') " :class="{ active: activeParam('fac', '4U') }">4U</a></li>
                                         <li><a class="switcher__link disabled" href="#" @click=" toggleParam($event, 'fac', '5U') " :class="{ active: activeParam('fac', '5U') }">5U</a></li>
                                         <li><a class="switcher__link disabled" href="#" @click=" toggleParam($event, 'fac', 'TOWER') " :class="{ active: activeParam('fac', 'TOWER') }">TOWER</a></li>
-                                      </div>
-                                      <div class="switcher__list __ups">
+                                      </ul>
+                                      <ul class="switcher__list __ups">
                                         <li><a class="switcher__link" href="#" @click=" toggleParam($event, 'ups', '1хPS') " :class="{ active: activeParam('ups', '1хPS') }">1хPS</a></li>
                                         <li><a class="switcher__link" href="#" @click=" toggleParam($event, 'ups', '2хPS') " :class="{ active: activeParam('ups', '2хPS') }">2хPS</a></li>
                                         <li><a class="switcher__link" href="#" @click=" toggleParam($event, 'ups', '4хPS') " :class="{ active: activeParam('ups', '4хPS') }">4хPS</a></li>
-                                      </div>
+                                      </ul>
                     </div>
                   </section>
                   <!-- pug/components/switcher.pug ###-->
@@ -189,7 +189,13 @@
               </div>
             </section>
             <section class="page__section">
-              <div class="product__panel" x-cloak></div>
+<!-- ### pug/components/tags.pug-->
+<ul class="switcher__list">
+  <li><a class="switcher__link" href="#">Постоянный ток</a></li>
+  <li><a class="switcher__link" href="#">Росреестр</a></li>
+  <li><a class="switcher__link" href="#">Серверы для 1С</a></li>
+</ul>
+<!-- pug/components/tags.pug ###-->
               <ul class="product__list __wide">
                 <li>
                   <div class="configurator__warn">Нет подходящих комплектаций</div>
@@ -1075,8 +1081,8 @@
     <div class="popup__controls"><span class="btn" @click=" togglePopup(false) ">Закрыть</span></div>
   </div>
 </div>
-    <script type="module" src="vendor/alpine.js?v=1628274115612"></script>
-    <script nomodule src="vendor/alpine-ie11.js?v=1628274115612" defer></script>
+    <script type="module" src="vendor/alpine.js?v=1628284509226"></script>
+    <script nomodule src="vendor/alpine-ie11.js?v=1628284509226" defer></script>
 <script>
   window.dev = true;
   
@@ -3409,7 +3415,9 @@
               let target = document.getElementById('tab_' + tab);
   
               if (target && window.innerWidth < 640) {
-                  window.smoothScrollTo(window, window.pageYOffset, window.pageYOffset + target.getBoundingClientRect().top, 1000);
+                  setTimeout(function () {
+                      window.smoothScrollTo(window, window.pageYOffset, window.pageYOffset + target.getBoundingClientRect().top, 1000);
+                  }, 5)
               }
   
               this.checkFixedBlock();
@@ -4146,5 +4154,5 @@
       }
   }
 </script>
-  <script type="text/javascript" src="js/common.9a6c93a5e261d17c25c6.js"></script><script type="text/javascript" src="js/app.9a6c93a5e261d17c25c6.js"></script><script type="text/javascript" src="js/trinity.9a6c93a5e261d17c25c6.js"></script></body>
+  <script type="text/javascript" src="js/common.b301a549e05b5e92c215.js"></script><script type="text/javascript" src="js/app.b301a549e05b5e92c215.js"></script><script type="text/javascript" src="js/trinity.b301a549e05b5e92c215.js"></script></body>
 </html>

@@ -3,7 +3,7 @@
 mixin buildSwitch(name)
     - var cls = '__' + name;
 
-    .switcher__list(class= cls)
+    ul.switcher__list(class= cls)
         if (false)
             template(x-for="(item, index, collection) in availableParam('" + name + "')" :key='index' x-if="true")
                 li(x-html='getCheck(index, item, "' + name + '" )')

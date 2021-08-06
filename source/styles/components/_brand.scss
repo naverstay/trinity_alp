@@ -3,7 +3,7 @@
 .brand {
 
     &__list {
-        @extend %global_flex_block_row_wrap_flex-start_stretch;
+        @extend %global_flex_block_row_wrap_center;
         position: relative;
         z-index: 1;
         overflow-x: auto;
@@ -12,8 +12,8 @@
         min-height: 25px;
 
         > li {
+            flex: 0 0;
             padding: 13px 13px 10px;
-            flex: 1 0;
         }
 
         &.__wide {

@@ -2330,7 +2330,9 @@ script.
                 let target = document.getElementById('tab_' + tab);
 
                 if (target && window.innerWidth < 640) {
-                    window.smoothScrollTo(window, window.pageYOffset, window.pageYOffset + target.getBoundingClientRect().top, 1000);
+                    setTimeout(function () {
+                        window.smoothScrollTo(window, window.pageYOffset, window.pageYOffset + target.getBoundingClientRect().top, 1000);
+                    }, 5)
                 }
 
                 this.checkFixedBlock();
