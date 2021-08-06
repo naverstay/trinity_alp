@@ -45,15 +45,14 @@
     }
 
     &__link {
-        min-width: 56px;
         height: 44px;
         border: 2px solid #e2e2e2;
         margin-left: -2px;
         text-align: center;
-        font: 18px/44px $fontCirceRegular;
+        font: 14px/44px $fontCirceRegular;
         color: $blue;
         display: inline-block;
-        padding: 0 9px;
+        padding: 0 4px;
 
         &.active {
             background: $blue;
@@ -65,6 +64,10 @@
             pointer-events: none;
             cursor: default;
             color: rgba(0, 0, 0, 0.3);
+        }
+
+        @include respond-to-min($tab) {
+            font-size: 18px;
         }
 
         @include respond-to-min($dt) {

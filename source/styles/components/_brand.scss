@@ -12,8 +12,8 @@
         min-height: 25px;
 
         > li {
-            flex: 0 0;
             padding: 13px 13px 10px;
+            flex: 1 0;
         }
 
         &.__wide {
