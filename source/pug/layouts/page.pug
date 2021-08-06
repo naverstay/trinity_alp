@@ -30,6 +30,8 @@ mixin page(body_cls)
             include ../components/footer
             include ../components/popup
 
+        .go__top(@click='scrollTop()')
+
         script(type="module" src="vendor/alpine.js?v=" + date)
         script(nomodule src="vendor/alpine-ie11.js?v=" + date defer)
 

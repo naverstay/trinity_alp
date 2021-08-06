@@ -267,6 +267,9 @@ script.
             mainMenuIsOpen() {
                 return this.showMainMenu === true
             },
+            scrollTop() {
+                window.smoothScrollTo(window, window.pageYOffset, 0, 1000);
+            },
 
             items: [{title: 'test', tags: ['ok1', 'ok2']}, {title: 'test2', tags: ['ok2']}],
             activeMenu: 0,

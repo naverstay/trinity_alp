@@ -28,7 +28,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="cleartype" content="on">
     <meta name="msapplication-tap-highlight" content="no">
-  <link href="styles/0.b301a549e05b5e92c215.css" rel="stylesheet"></head>
+  <link href="styles/0.1ec65d56e17d39409b51.css" rel="stylesheet"></head>
   <body x-data=" siteData() " :class="{ 'menu-expanded': mainMenuIsOpen() }">
     <div class="main">
 <header class="header">
@@ -1063,8 +1063,9 @@
     <div class="popup__controls"><span class="btn" @click=" togglePopup(false) ">Закрыть</span></div>
   </div>
 </div>
-    <script type="module" src="vendor/alpine.js?v=1628284509303"></script>
-    <script nomodule src="vendor/alpine-ie11.js?v=1628284509303" defer></script>
+    <div class="go__top" @click="scrollTop()"></div>
+    <script type="module" src="vendor/alpine.js?v=1628285471210"></script>
+    <script nomodule src="vendor/alpine-ie11.js?v=1628285471210" defer></script>
     <script>
       window.order = {
           "totalDescription": " Intel® Xeon® Scalable 6128 Gold 6 Core 3.40G 19.25M 115W",
@@ -1699,6 +1700,9 @@
           },
           mainMenuIsOpen() {
               return this.showMainMenu === true
+          },
+          scrollTop() {
+              window.smoothScrollTo(window, window.pageYOffset, 0, 1000);
           },
   
           items: [{title: 'test', tags: ['ok1', 'ok2']}, {title: 'test2', tags: ['ok2']}],
@@ -4502,5 +4506,5 @@
       }
   }
 </script>
-  <script type="text/javascript" src="js/common.b301a549e05b5e92c215.js"></script><script type="text/javascript" src="js/app.b301a549e05b5e92c215.js"></script><script type="text/javascript" src="js/order.b301a549e05b5e92c215.js"></script></body>
+  <script type="text/javascript" src="js/common.1ec65d56e17d39409b51.js"></script><script type="text/javascript" src="js/app.1ec65d56e17d39409b51.js"></script><script type="text/javascript" src="js/order.1ec65d56e17d39409b51.js"></script></body>
 </html>

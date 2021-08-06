@@ -178,7 +178,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    window.addEventListener('scroll', function () {
+    window.addEventListener('scroll', function (e) {
+        document.body.classList[ window.pageYOffset > window.innerHeight ? 'add' : 'remove']('go__top-show');
         window.fixTotalBox();
     });
 
