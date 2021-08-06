@@ -375,7 +375,7 @@ mixin build_options(arr)
 
 include ../components/warranty
 
-#stuck_wrapper.configurator__total-wrapper(x-cloak): #total_box.configurator__total-sticky: .configurator__total
+#stuck_wrapper.configurator__total-wrapper(x-cloak): #total_box.configurator__total-sticky: .configurator__total(:class='{"__dollar" : preset.forceTotalD}')
     //-.configurator__total-info(x-html='preset.totalDescription')
     //- Корзина на 4 SAS/SATA 3,5” диска с возможностью горячей замены / Для установки дисков SAS требуется RAID-контроллер / Полноразмерный слот PCI-E /  Одинарный блок питания 350Вт / Поддержка одного процессора Intel® Xeon®  E3-1200 v6 и Core i3 / 4 сокета DDR4 Unbuffered ECC / 2 порта Gigabit Ethernet /  Встроенный IPMI.
 
@@ -386,19 +386,22 @@ include ../components/warranty
         p: a(href='#') Нашли дешевле?
         p: a(href='#') Сделаем скидку!
 
-    .configurator__counter
+    .configurator__counter(:class='{"__toggle" : preset.currencyOnlyRub !== true}')
         span.configurator__counter-btn.__plus.btn(@click="updateCounter($event, 1)") +
         .configurator__counter-value: input#item_count(type='number' min='1' x-model="preset.itemCount")
         span.configurator__counter-btn.__minus.btn(@click="updateCounter($event, -1)") -
+        .configurator__currency-toggle(x-show='preset.currencyOnlyRub !== true' @click="currencyToggle()")
+            span $
+            span ₽
 
     .configurator__total-price.__small
         .configurator__total-label Цена
-        .configurator__total-val.tab-vis(x-show='preset.currencyOnlyRub !== true' x-text='(preset.totalPriceD === "по запросу" ? "" : "$") + preset.totalPriceD')
-        .configurator__total-val(x-text='preset.totalPriceR + (preset.totalPriceR === "по запросу" ? "" : " ₽")')
+        .configurator__total-val.__total-d(x-show='preset.currencyOnlyRub !== true' x-text='(preset.totalPriceD === "по запросу" ? "" : "$") + preset.totalPriceD')
+        .configurator__total-val.__total-r(x-text='preset.totalPriceR + (preset.totalPriceR === "по запросу" ? "" : " ₽")')
 
     .configurator__total-price.__small
         .configurator__total-label Сумма
-        .configurator__total-val.tab-vis(x-show='preset.currencyOnlyRub !== true' x-text='(preset.totalPriceItemsD === "по запросу" ? "" : "$") + preset.totalPriceItemsD')
-        .configurator__total-val(x-text='preset.totalPriceItemsR + (preset.totalPriceItemsR === "по запросу" ? "" : " ₽")')
+        .configurator__total-val.__total-d(x-show='preset.currencyOnlyRub !== true' x-text='(preset.totalPriceItemsD === "по запросу" ? "" : "$") + preset.totalPriceItemsD')
+        .configurator__total-val.__total-r(x-text='preset.totalPriceItemsR + (preset.totalPriceItemsR === "по запросу" ? "" : " ₽")')
 
 // pug/components/conf_main.pug ###

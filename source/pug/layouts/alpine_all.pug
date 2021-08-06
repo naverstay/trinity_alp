@@ -2335,6 +2335,10 @@ script.
 
                 this.checkFixedBlock();
             },
+            currencyToggle() {
+                window.preset.forceTotalD = !window.preset.forceTotalD;
+                this.updatePreset();
+            },
             updateCounter(evt, upd) {
                 let that = this;
 

@@ -28,7 +28,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="cleartype" content="on">
     <meta name="msapplication-tap-highlight" content="no">
-  <link href="styles/0.70325c899fb644a16416.css" rel="stylesheet"></head>
+  <link href="styles/0.f3be4e2559f4574f1e15.css" rel="stylesheet"></head>
   <body x-data=" siteData() " :class="{ 'menu-expanded': mainMenuIsOpen() }">
     <div class="main">
 <header class="header">
@@ -421,8 +421,8 @@
     <div class="popup__controls"><span class="btn" @click=" togglePopup(false) ">Закрыть</span></div>
   </div>
 </div>
-    <script type="module" src="vendor/alpine.js?v=1628104897942"></script>
-    <script nomodule src="vendor/alpine-ie11.js?v=1628104897942" defer></script>
+    <script type="module" src="vendor/alpine.js?v=1628273694856"></script>
+    <script nomodule src="vendor/alpine-ie11.js?v=1628273694856" defer></script>
 <script>
   window.dev = true;
   
@@ -2760,6 +2760,10 @@
   
               this.checkFixedBlock();
           },
+          currencyToggle() {
+              window.preset.forceTotalD = !window.preset.forceTotalD;
+              this.updatePreset();
+          },
           updateCounter(evt, upd) {
               let that = this;
   
@@ -3488,5 +3492,5 @@
       }
   }
 </script>
-  <script type="text/javascript" src="js/common.70325c899fb644a16416.js"></script><script type="text/javascript" src="js/app.70325c899fb644a16416.js"></script><script type="text/javascript" src="js/lenovo.70325c899fb644a16416.js"></script></body>
+  <script type="text/javascript" src="js/common.f3be4e2559f4574f1e15.js"></script><script type="text/javascript" src="js/app.f3be4e2559f4574f1e15.js"></script><script type="text/javascript" src="js/lenovo.f3be4e2559f4574f1e15.js"></script></body>
 </html>

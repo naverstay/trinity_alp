@@ -37,6 +37,75 @@
 
 .configurator {
 
+    &__currency-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 100%;
+        margin-left: 5px;
+        width: 25px;
+        display: none;
+        overflow: hidden;
+        cursor: pointer;
+        border: 1px solid $blue;
+
+        span {
+            position: absolute;
+
+            @include respond-to-max($tab) {
+                font-size: 12px;
+            }
+
+            &:first-child {
+                left: 2px;
+                top: 2px;
+
+                .configurator__total.__dollar & {
+                    color: #fff;
+                }
+            }
+
+            &:last-child {
+                bottom: 2px;
+                right: 2px;
+
+                .configurator__total:not(.__dollar) & {
+                    color: #fff;
+                }
+            }
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            height: 120%;
+            bottom: 0;
+            margin-left: -2px;
+            margin-bottom: -10px;
+            width: 40px;
+            background: #347ebe;
+            transform: rotate(23deg);
+
+            @include respond-to-max($tab) {
+                transform: rotate(30deg);
+                margin-left: -4px;
+                margin-bottom: -13px;
+            }
+
+            .configurator__total.__dollar & {
+                transform: rotate(-157deg);
+                margin-left: -39px;
+                margin-bottom: 0;
+
+                @include respond-to-max($tab) {
+                    transform: rotate(-150deg);
+                    margin-left: -37px;
+                    margin-bottom: 7px;
+                }
+            }
+        }
+    }
+
     &__tabs {
         @extend %clearfix;
         width: 100%;
@@ -393,7 +462,7 @@
                 max-width: calc(100% - 170px);
 
                 .configurator__total & {
-                    max-width: calc(100% - 30vw - 10px);
+                    max-width: calc(100% - 30vw - 40px);
                 }
 
                 @include respond-to-min($tab) {
@@ -504,7 +573,17 @@
 
         @include respond-to-max($tab) {
             width: Min(180px, 25vw);
-            min-width: Min(180px, 25vw);
+            min-width: 90px;
+        }
+
+        &.__toggle {
+            @include respond-to-max($dt) {
+                margin-right: 30px;
+
+                .configurator__currency-toggle {
+                    display: block;
+                }
+            }
         }
 
         @include respond-to-min($dt) {
@@ -564,6 +643,20 @@
 
     &__total {
         @extend %global_flex_block_column_nowrap_flex-start_stretch;
+
+        @include respond-to-max($dt) {
+            &.__dollar {
+                .__total-r {
+                    display: none;
+                }
+            }
+
+            &:not(.__dollar) {
+                .__total-d {
+                    display: none;
+                }
+            }
+        }
 
         &-wrapper {
             position: relative;

@@ -28,7 +28,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="cleartype" content="on">
     <meta name="msapplication-tap-highlight" content="no">
-  <link href="styles/0.70325c899fb644a16416.css" rel="stylesheet"></head>
+  <link href="styles/0.f3be4e2559f4574f1e15.css" rel="stylesheet"></head>
   <body x-data=" siteData() " :class="{ 'menu-expanded': mainMenuIsOpen() }">
     <div class="main">
 <header class="header">
@@ -598,26 +598,27 @@
                           <!-- pug/components/warranty.pug ###-->
                           <div class="configurator__total-wrapper" id="stuck_wrapper" x-cloak>
                             <div class="configurator__total-sticky" id="total_box">
-                              <div class="configurator__total">
+                              <div class="configurator__total" :class="{&quot;__dollar&quot; : preset.forceTotalD}">
                                 <div class="configurator__cell"><span class="btn scrollTo" data-target="configurator__form">Получить предложение</span></div>
                                 <div class="configurator__share tablet-hidden">
                                   <p><a href="#">Нашли дешевле?</a></p>
                                   <p><a href="#">Сделаем скидку!</a></p>
                                 </div>
-                                <div class="configurator__counter"><span class="configurator__counter-btn __plus btn" @click="updateCounter($event, 1)">+</span>
+                                <div class="configurator__counter" :class="{&quot;__toggle&quot; : preset.currencyOnlyRub !== true}"><span class="configurator__counter-btn __plus btn" @click="updateCounter($event, 1)">+</span>
                                   <div class="configurator__counter-value">
                                     <input id="item_count" type="number" min="1" x-model="preset.itemCount">
                                   </div><span class="configurator__counter-btn __minus btn" @click="updateCounter($event, -1)">-</span>
+                                  <div class="configurator__currency-toggle" x-show="preset.currencyOnlyRub !== true" @click="currencyToggle()"><span>$</span><span>₽</span></div>
                                 </div>
                                 <div class="configurator__total-price __small">
                                   <div class="configurator__total-label">Цена</div>
-                                  <div class="configurator__total-val tab-vis" x-show="preset.currencyOnlyRub !== true" x-text="(preset.totalPriceD === &quot;по запросу&quot; ? &quot;&quot; : &quot;$&quot;) + preset.totalPriceD"></div>
-                                  <div class="configurator__total-val" x-text="preset.totalPriceR + (preset.totalPriceR === &quot;по запросу&quot; ? &quot;&quot; : &quot; ₽&quot;)"></div>
+                                  <div class="configurator__total-val __total-d" x-show="preset.currencyOnlyRub !== true" x-text="(preset.totalPriceD === &quot;по запросу&quot; ? &quot;&quot; : &quot;$&quot;) + preset.totalPriceD"></div>
+                                  <div class="configurator__total-val __total-r" x-text="preset.totalPriceR + (preset.totalPriceR === &quot;по запросу&quot; ? &quot;&quot; : &quot; ₽&quot;)"></div>
                                 </div>
                                 <div class="configurator__total-price __small">
                                   <div class="configurator__total-label">Сумма</div>
-                                  <div class="configurator__total-val tab-vis" x-show="preset.currencyOnlyRub !== true" x-text="(preset.totalPriceItemsD === &quot;по запросу&quot; ? &quot;&quot; : &quot;$&quot;) + preset.totalPriceItemsD"></div>
-                                  <div class="configurator__total-val" x-text="preset.totalPriceItemsR + (preset.totalPriceItemsR === &quot;по запросу&quot; ? &quot;&quot; : &quot; ₽&quot;)"></div>
+                                  <div class="configurator__total-val __total-d" x-show="preset.currencyOnlyRub !== true" x-text="(preset.totalPriceItemsD === &quot;по запросу&quot; ? &quot;&quot; : &quot;$&quot;) + preset.totalPriceItemsD"></div>
+                                  <div class="configurator__total-val __total-r" x-text="preset.totalPriceItemsR + (preset.totalPriceItemsR === &quot;по запросу&quot; ? &quot;&quot; : &quot; ₽&quot;)"></div>
                                 </div>
                               </div>
                             </div>
@@ -1062,8 +1063,8 @@
     <div class="popup__controls"><span class="btn" @click=" togglePopup(false) ">Закрыть</span></div>
   </div>
 </div>
-    <script type="module" src="vendor/alpine.js?v=1628104897997"></script>
-    <script nomodule src="vendor/alpine-ie11.js?v=1628104897997" defer></script>
+    <script type="module" src="vendor/alpine.js?v=1628273694911"></script>
+    <script nomodule src="vendor/alpine-ie11.js?v=1628273694911" defer></script>
     <script>
       window.order = {
           "totalDescription": " Intel® Xeon® Scalable 6128 Gold 6 Core 3.40G 19.25M 115W",
@@ -3767,6 +3768,10 @@
   
               this.checkFixedBlock();
           },
+          currencyToggle() {
+              window.preset.forceTotalD = !window.preset.forceTotalD;
+              this.updatePreset();
+          },
           updateCounter(evt, upd) {
               let that = this;
   
@@ -4495,5 +4500,5 @@
       }
   }
 </script>
-  <script type="text/javascript" src="js/common.70325c899fb644a16416.js"></script><script type="text/javascript" src="js/app.70325c899fb644a16416.js"></script><script type="text/javascript" src="js/order.70325c899fb644a16416.js"></script></body>
+  <script type="text/javascript" src="js/common.f3be4e2559f4574f1e15.js"></script><script type="text/javascript" src="js/app.f3be4e2559f4574f1e15.js"></script><script type="text/javascript" src="js/order.f3be4e2559f4574f1e15.js"></script></body>
 </html>
