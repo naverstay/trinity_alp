@@ -24,11 +24,12 @@
     &__list {
         @extend %global_flex_block_row_nowrap_center_center;
         width: 100%;
-        margin: 0 5px 20px;
+        margin: 0 5px 10px;
 
         @include respond-to-min($dt) {
             flex: 1 0 auto;
             width: auto;
+            margin-bottom: 20px;
 
             &:first-child {
                 justify-content: flex-start;
