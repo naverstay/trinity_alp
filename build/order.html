@@ -28,7 +28,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="cleartype" content="on">
     <meta name="msapplication-tap-highlight" content="no">
-  <link href="styles/0.fc9e24f69bfcbf19084c.css" rel="stylesheet"></head>
+  <link href="styles/0.d9468a52dd0381f8e33b.css" rel="stylesheet"></head>
   <body x-data=" siteData() " :class="{ 'menu-expanded': mainMenuIsOpen() }">
     <div class="main">
 <header class="header">
@@ -571,28 +571,18 @@
                               <p><a href="#">Стандартная гарантия</a> на продукцию Тринити (SC3) включает 3 года гарантийного обслуживания и восстановление работоспособности изделия в течение 21 рабочего дня. Подробная информация о расширенном гарантийном обслуживании
                                 <a href="">здесь</a>
                               </p>
-                              <ul class="product__warranty">
-                                <li>
-                                  <label class="checkbox_v1">
-                                    <input type="checkbox" checked="checked"><span class="checkbox__text">Стандартная гарантия 3 года </span>
-                                  </label>
-                                </li>
-                                <li>
-                                  <label class="checkbox_v1">
-                                    <input type="checkbox"><span class="checkbox__text">Расширенная гарантия 3 года с выездом </span>
-                                  </label>
-                                </li>
-                                <li>
-                                  <label class="checkbox_v1">
-                                    <input type="checkbox"><span class="checkbox__text">Расширенная гарантия 5 лет с выездом </span>
-                                  </label>
-                                </li>
-                                <li>
-                                  <label class="checkbox_v1">
-                                    <input type="checkbox"><span class="checkbox__text">Дополнительная опция «Невозврат носителей информации» </span>
-                                  </label>
-                                </li>
-                              </ul>
+                              <template x-if=" preset.loaded &amp;&amp; preset.hasOwnProperty('Services') ">
+                                <ul class="product__warranty">
+                                  <input class="input_hidden" @input=" updatePreset('Services') " x-model="preset.Services.id" name="preset_Services_id" data-index="0" data-preset="Services">
+                                  <template x-for="(item, index, collection) in configuratorAlpine().selectOption('Services')" :key="item" x-if="true">
+                                    <li>
+                                      <label class="checkbox_v1">
+                                        <input type="radio" x-model="preset.Services.id" name="service_warranty" :value="item.id.toString()" :id="item.id" @input=" updatePreset('Services') "><span class="checkbox__text" x-text="item.name"></span>
+                                      </label>
+                                    </li>
+                                  </template>
+                                </ul>
+                              </template>
                             </div>
                           </div>
                           <!-- pug/components/warranty.pug ###-->
@@ -822,39 +812,6 @@
 <!-- pug/components/conf_aside.pug ###-->
                 </div>
               </div>
-              <!-- ### pug/components/warranty.pug-->
-              <h3 class="product__description-title">Гарантия</h3>
-              <div class="product__description">
-                <h3 class="product__description-subcaption">Гарантия и сервисное обслуживание</h3>
-                <div class="product__description-text __short">
-                  <p><a href="#">Стандартная гарантия</a> на продукцию Тринити (SC3) включает 3 года гарантийного обслуживания и восстановление работоспособности изделия в течение 21 рабочего дня. Подробная информация о расширенном гарантийном обслуживании
-                    <a href="">здесь</a>
-                  </p>
-                  <ul class="product__warranty">
-                    <li>
-                      <label class="checkbox_v1">
-                        <input type="checkbox" checked="checked"><span class="checkbox__text">Стандартная гарантия 3 года </span>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="checkbox_v1">
-                        <input type="checkbox"><span class="checkbox__text">Расширенная гарантия 3 года с выездом </span>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="checkbox_v1">
-                        <input type="checkbox"><span class="checkbox__text">Расширенная гарантия 5 лет с выездом </span>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="checkbox_v1">
-                        <input type="checkbox"><span class="checkbox__text">Дополнительная опция «Невозврат носителей информации» </span>
-                      </label>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <!-- pug/components/warranty.pug ###-->
 <!-- ### pug/components/description.pug-->
 <h3 class="product__description-title">Описание серверов Lenovo</h3>
 <div class="product__description" x-data=" slideActions() " :class="{ '_expanded': isOpen() , '_collapsed': !isOpen() }">
@@ -1064,8 +1021,8 @@
   </div>
 </div>
     <div class="go__top" @click="scrollTop()"></div>
-    <script type="module" src="vendor/alpine.js?v=1628789984917"></script>
-    <script nomodule src="vendor/alpine-ie11.js?v=1628789984917" defer></script>
+    <script type="module" src="vendor/alpine.js?v=1629107455475"></script>
+    <script nomodule src="vendor/alpine-ie11.js?v=1629107455475" defer></script>
     <script>
       window.order = {
           "totalDescription": " Intel® Xeon® Scalable 6128 Gold 6 Core 3.40G 19.25M 115W",
@@ -1118,10 +1075,6 @@
                   }
               ]
           },
-          "Soft": {
-              "id": "",
-              "count": "0"
-          },
           "Other": {
               "list": [
                   {
@@ -1130,17 +1083,9 @@
                   }
               ]
           },
-          "UPS": {
-              "id": "",
-              "count": "0"
-          },
           "Services": {
-              "id": "",
-              "count": "0"
-          },
-          "Switch": {
-              "id": "",
-              "count": "0"
+              "id": "1251",
+              "count": "1"
           },
           "loaded": true,
           "totalPrice": 6633
@@ -3418,7 +3363,7 @@
                       "name": "Расширенная гарантия 3 года с выездом (ONS3)",
                       "short_name": "Расширенная гарантия 3 года с выездом (ONS3)",
                       "description": "Расширенная гарантия 3 года с выездом (ONS3)",
-                      "price": 0,
+                      "price": 2000,
                       "base_price": 0,
                       "value": "1",
                       "is_composite": "1",
@@ -3434,7 +3379,7 @@
                       "name": "Расширенная гарантия 5 лет (SC5)",
                       "short_name": "Расширенная гарантия 5 лет (SC5)",
                       "description": "Расширенная гарантия 5 лет (SC5)",
-                      "price": 0,
+                      "price": 3000,
                       "base_price": 0,
                       "value": "1",
                       "is_composite": "1",
@@ -3450,7 +3395,7 @@
                       "name": "Расширенная гарантия 5 лет с выездом (ONS5)",
                       "short_name": "Расширенная гарантия 5 лет с выездом (ONS5)",
                       "description": "Расширенная гарантия 5 лет с выездом (ONS5)",
-                      "price": 0,
+                      "price": 70000,
                       "base_price": 0,
                       "value": "1",
                       "is_composite": "1",
@@ -3466,7 +3411,7 @@
                       "name": "Дополнительная опция «Невозврат носителей информации» (NR3)",
                       "short_name": "Дополнительная опция «Невозврат носителей информации» (NR3)",
                       "description": "Дополнительная опция «Невозврат носителей информации» (NR3)",
-                      "price": 0,
+                      "price": 1000,
                       "base_price": 0,
                       "value": "1",
                       "is_composite": "1",
@@ -3958,12 +3903,11 @@
           },
           selectOption(typeId) {
               let that = this;
-              let ret = {};
+              let ret = [];
               let typeCode = that.partTypeIds[typeId];
               let curCPU = window.preset.CPU ? that.brand[that.partTypeIds['CPU']].find(f => f.id === window.preset.CPU.id) : void 0;
   
               if (typeCode in that.brand) {
-                  let iter = 0;
                   let list = that.brand[typeCode];
   
                   if (typeId === 'Soft' && curCPU) {
@@ -3971,8 +3915,7 @@
                   }
   
                   for (const x of list) {
-                      ret[iter] = {id: x.id, name: x.name};
-                      iter++;
+                      ret.push({id: x.id, name: x.name});
                   }
               }
   
@@ -4034,7 +3977,7 @@
           },
           selectOptionCount(typeId) {
               let that = this;
-              let ret = {};
+              let ret = [];
               let typeCode = that.partTypeIds[typeId];
               let id = '';
               let count = 0;
@@ -4057,10 +4000,8 @@
               }
   
               if (count) {
-                  let iter = 0;
                   for (let i = 0; i < +count; i++) {
-                      ret[iter] = {id: i + 1, name: i + 1};
-                      iter++;
+                      ret.push({id: i + 1, name: i + 1});
                   }
               }
   
@@ -4392,7 +4333,18 @@
               that.options = that.data;
   
               if (typeof that.data === 'function') {
-                  that.options = that.data();
+                  let array = that.data();
+                  let data = {};
+                  let count = 0;
+  
+                  console.log('array', array);
+  
+                  for (const x of array) {
+                      data[count] = x;
+                      count++;
+                  }
+  
+                  that.options = data;
               }
   
               window.dev && console.log('selectConfig', typeof that.data, config, that.options);
@@ -4506,5 +4458,5 @@
       }
   }
 </script>
-  <script type="text/javascript" src="js/common.fc9e24f69bfcbf19084c.js"></script><script type="text/javascript" src="js/app.fc9e24f69bfcbf19084c.js"></script><script type="text/javascript" src="js/order.fc9e24f69bfcbf19084c.js"></script></body>
+  <script type="text/javascript" src="js/common.d9468a52dd0381f8e33b.js"></script><script type="text/javascript" src="js/app.d9468a52dd0381f8e33b.js"></script><script type="text/javascript" src="js/order.d9468a52dd0381f8e33b.js"></script></body>
 </html>
