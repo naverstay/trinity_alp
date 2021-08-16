@@ -11,14 +11,35 @@ h3.product__description-title Гарантия
             |
             a(href='') здесь
 
-        ul.product__warranty
-            li
-                +checkbox('Стандартная гарантия 3 года ', true)
-            li
-                +checkbox('Расширенная гарантия 3 года с выездом ')
-            li
-                +checkbox('Расширенная гарантия 5 лет с выездом ')
-            li
-                +checkbox('Дополнительная опция «Невозврат носителей информации» ')
+        template(x-if=" preset.loaded && preset.hasOwnProperty('Services') " ): ul.product__warranty
+            if (templ)
+                - var d = 'Services';
+                input.input_hidden(@input=" updatePreset('" + d + "') " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
+                template(x-for="(item, index, collection) in configuratorAlpine().selectOption('" + d + "')" :key="item" x-if="true")
+                    li
+                        label.checkbox_v1
+                            input(type='radio' x-model="preset." + d + ".id" name='service_warranty' :value="item.id.toString()" :id='item.id' @input=" updatePreset('" + d + "') " )
+                            span.checkbox__text(x-text= 'item.name')
+
+                    //-.configurator__cell(data-preset=d data-index='0')
+                        - var ref = "'select_" + d + "_' + index + '_value'";
+                        input.input_hidden(@input=" updatePreset('" + d + "') " x-model="preset." + d + ".id" name="preset_" + d + "_id" data-index='0' data-preset=d )
+                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOption('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', name: '" + ("preset_CPU_") + "', placeholder: 'Выберите из списка' })", d)
+
+                    //-.configurator__cell.__multiply(:class="{ __disabled: " + "!preset?." + d + "?.id?.length" + " }" data-preset=(d + '_count') data-index='0')
+                        input.input_hidden(value='1' @input=" updatePreset() " x-model="preset." + d + ".count" name="preset_" + d + "_count" data-index='0' data-preset=(d + '_count') )
+                        .configurator__cell-rm(@click=" removeItem('" + d + "', $event.target.dataset.index) " data-index='0') x
+                        +select("alpineSelect({ data: ()=> configuratorAlpine().selectOptionCount('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("preset." + d + ".id") + "', placeholder: 'Выберите из списка' })", "preset." + d + ".count", "preset." + d + ".id")
+
+            else
+                ul.product__warranty
+                    li
+                        +checkbox('Стандартная гарантия 3 года ', true)
+                    li
+                        +checkbox('Расширенная гарантия 3 года с выездом ')
+                    li
+                        +checkbox('Расширенная гарантия 5 лет с выездом ')
+                    li
+                        +checkbox('Дополнительная опция «Невозврат носителей информации» ')
 
 // pug/components/warranty.pug ###

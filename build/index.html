@@ -28,7 +28,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="cleartype" content="on">
     <meta name="msapplication-tap-highlight" content="no">
-  <link href="styles/0.fc9e24f69bfcbf19084c.css" rel="stylesheet"></head>
+  <link href="styles/0.a1b61cd3d04683c62f42.css" rel="stylesheet"></head>
   <body x-data=" siteData() " :class="{ 'menu-expanded': mainMenuIsOpen() }">
     <div class="main">
 <header class="header">
@@ -388,8 +388,8 @@
   </div>
 </div>
     <div class="go__top" @click="scrollTop()"></div>
-    <script type="module" src="vendor/alpine.js?v=1628789984780"></script>
-    <script nomodule src="vendor/alpine-ie11.js?v=1628789984780" defer></script>
+    <script type="module" src="vendor/alpine.js?v=1629106828980"></script>
+    <script nomodule src="vendor/alpine-ie11.js?v=1629106828980" defer></script>
 <script>
   window.dev = true;
   
@@ -2376,7 +2376,7 @@
                       "name": "Расширенная гарантия 3 года с выездом (ONS3)",
                       "short_name": "Расширенная гарантия 3 года с выездом (ONS3)",
                       "description": "Расширенная гарантия 3 года с выездом (ONS3)",
-                      "price": 0,
+                      "price": 2000,
                       "base_price": 0,
                       "value": "1",
                       "is_composite": "1",
@@ -2392,7 +2392,7 @@
                       "name": "Расширенная гарантия 5 лет (SC5)",
                       "short_name": "Расширенная гарантия 5 лет (SC5)",
                       "description": "Расширенная гарантия 5 лет (SC5)",
-                      "price": 0,
+                      "price": 3000,
                       "base_price": 0,
                       "value": "1",
                       "is_composite": "1",
@@ -2408,7 +2408,7 @@
                       "name": "Расширенная гарантия 5 лет с выездом (ONS5)",
                       "short_name": "Расширенная гарантия 5 лет с выездом (ONS5)",
                       "description": "Расширенная гарантия 5 лет с выездом (ONS5)",
-                      "price": 0,
+                      "price": 70000,
                       "base_price": 0,
                       "value": "1",
                       "is_composite": "1",
@@ -2424,7 +2424,7 @@
                       "name": "Дополнительная опция «Невозврат носителей информации» (NR3)",
                       "short_name": "Дополнительная опция «Невозврат носителей информации» (NR3)",
                       "description": "Дополнительная опция «Невозврат носителей информации» (NR3)",
-                      "price": 0,
+                      "price": 1000,
                       "base_price": 0,
                       "value": "1",
                       "is_composite": "1",
@@ -2916,12 +2916,11 @@
           },
           selectOption(typeId) {
               let that = this;
-              let ret = {};
+              let ret = [];
               let typeCode = that.partTypeIds[typeId];
               let curCPU = window.preset.CPU ? that.brand[that.partTypeIds['CPU']].find(f => f.id === window.preset.CPU.id) : void 0;
   
               if (typeCode in that.brand) {
-                  let iter = 0;
                   let list = that.brand[typeCode];
   
                   if (typeId === 'Soft' && curCPU) {
@@ -2929,8 +2928,7 @@
                   }
   
                   for (const x of list) {
-                      ret[iter] = {id: x.id, name: x.name};
-                      iter++;
+                      ret.push({id: x.id, name: x.name});
                   }
               }
   
@@ -2992,7 +2990,7 @@
           },
           selectOptionCount(typeId) {
               let that = this;
-              let ret = {};
+              let ret = [];
               let typeCode = that.partTypeIds[typeId];
               let id = '';
               let count = 0;
@@ -3015,10 +3013,8 @@
               }
   
               if (count) {
-                  let iter = 0;
                   for (let i = 0; i < +count; i++) {
-                      ret[iter] = {id: i + 1, name: i + 1};
-                      iter++;
+                      ret.push({id: i + 1, name: i + 1});
                   }
               }
   
@@ -3350,7 +3346,18 @@
               that.options = that.data;
   
               if (typeof that.data === 'function') {
-                  that.options = that.data();
+                  let array = that.data();
+                  let data = {};
+                  let count = 0;
+  
+                  console.log('array', array);
+  
+                  for (const x of array) {
+                      data[count] = x;
+                      count++;
+                  }
+  
+                  that.options = data;
               }
   
               window.dev && console.log('selectConfig', typeof that.data, config, that.options);
@@ -3464,5 +3471,5 @@
       }
   }
 </script>
-  <script type="text/javascript" src="js/common.fc9e24f69bfcbf19084c.js"></script><script type="text/javascript" src="js/app.fc9e24f69bfcbf19084c.js"></script><script type="text/javascript" src="js/index.fc9e24f69bfcbf19084c.js"></script></body>
+  <script type="text/javascript" src="js/common.a1b61cd3d04683c62f42.js"></script><script type="text/javascript" src="js/app.a1b61cd3d04683c62f42.js"></script><script type="text/javascript" src="js/index.a1b61cd3d04683c62f42.js"></script></body>
 </html>

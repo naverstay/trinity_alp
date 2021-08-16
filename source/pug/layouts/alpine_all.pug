@@ -1984,7 +1984,7 @@ script.
                         "name": "Расширенная гарантия 3 года с выездом (ONS3)",
                         "short_name": "Расширенная гарантия 3 года с выездом (ONS3)",
                         "description": "Расширенная гарантия 3 года с выездом (ONS3)",
-                        "price": 0,
+                        "price": 2000,
                         "base_price": 0,
                         "value": "1",
                         "is_composite": "1",
@@ -2000,7 +2000,7 @@ script.
                         "name": "Расширенная гарантия 5 лет (SC5)",
                         "short_name": "Расширенная гарантия 5 лет (SC5)",
                         "description": "Расширенная гарантия 5 лет (SC5)",
-                        "price": 0,
+                        "price": 3000,
                         "base_price": 0,
                         "value": "1",
                         "is_composite": "1",
@@ -2016,7 +2016,7 @@ script.
                         "name": "Расширенная гарантия 5 лет с выездом (ONS5)",
                         "short_name": "Расширенная гарантия 5 лет с выездом (ONS5)",
                         "description": "Расширенная гарантия 5 лет с выездом (ONS5)",
-                        "price": 0,
+                        "price": 70000,
                         "base_price": 0,
                         "value": "1",
                         "is_composite": "1",
@@ -2032,7 +2032,7 @@ script.
                         "name": "Дополнительная опция «Невозврат носителей информации» (NR3)",
                         "short_name": "Дополнительная опция «Невозврат носителей информации» (NR3)",
                         "description": "Дополнительная опция «Невозврат носителей информации» (NR3)",
-                        "price": 0,
+                        "price": 1000,
                         "base_price": 0,
                         "value": "1",
                         "is_composite": "1",
@@ -2524,12 +2524,11 @@ script.
             },
             selectOption(typeId) {
                 let that = this;
-                let ret = {};
+                let ret = [];
                 let typeCode = that.partTypeIds[typeId];
                 let curCPU = window.preset.CPU ? that.brand[that.partTypeIds['CPU']].find(f => f.id === window.preset.CPU.id) : void 0;
 
                 if (typeCode in that.brand) {
-                    let iter = 0;
                     let list = that.brand[typeCode];
 
                     if (typeId === 'Soft' && curCPU) {
@@ -2537,8 +2536,7 @@ script.
                     }
 
                     for (const x of list) {
-                        ret[iter] = {id: x.id, name: x.name};
-                        iter++;
+                        ret.push({id: x.id, name: x.name});
                     }
                 }
 
@@ -2600,7 +2598,7 @@ script.
             },
             selectOptionCount(typeId) {
                 let that = this;
-                let ret = {};
+                let ret = [];
                 let typeCode = that.partTypeIds[typeId];
                 let id = '';
                 let count = 0;
@@ -2623,10 +2621,8 @@ script.
                 }
 
                 if (count) {
-                    let iter = 0;
                     for (let i = 0; i < +count; i++) {
-                        ret[iter] = {id: i + 1, name: i + 1};
-                        iter++;
+                        ret.push({id: i + 1, name: i + 1});
                     }
                 }
 
@@ -2958,7 +2954,18 @@ script.
                 that.options = that.data;
 
                 if (typeof that.data === 'function') {
-                    that.options = that.data();
+                    let array = that.data();
+                    let data = {};
+                    let count = 0;
+
+                    console.log('array', array);
+
+                    for (const x of array) {
+                        data[count] = x;
+                        count++;
+                    }
+
+                    that.options = data;
                 }
 
                 window.dev && console.log('selectConfig', typeof that.data, config, that.options);
