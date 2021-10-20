@@ -2489,6 +2489,10 @@ script.
                         }
                     }
 
+                    if (window.preset.platformPrice === 0) {
+                        priceRequest = true;
+                    }
+
                     window.preset.totalPrice = priceRequest ? 'по запросу' : price + (window.preset.platformPrice || 0);
                     window.preset.hddCount = hddCount;
                     window.preset.hddCount25 = hddCount25;
