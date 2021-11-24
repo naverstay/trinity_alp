@@ -229,6 +229,7 @@
                                       </div>
                                     </div>
                                   </div>
+                                  <div class="configurator__cell __price" data-preset="CPU_price" data-index="0"></div>
                                 </div>
                               </div>
                             </template>
@@ -268,6 +269,7 @@
                                       </div>
                                     </div>
                                   </div>
+                                  <div class="configurator__cell __price" data-preset="RAM_price" data-index="0"></div>
                                 </div>
                               </div>
                             </template>
@@ -294,6 +296,7 @@
                                   <div class="configurator__cell __multiply" :class="{ __disabled: !preset?.RAID?.id?.length }">
                                     <div class="configurator__cell-rm" @click=" removeItem('RAID', $event.target.dataset.index) " data-index="0">x</div>
                                   </div>
+                                  <div class="configurator__cell __price" data-preset="RAID_price" data-index="0"></div>
                                 </div>
                               </div>
                             </template>
@@ -339,6 +342,7 @@
                                             </div>
                                           </div>
                                         </div>
+                                        <div class="configurator__cell __price" data-preset="SATA_price" :data-index=" index "></div>
                                       </div>
                                     </template>
                                   </div>
@@ -379,6 +383,7 @@
                                             </div>
                                           </div>
                                         </div>
+                                        <div class="configurator__cell __price" data-preset="SAS_price" :data-index=" index "></div>
                                       </div>
                                     </template>
                                   </div>
@@ -419,6 +424,7 @@
                                             </div>
                                           </div>
                                         </div>
+                                        <div class="configurator__cell __price" data-preset="SSD_price" :data-index=" index "></div>
                                       </div>
                                     </template>
                                   </div>
@@ -449,6 +455,7 @@
                                     <div class="configurator__cell __multiply" :class="{ __disabled: !collection[index]?.id?.length }">
                                       <div class="configurator__cell-rm" @click=" removeItem('OtherContr', $event.target.dataset.index) " :data-index=" index ">x</div>
                                     </div>
+                                    <div class="configurator__cell __price" data-preset="OtherContr_price" :data-index=" index "></div>
                                   </div>
                                 </template>
                               </div>
@@ -476,6 +483,7 @@
                                   <div class="configurator__cell __multiply" :class="{ __disabled: !preset?.Other?.id?.length }">
                                     <div class="configurator__cell-rm" @click=" removeItem('Other', $event.target.dataset.index) " data-index="0">x</div>
                                   </div>
+                                  <div class="configurator__cell __price" data-preset="Other_price" data-index="0"></div>
                                 </div>
                               </div>
                             </template>
@@ -503,6 +511,7 @@
                                     <div class="configurator__cell __multiply" :class="{ __disabled: !collection[index]?.id?.length }">
                                       <div class="configurator__cell-rm" @click=" removeItem('Soft', $event.target.dataset.index) " :data-index=" index ">x</div>
                                     </div>
+                                    <div class="configurator__cell __price" data-preset="Soft_price" :data-index=" index "></div>
                                   </div>
                                 </template>
                               </div>
@@ -531,6 +540,7 @@
                                     <div class="configurator__cell __multiply" :class="{ __disabled: !collection[index]?.id?.length }">
                                       <div class="configurator__cell-rm" @click=" removeItem('UPS', $event.target.dataset.index) " :data-index=" index ">x</div>
                                     </div>
+                                    <div class="configurator__cell __price" data-preset="UPS_price" :data-index=" index "></div>
                                   </div>
                                 </template>
                               </div>
@@ -559,6 +569,7 @@
                                     <div class="configurator__cell __multiply" :class="{ __disabled: !collection[index]?.id?.length }">
                                       <div class="configurator__cell-rm" @click=" removeItem('Switch', $event.target.dataset.index) " :data-index=" index ">x</div>
                                     </div>
+                                    <div class="configurator__cell __price" data-preset="Switch_price" :data-index=" index "></div>
                                   </div>
                                 </template>
                               </div>
@@ -1022,8 +1033,8 @@
   </div>
 </div>
     <div class="go__top" @click="scrollTop()"></div>
-    <script type="module" src="vendor/alpine.js?v=1635926894368"></script>
-    <script nomodule src="vendor/alpine-ie11.js?v=1635926894368" defer></script>
+    <script type="module" src="vendor/alpine.js?v=1637784193730"></script>
+    <script nomodule src="vendor/alpine-ie11.js?v=1637784193730" defer></script>
     <script>
       window.order = {
           "totalDescription": " Intel® Xeon® Scalable 6128 Gold 6 Core 3.40G 19.25M 115W",
@@ -1091,6 +1102,7 @@
           "loaded": true,
           "totalPrice": 6633
       };
+      
       window.order_8 = {
           "totalDescription": " Intel® Xeon® Scalable 6128 Gold 6 Core 3.40G 19.25M 115W",
           "exchangeRate": "74",
@@ -1380,6 +1392,7 @@
     </script>
 <script>
   window.dev = true;
+  window.requestPrice = '';
   
   //window.order = {
   //    "totalDescription": " Intel® Xeon® Scalable 6128 Gold 6 Core 3.40G 19.25M 115W",
@@ -3747,6 +3760,16 @@
           getPreset() {
               return window.preset;
           },
+          updateElementPrice(selector, price) {
+              setTimeout(() => {
+                  let element = document.querySelector(selector);
+                  if (element) {
+                      element.innerHTML = price;
+                  } else {
+                      window.dev && console.log('no matching element', selector);
+                  }
+              }, 5);
+          },
           updatePreset(initiator) {
               //return;
   
@@ -3831,17 +3854,22 @@
   
                                       descr += (count && info.description) ? ' / ' + info.description : '';
   
-                                      if (info.price === 0) {
-                                          priceRequest = true;
-                                      }
-  
                                       if (info.preinstalled && !skipPreinstalled) {
                                           skipPreinstalled = true;
                                           preinstallCorrection = 1;
                                           that.preinstalled[typeId] = item.id;
                                       }
   
-                                      price += Math.max(0, (count - preinstallCorrection)) * itemPrice;
+                                      let newCount = Math.max(0, (count - preinstallCorrection));
+  
+                                      if (info.price === 0) {
+                                          priceRequest = true;
+                                          that.updateElementPrice('[data-preset="' + typeId + '_price"][data-index="' + ind + '"]', window.requestPrice || '');
+                                      } else {
+                                          that.updateElementPrice('[data-preset="' + typeId + '_price"][data-index="' + ind + '"]', '+$' + (itemPrice * newCount));
+                                      }
+  
+                                      price += newCount * itemPrice;
                                   } else {
                                       if (item.list.length > 1 && ind < item.list.length - 1) {
                                           item.list.splice(ind, 1);
@@ -3855,16 +3883,21 @@
                               let preinstallCorrection = 0;
                               descr += (count && info.description) ? ' / ' + info.description : '';
   
-                              if (itemPrice === 0) {
-                                  priceRequest = true;
-                              }
-  
                               if (info.preinstalled) {
                                   preinstallCorrection = 1;
                                   that.preinstalled[typeId] = item.id;
                               }
   
-                              price += Math.max(0, (count - preinstallCorrection)) * itemPrice;
+                              let newCount = Math.max(0, (count - preinstallCorrection));
+  
+                              if (itemPrice === 0) {
+                                  priceRequest = true;
+                                  that.updateElementPrice('[data-preset="' + typeId + '_price"]', window.requestPrice || '');
+                              } else {
+                                  that.updateElementPrice('[data-preset="'+typeId+'_price"]', '+$'+(itemPrice*newCount));
+                              }
+  
+                              price += newCount * itemPrice;
                           }
                       }
                   }
@@ -4042,7 +4075,7 @@
                   } else {
                       let component = that.getInfo(typeId, window.preset.RAID.id);
   
-                      console.log('component', component);
+                      window.dev && console.log('component', component);
                       if (component) {
                           window.preset.hddLimitSAS = component.sas_count;
                       }
@@ -4061,6 +4094,7 @@
                       if (rm.list.length > 1) {
                           if (that.preinstalled[typeId] === rm.list[ind].id) {
                               that.preinstalled[typeId] = '';
+                              that.updateElementPrice('[data-preset="' + typeId + '_price"][data-index="' + ind + '"]', '');
                           }
   
                           rm.list.splice(ind, 1);
@@ -4068,13 +4102,14 @@
                   } else {
                       rm.count = that.preselectedCount(typeId);
                       rm.id = '';
+                      that.updateElementPrice('[data-preset="' + typeId + '_price"]', '');
                   }
   
                   if (that.preinstalled[typeId] === rm.id) {
                       that.preinstalled[typeId] = '';
                   }
   
-                  console.log('preinstalled', typeId, that.preinstalled);
+                  window.dev && console.log('preinstalled', typeId, that.preinstalled);
   
                   that.updateDependencies(typeId);
   
@@ -4342,7 +4377,7 @@
                   let data = {};
                   let count = 0;
   
-                  console.log('array', array);
+                  window.dev && console.log('array', array);
   
                   for (const x of array) {
                       data[count] = x;

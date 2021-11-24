@@ -427,10 +427,11 @@
   </div>
 </div>
     <div class="go__top" @click="scrollTop()"></div>
-    <script type="module" src="vendor/alpine.js?v=1635926894300"></script>
-    <script nomodule src="vendor/alpine-ie11.js?v=1635926894300" defer></script>
+    <script type="module" src="vendor/alpine.js?v=1637784193662"></script>
+    <script nomodule src="vendor/alpine-ie11.js?v=1637784193662" defer></script>
 <script>
   window.dev = true;
+  window.requestPrice = '';
   
   //window.order = {
   //    "totalDescription": " Intel® Xeon® Scalable 6128 Gold 6 Core 3.40G 19.25M 115W",
@@ -2798,6 +2799,16 @@
           getPreset() {
               return window.preset;
           },
+          updateElementPrice(selector, price) {
+              setTimeout(() => {
+                  let element = document.querySelector(selector);
+                  if (element) {
+                      element.innerHTML = price;
+                  } else {
+                      window.dev && console.log('no matching element', selector);
+                  }
+              }, 5);
+          },
           updatePreset(initiator) {
               //return;
   
@@ -2882,17 +2893,22 @@
   
                                       descr += (count && info.description) ? ' / ' + info.description : '';
   
-                                      if (info.price === 0) {
-                                          priceRequest = true;
-                                      }
-  
                                       if (info.preinstalled && !skipPreinstalled) {
                                           skipPreinstalled = true;
                                           preinstallCorrection = 1;
                                           that.preinstalled[typeId] = item.id;
                                       }
   
-                                      price += Math.max(0, (count - preinstallCorrection)) * itemPrice;
+                                      let newCount = Math.max(0, (count - preinstallCorrection));
+  
+                                      if (info.price === 0) {
+                                          priceRequest = true;
+                                          that.updateElementPrice('[data-preset="' + typeId + '_price"][data-index="' + ind + '"]', window.requestPrice || '');
+                                      } else {
+                                          that.updateElementPrice('[data-preset="' + typeId + '_price"][data-index="' + ind + '"]', '+$' + (itemPrice * newCount));
+                                      }
+  
+                                      price += newCount * itemPrice;
                                   } else {
                                       if (item.list.length > 1 && ind < item.list.length - 1) {
                                           item.list.splice(ind, 1);
@@ -2906,16 +2922,21 @@
                               let preinstallCorrection = 0;
                               descr += (count && info.description) ? ' / ' + info.description : '';
   
-                              if (itemPrice === 0) {
-                                  priceRequest = true;
-                              }
-  
                               if (info.preinstalled) {
                                   preinstallCorrection = 1;
                                   that.preinstalled[typeId] = item.id;
                               }
   
-                              price += Math.max(0, (count - preinstallCorrection)) * itemPrice;
+                              let newCount = Math.max(0, (count - preinstallCorrection));
+  
+                              if (itemPrice === 0) {
+                                  priceRequest = true;
+                                  that.updateElementPrice('[data-preset="' + typeId + '_price"]', window.requestPrice || '');
+                              } else {
+                                  that.updateElementPrice('[data-preset="'+typeId+'_price"]', '+$'+(itemPrice*newCount));
+                              }
+  
+                              price += newCount * itemPrice;
                           }
                       }
                   }
@@ -3093,7 +3114,7 @@
                   } else {
                       let component = that.getInfo(typeId, window.preset.RAID.id);
   
-                      console.log('component', component);
+                      window.dev && console.log('component', component);
                       if (component) {
                           window.preset.hddLimitSAS = component.sas_count;
                       }
@@ -3112,6 +3133,7 @@
                       if (rm.list.length > 1) {
                           if (that.preinstalled[typeId] === rm.list[ind].id) {
                               that.preinstalled[typeId] = '';
+                              that.updateElementPrice('[data-preset="' + typeId + '_price"][data-index="' + ind + '"]', '');
                           }
   
                           rm.list.splice(ind, 1);
@@ -3119,13 +3141,14 @@
                   } else {
                       rm.count = that.preselectedCount(typeId);
                       rm.id = '';
+                      that.updateElementPrice('[data-preset="' + typeId + '_price"]', '');
                   }
   
                   if (that.preinstalled[typeId] === rm.id) {
                       that.preinstalled[typeId] = '';
                   }
   
-                  console.log('preinstalled', typeId, that.preinstalled);
+                  window.dev && console.log('preinstalled', typeId, that.preinstalled);
   
                   that.updateDependencies(typeId);
   
@@ -3393,7 +3416,7 @@
                   let data = {};
                   let count = 0;
   
-                  console.log('array', array);
+                  window.dev && console.log('array', array);
   
                   for (const x of array) {
                       data[count] = x;

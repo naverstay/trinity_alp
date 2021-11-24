@@ -30,6 +30,7 @@ mixin build_options(arr)
                     input.input_hidden(value='1' @input=" updatePreset() " x-model="preset." + d + ".count" name="preset_" + d + "_count" data-index='0' data-preset=(d + '_count') )
                     .configurator__cell-rm(@click=" removeItem('" + d + "', $event.target.dataset.index) " data-index='0') x
                     +select("alpineSelect({ data: ()=> configuratorAlpine().selectOptionCount('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("preset." + d + ".id") + "', placeholder: 'Выберите из списка' })", "preset." + d + ".count", "preset." + d + ".id")
+                .configurator__cell.__price(data-preset=(d + '_price') data-index='0')
 
                 //-.configurator__cell
                     select(x-model="preset.CPU.id" id='preset_CPU_id' @change!=" $nextTick(() => { updateSelect('CPU'); updatePreset(); }); ")
@@ -46,6 +47,7 @@ mixin build_options(arr)
                 .configurator__cell.__multiply
                     .configurator__cell-rm x
                     +selectBox(1)
+                .configurator__cell.__price(data-preset=(d + '_price'))
 
     template(x-if=" preset.loaded && preset.hasOwnProperty('RAM') "): .configurator__row
         .configurator__icon
@@ -63,6 +65,7 @@ mixin build_options(arr)
                     input.input_hidden(value='1' @input=" updatePreset() " x-model="preset." + d + ".count" name="preset_" + d + "_count" data-index='0' data-preset=(d + '_count'))
                     .configurator__cell-rm(@click=" removeItem('" + d + "', $event.target.dataset.index) " data-index='0') x
                     +select("alpineSelect({ data: ()=> configuratorAlpine().selectOptionCount('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + ("preset." + d + ".id") + "', placeholder: 'Выберите из списка' })", "preset." + d + ".count", " !item.id.length ")
+                .configurator__cell.__price(data-preset=(d + '_price') data-index='0')
 
                 //-.configurator__cell
                     select(x-model="preset.RAM.id" id='preset_RAM_id' @change!=" $nextTick(() => { updateSelect('RAM'); updatePreset(); }); ")
@@ -79,6 +82,7 @@ mixin build_options(arr)
                 .configurator__cell.__multiply
                     .configurator__cell-rm x
                     +selectBox(1)
+                .configurator__cell.__price(data-preset=(d + '_price'))
 
     template(x-if=" preset.loaded && preset.hasOwnProperty('RAID') "): .configurator__row
         .configurator__icon
@@ -98,6 +102,8 @@ mixin build_options(arr)
                     //-select(x-model="preset.RAID.id" id='preset_RAID_id' @change!=" $nextTick(() => { updateSelect('RAID', 1); updatePreset(); }); ")
                         template(x-for="(item, index) in optionsList('RAID')" :key="item.id" x-if="true")
                             option(x-text='item.text' :value='item.id')
+                .configurator__cell.__price(data-preset=(d + '_price') data-index='0')
+
             else
                 .configurator__cell
                     +selectBox('Intel® Xeon® 4 Core 4T E3-1220v6 3000/8M')
@@ -153,6 +159,7 @@ mixin build_options(arr)
                                 input.input_hidden(@input=" updatePreset() " x-model=" collection[index].count " :name="'preset_" + d + "_list_' + index + '_count'" :data-index=' index ' data-preset=(d + '_count'))
                                 .configurator__cell-rm(  @click=" removeItem('" + d + "', $event.target.dataset.index) " :data-index=' index ') x
                                 +select("alpineSelect({ data: ()=> configuratorAlpine().selectOptionCount('" + d + "'), emptyOptionsMessage: 'Нет подходящих вариантов', model: '" + (" collection[index].count ") + "', placeholder: 'Выберите из списка' })", d, " !collection[index].id.length ")
+                            .configurator__cell.__price(data-preset=(d + '_price') :data-index=' index ')
 
                 else
                     +loop_while(3)
@@ -162,6 +169,7 @@ mixin build_options(arr)
                             .configurator__cell.__multiply
                                 .configurator__cell-rm x
                                 +selectBox(1)
+                            .configurator__cell.__price(data-preset=(d + '_price'))
 
     template(x-if=" preset.loaded && preset.hasOwnProperty('OtherContr') "): .configurator__row
         .configurator__icon
@@ -180,6 +188,7 @@ mixin build_options(arr)
 
                     .configurator__cell.__multiply(:class= "{ __disabled: !collection[index]?.id?.length" + " }")
                         .configurator__cell-rm(@click=" removeItem('" + d + "', $event.target.dataset.index) " :data-index=' index ') x
+                    .configurator__cell.__price(data-preset=(d + '_price') :data-index=' index ')
 
                 //-.configurator__controls()
                     .configurator__cell.__wide(data-preset=d :data-index=' index ')
@@ -237,6 +246,7 @@ mixin build_options(arr)
 
                 .configurator__cell.__multiply(:class="{ __disabled: " + "!preset?." + d + "?.id?.length" + " }")
                     .configurator__cell-rm(@click=" removeItem('" + d + "', $event.target.dataset.index) " data-index='0') x
+                .configurator__cell.__price(data-preset=(d + '_price') data-index='0')
 
                 //-.configurator__cell
                     select(x-model="preset.Other.id" id='preset_Other_id' @change!=" $nextTick(() => { updateSelect('Other', 1); updatePreset(); }); ")
@@ -273,6 +283,7 @@ mixin build_options(arr)
 
                     .configurator__cell.__multiply(:class= "{ __disabled: !collection[index]?.id?.length" + " }")
                         .configurator__cell-rm(@click=" removeItem('" + d + "', $event.target.dataset.index) " :data-index=' index ') x
+                    .configurator__cell.__price(data-preset=(d + '_price') :data-index=' index ')
 
             //-.configurator__cell(data-preset=d data-index='0')
                 - var ref = "'select_" + d + "_' + index + '_value'";
@@ -306,6 +317,7 @@ mixin build_options(arr)
 
                     .configurator__cell.__multiply(:class= "{ __disabled: !collection[index]?.id?.length" + " }")
                         .configurator__cell-rm(@click=" removeItem('" + d + "', $event.target.dataset.index) " :data-index=' index ') x
+                    .configurator__cell.__price(data-preset=(d + '_price') :data-index=' index ')
 
                 //-.configurator__cell(data-preset=d data-index='0')
                     - var ref = "'select_" + d + "_' + index + '_value'";
@@ -338,6 +350,7 @@ mixin build_options(arr)
 
                     .configurator__cell.__multiply(:class= "{ __disabled: !collection[index]?.id?.length" + " }")
                         .configurator__cell-rm(@click=" removeItem('" + d + "', $event.target.dataset.index) " :data-index=' index ') x
+                    .configurator__cell.__price(data-preset=(d + '_price') :data-index=' index ')
 
             //-.configurator__cell(data-preset=d data-index='0')
                 - var ref = "'select_" + d + "_' + index + '_value'";
