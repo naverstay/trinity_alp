@@ -494,6 +494,7 @@
 
         &.__price {
             font-size: 18px;
+            line-height: 44px;
 
             @include respond-to-max($tab) {
                 display: none;
