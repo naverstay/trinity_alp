@@ -37,7 +37,7 @@ block content
                     section#tab_configurator.configurator__tabs-panel(:class="{ 'active': activeTab === 'configurator' }")
                         .configurator__tabs-btn.btn(:class="{ 'active': activeTab === 'configurator' }" @click="setActiveTab('configurator')") Конфигуратор
                         .configurator__tabs-inner(x-show="activeTab === 'configurator'")
-                            form(action='#' method="post"  @submit.prevent=" configuratorSubmit($event) ")
+                            form.justValidate(action='#' method="post"  @submit.prevent=" configuratorSubmit($event) ")
                                 include ../../components/conf_main
 
                                 include ../../components/conf_form

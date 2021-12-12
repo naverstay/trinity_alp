@@ -34,6 +34,7 @@ mixin page(body_cls)
 
         script(type="module" src="vendor/alpine.js?v=" + date)
         script(nomodule src="vendor/alpine-ie11.js?v=" + date defer)
+        script(src="vendor/just-validate.production.min.js?v=" + date defer)
 
         //- block scripts
         block scripts

@@ -458,6 +458,10 @@
             max-width: 100%;
         }
 
+        .just-validate-error-label {
+            display: none !important;
+        }
+
         &-rm {
             cursor: pointer;
             position: absolute;

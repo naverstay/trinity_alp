@@ -10,13 +10,13 @@ require('./scripts/slideToggle');
 //require('alpinejs/dist/alpine-ie11.js');
 
 if (/naverstay\.me/.test(location.origin)) {
-    var scr = {
+    let scr = {
         "scripts": [
             {
                 "src": "//cdn.jsdelivr.net/npm/eruda",
                 "async": false,
                 "onload": function () {
-                    var c = document.createElement("script");
+                    let c = document.createElement("script");
                     c.innerHTML = 'eruda.init();';
                     document.body.appendChild(c);
                 }
@@ -25,10 +25,10 @@ if (/naverstay\.me/.test(location.origin)) {
     };
     !function (win, doc, scr) {
         "use strict";
-        var add = function (t) {
+        let add = function (t) {
             if ("[object Array]" !== Object.prototype.toString.call(t)) return !1;
             for (var r = 0; r < t.length; r++) {
-                var c = doc.createElement("script"), e = t[r];
+                let c = doc.createElement("script"), e = t[r];
                 c.src = e.src;
                 c.async = e.async;
                 doc.body.appendChild(c);
@@ -70,7 +70,7 @@ function setInputFilter(textbox, inputFilter) {
 }
 
 function browserCheck() {
-    var ie, userAgent = navigator.userAgent.toLowerCase(),
+    let ie, userAgent = navigator.userAgent.toLowerCase(),
         html = document.documentElement;
 
     if ((userAgent.indexOf('msie') !== -1)) {
@@ -94,7 +94,7 @@ function browserCheck() {
         html.className += ' firefox';
     }
 
-    var platform = window.navigator.platform,
+    let platform = window.navigator.platform,
         macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
         windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
         iosPlatforms = ['iPhone', 'iPad', 'iPod'],
@@ -150,7 +150,7 @@ window.smoothScrollTo = function (target, startY, endY, duration) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    var totalBox = document.getElementById('total_box'),
+    let totalBox = document.getElementById('total_box'),
         totalBoxWrapper = document.getElementById('stuck_wrapper'),
         temp,
         isSticky;
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.fixTotalBox = function () {
         if (!totalBox) return;
 
-        var totalBoxHeight = totalBox.offsetHeight;
+        let totalBoxHeight = totalBox.offsetHeight;
 
         isSticky = totalBox.classList.contains('stuck');
         temp = totalBoxWrapper;
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.addEventListener('scroll', function (e) {
-        document.body.classList[ window.pageYOffset > window.innerHeight ? 'add' : 'remove']('go__top-show');
+        document.body.classList[window.pageYOffset > window.innerHeight ? 'add' : 'remove']('go__top-show');
         window.fixTotalBox();
     });
 
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const btn = scrollTo[i];
 
             btn.addEventListener("click", function (e) {
-                var target = document.getElementById(e.target.dataset.target);
+                let target = document.getElementById(e.target.dataset.target);
 
                 if (target) {
                     window.smoothScrollTo(window, window.pageYOffset, window.pageYOffset + target.getBoundingClientRect().top - 20, 1000);

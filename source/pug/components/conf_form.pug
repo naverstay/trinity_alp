@@ -1,20 +1,20 @@
 // ### pug/components/conf_form.pug
 
-mixin form_cell(name, txt)
-    - var id = "config_" + name
+mixin form_cell(name, txt, validate, placeholder)
+    - let id = "config_" + name
     .configurator__row
         .configurator__icon
             span(class= 'ti-' + name)
         .configurator__label: label(for= id)= txt
         .configurator__controls
             .configurator__cell
-                input.input_v1(id= id name= id value=(name === 'user' ? 'Алексеев Артем Иванович' : '') @change=" inputChangeFunc($event) ")
+                input.input_v1(id= id name= id value=(name === 'user' ? 'Алексеев Артем Иванович' : '') @change=" inputChangeFunc($event) " placeholder= placeholder class= validate)
 
 #configurator__form.configurator__form
     +form_cell('user', 'ФИО')
-    +form_cell('mail', 'E-mail')
+    +form_cell('mail', 'E-mail', 'validate')
     +form_cell('map', 'Город')
-    +form_cell('phone', 'Телефон')
+    +form_cell('phone', 'Телефон', 'validate', '000-000-0000')
     +form_cell('office', 'Ближайший офис')
     +form_cell('message', 'Комментарий')
 
