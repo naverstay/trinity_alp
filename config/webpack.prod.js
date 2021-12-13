@@ -4,7 +4,7 @@ const PATHS = require('./paths');
 // Plugins
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const prod = {
+module.exports = {
     output: {
         filename: 'js/[name].js'
     },
@@ -18,5 +18,3 @@ const prod = {
         })
     ]
 };
-
-module.exports = prod;

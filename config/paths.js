@@ -2,7 +2,7 @@ const path = require('path');
 
 const ROOT = process.cwd();
 
-const PATHS = {
+module.exports = {
     config: path.join(ROOT, 'config'),
     build: path.join(ROOT, 'build'),
     source: path.join(ROOT, 'source'),
@@ -10,5 +10,3 @@ const PATHS = {
     media: path.join(ROOT, 'source/media'),
     styles: path.join(ROOT, 'source/styles')
 };
-
-module.exports = PATHS;
