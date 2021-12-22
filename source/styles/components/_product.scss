@@ -302,6 +302,19 @@
             }
         }
 
+        &-warranty {
+            color: $black;
+            font-size: 18px;
+            margin-bottom: 28px;
+
+            .checkbox_v1 .checkbox__text {
+                &::before {
+                    margin-top: -9px;
+                    top: 50%;
+                }
+            }
+        }
+
         &-text {
 
             a {
@@ -320,6 +333,7 @@
             }
 
             &.__short {
+                .product__description-warranty,
                 p {
                     font-size: 14px;
                     line-height: 22px;

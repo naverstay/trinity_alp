@@ -187,35 +187,16 @@
               <div class="product__description">
                 <h3 class="product__description-subcaption">Гарантия и сервисное обслуживание</h3>
                 <div class="product__description-text __short">
-                  <p><a href="#">Стандартная гарантия</a> на продукцию Тринити (SC3) включает 3 года гарантийного обслуживания и восстановление работоспособности изделия в течение 21 рабочего дня. Подробная информация о расширенном гарантийном обслуживании
-                    <a href="">здесь</a>
-                  </p>
-                  <template x-if=" preset.loaded &amp;&amp; preset.hasOwnProperty('Services') ">
-                    <ul class="product__warranty">
-                      <ul class="product__warranty">
-                        <li>
-                          <label class="checkbox_v1">
-                            <input type="checkbox" checked="checked"><span class="checkbox__text">Стандартная гарантия 3 года </span>
-                          </label>
-                        </li>
-                        <li>
-                          <label class="checkbox_v1">
-                            <input type="checkbox"><span class="checkbox__text">Расширенная гарантия 3 года с выездом </span>
-                          </label>
-                        </li>
-                        <li>
-                          <label class="checkbox_v1">
-                            <input type="checkbox"><span class="checkbox__text">Расширенная гарантия 5 лет с выездом </span>
-                          </label>
-                        </li>
-                        <li>
-                          <label class="checkbox_v1">
-                            <input type="checkbox"><span class="checkbox__text">Дополнительная опция «Невозврат носителей информации» </span>
-                          </label>
-                        </li>
-                      </ul>
-                    </ul>
-                  </template>
+                  <div class="product__description-warranty">
+                    <label class="checkbox_v1">
+                      <input type="checkbox" checked="checked"><span class="checkbox__text"><b>Стандартная гарантия от Тринити (предоставляется по умолчанию)</b> <br />Каждый сервер по умолчанию обеспечивается <a href="#">стандартной гарантией в течение трех лет</a>. Обслуживание производится в сервисном центре или дистанционно (курьерскими службами). Время реакции сервисной службы – следующий рабочий день.<br />Время восстановления работоспособности – не более 21 рабочего дня.<br />Стоимость стандартной гарантии включена по умолчанию и отражена в итоговой сумме КП на серверное оборудование.</span>
+                    </label>
+                  </div>
+                  <div class="product__description-warranty" x-data=" slideActions() " :class="{ '_expanded': isOpen() , '_collapsed': !isOpen() }">
+                    <label class="checkbox_v1">
+                      <input type="checkbox"><span class="checkbox__text"><b>Расширенная гарантия (приобретается отдельно).</b> <a href="#" @click=" slideToggle($event, $el) "><b x-text=" isOpen() ? 'Свернуть' : 'Развернуть' "></b></a> <br /> <div style="display: none;" class="slideBlock">Пакеты расширенной гарантии позволяют продлить гарантийный срок серверного оборудования (в т.ч. и для ранее приобретенного оборудования), обеспечить ремонт на месте установки, значительно сократить время реакции и гарантировать время восстановления, а также не возвращать накопители с конфиденциальной информацией. Стоимость расширенной гарантии определяется от задач и рассчитывается индивидуально. При необходимости выберите данный пункт гарантии слева и отразите данный момент в комментариях к заказу, а также Вашему персональному менеджеру. </div></span>
+                    </label>
+                  </div>
                 </div>
               </div>
               <!-- pug/components/warranty.pug ###-->
@@ -428,9 +409,9 @@
   </div>
 </div>
     <div class="go__top" @click="scrollTop()"></div>
-    <script type="module" src="vendor/alpine.js?v=1639403875168"></script>
-    <script nomodule src="vendor/alpine-ie11.js?v=1639403875168" defer></script>
-    <script src="vendor/just-validate.production.min.js?v=1639403875168" defer></script>
+    <script type="module" src="vendor/alpine.js?v=1640179360921"></script>
+    <script nomodule src="vendor/alpine-ie11.js?v=1640179360921" defer></script>
+    <script src="vendor/just-validate.production.min.js?v=1640179360921" defer></script>
 <script>
   window.dev = true;
   window.requestPrice = '';
